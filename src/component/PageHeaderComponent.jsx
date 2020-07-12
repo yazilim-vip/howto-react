@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CustomNavbar from '../component/CustomNavbar';
+import CustomNavbar from './CustomNavbar';
 
 const PageHeaderComponent = () => (
     <div>
