@@ -9,3 +9,12 @@
 .custom-btn-toolbar > .btn {
   margin-right: 1rem;
 }
+
+
+/* Place the navbar at the bottom of the page, and make it stick */
+footer .navbar {
+  overflow: hidden !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  width: 100% !important;
+}

@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import CustomNavbar from './CustomNavbar';
 
 const PageHeaderComponent = () => (
-    <div>
+    <header>
         <CustomNavbar />
-    </div>
+    </header>
 )
 
 
