@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav} from 'react-bootstrap';
 import GridLayout from '../layout/GridLayout';
+import { Link } from 'react-router-dom';
 
 class CustomNavbar extends Component {
 
@@ -25,12 +26,13 @@ class CustomNavbar extends Component {
                         </Navbar.Brand>
 
                         <Nav className="mr-auto">
-                            <Nav.Link className="text-light" to={'/'}>
+                            <Link className="text-light nav-link" to={'/'}>
                                 Home
-                            </Nav.Link>
-                            <Nav.Link className="text-light" to={'/another'}>
+                            </Link>
+
+                            <Link className="text-light nav-link" to={'/about'}>
                                 About
-                            </Nav.Link>
+                            </Link>
                         </Nav>
                     </Navbar>
                 </GridLayout>
