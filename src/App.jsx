@@ -15,10 +15,9 @@ const App = () => (
   <Router>
 
     <PageHeaderComponent />
-
-
+    
     {/* BODY */}
-    <main className="mt-4">
+    <main className="my-4">
       <GridLayout>
         <Switch>
           <Route exact path='/' component={Home} />
