@@ -3,8 +3,8 @@ import { Navbar } from 'react-bootstrap';
 
 
 const PageFooterComponent = () => (
-    <footer style={styles.stickyFooter}>
-        <Navbar bg="dark" sticky="bottom">
+    <footer>
+        <Navbar bg="dark">
             <Navbar.Brand href="#home">
                 hehehe
             </Navbar.Brand>
@@ -12,13 +12,5 @@ const PageFooterComponent = () => (
     </footer>
 )
 
-const styles = {
-    stickyFooter: {
-        flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        flexDirection: 'row',
-    }
-}
 
 export default PageFooterComponent;
