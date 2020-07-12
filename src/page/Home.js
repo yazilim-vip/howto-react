@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class Home extends Component {
+class About extends Component {
 
     constructor(props) {
         super(props);
@@ -11,6 +11,7 @@ class Home extends Component {
 
         return (
 
+
             <div>
                 My Awesome Component
             </div>
@@ -18,4 +19,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default About;

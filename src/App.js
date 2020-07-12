@@ -2,14 +2,25 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from "./page/Home";
 import About from "./page/About";
-import { Button } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 import './App.css';
 
 const App = () => (
   <Router>
     <div>
-      <Button variant="primary">Primary</Button>{' '}
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src="/logo.svg"
+            width="100"
+            height="100"
+            className="d-inline-block align-top"
+          />{' '}
+      React Bootstrap
+    </Navbar.Brand>
+      </Navbar>
 
       <h2>React Router Example</h2>
       <ul>
