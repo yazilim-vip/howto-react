@@ -1,22 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-
-class About extends Component {
-
-    constructor(props) {
-        super(props);
-    }
+class Home extends Component {
 
     render() {
-
         return (
-
-
             <div>
-                My Awesome Component
+                About Page
             </div>
         );
     }
 }
 
-export default About;
+export default Home;
