@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar, Nav, Row, Col } from 'react-bootstrap';
-import GridLayout from '../layout/GridLayout';
 import { Link } from 'react-router-dom';
 
 const CustomNavbar = () => (
@@ -14,7 +13,7 @@ const CustomNavbar = () => (
                         <img
                             alt=""
                             src="/logo.svg"
-                            width="170"
+                            width="260"
                             className="d-inline-block align-top"
                         />{' '}
                         <span style={styles.slogan} className="text-white-50 d-block">Do the right, not the easy</span>
