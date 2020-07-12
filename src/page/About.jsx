@@ -2,7 +2,49 @@ import React, { Component } from 'react';
 
 const About = () => (
     <div>
-        About Page
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        About Page <br />
+        This is final
     </div>
 )
 

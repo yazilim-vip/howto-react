@@ -16,15 +16,16 @@ const App = () => (
 
     <PageHeaderComponent />
 
+
     {/* BODY */}
-    <div className="mt-4">
+    <main className="mt-4">
       <GridLayout>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/about' component={About} />
         </Switch>
       </GridLayout>
-    </div>
+    </main>
 
     <PageFooterComponent />
 
