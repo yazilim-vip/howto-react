@@ -2,24 +2,33 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from "./page/Home";
 import About from "./page/About";
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Row, Col } from 'react-bootstrap';
 
 import './App.css';
 
 const App = () => (
   <Router>
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="text-center">
         <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src="/logo.svg"
-            width="100"
-            height="100"
-            className="d-inline-block align-top"
-          />{' '}
-      React Bootstrap
-    </Navbar.Brand>
+          <Row>
+            <Col>
+              <img
+                alt=""
+                src="/logo.svg"
+                width="170"
+                className="d-inline-block align-top"
+              />{' '}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+            <span className="text-white-50">
+              Do the right, not the easy
+            </span>
+            </Col>
+          </Row>
+        </Navbar.Brand>
       </Navbar>
 
       <h2>React Router Example</h2>
