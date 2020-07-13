@@ -2,7 +2,7 @@ stages:
     - build
     - deploy
   
-reactjs-build:
+pages:
     image: node:12.18.2
     stage: build
     script:
