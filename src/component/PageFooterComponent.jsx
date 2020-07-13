@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navbar, Nav, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Navbar } from 'react-bootstrap';
 
 
 const PageFooterComponent = () => (

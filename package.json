@@ -1,5 +1,5 @@
 {
-  "name": "code-sandbox-examples",
+  "name": "yvip-website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,5 +31,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jquery": "3.5.1",
+    "popper.js": "^1.16.1",
+    "typescript": "^3.9.6"
   }
 }
