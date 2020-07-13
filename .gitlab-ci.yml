@@ -8,6 +8,7 @@ pages:
     script:
         - npm i
         - npm run-script build
+        - rm -rv public
         - cp -R build public
     artifacts:
         paths:
