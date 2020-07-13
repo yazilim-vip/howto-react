@@ -3,8 +3,6 @@ import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const CustomNavbar = () => (
-
-
     <div style={styles.navbar}>
         <Navbar bg="dark" variant="dark" className="justify-content-center">
             <Row className="align-items-center">
@@ -26,7 +24,6 @@ const CustomNavbar = () => (
             </Row>
         </Navbar>
     </div>
-
 )
 
 const styles = {
