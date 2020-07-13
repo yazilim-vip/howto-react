@@ -7,7 +7,7 @@ reactjs-build:
     stage: build
     script:
         - npm i
-        - ng build
+        - npm run-script build
         - cp -R build public
     artifacts:
         paths:
