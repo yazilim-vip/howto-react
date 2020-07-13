@@ -1,0 +1,29 @@
+stages:
+    - build
+    - deploy
+  
+reactjs-build:
+    image: node:12.18.2
+    stage: build
+    script:
+        - npm i
+        - ng build
+        - cp -R build public
+    artifacts:
+        paths:
+        - public
+    only:
+        - master
+    
+# docker-build:
+#     image: 'docker:latest'
+#     stage: deploy
+#     services:
+#         - 'docker:dind'
+#     before_script:
+#         - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#     script:
+#         - 'docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .'
+#         - 'docker push "$CI_REGISTRY_IMAGE:latest"'
+#     only:
+#         - master
