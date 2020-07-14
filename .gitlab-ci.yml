@@ -2,12 +2,11 @@ stages:
     - build
     - deploy
   
- reactjs-build:
+reactjs-build:
     image: node:12.18.2
     stage: build
     script:
-        - npm i
-        - npm run-script build
+        - npm i && npm run-script build
     artifacts:
         paths:
             - build
