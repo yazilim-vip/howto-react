@@ -2,17 +2,15 @@ stages:
     - build
     - deploy
   
-pages:
+ reactjs-build:
     image: node:12.18.2
     stage: build
     script:
         - npm i
         - npm run-script build
-        - rm -rv public
-        - cp -R build public
     artifacts:
         paths:
-        - public
+        - build
     only:
         - master
     
