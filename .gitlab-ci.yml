@@ -10,7 +10,7 @@ stages:
         - npm run-script build
     artifacts:
         paths:
-        - build
+            - build
     only:
         - master
     
