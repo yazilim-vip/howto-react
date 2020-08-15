@@ -10,7 +10,7 @@ const TeamInfoComponent = (props) => (
                 // Return the element. Also pass key     
                 return (
                     <Card className="mb-4">
-                        <Card.Header style={styles.teamMemberCardHeader}>
+                        <Card.Header>
                             {team_member.name} - ({team_member.title})
                         </Card.Header>
 
@@ -38,10 +38,6 @@ const TeamInfoComponent = (props) => (
 const styles = {
     teamMemberImg: {
         width: '100%'
-    },
-
-    teamMemberCardHeader: {
-        textAlign: 'center'
     }
 }
 
