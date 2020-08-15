@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Bootstrap
-import { CardDeck, Card, Image, Row, Col } from 'react-bootstrap';
+import { Card, Image, Row, Col } from 'react-bootstrap';
 
 const TeamInfoComponent = (props) => (
     <div>
