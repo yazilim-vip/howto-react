@@ -31,7 +31,7 @@ const team_member_list = [
     }
 ]
 
-const memberToComponent = (tm, i) => <TeamMemberComponent team_member={tm}> </TeamMemberComponent>
+const memberToComponent = (tm) => <TeamMemberComponent team_member={tm} />
 
 const About = () => (
     <Page>
