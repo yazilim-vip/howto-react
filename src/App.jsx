@@ -13,6 +13,12 @@ import Portfolio from "./page/Portfolio";
 import './App.css';
 import CustomNavbar from './component/CustomNavbar';
 
+// Fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fab)
+
 
 const App = () => (
   <Router>

@@ -3,11 +3,34 @@ import React from "react";
 // Bootstrap
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGitlab } from "@fortawesome/free-brands-svg-icons";
 
-const linkToIcon = (i, url) => (
-  <FontAwesomeIcon icon={faGitlab} href={url} size="lg" className="mr-3" />
-);
+const linkToIcon = (linkMap) => {
+  const iconCode = linkMap[0];
+  const url = linkMap[1];
+
+  const colorMap = {
+    gitlab: "#E2432A",
+    medium: "#000000",
+    google_play: "#3BCCFF",
+  };
+
+  //   var color = "#000000";
+  //   var key = iconCode.replaceAll("-", "_")
+  //   if (colorMap[key]) {
+  //     color = colorMap[key];
+  //   }
+
+  return (
+    <a href={url} target="blank" className="text-dark portfolio-link">
+      <FontAwesomeIcon
+        icon={["fab", iconCode]}
+        size="lg"
+        className="mr-3"
+        color={colorMap[iconCode.split("-").join("_")]}
+      />
+    </a>
+  );
+};
 
 const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
@@ -27,7 +50,7 @@ const PortfolioCard = (props) => {
   }
 
   return (
-    <Card className="mb-4 shadow border borde  r-dark">
+    <Card className="mb-4 shadow border border-dark">
       {portfolioImgElement}
 
       <Card.Body>
