@@ -18,6 +18,7 @@ const CustomNavbar = () => (
                     </Navbar.Brand>
                     <Nav className="justify-content-center">
                         <Link className="text-light nav-link" to={'/'}>Home</Link>
+                        <Link className="text-light nav-link" to={'/portfolio'}>Portfolio</Link>
                         <Link className="text-light nav-link" to={'/about'}>About</Link>
                     </Nav>
                 </Col>

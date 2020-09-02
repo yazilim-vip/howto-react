@@ -8,6 +8,7 @@ import { Row, Col, Navbar } from 'react-bootstrap';
 // Pages
 import Home from "./page/Home";
 import About from "./page/About";
+import Portfolio from "./page/Portfolio";
 
 import './App.css';
 import CustomNavbar from './component/CustomNavbar';
@@ -28,6 +29,7 @@ const App = () => (
           <Col md={{ span: 8, offset: 2 }}>
             <Switch>
               <Route exact path='/' component={Home} />
+              <Route exact path='/portfolio' component={Portfolio} />
               <Route exact path='/about' component={About} />
             </Switch>
           </Col>

@@ -18,7 +18,7 @@ const TeamInfoComponent = (props) => (
                             <Col md={{ span: 12 }}>
                                 <Row>
                                     <Col md={{ span: 2 }}>
-                                        <Image src={`img/${team_member.image_name}`} roundedCircle style={styles.teamMemberImg} />
+                                        <Image src={`${team_member.image_name}`} roundedCircle style={styles.teamMemberImg} />
                                     </Col>
                                     <Col md={{ span: 10 }}>
 

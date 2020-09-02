@@ -3,10 +3,10 @@ import React from 'react';
 // Component
 import Page from '../component/Page';
 
-const Home = (props) => (
+const Portfolio = () => (
     <Page>
-        <h1> Sleam </h1>
+
     </Page>
 )
 
-export default Home;
+export default Portfolio;

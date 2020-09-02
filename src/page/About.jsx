@@ -9,34 +9,28 @@ const About = () => (
         <TeamInfoComponent team_member_list={
             [
                 {
-                    name: "Emre Sen",
+                    name: "Mehmet Arif Emre Sen",
                     title: "Major Contributor",
-                    info: "Info",
-                    image_name: "linux-penguin.jpg"
+                    info: "Computer Engineer",
+                    image_name: "https://gitlab.com/uploads/-/system/user/avatar/1102036/avatar.png?width=400"
                 },
                 {
-                    name: "Emre Sen",
+                    name: "Burak Erkan",
                     title: "Major Contributor",
-                    info: "Info",
-                    image_name: "linux-penguin.jpg"
+                    info: "Computer Engineer",
+                    image_name: "https://gitlab.com/uploads/-/system/user/avatar/2674558/avatar.png?width=400"
                 },
                 {
-                    name: "Emre Sen",
+                    name: "Mustafa Arif Sisman",
                     title: "Major Contributor",
-                    info: "Info",
-                    image_name: "linux-penguin.jpg"
+                    info: "Computer Engineer",
+                    image_name: "https://gitlab.com/uploads/-/system/user/avatar/1907363/avatar.png?width=400"
                 },
                 {
-                    name: "Emre Sen",
-                    title: "Major Contributor",
-                    info: "Info",
-                    image_name: "linux-penguin.jpg"
-                },
-                {
-                    name: "Emre Sen",
-                    title: "Major Contributor",
-                    info: "Info",
-                    image_name: "linux-penguin.jpg"
+                    name: "Ahmet Gurdal",
+                    title: "Contributor",
+                    info: "Computer Engineer",
+                    image_name: "https://secure.gravatar.com/avatar/93d5395c86f888c9e820f1805dc874f2?s=800&d=identicon"
                 }
             ]
         } />
