@@ -25,17 +25,24 @@ footer {
   background-color: #343a40;
 }
 
-
-
 .portfolio-link {
-  -webkit-transition: opacity 500ms ease-in-out;
-  -moz-transition: opacity 500ms ease-in-out;
-  -ms-transition: opacity 500ms ease-in-out;
-  -o-transition: opacity 500ms ease-in-out;
-  transition: opacity 500ms ease-in-out;
-  opacity: 0.4
+  -webkit-transition: color 500ms ease-in-out;
+  -moz-transition: color 500ms ease-in-out;
+  -ms-transition: color 500ms ease-in-out;
+  -o-transition: color 500ms ease-in-out;
+  transition: color 500ms ease-in-out;
+  font-size: 1.6em
 }
 
-.portfolio-link:hover {
-  opacity: 1
+.portfolio-link.gitlab:hover{
+  color: #E2432A!important;
+}
+.portfolio-link.medium:hover{
+  color: #000000!important;
+}
+.portfolio-link.google-play:hover{
+  color: #3BCCFF!important;
+}
+.portfolio-link.bitbucket:hover{
+  color: #0C61DB!important;
 }

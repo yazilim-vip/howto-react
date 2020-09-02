@@ -8,25 +8,11 @@ const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
   const url = linkMap[1];
 
-  const colorMap = {
-    gitlab: "#E2432A",
-    medium: "#000000",
-    google_play: "#3BCCFF",
-  };
-
-  //   var color = "#000000";
-  //   var key = iconCode.replaceAll("-", "_")
-  //   if (colorMap[key]) {
-  //     color = colorMap[key];
-  //   }
-
   return (
-    <a href={url} target="blank" className="text-dark portfolio-link">
+    <a href={url} target="blank" className={`text-muted portfolio-link ${iconCode}`}>
       <FontAwesomeIcon
         icon={["fab", iconCode]}
-        size="lg"
         className="mr-3"
-        color={colorMap[iconCode.split("-").join("_")]}
       />
     </a>
   );
@@ -59,7 +45,7 @@ const PortfolioCard = (props) => {
         <Card.Text>{portfolio.description}</Card.Text>
       </Card.Body>
 
-      <Card.Footer className="text-muted">{portfolioLinksElement}</Card.Footer>
+      <Card.Footer className="text-center">{portfolioLinksElement}</Card.Footer>
     </Card>
   );
 };
