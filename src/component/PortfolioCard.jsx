@@ -1,45 +1,44 @@
-import React from 'react';
+import React from "react";
 
 // Bootstrap
-import { Card, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGitlab } from '@fortawesome/free-brands-svg-icons';
+import { Card } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGitlab } from "@fortawesome/free-brands-svg-icons";
 
-const linkToIcon = (i, url) => <FontAwesomeIcon icon={i} href={url} size="lg"  />
+const linkToIcon = (i, url) => (
+  <FontAwesomeIcon icon={faGitlab} href={url} size="lg" className="mr-3" />
+);
 
 const PortfolioCard = (props) => {
-    const portfolio = props.portfolio
-    var portfolioImgElement
-    var portfolioLinks = portfolio.links
+  const portfolio = props.portfolio;
+  const portfolioLinks = portfolio.links;
 
-    if (portfolio.imageSource) {
-        portfolioImgElement = <Card.Img variant="top" src={`${portfolio.imageSource}`} />
-    }
+  var portfolioImgElement;
+  var portfolioLinksElement;
 
-    var portfolioLinksElement
-    for (var l in portfolioLinks) {
-        portfolioLinksElement += linkToIcon(l, portfolioLinks[l])
-    }
+  if (portfolio.imageSource) {
+    portfolioImgElement = (
+      <Card.Img variant="top" src={`${portfolio.imageSource}`} />
+    );
+  }
 
-    return (
-        <Card className="mb-4 shadow border border-dark">
-            {portfolioImgElement}
+  if (portfolioLinks !== undefined && portfolioLinks !== null) {
+    portfolioLinksElement = Object.entries(portfolioLinks).map(linkToIcon);
+  }
 
-            <Card.Body>
-                <Card.Title>
-                    {portfolio.name}
-                </Card.Title>
+  return (
+    <Card className="mb-4 shadow border borde  r-dark">
+      {portfolioImgElement}
 
-                <Card.Text>
-                    {portfolio.description}
-                </Card.Text>
-            </Card.Body>
+      <Card.Body>
+        <Card.Title>{portfolio.name}</Card.Title>
 
-            <Card.Footer className="text-muted">
-                {portfolioLinksElement}
-            </Card.Footer>
-        </Card>
-    )
-}
+        <Card.Text>{portfolio.description}</Card.Text>
+      </Card.Body>
 
-export default PortfolioCard
+      <Card.Footer className="text-muted">{portfolioLinksElement}</Card.Footer>
+    </Card>
+  );
+};
+
+export default PortfolioCard;
