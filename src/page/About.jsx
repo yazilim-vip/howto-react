@@ -1,46 +1,86 @@
-import React from 'react';
+import React from "react";
 
 // Component
-import Page from '../component/Page';
-import TeamMemberComponent from '../component/TeamMemberCard';
+import Page from "../component/Page";
+import PortfolioCard from "../component/PortfolioCard";
+import { CardDeck, Row, Col } from "react-bootstrap";
 
 const team_member_list = [
-    {
-        name: "Mehmet Arif Emre Sen",
-        title: "Major Contributor",
-        info: "Computer Engineer",
-        image_name: "https://gitlab.com/uploads/-/system/user/avatar/1102036/avatar.png?width=400"
+  {
+    name: "Mehmet Arif Emre Sen",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    imageSource: "https://thispersondoesnotexist.com/image",
+    title: "Major Contributor",
+    links: {
+      gitlab: "https://thispersondoesnotexist.com/image",
+      medium: "https://thispersondoesnotexist.com/image",
+      "google-play": "https://thispersondoesnotexist.com/image",
     },
-    {
-        name: "Burak Erkan",
-        title: "Major Contributor",
-        info: "Computer Engineer",
-        image_name: "https://gitlab.com/uploads/-/system/user/avatar/2674558/avatar.png?width=400"
+  },
+  {
+    name: "Burak Erkan",
+    title: "Major Contributor",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    imageSource: "https://thispersondoesnotexist.com/image",
+    links: {
+      gitlab: "https://thispersondoesnotexist.com/image",
+      medium: "https://thispersondoesnotexist.com/image",
+      "google-play": "https://thispersondoesnotexist.com/image",
     },
-    {
-        name: "Mustafa Arif Sisman",
-        title: "Major Contributor",
-        info: "Computer Engineer",
-        image_name: "https://gitlab.com/uploads/-/system/user/avatar/1907363/avatar.png?width=400"
+  },
+  {
+    name: "Mustafa Arif Sisman",
+    title: "Major Contributor",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    imageSource: "https://thispersondoesnotexist.com/image",
+    links: {
+      gitlab: "https://thispersondoesnotexist.com/image",
+      medium: "https://thispersondoesnotexist.com/image",
+      "google-play": "https://thispersondoesnotexist.com/image",
     },
-    {
-        name: "Ahmet Gurdal",
-        title: "Contributor",
-        info: "Computer Engineer",
-        image_name: "https://secure.gravatar.com/avatar/93d5395c86f888c9e820f1805dc874f2?s=800&d=identicon"
-    }
-]
+  },
+];
 
-const memberToComponent = (tm) => <TeamMemberComponent team_member={tm} />
+const contributor_list = [
+  {
+    name: "Ahmet Gurdal",
+    title: "Contributor",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    imageSource: "https://thispersondoesnotexist.com/image",
+    links: {
+      gitlab: "https://thispersondoesnotexist.com/image",
+      medium: "https://thispersondoesnotexist.com/image",
+      "google-play": "https://thispersondoesnotexist.com/image",
+    },
+  },
+];
+
+const memberToComponent = (tm) => (
+  <Col md={{ span: 4 }}>
+    <PortfolioCard portfolio={tm} />
+  </Col>
+);
 
 const About = () => (
-    <Page>
-        <div>
-            {
-                team_member_list.map(memberToComponent)
-            }
-        </div>
-    </Page>
-)
+  <Page>
+    <div className="about-page">
+      <h3 className="text-center mb-4">Major Contributors</h3>
+      <Col md={{ span: 12 }}>
+        <Row>{team_member_list.map(memberToComponent)}</Row>
+      </Col>
+
+      <hr />
+
+      <h3 className="text-center mb-4">Contributors</h3>
+      <Col md={{ span: 12 }}>
+        <Row>{contributor_list.map(memberToComponent)}</Row>
+      </Col>
+    </div>
+  </Page>
+);
 
 export default About;

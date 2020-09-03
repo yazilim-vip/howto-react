@@ -36,15 +36,13 @@ const PortfolioCard = (props) => {
   }
 
   return (
-    <Card className="mb-4 shadow border border-dark">
+    <Card className="mb-4 portfolio-card shadow border border-dark">
       {portfolioImgElement}
-
       <Card.Body>
         <Card.Title>{portfolio.name}</Card.Title>
-
+        <Card.Subtitle className="mb-4 text-muted">{props.portfolio.title}</Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
       </Card.Body>
-
       <Card.Footer className="text-center">{portfolioLinksElement}</Card.Footer>
     </Card>
   );
