@@ -11,7 +11,7 @@ const CustomNavbar = () => (
                         <img
                             alt=""
                             src="/logo.svg"
-                            width="260"
+                            width="300"
                             className="d-inline-block align-top"
                         />{' '}
                         <span style={styles.slogan} className="text-white-50 d-block">Do the right, not the easy</span>

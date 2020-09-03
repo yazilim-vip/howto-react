@@ -27,7 +27,7 @@ const PortfolioCard = (props) => {
 
   if (portfolio.imageSource) {
     portfolioImgElement = (
-      <Card.Img variant="top" src={`${portfolio.imageSource}`} />
+      <Card.Img variant="top" src={`${portfolio.imageSource}`}/>
     );
   }
 

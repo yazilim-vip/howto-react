@@ -60,7 +60,7 @@ const contributor_list = [
 ];
 
 const memberToComponent = (tm) => (
-  <Col md={{ span: 4 }}>
+  <Col lg={{ span: 4 }}>
     <PortfolioCard portfolio={tm} />
   </Col>
 );
@@ -68,14 +68,12 @@ const memberToComponent = (tm) => (
 const About = () => (
   <Page>
     <div className="about-page">
-      <h3 className="text-center mb-4">Major Contributors</h3>
       <Col md={{ span: 12 }}>
         <Row>{team_member_list.map(memberToComponent)}</Row>
       </Col>
 
       <hr />
 
-      <h3 className="text-center mb-4">Contributors</h3>
       <Col md={{ span: 12 }}>
         <Row>{contributor_list.map(memberToComponent)}</Row>
       </Col>
