@@ -12,7 +12,7 @@ const linkToIcon = (linkMap) => {
     <a
       href={url}
       target="blank"
-      className={`text-muted portfolio-link ${iconCode}`}
+      className={`text-muted portfolio-link icon ${iconCode}`}
     >
       <FontAwesomeIcon icon={["fab", iconCode]} className="mr-3" />
     </a>

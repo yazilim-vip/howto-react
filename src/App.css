@@ -27,7 +27,7 @@ footer {
 }
 
 
-.nav-link {
+/* .nav-link {
   border-top: 3px solid gray;
   border-bottom: 3px solid gray;
   transition: border-color 300ms ease-in-out;
@@ -36,10 +36,10 @@ footer {
 
 .nav-link.active {
   border-color: #29a4d9;
-}
+} */
 
 
-.portfolio-link {
+.portfolio-link, .nav-link.icon {
   -webkit-transition: color 500ms ease-in-out;
   -moz-transition: color 500ms ease-in-out;
   -ms-transition: color 500ms ease-in-out;
@@ -48,15 +48,16 @@ footer {
   font-size: 1.6em;
 }
 
-.portfolio-link.gitlab:hover {
+
+.icon.gitlab:hover {
   color: #e2432a !important;
 }
-.portfolio-link.medium:hover {
+.icon.medium:hover {
   color: #000000 !important;
 }
-.portfolio-link.google-play:hover {
+.icon.google-play:hover {
   color: #3bccff !important;
 }
-.portfolio-link.bitbucket:hover {
+.icon.bitbucket:hover {
   color: #0c61db !important;
 }

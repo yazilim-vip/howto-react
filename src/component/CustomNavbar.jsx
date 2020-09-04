@@ -1,75 +1,58 @@
 import React from "react";
 import { Navbar, Nav, Row, Col } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CustomNavbar = () => (
-  <div style={styles.navbar}>
-    <Navbar bg="dark" variant="dark">
-        
-      <Navbar.Brand className="pl-5">
-        <img
-          alt=""
-          src="/logo.svg"
-          width="250"
-          className="d-inline-block align-top"
-        />
-        <span style={styles.slogan} className="text-white-50 d-block">
-          Do the right, not the easy
-        </span>
-      </Navbar.Brand>
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar.Brand className="my-2">
+      <img alt="" src="/logo.svg" width="250" />
+    </Navbar.Brand>
 
-      <Row>
-        <Col md={{ span: 12 }}>
-          <Nav className="pl-5 mx-auto">
-            <NavLink
-              exact
-              activeClassName="active"
-              className="text-light nav-link"
-              to="/"
-            >
-              Home
-            </NavLink>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="mr-auto">
+        <NavLink
+          exact
+          activeClassName="active"
+          className="text-light nav-link"
+          to="/"
+        >
+          Home
+        </NavLink>
 
-            <NavLink
-              activeClassName="active"
-              className="text-light nav-link"
-              to="/portfolio"
-            >
-              Portfolio
-            </NavLink>
+        <NavLink
+          activeClassName="active"
+          className="text-light nav-link"
+          to="/portfolio"
+        >
+          Portfolio
+        </NavLink>
 
-            <NavLink
-              activeClassName="active"
-              className="text-light nav-link"
-              to="/about"
-            >
-              About
-            </NavLink>
-
-            {/* <Link className="text-light nav-link" to={"/"}>
-              Home
-            </Link>
-            <Link className="text-light nav-link" to={"/portfolio"}>
-              Portfolio
-            </Link>
-            <Link className="text-light nav-link" to={"/about"}>
-              About
-            </Link> */}
-          </Nav>
-        </Col>
-      </Row>
-    </Navbar>
-  </div>
+        <NavLink
+          activeClassName="active"
+          className="text-light nav-link"
+          to="/about"
+        >
+          About
+        </NavLink>
+      </Nav>
+      <Nav>
+        <NavLink
+          activeClassName="active"
+          className="text-light nav-link gitlab icon"
+          to="/about"
+        >
+          <FontAwesomeIcon icon={["fab", "gitlab"]} className="mr-3" />
+        </NavLink>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
 );
 
 const styles = {
   slogan: {
     fontSize: "15px",
-  },
-
-  navbar: {
-    backgroundColor: "#343a40",
-    textAlign: "center",
   },
 };
 
