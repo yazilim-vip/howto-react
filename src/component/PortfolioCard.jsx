@@ -9,12 +9,10 @@ const linkToIcon = (linkMap) => {
   const url = linkMap[1];
 
   return (
-    <a
-      href={url}
-      target="blank"
-      className={`text-muted portfolio-link icon ${iconCode}`}
-    >
-      <FontAwesomeIcon icon={["fab", iconCode]} className="mr-3" />
+    <a href={url} target="blank" className={`text-muted portfolio-link`}>
+      <span className={`yvip-icon ${iconCode}`}>
+        <FontAwesomeIcon icon={["fab", iconCode]} className="mr-3" />
+      </span>
     </a>
   );
 };

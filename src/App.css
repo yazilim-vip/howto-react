@@ -39,7 +39,16 @@ footer {
 } */
 
 
-.portfolio-link, .nav-link.icon {
+/* .portfolio-link, .nav-link.icon {
+  -webkit-transition: color 500ms ease-in-out;
+  -moz-transition: color 500ms ease-in-out;
+  -ms-transition: color 500ms ease-in-out;
+  -o-transition: color 500ms ease-in-out;
+  transition: color 500ms ease-in-out;
+  font-size: 1.6em;
+} */
+
+.yvip-icon {
   -webkit-transition: color 500ms ease-in-out;
   -moz-transition: color 500ms ease-in-out;
   -ms-transition: color 500ms ease-in-out;
@@ -48,16 +57,15 @@ footer {
   font-size: 1.6em;
 }
 
-
-.icon.gitlab:hover {
+.yvip-icon.gitlab:hover {
   color: #e2432a !important;
 }
-.icon.medium:hover {
+.yvip-icon.medium:hover {
   color: #000000 !important;
 }
-.icon.google-play:hover {
+.yvip-icon.google-play:hover {
   color: #3bccff !important;
 }
-.icon.bitbucket:hover {
+.yvip-icon.bitbucket:hover {
   color: #0c61db !important;
 }

@@ -40,10 +40,12 @@ const CustomNavbar = () => (
       <Nav>
         <NavLink
           activeClassName="active"
-          className="text-light nav-link gitlab icon"
+          className="text-light nav-link"
           to="/about"
         >
-          <FontAwesomeIcon icon={["fab", "gitlab"]} className="mr-3" />
+          <span className="yvip-icon gitlab">
+            <FontAwesomeIcon icon={["fab", "gitlab"]} className="mr-3" />
+          </span>
         </NavLink>
       </Nav>
     </Navbar.Collapse>
