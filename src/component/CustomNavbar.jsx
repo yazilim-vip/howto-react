@@ -8,11 +8,12 @@ const CustomNavbar = () => {
   const toggleHover = () => setHovered(!hovered);
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand className="my-2">
-        <img alt="" src="/logo.svg" width="250" />
-      </Navbar.Brand>
-
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="text-center">
+      <div className="animate__animated animate__flipInX">
+        <Navbar.Brand className="my-2">
+          <img alt="" src="/logo.svg" width="250" />
+        </Navbar.Brand>
+      </div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -42,34 +43,41 @@ const CustomNavbar = () => {
           </NavLink>
         </Nav>
         <Nav>
-          <NavLink
+          <span
             activeClassName="active"
             className="text-light nav-link"
-            to="/about"
-            onMouseEnter={toggleHover}
-            onMouseLeave={toggleHover}
           >
-            {/* <div className={`d-inline-block  ${hovered ? "animated animate__heartBeat" : ""}`}>
-              <YvipIcon iconCode={"gitlab"} />
-            </div> */}
             <YvipIcon
               iconCode={"gitlab"}
               className="animate__animated animate__zoomInLeft"
+              link="https://gitlab.com/yazilim.vip"
             />
             <YvipIcon
               iconCode={"github"}
               className="animate__animated animate__zoomInLeft"
+              link="https://github.com/yazilim-vip"
             />
             <YvipIcon
               iconCode={"bitbucket"}
               className="animate__animated animate__zoomInLeft"
+              link="https://bitbucket.org/yazilimvip/"
+            />
+            <YvipIcon
+              iconCode={"docker"}
+              className="animate__animated animate__zoomInLeft"
+              link="https://hub.docker.com/orgs/yazilimvip/repositories"
             />
             <YvipIcon
               iconCode={"linkedin"}
               className="animate__animated animate__zoomInLeft"
+              link="https://www.linkedin.com/company/yazilimvip"
             />
-
-          </NavLink>
+            <YvipIcon
+              iconCode={"medium"}
+              className="animate__animated animate__zoomInLeft"
+              link="https://medium.com/yazilim-vip"
+            />
+          </span>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
