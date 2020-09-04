@@ -54,19 +54,19 @@ const CustomNavbar = () => {
             </div> */}
             <YvipIcon
               iconCode={"gitlab"}
-              className="animate__animated animate__rollIn"
+              className="animate__animated animate__zoomInLeft"
             />
             <YvipIcon
               iconCode={"github"}
-              className="animate__animated animate__rollIn"
+              className="animate__animated animate__zoomInLeft"
             />
             <YvipIcon
               iconCode={"bitbucket"}
-              className="animate__animated animate__rollIn"
+              className="animate__animated animate__zoomInLeft"
             />
             <YvipIcon
               iconCode={"linkedin"}
-              className="animate__animated animate__rollIn"
+              className="animate__animated animate__zoomInLeft"
             />
 
           </NavLink>
