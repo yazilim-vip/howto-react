@@ -1,60 +1,79 @@
-import React from "react";
-import { Navbar, Nav, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import YvipIcon from "./YvipIcon";
 
-const CustomNavbar = () => (
-  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand className="my-2">
-      <img alt="" src="/logo.svg" width="250" />
-    </Navbar.Brand>
+const CustomNavbar = () => {
+  const [hovered, setHovered] = useState(false);
+  const toggleHover = () => setHovered(!hovered);
 
-    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-    <Navbar.Collapse id="responsive-navbar-nav">
-      <Nav className="mr-auto">
-        <NavLink
-          exact
-          activeClassName="active"
-          className="text-light nav-link"
-          to="/"
-        >
-          Home
-        </NavLink>
+  return (
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand className="my-2">
+        <img alt="" src="/logo.svg" width="250" />
+      </Navbar.Brand>
 
-        <NavLink
-          activeClassName="active"
-          className="text-light nav-link"
-          to="/portfolio"
-        >
-          Portfolio
-        </NavLink>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <NavLink
+            exact
+            activeClassName="active"
+            className="text-light nav-link"
+            to="/"
+          >
+            Home
+          </NavLink>
 
-        <NavLink
-          activeClassName="active"
-          className="text-light nav-link"
-          to="/about"
-        >
-          About
-        </NavLink>
-      </Nav>
-      <Nav>
-        <NavLink
-          activeClassName="active"
-          className="text-light nav-link"
-          to="/about"
-        >
-          <span className="yvip-icon gitlab">
-            <FontAwesomeIcon icon={["fab", "gitlab"]} className="mr-3" />
-          </span>
-        </NavLink>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-);
+          <NavLink
+            activeClassName="active"
+            className="text-light nav-link"
+            to="/portfolio"
+          >
+            Portfolio
+          </NavLink>
+
+          <NavLink
+            activeClassName="active"
+            className="text-light nav-link"
+            to="/about"
+          >
+            About
+          </NavLink>
+        </Nav>
+        <Nav>
+          <NavLink
+            activeClassName="active"
+            className="text-light nav-link"
+            to="/about"
+            onMouseEnter={toggleHover}
+            onMouseLeave={toggleHover}
+          >
+            {/* <div className={`d-inline-block  ${hovered ? "animated animate__heartBeat" : ""}`}>
+              <YvipIcon iconCode={"gitlab"} />
+            </div> */}
+            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-4s`}>
+              <YvipIcon iconCode={"gitlab"} />
+            </div>
+            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-3s`}>
+              <YvipIcon iconCode={"github"} />
+            </div>
+            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-2s`}>
+              <YvipIcon iconCode={"bitbucket"} />
+            </div>
+            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-1s`}>
+              <YvipIcon iconCode={"medium"} />
+            </div>
+          </NavLink>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
 
 const styles = {
-  slogan: {
-    fontSize: "15px",
+  iconAnimationWrapper: {
+    display: "inlineBlock",
   },
 };
 

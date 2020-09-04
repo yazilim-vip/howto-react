@@ -3,6 +3,7 @@ import React from "react";
 // Bootstrap
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import YvipIcon from "./YvipIcon";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
@@ -10,9 +11,7 @@ const linkToIcon = (linkMap) => {
 
   return (
     <a href={url} target="blank" className={`text-muted portfolio-link`}>
-      <span className={`yvip-icon ${iconCode}`}>
-        <FontAwesomeIcon icon={["fab", iconCode]} className="mr-3" />
-      </span>
+      <YvipIcon iconCode={iconCode} />
     </a>
   );
 };

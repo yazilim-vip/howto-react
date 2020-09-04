@@ -26,7 +26,6 @@ footer {
   background-color: #343a40;
 }
 
-
 /* .nav-link {
   border-top: 3px solid gray;
   border-bottom: 3px solid gray;
@@ -37,7 +36,6 @@ footer {
 .nav-link.active {
   border-color: #29a4d9;
 } */
-
 
 /* .portfolio-link, .nav-link.icon {
   -webkit-transition: color 500ms ease-in-out;
@@ -68,4 +66,7 @@ footer {
 }
 .yvip-icon.bitbucket:hover {
   color: #0c61db !important;
+}
+.yvip-icon.linkedin:hover {
+  color: #2867b2 !important;
 }
