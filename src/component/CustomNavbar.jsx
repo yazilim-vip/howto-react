@@ -52,8 +52,22 @@ const CustomNavbar = () => {
             {/* <div className={`d-inline-block  ${hovered ? "animated animate__heartBeat" : ""}`}>
               <YvipIcon iconCode={"gitlab"} />
             </div> */}
-            <YvipIcon iconCode={"gitlab"} className="animate__animated animate__fadeInRight" />
-            <YvipIcon iconCode={"linkedin"} className="animate__animated animate__fadeInRight" />
+            <YvipIcon
+              iconCode={"gitlab"}
+              className="animate__animated animate__rollIn"
+            />
+            <YvipIcon
+              iconCode={"github"}
+              className="animate__animated animate__rollIn"
+            />
+            <YvipIcon
+              iconCode={"bitbucket"}
+              className="animate__animated animate__rollIn"
+            />
+            <YvipIcon
+              iconCode={"linkedin"}
+              className="animate__animated animate__rollIn"
+            />
 
           </NavLink>
         </Nav>

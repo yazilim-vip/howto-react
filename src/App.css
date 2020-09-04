@@ -70,3 +70,36 @@ footer {
 .yvip-icon.linkedin:hover {
   color: #2867b2 !important;
 }
+
+
+.nav-link .yvip-icon{
+/* This changes all the animations globaly */
+  /* --animate-duration: 800ms; */
+}
+
+.nav-link .yvip-icon:nth-child(5){
+  /* This changes all the animations globaly */
+  --animate-duration: 500ms;
+}
+
+
+.nav-link .yvip-icon:nth-child(4){
+  /* This changes all the animations globaly */
+  --animate-duration: 1000ms;
+}
+
+
+.nav-link .yvip-icon:nth-child(3){
+  /* This changes all the animations globaly */
+  --animate-duration: 1500ms;
+}
+
+.nav-link .yvip-icon:nth-child(2){
+  /* This changes all the animations globaly */
+  --animate-duration:  2000ms;
+}
+
+.nav-link .yvip-icon:nth-child(1){
+  /* This changes all the animations globaly */
+  --animate-duration: 2500ms;
+}
