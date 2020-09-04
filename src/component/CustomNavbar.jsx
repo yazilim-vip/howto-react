@@ -52,18 +52,9 @@ const CustomNavbar = () => {
             {/* <div className={`d-inline-block  ${hovered ? "animated animate__heartBeat" : ""}`}>
               <YvipIcon iconCode={"gitlab"} />
             </div> */}
-            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-4s`}>
-              <YvipIcon iconCode={"gitlab"} />
-            </div>
-            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-3s`}>
-              <YvipIcon iconCode={"github"} />
-            </div>
-            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-2s`}>
-              <YvipIcon iconCode={"bitbucket"} />
-            </div>
-            <div className={`d-inline-block  animate__animated animate__zoomIn animate__delay-1s`}>
-              <YvipIcon iconCode={"medium"} />
-            </div>
+            <YvipIcon iconCode={"gitlab"} className="animate__animated animate__fadeInRight" />
+            <YvipIcon iconCode={"linkedin"} className="animate__animated animate__fadeInRight" />
+
           </NavLink>
         </Nav>
       </Navbar.Collapse>

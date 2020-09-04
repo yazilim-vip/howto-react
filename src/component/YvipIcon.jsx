@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const YvipIcon = (props) => (
-  <span className={`yvip-icon ${props.iconCode}`}>
+  <div className={`d-inline-block yvip-icon ${props.iconCode} ${props.className}`}>
     <FontAwesomeIcon icon={["fab", props.iconCode]} className="mr-3" />
-  </span>
+  </div>
 );
 
 export default YvipIcon;
