@@ -14,7 +14,7 @@
     "react-dom": "^16.13.1",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -40,9 +40,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.8.1",
-    "eslint-plugin-mocha": "^8.0.0",
-    "eslint-plugin-react": "^7.20.6",
     "jquery": "3.5.1",
     "popper.js": "^1.16.1",
     "typescript": "^3.9.6"
