@@ -7,7 +7,7 @@ import { Row, Col } from "react-bootstrap";
 import * as Constants from '../constants';
 
 const memberToComponent = (tm) => (
-  <Col lg={{ span: 4 }}>
+  <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 12 }}>
     <PortfolioCard portfolio={tm} />
   </Col>
 );

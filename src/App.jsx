@@ -10,7 +10,7 @@ import Home from "./page/Home";
 import About from "./page/About";
 import Portfolio from "./page/Portfolio";
 
-import './App.css';
+import './App.scss';
 import CustomNavbar from './component/CustomNavbar';
 
 // Fontawesome
