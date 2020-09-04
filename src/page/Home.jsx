@@ -5,7 +5,8 @@ import Page from "../component/Page";
 
 const Home = (props) => (
   <Page>
-    <h1> Sleam </h1>
+    <h1 className="text-center"> Home </h1>
+    <hr/>
   </Page>
 );
 

@@ -17,6 +17,7 @@ body {
 main {
   flex: 1 0 auto;
   padding: 10px;
+  background-color: #e9ebf0;
 }
 
 footer {
@@ -25,24 +26,37 @@ footer {
   background-color: #343a40;
 }
 
+
+.nav-link {
+  border-top: 3px solid gray;
+  border-bottom: 3px solid gray;
+  transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+.nav-link.active {
+  border-color: #29a4d9;
+}
+
+
 .portfolio-link {
   -webkit-transition: color 500ms ease-in-out;
   -moz-transition: color 500ms ease-in-out;
   -ms-transition: color 500ms ease-in-out;
   -o-transition: color 500ms ease-in-out;
   transition: color 500ms ease-in-out;
-  font-size: 1.6em
+  font-size: 1.6em;
 }
 
-.portfolio-link.gitlab:hover{
-  color: #E2432A!important;
+.portfolio-link.gitlab:hover {
+  color: #e2432a !important;
 }
-.portfolio-link.medium:hover{
-  color: #000000!important;
+.portfolio-link.medium:hover {
+  color: #000000 !important;
 }
-.portfolio-link.google-play:hover{
-  color: #3BCCFF!important;
+.portfolio-link.google-play:hover {
+  color: #3bccff !important;
 }
-.portfolio-link.bitbucket:hover{
-  color: #0C61DB!important;
+.portfolio-link.bitbucket:hover {
+  color: #0c61db !important;
 }

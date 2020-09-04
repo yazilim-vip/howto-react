@@ -29,14 +29,14 @@ const App = () => (
     </header>
 
     {/* BODY */}
-    <main className="my-4">
+    <main className="py-4">
       <Col md={{ span: 12 }}>
         <Row>
           <Col md={{ span: 8, offset: 2 }}>
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route exact path='/portfolio' component={Portfolio} />
-              <Route exact path='/about' component={About} />
+              <Route path='/portfolio' component={Portfolio} />
+              <Route path='/about' component={About} />
             </Switch>
           </Col>
         </Row>
