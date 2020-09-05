@@ -4,7 +4,7 @@ import React from 'react';
 import Page from '../component/Page';
 import PortfolioCard from '../component/PortfolioCard';
 import { CardColumns } from 'react-bootstrap';
-import * as Constants from '../constants';
+import * as Content from '../content';
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
 
@@ -12,7 +12,7 @@ const Portfolio = () => (
     <Page>
         <CardColumns>
             {
-                Constants.portfolioList.map(portfolioToComponent)
+                Content.portfolioList.map(portfolioToComponent)
             }
         </CardColumns>
     </Page>

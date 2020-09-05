@@ -4,7 +4,7 @@ import React from "react";
 import Page from "../component/Page";
 import PortfolioCard from "../component/PortfolioCard";
 import { Row, Col } from "react-bootstrap";
-import * as Constants from '../constants';
+import * as Content from '../content';
 
 const memberToComponent = (tm) => (
   <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 12 }}>
@@ -16,13 +16,13 @@ const About = () => (
   <Page>
     <div className="about-page">
       <Col md={{ span: 12 }}>
-        <Row>{Constants.teamMemberList.map(memberToComponent)}</Row>
+        <Row>{Content.teamMemberList.map(memberToComponent)}</Row>
       </Col>
 
       <hr />
 
       <Col md={{ span: 12 }}>
-        <Row>{Constants.contributorList.map(memberToComponent)}</Row>
+        <Row>{Content.contributorList.map(memberToComponent)}</Row>
       </Col>
     </div>
   </Page>
