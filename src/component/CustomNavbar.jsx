@@ -15,8 +15,9 @@ const CustomNavbar = () => {
         </Navbar.Brand>
       </div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="mx-auto page-nav">
           <NavLink
             exact
             activeClassName="active"
@@ -76,6 +77,11 @@ const CustomNavbar = () => {
               iconCode={"medium"}
               className="animate__animated animate__zoomInLeft"
               link="https://medium.com/yazilim-vip"
+            />
+            <YvipIcon
+              iconCode={"discord"}
+              className="animate__animated animate__zoomInLeft"
+              link=""
             />
           </span>
         </Nav>

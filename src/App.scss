@@ -14,6 +14,7 @@ body {
   height: 100%;
 }
 
+
 main {
   flex: 1 0 auto;
   padding: 10px;
@@ -26,15 +27,16 @@ footer {
   background-color: #343a40;
 }
 
-.nav-link {
-  border-top: 3px solid gray;
-  border-bottom: 3px solid gray;
-  transition: border-color 300ms ease-in-out;
-  transition: border-color 300ms ease-in-out;
-}
+.page-nav {
+  .nav-link {
+    border-bottom: 3px solid gray;
+    transition: border-color 300ms ease-in-out;
+    transition: border-color 300ms ease-in-out;
+  }
 
-.nav-link.active {
-  border-color: #29a4d9;
+  .nav-link.active {
+    border-color: #29a4d9;
+  }
 }
 
 .yvip-icon {
@@ -43,7 +45,7 @@ footer {
   -ms-transition: color 500ms ease-in-out;
   -o-transition: color 500ms ease-in-out;
   transition: color 500ms ease-in-out;
-  font-size: 1.6em;
+  font-size: 1.5em;
 }
 
 .yvip-icon a, .yvip-icon a:hover{
@@ -74,8 +76,9 @@ footer {
   color: #24292e !important;
 }
 
-
-
+.yvip-icon.discord:hover, .yvip-icon.discord.colored {
+  color: #7289DA !important;
+}
  
 .nav-link .yvip-icon:nth-last-child(1){
   --animate-duration: 400ms;
@@ -102,9 +105,23 @@ footer {
   --animate-duration: 2400ms;
 }
 
+.nav-link .yvip-icon:nth-last-child(7){
+  --animate-duration: 2800ms;
+}
+
 // @for $i from 1 through 6 {
 //   .nav-link .yvip-icon:nth-child($i){
 //     --animate-duration: 3400ms * $i;
 //   }
  
 // }
+
+
+
+.yvip-card {
+  .yvip-card-img {
+      background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 100%), url('https://netresim.com/bilesenler/dosya/dosyalar/image/galeriler/09.10.2018/oresim/antalya-1920x1080-full-hd-masaustu-duvar-kagidi-wallpapers.jpg') no-repeat;
+      height: 65vh;
+      width: 100%;   
+  }
+}
