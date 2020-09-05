@@ -9,7 +9,8 @@ import { Card } from "react-bootstrap";
 const Home = (props) => (
   <Page>
     <Card className="mb-4 portfolio-card shadow yvip-card">
-      <div className="yvip-card-img"></div>
+      <div className="yvip-card-img img-responsive img-fluid"/>
+
       <Card.Body>
         <Card.Title>
           <h1 className="text-center display-4 pb-2">
