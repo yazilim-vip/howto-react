@@ -1,28 +1,22 @@
 {
     "env": {
         "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "mocha": true,
-        "node": false
+        "es2021": true
     },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
+        "ecmaVersion": 12,
         "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        "no-const-assign": "warn",
-        "no-this-before-super": "warn",
-        "no-undef": "warn",
-        "no-unreachable": "warn",
-        "no-unused-vars": "warn",
-        "constructor-super": "warn",
-        "valid-typeof": "warn"
-    },
-    "extends": ["eslint:recommended", "plugin:react/recommended"]
+    }
 }
