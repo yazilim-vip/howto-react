@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 import YvipIcon from "./YvipIcon";
 
 const CustomNavbar = () => {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="text-center">
       <div className="animate__animated animate__flipInX">
