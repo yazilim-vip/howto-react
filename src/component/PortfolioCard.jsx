@@ -2,7 +2,6 @@ import React from "react";
 
 // Bootstrap
 import { Card } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import YvipIcon from "./YvipIcon";
 
 const linkToIcon = (linkMap) => {

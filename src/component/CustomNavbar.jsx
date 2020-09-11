@@ -5,7 +5,6 @@ import YvipIcon from "./YvipIcon";
 
 const CustomNavbar = () => {
   const [hovered, setHovered] = useState(false);
-  const toggleHover = () => setHovered(!hovered);
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="text-center">
@@ -88,12 +87,6 @@ const CustomNavbar = () => {
       </Navbar.Collapse>
     </Navbar>
   );
-};
-
-const styles = {
-  iconAnimationWrapper: {
-    display: "inlineBlock",
-  },
 };
 
 export default CustomNavbar;

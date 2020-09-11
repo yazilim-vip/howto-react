@@ -2,8 +2,6 @@ import React from "react";
 
 // Component
 import Page from "../component/Page";
-import { Jumbotron, Container } from "react-bootstrap";
-import PortfolioCard from "../component/PortfolioCard";
 import { Card } from "react-bootstrap";
 
 const Home = (props) => (
