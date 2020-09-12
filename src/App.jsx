@@ -32,16 +32,12 @@ const App = () => (
     {/* BODY */}
     <main className="py-4">
       <Col md={{ span: 12 }}>
-        <Row>
-          <Col md={{ span: 8, offset: 2 }}>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/portfolio' component={Portfolio} />
-              <Route path='/howto' component={HowTo} />
-              <Route path='/about' component={About} />
-            </Switch>
-          </Col>
-        </Row>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/portfolio' component={Portfolio} />
+          <Route path='/howto' component={HowTo} />
+          <Route path='/about' component={About} />
+        </Switch>
       </Col>
     </main>
 
