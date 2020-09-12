@@ -69,7 +69,7 @@ export const teamMemberList = [
     name: "Mehmet Arif Emre Sen",
     description:
       "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
-    imageSource: "https://thispersondoesnotexist.com/image",
+    imageSource: "/img/emre.jpeg",
     title: "Major Contributor",
     links: {
       gitlab: "https://gitlab.com/emresen",
