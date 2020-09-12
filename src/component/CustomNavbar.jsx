@@ -5,10 +5,18 @@ import YvipIcon from "./YvipIcon";
 
 const CustomNavbar = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="text-center">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="text-center"
+    >
       <div className="animate__animated animate__flipInX">
         <Navbar.Brand className="my-2">
-          <img alt="" src="/logo.svg" width="250" />
+          <a href="/">
+            <img alt="" src="/logo.svg" width="250" />
+          </a>
         </Navbar.Brand>
       </div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -41,10 +49,7 @@ const CustomNavbar = () => {
           </NavLink>
         </Nav>
         <Nav>
-          <span
-            activeClassName="active"
-            className="text-light nav-link"
-          >
+          <span activeClassName="active" className="text-light nav-link">
             <YvipIcon
               iconCode={"gitlab"}
               className="animate__animated animate__zoomInLeft"
