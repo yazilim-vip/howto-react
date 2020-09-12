@@ -25,7 +25,7 @@ const CustomNavbar = () => {
         <Nav className="mx-auto page-nav">
           <NavLink
             exact
-            activeClassName="active"
+            activeclassname="active"
             className="text-light nav-link"
             to="/"
           >
@@ -33,7 +33,7 @@ const CustomNavbar = () => {
           </NavLink>
 
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="text-light nav-link"
             to="/portfolio"
           >
@@ -41,7 +41,7 @@ const CustomNavbar = () => {
           </NavLink>
 
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="text-light nav-link"
             to="/howto"
           >
@@ -49,7 +49,7 @@ const CustomNavbar = () => {
           </NavLink>
 
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="text-light nav-link"
             to="/about"
           >
@@ -57,7 +57,7 @@ const CustomNavbar = () => {
           </NavLink>
         </Nav>
         <Nav>
-          <span activeClassName="active" className="text-light nav-link">
+          <span activeclassname="active" className="text-light nav-link">
             <YvipIcon
               iconCode={"gitlab"}
               className="animate__animated animate__zoomInLeft"

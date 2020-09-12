@@ -8,43 +8,32 @@ class HowTo extends React.Component {
     super();
 
     let categoryNames = props.match.params[0].split("/")
-    let selectedCategoryName = categoryNames[categoryNames.length - 1]
+    let categorySelectedFlag;
+
+    if (categoryNames.length === 1 && categoryNames[0] === "") {
+      categorySelectedFlag = false
+    } else {
+      categorySelectedFlag = true
+    }
 
     this.state = {
       error: null,
       isLoaded: false,
-      items: [],
       categoryNames: categoryNames,
-      selectedCategoryName: selectedCategoryName
+      selectedCategoryName: categoryNames[categoryNames.length - 1],
+      categorySelectedFlag: categorySelectedFlag
     };
   }
 
   componentDidMount() {
-    fetch("http://yazilim.vip:9999/howto")
+    fetch(`http://yazilim.vip:9999/howto?path=${this.props.match.params[0]}`)
       .then(res => res.json())
       .then(
         (result) => {
-
-          var currCategory = null
-
-          console.log("this.state.categoryNames", this.state.categoryNames)
-          for (var catNameIndex in this.state.categoryNames) {
-            var catName = this.state.categoryNames[catNameIndex]
-            console.log(`Checking for ${catName}`)
-
-            if (currCategory === null) {
-              currCategory = result[catName]
-            } else {
-              currCategory = currCategory.subCategoryList[catName]
-            }
-          }
-
-          console.log("currCategory", currCategory)
-
+          console.log("result.howtoCategoryList", result.howtoCategoryList)
           this.setState({
             isLoaded: true,
-            items: result,
-            selectedCategory: currCategory
+            selectedCategory: result.howtoCategoryList[this.state.selectedCategoryName]
           });
         },
         (error) => {
@@ -58,7 +47,7 @@ class HowTo extends React.Component {
 
 
   render() {
-    const { error, isLoaded, selectedCategory, categoryNames } = this.state;
+    const { error, isLoaded, selectedCategory, categoryNames, categorySelectedFlag } = this.state;
 
     var input = '# This is a header\n\nAnd this is a paragraph'
     if (error) {
@@ -66,6 +55,29 @@ class HowTo extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
+
+      let sideMenuSubCategoryElements = null
+      let sideMenuHowToElements = null
+
+      console.log("selectedCategory", selectedCategory)
+      console.log("selectedCategory.subCategoryList", selectedCategory.subCategoryList)
+      console.log("selectedCategory.howtoList", selectedCategory.howtoList)
+      console.log("categorySelectedFlag", categorySelectedFlag)
+
+      if (selectedCategory.subCategoryList !== undefined && categorySelectedFlag) {
+        sideMenuSubCategoryElements = Object.keys(selectedCategory.subCategoryList).map(key => {
+          return (
+            <ListGroup.Item>{selectedCategory.subCategoryList[key].name}</ListGroup.Item>
+          )
+        })
+      }
+
+      if (selectedCategory.howtoList !== undefined && categorySelectedFlag) {
+        sideMenuHowToElements = Object.keys(selectedCategory.howtoList).map((key) =>
+          <ListGroup.Item>{selectedCategory.howtoList[key].label}</ListGroup.Item>
+        )
+      }
+
       return (
         <Page span={{ span: 12 }}>
           <Breadcrumb>
@@ -77,30 +89,15 @@ class HowTo extends React.Component {
           <hr />
 
           <Row>
-            <Col md="3">
-
-              <h5 className="pl-3">Sub-Categories</h5>
+            <Col md="3" className="border-right">
               <ListGroup>
-                {
-                  Object.keys(selectedCategory.subCategoryList).map(function (key) {
-                    return (
-                      <ListGroup.Item>{selectedCategory.subCategoryList[key].name}</ListGroup.Item>
-                    )
-                  })
-                }
+                <h5 className="pl-3">Sub Categories</h5>
+                {sideMenuSubCategoryElements}
 
                 <br />
 
                 <h5 className="pl-3">Contents</h5>
-                {
-                  Object.keys(selectedCategory.howtoList).map(function (key) {
-                    return (
-                      <ListGroup.Item>{selectedCategory.howtoList[key].label}</ListGroup.Item>
-                    )
-                  })
-                }
-
-
+                {sideMenuHowToElements}
               </ListGroup>
             </Col>
 
