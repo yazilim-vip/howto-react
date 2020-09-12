@@ -16,6 +16,7 @@ import CustomNavbar from './component/CustomNavbar';
 // Fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import HowTo from './page/HowTo';
 
 library.add(fab)
 
@@ -36,6 +37,7 @@ const App = () => (
             <Switch>
               <Route exact path='/' component={Home} />
               <Route path='/portfolio' component={Portfolio} />
+              <Route path='/howto' component={HowTo} />
               <Route path='/about' component={About} />
             </Switch>
           </Col>
