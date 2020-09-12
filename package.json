@@ -1,7 +1,7 @@
 {
   "name": "yvip-website",
   "version": "0.1.0",
-  "homepage": "https://yazilim.vip.gitlab.io/projects/yazilimvip/yvip-website/",
+  "homepage": "http://www.yazilim.vip",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
