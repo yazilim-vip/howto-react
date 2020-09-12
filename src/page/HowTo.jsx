@@ -6,18 +6,16 @@ import Page from "../component/Page";
 class HowTo extends React.Component {
   constructor(props) {
     super();
-    
-    let categories = props.match.params[0].split("/")
 
-
-    let selectedCategory = categories[categories.length - 1]
+    let categoryNames = props.match.params[0].split("/")
+    let selectedCategoryName = categoryNames[categoryNames.length - 1]
 
     this.state = {
       error: null,
       isLoaded: false,
       items: [],
-      categories: categories,
-      selectedCategory: selectedCategory
+      categoryNames: categoryNames,
+      selectedCategoryName: selectedCategoryName
     };
   }
 
@@ -26,10 +24,27 @@ class HowTo extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
+
+          var currCategory = null
+
+          console.log("this.state.categoryNames", this.state.categoryNames)
+          for (var catNameIndex in this.state.categoryNames) {
+            var catName = this.state.categoryNames[catNameIndex]
+            console.log(`Checking for ${catName}`)
+
+            if (currCategory === null) {
+              currCategory = result[catName]
+            } else {
+              currCategory = currCategory.subCategoryList[catName]
+            }
+          }
+
+          console.log("currCategory", currCategory)
+
           this.setState({
             isLoaded: true,
             items: result,
-            selectedCategory: result[7].subCategoryList[2]
+            selectedCategory: currCategory
           });
         },
         (error) => {
@@ -43,7 +58,7 @@ class HowTo extends React.Component {
 
 
   render() {
-    const { error, isLoaded, selectedCategory, categories } = this.state;
+    const { error, isLoaded, selectedCategory, categoryNames } = this.state;
 
     var input = '# This is a header\n\nAnd this is a paragraph'
     if (error) {
@@ -55,7 +70,7 @@ class HowTo extends React.Component {
         <Page span={{ span: 12 }}>
           <Breadcrumb>
             {
-              categories.map(item => <Breadcrumb.Item  className={item === selectedCategory ? 'active' : ""} href="#">{item}</Breadcrumb.Item>)
+              categoryNames.map(item => <Breadcrumb.Item href="#">{item}</Breadcrumb.Item>)
             }
           </Breadcrumb>
 
@@ -67,13 +82,23 @@ class HowTo extends React.Component {
               <h5 className="pl-3">Sub-Categories</h5>
               <ListGroup>
                 {
-                  selectedCategory.subCategoryList.map(item => <ListGroup.Item>{item.name}</ListGroup.Item>)
+                  Object.keys(selectedCategory.subCategoryList).map(function (key) {
+                    return (
+                      <ListGroup.Item>{selectedCategory.subCategoryList[key].name}</ListGroup.Item>
+                    )
+                  })
                 }
 
                 <br />
 
                 <h5 className="pl-3">Contents</h5>
-                {selectedCategory.howtoList.map(item => <ListGroup.Item>{item.label}</ListGroup.Item>)}
+                {
+                  Object.keys(selectedCategory.howtoList).map(function (key) {
+                    return (
+                      <ListGroup.Item>{selectedCategory.howtoList[key].label}</ListGroup.Item>
+                    )
+                  })
+                }
 
 
               </ListGroup>
