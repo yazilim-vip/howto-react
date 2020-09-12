@@ -1,15 +1,23 @@
 import React from "react";
-import { Breadcrumb, Col, Row } from "react-bootstrap";
+import { Breadcrumb, Col, ListGroup, Row } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import Page from "../component/Page";
 
 class HowTo extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
+    
+    let categories = props.match.params[0].split("/")
+
+
+    let selectedCategory = categories[categories.length - 1]
+
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      categories: categories,
+      selectedCategory: selectedCategory
     };
   }
 
@@ -20,7 +28,8 @@ class HowTo extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
+            selectedCategory: result[7].subCategoryList[2]
           });
         },
         (error) => {
@@ -32,8 +41,9 @@ class HowTo extends React.Component {
       )
   }
 
+
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, selectedCategory, categories } = this.state;
 
     var input = '# This is a header\n\nAnd this is a paragraph'
     if (error) {
@@ -43,27 +53,33 @@ class HowTo extends React.Component {
     } else {
       return (
         <Page span={{ span: 12 }}>
+          <Breadcrumb>
+            {
+              categories.map(item => <Breadcrumb.Item  className={item === selectedCategory ? 'active' : ""} href="#">{item}</Breadcrumb.Item>)
+            }
+          </Breadcrumb>
+
+          <hr />
+
           <Row>
-            <Col md="2">
-            <ul>
-                {items.map(item => (
-                  <li key={item.name}>
-                    {item.name}
-                  </li>
-                ))}
-              </ul>
+            <Col md="3">
+
+              <h5 className="pl-3">Sub-Categories</h5>
+              <ListGroup>
+                {
+                  selectedCategory.subCategoryList.map(item => <ListGroup.Item>{item.name}</ListGroup.Item>)
+                }
+
+                <br />
+
+                <h5 className="pl-3">Contents</h5>
+                {selectedCategory.howtoList.map(item => <ListGroup.Item>{item.label}</ListGroup.Item>)}
+
+
+              </ListGroup>
             </Col>
-            <Col md="10">
-              <Breadcrumb>
-                <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-                  Library
-            </Breadcrumb.Item>
-                <Breadcrumb.Item active>Data</Breadcrumb.Item>
-              </Breadcrumb>
 
-              <hr/>
-
+            <Col md="9">
               <ReactMarkdown source={input}></ReactMarkdown>
             </Col>
           </Row>
