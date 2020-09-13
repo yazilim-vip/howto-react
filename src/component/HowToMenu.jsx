@@ -11,18 +11,14 @@ const HowToMenu = (props) => {
         switch (type) {
             case "subcategory":
                 return (
-                    <ListGroup.Item key={key}>
-                        <a href={`/howto/${route}/${items[key].name}`}>
+                    <ListGroup.Item key={key} href={`/howto/${route}/${items[key].name}`} action>
                             {items[key].name}
-                        </a>
                     </ListGroup.Item>
                 )
             case "content":
                 return (
-                    <ListGroup.Item key={key} onClick={() => {props.onContentClick(items[key].markdownContent)}}>
-                        {/*<a href={`/howto/${route}/${items[key].label}`} >*/}
+                    <ListGroup.Item key={key} action onClick={() => {props.onContentClick(items[key].markdownContent)}}>
                             {items[key].label}
-                        {/*</a>*/}
                     </ListGroup.Item>
                 )
             default:
