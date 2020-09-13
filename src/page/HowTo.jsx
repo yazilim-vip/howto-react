@@ -8,36 +8,57 @@ class HowTo extends React.Component {
     constructor(props) {
         super(undefined);
 
-        let categoryNames = props.match.params[0].split("/")
+        let fullPath = props.match.params[0]
+        let folderPath
+        let selectedCategory
+        let selectedContent = null
+
+        let categoryNames = fullPath.split("/")
         categoryNames.unshift("howto")
+
+        if (fullPath.endsWith(".howto")) {
+            categoryNames.pop()
+            folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
+            selectedContent = categoryNames[categoryNames.length]
+        } else {
+            folderPath = fullPath
+        }
+
+        selectedCategory = categoryNames[categoryNames.length - 1]
 
         this.state = {
             error: null,
             isLoaded: false,
-            markdownContent: null,
+            fullPath: fullPath,
+            folderPath: folderPath,
             categoryNames: categoryNames,
-            selectedCategoryName: categoryNames[categoryNames.length - 1]
+            selectedCategory: selectedCategory,
+            selectedContent: selectedContent,
+            markdownContent: null
         };
 
         this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
     }
 
     componentDidMount() {
-        fetch(`http://yazilim.vip:9999/${this.props.match.params[0]}`)
+
+        fetch("http://yazilim.vip:9999/" + this.state.folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
+                    // console.log("result", result)
+
                     // howto-service should return error response if content is empty, this check is temporary
-                    // if (Object.keys(result).length === 0) {
-                    //     let error = "error"
-                    //     this.setState({
-                    //         error
-                    //     });
-                    // }
+                    if (Object.keys(result).length === 0) {
+                        let error = "error"
+                        this.setState({
+                            error
+                        });
+                    }
 
                     this.setState({
                         isLoaded: true,
-                        selectedCategory: result[this.state.selectedCategoryName],
+                        selectedCategory: result[this.state.selectedCategory]
                     });
                 },
                 (error) => {
@@ -50,23 +71,23 @@ class HowTo extends React.Component {
     }
 
     getBreadcrumbLink(index) {
-        let route = ""
+        let link = ""
 
         for (let i = 0; i < index; i++) {
-            route += "/" + this.state.categoryNames[i]
+            link += "/" + this.state.categoryNames[i]
         }
 
-        return route
+        return link
     }
 
-    renderMarkdownContent(markdownContent){
-        console.log(markdownContent)
-        this.setState({markdownContent: markdownContent})
+    renderMarkdownContent(markdownContent) {
+        this.setState({
+            markdownContent: markdownContent
+        })
     }
 
     render() {
-        const {error, isLoaded, selectedCategory, categoryNames} = this.state;
-        // const input = '# This is a header\n\nAnd this is a paragraph';
+        const {error, isLoaded, selectedCategory, categoryNames, folderPath} = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -97,14 +118,14 @@ class HowTo extends React.Component {
                         {/*Menus*/}
                         <Col md="3" className="border-right">
                             <HowToMenu
-                                route={this.props.match.params[0]}
+                                folderPath={folderPath}
                                 type="subcategory"
                                 title="Sub Categories"
                                 items={selectedCategory.subCategoryList}
                             />
                             <br/>
                             <HowToMenu
-                                route={this.props.match.params[0]}
+                                folderPath={folderPath}
                                 type="content"
                                 title="Contents"
                                 items={selectedCategory.howtoList}

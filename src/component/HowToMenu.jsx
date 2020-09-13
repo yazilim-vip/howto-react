@@ -1,8 +1,11 @@
 import React from "react";
 import {ListGroup} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {BrowserRouter} from 'react-router-dom';
+
 
 const HowToMenu = (props) => {
-    const route = props.route;
+    const folderPath = props.folderPath;
     const type = props.type;
     const title = props.title;
     const items = props.items;
@@ -11,15 +14,21 @@ const HowToMenu = (props) => {
         switch (type) {
             case "subcategory":
                 return (
-                    <ListGroup.Item key={key} href={`/howto/${route}/${items[key].name}`} action>
-                            {items[key].name}
+                    <ListGroup.Item key={key} href={`/howto/${folderPath}/${items[key].name}`} action>
+                        {items[key].name}
                     </ListGroup.Item>
                 )
             case "content":
                 return (
-                    <ListGroup.Item key={key} action onClick={() => {props.onContentClick(items[key].markdownContent)}}>
-                            {items[key].label}
-                    </ListGroup.Item>
+                    <BrowserRouter key={key}>
+                        <Link to={`/howto/${folderPath}/${items[key].label}`}>
+                            <ListGroup.Item action onClick={() => {
+                                props.onContentClick(items[key].markdownContent)
+                            }}>
+                                {items[key].label}
+                            </ListGroup.Item>
+                        </Link>
+                    </BrowserRouter>
                 )
             default:
                 return (<div/>)
