@@ -11,13 +11,13 @@ class HowTo extends React.Component {
         let fullPath = props.match.params[0]
         let folderPath
         let selectedCategory
-        let selectedContent = null
+        let selectedHowto = null
 
         let categoryNames = fullPath.split("/")
         categoryNames.unshift("howto")
 
         if (fullPath.endsWith(".howto")) {
-            selectedContent = categoryNames.pop()
+            selectedHowto = categoryNames.pop()
             folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
         } else {
             folderPath = fullPath
@@ -34,7 +34,7 @@ class HowTo extends React.Component {
             howtoList: null,
             categoryNames: categoryNames,
             selectedCategory: selectedCategory,
-            selectedContent: selectedContent,
+            selectedHowto: selectedHowto,
             markdownContent: null
         };
 
@@ -42,13 +42,13 @@ class HowTo extends React.Component {
     }
 
     componentDidMount() {
-        let {selectedCategory, selectedContent, folderPath} = this.state
+        let {selectedCategory, selectedHowto, folderPath} = this.state
 
         fetch("http://yazilim.vip:9999/" + folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("selectedContent", selectedContent)
+                    console.log("selectedContent", selectedHowto)
                     console.log("markdownContent", result[selectedCategory].howtoList)
 
                     // howto-service should return error response if content is empty, this check is temporary
@@ -66,8 +66,8 @@ class HowTo extends React.Component {
                     });
 
 
-                    if(selectedContent !== null){
-                        this.renderMarkdownContent(result[selectedCategory].howtoList[selectedContent].markdownContent)
+                    if (selectedHowto !== null) {
+                        this.renderMarkdownContent(result[selectedCategory].howtoList[selectedHowto])
                     }
                 },
                 (error) => {
@@ -89,14 +89,15 @@ class HowTo extends React.Component {
         return link
     }
 
-    renderMarkdownContent(markdownContent) {
+    renderMarkdownContent(selectedHowto) {
         this.setState({
-            markdownContent: markdownContent
+            selectedHowto: selectedHowto,
+            markdownContent: selectedHowto.markdownContent
         })
     }
 
     render() {
-        const {error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath} = this.state;
+        const {error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath, selectedHowto} = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -138,6 +139,7 @@ class HowTo extends React.Component {
                                 type="content"
                                 title="Contents"
                                 items={howtoList}
+                                selectedHowto={selectedHowto}
                                 onContentClick={this.renderMarkdownContent}
                             />
                         </Col>

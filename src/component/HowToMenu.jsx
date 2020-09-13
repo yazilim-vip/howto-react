@@ -9,6 +9,7 @@ const HowToMenu = (props) => {
     const type = props.type;
     const title = props.title;
     const items = props.items;
+    const selectedHowto = props.selectedHowto;
 
     const renderItem = (key) => {
         switch (type) {
@@ -22,10 +23,13 @@ const HowToMenu = (props) => {
                 return (
                     <BrowserRouter key={key}>
                         <Link to={`/howto/${folderPath}/${items[key].label}`}>
-                            <ListGroup.Item action onClick={() => {
-                                props.onContentClick(items[key].markdownContent)
-                            }}>
-                                {items[key].label}
+                            <ListGroup.Item
+                                onClick={() => {props.onContentClick(items[key])}}
+                                action
+                                href={key}
+                                active={items[key] === selectedHowto}
+                            >
+                                {items[key].label.replace(".howto", "")}
                             </ListGroup.Item>
                         </Link>
                     </BrowserRouter>
