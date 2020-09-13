@@ -33,9 +33,18 @@ class HowTo extends React.Component {
       .then(
         (result) => {
           console.log("result", result)
+
+          // howto-service should return error response if content is empty, this check is temporary
+          if(Object.keys(result).length === 0){
+            let error = "sads"
+            this.setState({
+              error
+            });
+          }
+
           this.setState({
             isLoaded: true,
-            selectedCategory: result[this.state.selectedCategoryName]
+            selectedCategory: result[this.state.selectedCategoryName],
           });
         },
         (error) => {
@@ -53,6 +62,7 @@ class HowTo extends React.Component {
     for (var i = 0; i < index; i++) {
       route += "/" + this.state.categoryNames[i]
     }
+
 
     console.log("route", route)
     return route
@@ -98,7 +108,7 @@ class HowTo extends React.Component {
         <Page span={{ span: 12 }}>
           <Breadcrumb>
             {
-              categoryNames.map((item, index) => <Breadcrumb.Item href={this.getBreadcrumbLink(index + 1)} active={index + 1 === categoryNames.length ? true : false }>{item}</Breadcrumb.Item>)
+              categoryNames.map((item, index) => <Breadcrumb.Item href={this.getBreadcrumbLink(index + 1)} active={index + 1 === categoryNames.length ? true : false}>{item}</Breadcrumb.Item>)
             }
           </Breadcrumb>
           <hr />
