@@ -26,14 +26,14 @@ class HowTo extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://yazilim.vip:9999/howto?path=${this.props.match.params[0]}`)
+    fetch(`http://yazilim.vip:9999/${this.props.match.params[0]}`)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log("result.howtoCategoryList", result.howtoCategoryList)
+          console.log("result", result)
           this.setState({
             isLoaded: true,
-            selectedCategory: result.howtoCategoryList[this.state.selectedCategoryName]
+            selectedCategory: result[this.state.selectedCategoryName]
           });
         },
         (error) => {
