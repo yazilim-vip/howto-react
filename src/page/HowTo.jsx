@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumb, Col, ListGroup, Row } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
+import { Router, Link } from "react-router-dom";
 import Page from "../component/Page";
 
 class HowTo extends React.Component {
@@ -97,7 +98,7 @@ class HowTo extends React.Component {
         <Page span={{ span: 12 }}>
           <Breadcrumb>
             {
-              categoryNames.map((item, index) => <Breadcrumb.Item href={this.getBreadcrumbLink(index + 1)}>{item}</Breadcrumb.Item>)
+              categoryNames.map((item, index) => <Breadcrumb.Item href={this.getBreadcrumbLink(index + 1)} active={index + 1 === categoryNames.length ? true : false }>{item}</Breadcrumb.Item>)
             }
           </Breadcrumb>
           <hr />
