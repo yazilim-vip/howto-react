@@ -12,24 +12,27 @@ const HowToMenu = (props) => {
             case "subcategory":
                 return (
                     <ListGroup.Item key={key}>
-                        <a href={`/howto/${route}/${items[key].name}`} key={key}>
+                        <a href={`/howto/${route}/${items[key].name}`}>
                             {items[key].name}
                         </a>
                     </ListGroup.Item>
                 )
             case "content":
                 return (
-                    <ListGroup.Item key={key}>
-                        <a href={`/howto/${route}/${items[key].label}`} key={key}>
+                    <ListGroup.Item key={key} onClick={() => {props.onContentClick(items[key].markdownContent)}}>
+                        {/*<a href={`/howto/${route}/${items[key].label}`} >*/}
                             {items[key].label}
-                        </a>
+                        {/*</a>*/}
                     </ListGroup.Item>
                 )
-            default: return (<div/>)
+            default:
+                return (<div/>)
         }
     }
 
-    const renderItems = Object.keys(items).map(key => {return (renderItem(key))})
+    const renderItems = Object.keys(items).map(key => {
+        return (renderItem(key))
+    })
     const renderTitle = <h5 className="pl-3">{title}</h5>
 
     return (

@@ -14,9 +14,12 @@ class HowTo extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
+            markdownContent: null,
             categoryNames: categoryNames,
             selectedCategoryName: categoryNames[categoryNames.length - 1]
         };
+
+        this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
     }
 
     componentDidMount() {
@@ -25,12 +28,12 @@ class HowTo extends React.Component {
             .then(
                 (result) => {
                     // howto-service should return error response if content is empty, this check is temporary
-                    if (Object.keys(result).length === 0) {
-                        let error = "error"
-                        this.setState({
-                            error
-                        });
-                    }
+                    // if (Object.keys(result).length === 0) {
+                    //     let error = "error"
+                    //     this.setState({
+                    //         error
+                    //     });
+                    // }
 
                     this.setState({
                         isLoaded: true,
@@ -56,9 +59,14 @@ class HowTo extends React.Component {
         return route
     }
 
+    renderMarkdownContent(markdownContent){
+        console.log(markdownContent)
+        this.setState({markdownContent: markdownContent})
+    }
+
     render() {
         const {error, isLoaded, selectedCategory, categoryNames} = this.state;
-        const input = '# This is a header\n\nAnd this is a paragraph';
+        // const input = '# This is a header\n\nAnd this is a paragraph';
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -100,12 +108,13 @@ class HowTo extends React.Component {
                                 type="content"
                                 title="Contents"
                                 items={selectedCategory.howtoList}
+                                onContentClick={this.renderMarkdownContent}
                             />
                         </Col>
 
                         {/*Content*/}
                         <Col md="9">
-                            <ReactMarkdown source={input}/>
+                            <ReactMarkdown source={this.state.markdownContent}/>
                         </Col>
                     </Row>
                 </Page>
