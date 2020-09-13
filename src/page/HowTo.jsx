@@ -17,9 +17,8 @@ class HowTo extends React.Component {
         categoryNames.unshift("howto")
 
         if (fullPath.endsWith(".howto")) {
-            categoryNames.pop()
+            selectedContent = categoryNames.pop()
             folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
-            selectedContent = categoryNames[categoryNames.length]
         } else {
             folderPath = fullPath
         }
@@ -31,6 +30,8 @@ class HowTo extends React.Component {
             isLoaded: false,
             fullPath: fullPath,
             folderPath: folderPath,
+            subCategoryList: null,
+            howtoList: null,
             categoryNames: categoryNames,
             selectedCategory: selectedCategory,
             selectedContent: selectedContent,
@@ -41,12 +42,14 @@ class HowTo extends React.Component {
     }
 
     componentDidMount() {
+        let {selectedCategory, selectedContent, folderPath} = this.state
 
-        fetch("http://yazilim.vip:9999/" + this.state.folderPath)
+        fetch("http://yazilim.vip:9999/" + folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
-                    // console.log("result", result)
+                    console.log("selectedContent", selectedContent)
+                    console.log("markdownContent", result[selectedCategory].howtoList)
 
                     // howto-service should return error response if content is empty, this check is temporary
                     if (Object.keys(result).length === 0) {
@@ -58,8 +61,14 @@ class HowTo extends React.Component {
 
                     this.setState({
                         isLoaded: true,
-                        selectedCategory: result[this.state.selectedCategory]
+                        subCategoryList: result[selectedCategory].subCategoryList,
+                        howtoList: result[selectedCategory].howtoList
                     });
+
+
+                    if(selectedContent !== null){
+                        this.renderMarkdownContent(result[selectedCategory].howtoList[selectedContent].markdownContent)
+                    }
                 },
                 (error) => {
                     this.setState({
@@ -87,7 +96,7 @@ class HowTo extends React.Component {
     }
 
     render() {
-        const {error, isLoaded, selectedCategory, categoryNames, folderPath} = this.state;
+        const {error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath} = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -121,14 +130,14 @@ class HowTo extends React.Component {
                                 folderPath={folderPath}
                                 type="subcategory"
                                 title="Sub Categories"
-                                items={selectedCategory.subCategoryList}
+                                items={subCategoryList}
                             />
                             <br/>
                             <HowToMenu
                                 folderPath={folderPath}
                                 type="content"
                                 title="Contents"
-                                items={selectedCategory.howtoList}
+                                items={howtoList}
                                 onContentClick={this.renderMarkdownContent}
                             />
                         </Col>
