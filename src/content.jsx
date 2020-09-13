@@ -1,67 +1,26 @@
 export const portfolioList = [
   {
+    name: "Timecoutndown",
+    description:
+      "A visual studio code extension and this extension takes care of the time countdown tasks. It is very easy to use, just type the time to count down in an allowed format, and the application will count down the given time by 1 sec in an interval.",
+    // imageSource: "https://thispersondoesnotexist.com/image",
+    links: {
+      bitbucket: "https://bitbucket.org/yazilimvip/time-countdown/src/master/",
+      microsoft:
+        "https://marketplace.visualstudio.com/items?itemName=yazilim-vip.time-countdown&ssr=false#overview",
+    },
+  },
+  {
     name: "Play2Gether",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    imageSource: "https://thispersondoesnotexist.com/image",
+      "The Play2Gether app is a music listening platform to listen to Spotify with your friends or other people. Listen to the same song at the same time with other people, queue and vote the songs, chat together, discover and share new music!",
+    imageSource: "/img/project-p2g.jpeg",
     links: {
       gitlab: "https://thispersondoesnotexist.com/image",
       medium: "https://thispersondoesnotexist.com/image",
       "google-play": "https://thispersondoesnotexist.com/image",
     },
   },
-  {
-    name: "Play2Gether",
-    description: "Desc........",
-    links: {
-      bitbucket: "https://thispersondoesnotexist.com/image",
-    },
-  },
-  {
-    name: "Play2Gether",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-  },
-  {
-    name: "Play2Gether",
-    description: "Desc........",
-  },
-  {
-    name: "Play2Gether",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-  },
-  {
-    name: "Play2Gether",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageSource: "https://thispersondoesnotexist.com/image",
-  },
-  {
-    name: "Play2Gether",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-  },
-  {
-    name: "Play2Gether",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-      imageSource: "https://thispersondoesnotexist.com/image",
-    links: {
-      gitlab: "https://thispersondoesnotexist.com/image",
-      medium: "https://thispersondoesnotexist.com/image",
-      "google-play": "https://thispersondoesnotexist.com/image",
-    },
-    },
-  {
-    name: "Play2Gether",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    links: {
-      gitlab: "https://thispersondoesnotexist.com/image",
-      medium: "https://thispersondoesnotexist.com/image",
-      "google-play": "https://thispersondoesnotexist.com/image",
-    },
-  },
-  
 ];
 
 export const teamMemberList = [
