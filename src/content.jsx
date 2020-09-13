@@ -42,7 +42,7 @@ export const teamMemberList = [
     name: "Burak Erkan",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    imageSource: "https://thispersondoesnotexist.com/image",
+    imageSource: "/img/burak.jpeg",
     title: "Major Contributor",
     links: {
       gitlab: "https://thispersondoesnotexist.com/image",
@@ -55,7 +55,7 @@ export const teamMemberList = [
     title: "Major Contributor",
     description:
       "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
-    imageSource: "https://thispersondoesnotexist.com/image",
+      imageSource: "/img/arif.jpeg",
     links: {
       gitlab: "https://gitlab.com/arifsisman",
       github: "https://github.com/arifsisman",
@@ -73,7 +73,7 @@ export const contributorList = [
     title: "Contributor",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    imageSource: "https://thispersondoesnotexist.com/image",
+    imageSource: "/img/ahmet.jpeg",
     links: {
       gitlab: "https://thispersondoesnotexist.com/image",
       medium: "https://thispersondoesnotexist.com/image",
