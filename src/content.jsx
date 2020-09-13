@@ -1,16 +1,5 @@
 export const portfolioList = [
   {
-    name: "Timecoutndown",
-    description:
-      "A visual studio code extension and this extension takes care of the time countdown tasks. It is very easy to use, just type the time to count down in an allowed format, and the application will count down the given time by 1 sec in an interval.",
-    // imageSource: "https://thispersondoesnotexist.com/image",
-    links: {
-      bitbucket: "https://bitbucket.org/yazilimvip/time-countdown/src/master/",
-      microsoft:
-        "https://marketplace.visualstudio.com/items?itemName=yazilim-vip.time-countdown&ssr=false#overview",
-    },
-  },
-  {
     name: "Play2Gether",
     description:
       "The Play2Gether app is a music listening platform to listen to Spotify with your friends or other people. Listen to the same song at the same time with other people, queue and vote the songs, chat together, discover and share new music!",
@@ -19,6 +8,16 @@ export const portfolioList = [
       gitlab: "https://thispersondoesnotexist.com/image",
       medium: "https://thispersondoesnotexist.com/image",
       "google-play": "https://thispersondoesnotexist.com/image",
+    },
+  },
+  {
+    name: "TimeCountdown",
+    description:
+      "A visual studio code extension and this extension takes care of the time countdown tasks. It is very easy to use, just type the time to count down in an allowed format, and the application will count down the given time by 1 sec in an interval.",
+    links: {
+      bitbucket: "https://bitbucket.org/yazilimvip/time-countdown/src/master/",
+      microsoft:
+        "https://marketplace.visualstudio.com/items?itemName=yazilim-vip.time-countdown&ssr=false#overview",
     },
   },
 ];
@@ -55,7 +54,7 @@ export const teamMemberList = [
     title: "Major Contributor",
     description:
       "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
-      imageSource: "/img/arif.jpeg",
+    imageSource: "/img/arif.jpeg",
     links: {
       gitlab: "https://gitlab.com/arifsisman",
       github: "https://github.com/arifsisman",
