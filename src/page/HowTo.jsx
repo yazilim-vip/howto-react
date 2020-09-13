@@ -8,6 +8,7 @@ class HowTo extends React.Component {
     super();
 
     let categoryNames = props.match.params[0].split("/")
+    categoryNames.unshift("howto")
     let categorySelectedFlag;
 
     if (categoryNames.length === 1 && categoryNames[0] === "") {
@@ -45,6 +46,16 @@ class HowTo extends React.Component {
       )
   }
 
+  getBreadcrumbLink(index) {
+    let route = ""
+
+    for (var i = 0; i < index; i++) {
+      route += "/" + this.state.categoryNames[i]
+    }
+
+    console.log("route", route)
+    return route
+  }
 
   render() {
     const { error, isLoaded, selectedCategory, categoryNames, categorySelectedFlag } = this.state;
@@ -67,7 +78,11 @@ class HowTo extends React.Component {
       if (selectedCategory.subCategoryList !== undefined && categorySelectedFlag) {
         sideMenuSubCategoryElements = Object.keys(selectedCategory.subCategoryList).map(key => {
           return (
-            <ListGroup.Item>{selectedCategory.subCategoryList[key].name}</ListGroup.Item>
+            <ListGroup.Item>
+              <a href={`/howto/${this.props.match.params[0]}/${selectedCategory.subCategoryList[key].name}`}>
+                {selectedCategory.subCategoryList[key].name}
+              </a>
+            </ListGroup.Item>
           )
         })
       }
@@ -82,10 +97,9 @@ class HowTo extends React.Component {
         <Page span={{ span: 12 }}>
           <Breadcrumb>
             {
-              categoryNames.map(item => <Breadcrumb.Item href="#">{item}</Breadcrumb.Item>)
+              categoryNames.map((item, index) => <Breadcrumb.Item href={this.getBreadcrumbLink(index + 1)}>{item}</Breadcrumb.Item>)
             }
           </Breadcrumb>
-
           <hr />
 
           <Row>
