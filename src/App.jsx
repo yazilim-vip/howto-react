@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // Bootstrap
-import { Row, Col, Navbar } from 'react-bootstrap';
+import { Col, Navbar } from 'react-bootstrap';
 
 // Pages
 import Home from "./page/Home";

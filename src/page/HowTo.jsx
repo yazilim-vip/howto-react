@@ -1,7 +1,6 @@
 import React from "react";
 import { Breadcrumb, Col, ListGroup, Row } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
-import { Router, Link } from "react-router-dom";
 import Page from "../component/Page";
 
 class HowTo extends React.Component {
