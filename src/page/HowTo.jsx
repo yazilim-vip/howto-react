@@ -115,6 +115,7 @@ class HowTo extends React.Component {
 
     renderMarkdownContent(selectedHowto) {
         this.setState({
+            howtoNotFound: false,
             selectedHowto: selectedHowto,
             markdownContent: selectedHowto.markdownContent
         })
@@ -156,14 +157,44 @@ class HowTo extends React.Component {
         // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
         // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
-
-
         let contentElement
         if (this.state.categoryNotFound) {
             contentElement = (
                 <Alert key={1} variant={"danger"}>
                     {this.state.fullPath} not found on archive.
                 </Alert>
+            )
+        } else if(this.state.howtoSelectedFlag && this.state.howtoNotFound) {
+            contentElement = (
+                <div>
+                    <HowToMenu
+                        folderPath={folderPath}
+                        type="subcategory"
+                        items={subCategoryList}
+                    />
+
+                    <hr />
+
+                    <Row>
+                        {/*Menus*/}
+                        <Col md="3" className="border-right">
+                            <HowToMenu
+                                folderPath={folderPath}
+                                type="content"
+                                items={howtoList}
+                                selectedHowto={selectedHowto}
+                                onContentClick={this.renderMarkdownContent}
+                            />
+                        </Col>
+
+                        {/*Content*/}
+                        <Col md="9">
+                            <Alert key={1} variant={"danger"}>
+                                {this.state.fullPath} not found on archive.
+                            </Alert>
+                        </Col>
+                    </Row>
+                </div>
             )
         } else {
             contentElement = (
