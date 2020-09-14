@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import HowToMenu from "../component/HowToMenu";
 import Page from "../component/Page";
 import * as constants from '../constants';
+import howtoPathParser from '../util/HowtoPathParser'
 
 class HowTo extends React.Component {
     constructor(props) {
@@ -13,18 +14,20 @@ class HowTo extends React.Component {
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
 
-        let userRequest = this.parseFullPath(fullPath)
+        // let userRequest = this.parseFullPath(fullPath)
+        let fullPathParts = howtoPathParser(fullPath)
+        console.log("fullPathParts", fullPathParts)
  
         this.state = {
             error: null,
             isLoaded: false,
 
             // filled by user request
-            fullPath: userRequest.fullPath,
-            folderPath: userRequest.folderPath,
-            categoryNames: userRequest.categoryNames,
-            selectedCategoryName: userRequest.selectedCategoryName,
-            selectedHowto: userRequest.selectedHowto,
+            fullPath: fullPath,
+            folderPath: fullPathParts.folderPath,
+            categoryNames: fullPathParts.categoryNames,
+            selectedCategoryName: fullPathParts.selectedCategoryName,
+            selectedHowto: fullPathParts.selectedHowto,
 
             // filled by data from service
             subCategoryList: null,
@@ -33,76 +36,6 @@ class HowTo extends React.Component {
         };
 
         this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
-    }
-
-    /**
-     *
-     * Example1
-     * url: https://www.yazilim.vip/howto
-     * fullPath = ""
-     * fullPathParts = ""
-     * categoryNames = null
-     * folderPath = ""
-     * selectedCategoryName = "howto"
-     *
-     * Example2
-     * url: https://www.yazilim.vip/howto/linux
-     * fullPath = "linux"
-     * fullPathParts = ["linux"]
-     * categoryNames = ["linux"]
-     * folderPath = "linux"
-     * selectedCategoryName = "linux"
-     *
-     * Example3
-     * url: https://www.yazilim.vip/howto/linux/specific_distro
-     * fullPath = "linux/specific_distro"
-     * fullPathParts = ["linux", "specific_distro"]
-     * categoryNames = ["linux", "specific_distro"]
-     * folderPath = "linux/specific_distro"
-     * selectedCategoryName = "specific_distro"
-     *
-     * Example4
-     * url: http://www.yazilim.vip/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto
-     * fullPath = "ide/Eclipse/eclipse-shortcuts_configuration.howto"
-     * fullPathParts = ["ide", "Eclipse", "eclipse-shortcuts_configuration.howto"]
-     * categoryNames = ["ide, "Eclipse"]
-     * folderPath = "ide/Eclipse"
-     * selectedCategoryName = "Eclipse"
-     * selectedHowto = "eclipse-shortcuts_configuration.howto"
-     */
-    parseFullPath(fullPath) {
-
-        let fullPathParts = fullPath.split("/")
-        let categoryNames
-
-        let folderPath
-        let selectedCategoryName
-        let selectedHowto = null
-
-        if (fullPath.endsWith(".howto")) {
-            selectedHowto = fullPathParts.pop()
-            folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
-            categoryNames = fullPathParts
-        } else {
-            folderPath = fullPath
-            categoryNames = fullPathParts
-        }
-
-        // EMRETODO: needed ????
-        categoryNames.unshift(constants.HOWTO_PATH)
-
-        if (folderPath === "") {
-            selectedCategoryName = "howto"
-        } else {
-            folderPath = "/" + folderPath
-            selectedCategoryName = categoryNames[categoryNames.length - 1]
-        }
-
-        console.log("folderPath", folderPath)
-        console.log("selectedHowto", selectedHowto)
-        console.log("selectedCategoryName", selectedCategoryName)
-
-        return { fullPath, folderPath, categoryNames, selectedCategoryName, selectedHowto }
     }
 
 
@@ -125,8 +58,6 @@ class HowTo extends React.Component {
 
                         return
                     }
-
-                    console.log("selectedCategoryName", selectedCategoryName)
 
                     let subCategoryList = result[selectedCategoryName].subCategoryList
                     let howtoList = result[selectedCategoryName].howtoList
@@ -163,7 +94,9 @@ class HowTo extends React.Component {
             link += this.state.categoryNames[i] + "/"
         }
 
-        console.log(link)
+
+        // EMRETODO: ???? may be useful for debugging
+        // console.log(link)
 
         return link
     }
