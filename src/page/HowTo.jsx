@@ -27,8 +27,8 @@ class HowTo extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            categoryNotFound: false,
-            howtoNotFound: false,
+            categoryNotFoundFlag: false,
+            howtoNotFoundFlag: false,
 
             // filled by user request
             fullPath: fullPath,
@@ -74,7 +74,7 @@ class HowTo extends React.Component {
         if (Object.keys(data).length === 0) {
             this.setState({
                 isLoaded: true,
-                categoryNotFound: true
+                categoryNotFoundFlag: true
             });
             return
         }
@@ -84,24 +84,14 @@ class HowTo extends React.Component {
 
         this.setState({
             isLoaded: true,
-            categoryNotFound: false,
+            categoryNotFoundFlag: false,
             subCategoryList: subCategoryList,
             howtoList: howtoList
         });
 
         if (howtoSelectedFlag) {
-            let howtoExistsFlag = (data[selectedCategoryName].howtoList[selectedHowtoName]) ? true : false
-            if (howtoExistsFlag) {
-                this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowtoName])
-            } else {
-                this.setState({
-                    howtoNotFound: true
-                });
-            }
-        } else if (Object.keys(howtoList).length === 0) {
-            this.setState({
-                howtoNotFound: true
-            });
+            let howto = data[selectedCategoryName].howtoList[selectedHowtoName]
+            this.renderMarkdownContent(howto)
         } else {
             this.loadFirstHowtoContent()
         }
@@ -109,6 +99,12 @@ class HowTo extends React.Component {
 
     loadFirstHowtoContent() {
         let { howtoList } = this.state
+
+        if (Object.keys(howtoList).length === 0) {
+            // NO HowTo found under selectedCategory
+            // So, there is no  first HowTo :)
+            return;
+        }
 
         let firstHowtoIndex = Object.keys(howtoList)[0]
         let firstHowto = howtoList[firstHowtoIndex]
@@ -118,11 +114,17 @@ class HowTo extends React.Component {
     }
 
     renderMarkdownContent(selectedHowto) {
-        this.setState({
-            howtoNotFound: false,
-            selectedHowto: selectedHowto,
-            markdownContent: selectedHowto.markdownContent
-        })
+        if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
+            this.setState({
+                howtoNotFoundFlag: false,
+                selectedHowto: selectedHowto,
+                markdownContent: selectedHowto.markdownContent
+            })
+        } else {
+            this.setState({
+                howtoNotFoundFlag: true
+            })
+        }
     }
 
     serviceErrorHandler(error) {
@@ -162,45 +164,25 @@ class HowTo extends React.Component {
         // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
         let contentElement
-        if (this.state.categoryNotFound) {
+        if (this.state.categoryNotFoundFlag) {
             contentElement = (
                 <Alert key={1} variant={"danger"}>
                     {this.state.fullPath} not found on archive.
                 </Alert>
             )
-        } else if (this.state.howtoSelectedFlag && this.state.howtoNotFound) {
-            contentElement = (
-                <div>
-                    <HowToMenu
-                        folderPath={folderPath}
-                        type="subcategory"
-                        items={subCategoryList}
-                    />
-
-                    <hr />
-
-                    <Row>
-                        {/*Menus*/}
-                        <Col md="3" className="border-right">
-                            <HowToMenu
-                                folderPath={folderPath}
-                                type="content"
-                                items={howtoList}
-                                selectedHowto={selectedHowto}
-                                onContentClick={this.renderMarkdownContent}
-                            />
-                        </Col>
-
-                        {/*Content*/}
-                        <Col md="9">
-                            <Alert key={1} variant={"danger"}>
-                                {this.state.fullPath} not found on archive.
-                            </Alert>
-                        </Col>
-                    </Row>
-                </div>
-            )
         } else {
+
+            let howtoContentElement
+            if (this.state.howtoSelectedFlag && this.state.howtoNotFoundFlag) {
+                howtoContentElement = (
+                    <Alert key={1} variant={"danger"}>
+                        {this.state.fullPath} not found on archive.
+                    </Alert>
+                )
+            } else {
+                howtoContentElement = <ReactMarkdown source={this.state.markdownContent} />
+            }
+
             contentElement = (
                 <div>
                     <HowToMenu
@@ -225,7 +207,7 @@ class HowTo extends React.Component {
 
                         {/*Content*/}
                         <Col md="9">
-                            <ReactMarkdown source={this.state.markdownContent} />
+                            {howtoContentElement}
                         </Col>
                     </Row>
                 </div>
