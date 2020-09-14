@@ -9,51 +9,26 @@ class HowTo extends React.Component {
     constructor(props) {
         super(undefined);
 
-
         let fullPath = props.match.params[0]
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
 
-        let fullPathParts = fullPath.split("/")
-        let categoryNames
-
-        let folderPath
-        let selectedCategoryName
-        let selectedHowto = null
-
-        if (fullPath.endsWith(".howto")) {
-            selectedHowto = fullPathParts.pop()
-            folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
-            categoryNames = fullPathParts
-        } else {
-            folderPath = fullPath
-            categoryNames = fullPathParts
-        }
-
-        // EMRETODO: needed ????
-        categoryNames.unshift(constants.HOWTO_PATH)
-
-        if (folderPath === "") {
-            selectedCategoryName = "howto"
-        } else {
-            folderPath = "/" + folderPath
-            selectedCategoryName = categoryNames[categoryNames.length - 1]
-        }
-
-        console.log("folderPath", folderPath)
-        console.log("selectedHowto", selectedHowto)
-        console.log("selectedCategoryName", selectedCategoryName)
-
+        let userRequest = this.parseFullPath(fullPath)
+ 
         this.state = {
             error: null,
             isLoaded: false,
-            fullPath: fullPath,
-            folderPath: folderPath,
+
+            // filled by user request
+            fullPath: userRequest.fullPath,
+            folderPath: userRequest.folderPath,
+            categoryNames: userRequest.categoryNames,
+            selectedCategoryName: userRequest.selectedCategoryName,
+            selectedHowto: userRequest.selectedHowto,
+
+            // filled by data from service
             subCategoryList: null,
             howtoList: null,
-            categoryNames: categoryNames,
-            selectedCategoryName: selectedCategoryName,
-            selectedHowto: selectedHowto,
             markdownContent: null
         };
 
@@ -97,6 +72,37 @@ class HowTo extends React.Component {
      */
     parseFullPath(fullPath) {
 
+        let fullPathParts = fullPath.split("/")
+        let categoryNames
+
+        let folderPath
+        let selectedCategoryName
+        let selectedHowto = null
+
+        if (fullPath.endsWith(".howto")) {
+            selectedHowto = fullPathParts.pop()
+            folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
+            categoryNames = fullPathParts
+        } else {
+            folderPath = fullPath
+            categoryNames = fullPathParts
+        }
+
+        // EMRETODO: needed ????
+        categoryNames.unshift(constants.HOWTO_PATH)
+
+        if (folderPath === "") {
+            selectedCategoryName = "howto"
+        } else {
+            folderPath = "/" + folderPath
+            selectedCategoryName = categoryNames[categoryNames.length - 1]
+        }
+
+        console.log("folderPath", folderPath)
+        console.log("selectedHowto", selectedHowto)
+        console.log("selectedCategoryName", selectedCategoryName)
+
+        return { fullPath, folderPath, categoryNames, selectedCategoryName, selectedHowto }
     }
 
 
