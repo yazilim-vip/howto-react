@@ -22,6 +22,7 @@ class HowTo extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
+            notFound: false,
 
             // filled by user request
             fullPath: fullPath,
@@ -64,11 +65,10 @@ class HowTo extends React.Component {
 
         // howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
         if (Object.keys(data).length === 0) {
-            let error = "error"
             this.setState({
-                error
+                isLoaded: true,
+                notFound: true
             });
-
             return
         }
 
@@ -77,12 +77,18 @@ class HowTo extends React.Component {
 
         this.setState({
             isLoaded: true,
+            notFound: false,
             subCategoryList: subCategoryList,
             howtoList: howtoList
         });
 
-        if (howtoSelectedFlag) {
+        let howtoExistsFlag = (data[selectedCategoryName].howtoList[selectedHowto]) ? true : false
+        if (howtoSelectedFlag && howtoExistsFlag ) {
             this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowto])
+        } else if (Object.keys(howtoList).length === 0) {
+            this.setState({
+                // notFound: true EMRETODO
+            });
         } else {
             this.loadFirstHowtoContent()
         }
@@ -90,9 +96,6 @@ class HowTo extends React.Component {
 
     loadFirstHowtoContent() {
         let { howtoList } = this.state
-        if (Object.keys(howtoList).length === 0) {
-            return;
-        };
 
         let firstHowtoIndex = Object.keys(howtoList)[0]
         let firstHowto = howtoList[firstHowtoIndex]
@@ -144,52 +147,71 @@ class HowTo extends React.Component {
         // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
         // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
+        let breadcrumbElement = (
+            <Breadcrumb>
+                <Breadcrumb.Item
+                    key="root"
+                    href={"/howto"}
+                    active={1 === categoryNames.length && categoryNames[0] == ""}>
+                    <FontAwesomeIcon icon={faHome} />
+                </Breadcrumb.Item>
+                {
+                    categoryNames.map((item, index) =>
+                        <Breadcrumb.Item
+                            key={index}
+                            href={this.getBreadcrumbLink(index + 1)}
+                            active={index + 1 === categoryNames.length}>
+                            {item}
+                        </Breadcrumb.Item>
+                    )
+                }
+            </Breadcrumb>
+        )
+
+
+        let contentElement
+        if (this.state.notFound) {
+            contentElement = (
+                <div>
+                    {this.state.fullPath} not found on archive.
+                </div>
+            )
+        } else {
+            contentElement = (
+                <div>
+                    <HowToMenu
+                        folderPath={folderPath}
+                        type="subcategory"
+                        items={subCategoryList}
+                    />
+
+                    <hr />
+
+                    <Row>
+                        {/*Menus*/}
+                        <Col md="3" className="border-right">
+                            <HowToMenu
+                                folderPath={folderPath}
+                                type="content"
+                                items={howtoList}
+                                selectedHowto={selectedHowto}
+                                onContentClick={this.renderMarkdownContent}
+                            />
+                        </Col>
+
+                        {/*Content*/}
+                        <Col md="9">
+                            <ReactMarkdown source={this.state.markdownContent} />
+                        </Col>
+                    </Row>
+                </div>
+            )
+        }
+
         return (
             <Page span={{ span: 12 }}>
-                <Breadcrumb>
-                    <Breadcrumb.Item
-                        key="root"
-                        href={"/howto"}
-                        active={1 === categoryNames.length && categoryNames[0] == ""}>
-                        <FontAwesomeIcon icon={faHome} />
-                    </Breadcrumb.Item>
-                    {
-                        categoryNames.map((item, index) =>
-                            <Breadcrumb.Item
-                                key={index}
-                                href={this.getBreadcrumbLink(index + 1)}
-                                active={index + 1 === categoryNames.length}>
-                                {item}
-                            </Breadcrumb.Item>
-                        )
-                    }
-                </Breadcrumb>
-
-                <HowToMenu
-                    folderPath={folderPath}
-                    type="subcategory"
-                    items={subCategoryList}
-                />
-
-                <hr />
-
-                <Row>
-                    {/*Menus*/}
-                    <Col md="3" className="border-right">
-                        <HowToMenu
-                            folderPath={folderPath}
-                            type="content"
-                            items={howtoList}
-                            selectedHowto={selectedHowto}
-                            onContentClick={this.renderMarkdownContent}
-                        />
-                    </Col>
-
-                    {/*Content*/}
-                    <Col md="9">
-                        <ReactMarkdown source={this.state.markdownContent} />
-                    </Col>
-                </Row>
+                {breadcrumbElement}
+                {contentElement}
             </Page>
         );
     }
