@@ -17,7 +17,7 @@ class HowTo extends React.Component {
         // let userRequest = this.parseFullPath(fullPath)
         let fullPathParts = howtoPathParser(fullPath)
         console.log("fullPathParts", fullPathParts)
- 
+
         this.state = {
             error: null,
             isLoaded: false,
@@ -38,53 +38,58 @@ class HowTo extends React.Component {
         this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
     }
 
-
     componentDidMount() {
+
+        // get request to the HowTo Service
+        fetch(constants.REST_URL + "?path=" + this.state.folderPath)
+            // convert response to json    
+            .then(res => res.json())
+
+            // handle response
+            .then((res) => this.serviceSuccessHandler(res), (err) => this.serviceErrorHandler(err))
+    }
+
+    serviceSuccessHandler(result) {
         let { selectedCategoryName, selectedHowto, folderPath } = this.state
 
-        fetch(constants.REST_URL + "?path=" + folderPath)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log("url", constants.REST_URL + folderPath)
-                    console.log("result", result)
+        console.log("url", constants.REST_URL + folderPath)
+        console.log("result", result)
 
-                    // howto-service should return error response if content is empty, this check is temporary
-                    if (Object.keys(result).length === 0) {
-                        let error = "error"
-                        this.setState({
-                            error
-                        });
+        // howto-service should return error response if content is empty, this check is temporary
+        if (Object.keys(result).length === 0) {
+            let error = "error"
+            this.setState({
+                error
+            });
 
-                        return
-                    }
+            return
+        }
 
-                    let subCategoryList = result[selectedCategoryName].subCategoryList
-                    let howtoList = result[selectedCategoryName].howtoList
+        let subCategoryList = result[selectedCategoryName].subCategoryList
+        let howtoList = result[selectedCategoryName].howtoList
 
-                    this.setState({
-                        isLoaded: true,
-                        subCategoryList: subCategoryList,
-                        howtoList: howtoList
-                    });
+        this.setState({
+            isLoaded: true,
+            subCategoryList: subCategoryList,
+            howtoList: howtoList
+        });
 
-                    if (selectedHowto !== null) {
-                        this.renderMarkdownContent(result[selectedCategoryName].howtoList[selectedHowto])
-                    } else if (Object.keys(howtoList).length !== 0) {
-                        let firstHowtoIndex = Object.keys(howtoList)[0]
-                        let firstHowto = howtoList[firstHowtoIndex]
+        if (selectedHowto !== null) {
+            this.renderMarkdownContent(result[selectedCategoryName].howtoList[selectedHowto])
+        } else if (Object.keys(howtoList).length !== 0) {
+            let firstHowtoIndex = Object.keys(howtoList)[0]
+            let firstHowto = howtoList[firstHowtoIndex]
 
-                        this.renderMarkdownContent(firstHowto)
-                        this.props.history.push(selectedCategoryName + "/" + firstHowto.label);
-                    }
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+            this.renderMarkdownContent(firstHowto)
+            this.props.history.push(selectedCategoryName + "/" + firstHowto.label);
+        }
+    }
+
+    serviceErrorHandler(error) {
+        this.setState({
+            isLoaded: true,
+            error
+        });
     }
 
     getBreadcrumbLink(index) {
