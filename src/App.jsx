@@ -7,8 +7,9 @@ import { Col, Navbar } from 'react-bootstrap';
 
 // Pages
 import Home from "./page/Home";
-import About from "./page/About";
 import Portfolio from "./page/Portfolio";
+import HowTo from './page/HowTo';
+import About from "./page/About";
 
 import './App.scss';
 import CustomNavbar from './component/CustomNavbar';
@@ -16,7 +17,6 @@ import CustomNavbar from './component/CustomNavbar';
 // Fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import HowTo from './page/HowTo';
 
 library.add(fab)
 

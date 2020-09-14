@@ -111,18 +111,25 @@ class HowTo extends React.Component {
 
             return (
                 <Page span={{span: 12}}>
-                    <Breadcrumb>
-                        {
-                            categoryNames.map((item, index) =>
-                                <Breadcrumb.Item
-                                    key={index}
-                                    href={this.getBreadcrumbLink(index + 1)}
-                                    active={index + 1 === categoryNames.length}>
-                                    {item}
-                                </Breadcrumb.Item>
-                            )
-                        }
-                    </Breadcrumb>
+                        <Breadcrumb>
+                            {
+                                categoryNames.map((item, index) =>
+                                    <Breadcrumb.Item
+                                        key={index}
+                                        href={this.getBreadcrumbLink(index + 1)}
+                                        active={index + 1 === categoryNames.length}>
+                                        {item}
+                                    </Breadcrumb.Item>
+                                )
+                            }
+                        </Breadcrumb>
+
+                        <HowToMenu
+                            folderPath={folderPath}
+                            type="subcategory"
+                            items={subCategoryList}
+                        />
+
                     <hr/>
 
                     <Row>
@@ -130,15 +137,7 @@ class HowTo extends React.Component {
                         <Col md="3" className="border-right">
                             <HowToMenu
                                 folderPath={folderPath}
-                                type="subcategory"
-                                title="Sub Categories"
-                                items={subCategoryList}
-                            />
-                            <br/>
-                            <HowToMenu
-                                folderPath={folderPath}
                                 type="content"
-                                title="Contents"
                                 items={howtoList}
                                 selectedHowto={selectedHowto}
                                 onContentClick={this.renderMarkdownContent}
