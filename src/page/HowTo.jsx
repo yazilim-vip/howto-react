@@ -5,6 +5,8 @@ import HowToMenu from "../component/HowToMenu";
 import Page from "../component/Page";
 import * as constants from '../constants';
 import howtoPathParser from '../util/HowtoPathParser'
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class HowTo extends React.Component {
     constructor(props) {
@@ -14,7 +16,6 @@ class HowTo extends React.Component {
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
 
-        // let userRequest = this.parseFullPath(fullPath)
         let fullPathParts = howtoPathParser(fullPath)
         console.log("fullPathParts", fullPathParts)
 
@@ -29,7 +30,6 @@ class HowTo extends React.Component {
             selectedCategoryName: fullPathParts.selectedCategoryName,
             selectedHowto: fullPathParts.selectedHowto,
             howtoSelectedFlag: fullPathParts.howtoSelectedFlag,
-
 
             // filled by data from service
             subCategoryList: null,
@@ -117,15 +117,13 @@ class HowTo extends React.Component {
 
 
     getBreadcrumbLink(index) {
-        let link = ""
+        let link = constants.HOWTO_PATH + "/"
 
         for (let i = 0; i < index; i++) {
             link += this.state.categoryNames[i] + "/"
         }
 
-
-        // EMRETODO: ???? may be useful for debugging
-        // console.log(link)
+        // console.log("breadcrumbLink = ", link)
 
         return link
     }
@@ -149,6 +147,12 @@ class HowTo extends React.Component {
         return (
             <Page span={{ span: 12 }}>
                 <Breadcrumb>
+                    <Breadcrumb.Item
+                        key="root"
+                        href={"/howto"}
+                        active={1 === categoryNames.length && categoryNames[0] == ""}>
+                        <FontAwesomeIcon icon={faHome} />
+                    </Breadcrumb.Item>
                     {
                         categoryNames.map((item, index) =>
                             <Breadcrumb.Item

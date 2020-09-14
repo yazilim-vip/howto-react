@@ -54,7 +54,6 @@ var howtoPathParser = (fullPath) => {
     }
 
     // EMRETODO: needed ????
-    categoryNames.unshift(constants.HOWTO_PATH)
 
     if (folderPath === "") {
         selectedCategoryName = "howto"
