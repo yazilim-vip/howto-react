@@ -3,12 +3,13 @@ import {Breadcrumb, Col, Row} from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToMenu from "../component/HowToMenu";
 import Page from "../component/Page";
+import * as constants from '../constants';
 
 class HowTo extends React.Component {
     constructor(props) {
         super(undefined);
 
-        let fullPath = props.match.params[0]
+        let fullPath = props.match.params[0].replace(/\/$/, "")
         let folderPath
         let selectedCategory
         let selectedHowto = null
@@ -22,10 +23,11 @@ class HowTo extends React.Component {
             folderPath = fullPath
         }
 
-        if(folderPath === ""){
+        categoryNames.unshift(constants.howtoPath)
+
+        if (folderPath === "") {
             selectedCategory = "howto"
-            categoryNames.unshift("howto")
-        }else {
+        } else {
             folderPath = "/" + folderPath
             selectedCategory = categoryNames[categoryNames.length - 1]
         }
@@ -53,12 +55,11 @@ class HowTo extends React.Component {
     componentDidMount() {
         let {selectedCategory, selectedHowto, folderPath} = this.state
 
-        // fetch("http://yazilim.vip:9999/howto" + folderPath)
-        fetch("http://localhost:5000/howto" + folderPath)
+        fetch(constants.apiUrl + "?path=" + folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("url", "http://localhost:5000/howto/" + folderPath)
+                    console.log("url", constants.apiUrl + folderPath)
                     console.log("result", result)
 
                     // howto-service should return error response if content is empty, this check is temporary
@@ -106,8 +107,10 @@ class HowTo extends React.Component {
         let link = ""
 
         for (let i = 0; i < index; i++) {
-            link += "/" + this.state.categoryNames[i]
+            link += this.state.categoryNames[i] + "/"
         }
+
+        console.log(link)
 
         return link
     }
@@ -133,24 +136,24 @@ class HowTo extends React.Component {
 
             return (
                 <Page span={{span: 12}}>
-                        <Breadcrumb>
-                            {
-                                categoryNames.map((item, index) =>
-                                    <Breadcrumb.Item
-                                        key={index}
-                                        href={this.getBreadcrumbLink(index + 1)}
-                                        active={index + 1 === categoryNames.length}>
-                                        {item}
-                                    </Breadcrumb.Item>
-                                )
-                            }
-                        </Breadcrumb>
+                    <Breadcrumb>
+                        {
+                            categoryNames.map((item, index) =>
+                                <Breadcrumb.Item
+                                    key={index}
+                                    href={this.getBreadcrumbLink(index + 1)}
+                                    active={index + 1 === categoryNames.length}>
+                                    {item}
+                                </Breadcrumb.Item>
+                            )
+                        }
+                    </Breadcrumb>
 
-                        <HowToMenu
-                            folderPath={folderPath}
-                            type="subcategory"
-                            items={subCategoryList}
-                        />
+                    <HowToMenu
+                        folderPath={folderPath}
+                        type="subcategory"
+                        items={subCategoryList}
+                    />
 
                     <hr/>
 

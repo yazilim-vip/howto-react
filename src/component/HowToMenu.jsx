@@ -25,7 +25,7 @@ const HowToMenu = (props) => {
             case "content":
                 return (
                     <BrowserRouter key={key}>
-                        <Link to={`${constants.howtoPath}/${folderPath}/${items[key].label}`}>
+                        <Link to={`${constants.howtoPath}${folderPath}/${items[key].label}`}>
                             <ListGroup.Item
                                 onClick={() => {props.onContentClick(items[key])}}
                                 action
