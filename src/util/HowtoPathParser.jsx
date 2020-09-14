@@ -63,7 +63,8 @@ var howtoPathParser = (fullPath) => {
         selectedCategoryName = categoryNames[categoryNames.length - 1]
     }
 
-    return { folderPath, categoryNames, selectedCategoryName, selectedHowto }
+    let howtoSelectedFlag = selectedHowto !== null
+    return { folderPath, categoryNames, selectedCategoryName, selectedHowto, howtoSelectedFlag}
 }
 
 export default howtoPathParser;

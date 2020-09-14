@@ -28,6 +28,8 @@ class HowTo extends React.Component {
             categoryNames: fullPathParts.categoryNames,
             selectedCategoryName: fullPathParts.selectedCategoryName,
             selectedHowto: fullPathParts.selectedHowto,
+            howtoSelectedFlag: fullPathParts.howtoSelectedFlag,
+
 
             // filled by data from service
             subCategoryList: null,
@@ -39,7 +41,13 @@ class HowTo extends React.Component {
     }
 
     componentDidMount() {
+        this.fetchHowtoData()
+    }
 
+    //------------------------
+    // Fetching HowTo Data From Service 
+    //------------------------
+    fetchHowtoData() {
         // get request to the HowTo Service
         fetch(constants.REST_URL + "?path=" + this.state.folderPath)
             // convert response to json    
@@ -49,14 +57,13 @@ class HowTo extends React.Component {
             .then((res) => this.serviceSuccessHandler(res), (err) => this.serviceErrorHandler(err))
     }
 
-    serviceSuccessHandler(result) {
-        let { selectedCategoryName, selectedHowto, folderPath } = this.state
+    serviceSuccessHandler(data) {
+        let { selectedCategoryName, selectedHowto, folderPath, howtoSelectedFlag } = this.state
 
-        console.log("url", constants.REST_URL + folderPath)
-        console.log("result", result)
+        console.log("url", constants.REST_URL + folderPath, "data", data)
 
-        // howto-service should return error response if content is empty, this check is temporary
-        if (Object.keys(result).length === 0) {
+        // howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
+        if (Object.keys(data).length === 0) {
             let error = "error"
             this.setState({
                 error
@@ -65,8 +72,8 @@ class HowTo extends React.Component {
             return
         }
 
-        let subCategoryList = result[selectedCategoryName].subCategoryList
-        let howtoList = result[selectedCategoryName].howtoList
+        let subCategoryList = data[selectedCategoryName].subCategoryList
+        let howtoList = data[selectedCategoryName].howtoList
 
         this.setState({
             isLoaded: true,
@@ -74,15 +81,31 @@ class HowTo extends React.Component {
             howtoList: howtoList
         });
 
-        if (selectedHowto !== null) {
-            this.renderMarkdownContent(result[selectedCategoryName].howtoList[selectedHowto])
-        } else if (Object.keys(howtoList).length !== 0) {
-            let firstHowtoIndex = Object.keys(howtoList)[0]
-            let firstHowto = howtoList[firstHowtoIndex]
-
-            this.renderMarkdownContent(firstHowto)
-            this.props.history.push(selectedCategoryName + "/" + firstHowto.label);
+        if (howtoSelectedFlag) {
+            this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowto])
+        } else {
+            this.loadFirstHowtoContent()
         }
+    }
+
+    loadFirstHowtoContent() {
+        let { howtoList } = this.state
+        if (Object.keys(howtoList).length === 0) {
+            return;
+        };
+
+        let firstHowtoIndex = Object.keys(howtoList)[0]
+        let firstHowto = howtoList[firstHowtoIndex]
+
+        this.renderMarkdownContent(firstHowto)
+        this.props.history.push(this.state.selectedCategoryName + "/" + firstHowto.label);
+    }
+
+    renderMarkdownContent(selectedHowto) {
+        this.setState({
+            selectedHowto: selectedHowto,
+            markdownContent: selectedHowto.markdownContent
+        })
     }
 
     serviceErrorHandler(error) {
@@ -91,6 +114,7 @@ class HowTo extends React.Component {
             error
         });
     }
+
 
     getBreadcrumbLink(index) {
         let link = ""
@@ -106,12 +130,6 @@ class HowTo extends React.Component {
         return link
     }
 
-    renderMarkdownContent(selectedHowto) {
-        this.setState({
-            selectedHowto: selectedHowto,
-            markdownContent: selectedHowto.markdownContent
-        })
-    }
 
     render() {
         const { error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath, selectedHowto } = this.state;
@@ -169,6 +187,7 @@ class HowTo extends React.Component {
             );
         }
     }
+
 }
 
 export default HowTo
