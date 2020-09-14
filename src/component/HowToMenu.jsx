@@ -26,7 +26,7 @@ const HowToMenu = (props) => {
                             <ListGroup.Item
                                 onClick={() => {props.onContentClick(items[key])}}
                                 action
-                                href={key}
+                                id={key}
                                 active={items[key] === selectedHowto}
                             >
                                 {items[key].label.replace(".howto", "")}

@@ -48,26 +48,27 @@ class HowTo extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("selectedContent", selectedHowto)
+                    console.log("selectedCategory", selectedCategory)
+                    console.log("selectedHowto", selectedHowto)
                     console.log("markdownContent", result[selectedCategory].howtoList)
 
-                    // howto-service should return error response if content is empty, this check is temporary
-                    if (Object.keys(result).length === 0) {
-                        let error = "error"
-                        this.setState({
-                            error
-                        });
-                    }
+                    let subCategoryList = result[selectedCategory].subCategoryList
+                    let howtoList = result[selectedCategory].howtoList
 
                     this.setState({
                         isLoaded: true,
-                        subCategoryList: result[selectedCategory].subCategoryList,
-                        howtoList: result[selectedCategory].howtoList
+                        subCategoryList: subCategoryList,
+                        howtoList: howtoList
                     });
-
 
                     if (selectedHowto !== null) {
                         this.renderMarkdownContent(result[selectedCategory].howtoList[selectedHowto])
+                    }else if(Object.keys(howtoList).length !== 0){
+                        let firstHowtoIndex = Object.keys(howtoList)[0]
+                        let firstHowto = howtoList[firstHowtoIndex]
+
+                        this.renderMarkdownContent(firstHowto)
+                        this.props.history.push(selectedCategory + "/" + firstHowto.label);
                     }
                 },
                 (error) => {
