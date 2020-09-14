@@ -53,8 +53,8 @@ var howtoPathParser = (fullPath) => {
         categoryNames = fullPathParts
     }
 
-    let rootCategorySelectedFlag = (categoryNames.length === 1) && (categoryNames.length[0] === "")
-    if (folderPath === "") {
+    let rootCategorySelectedFlag = (folderPath === "");
+    if (rootCategorySelectedFlag) {
         selectedCategoryName = "howto"
         categoryNames =  []
     } else {
