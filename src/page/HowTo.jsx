@@ -29,8 +29,9 @@ class HowTo extends React.Component {
             folderPath: fullPathParts.folderPath,
             categoryNames: fullPathParts.categoryNames,
             selectedCategoryName: fullPathParts.selectedCategoryName,
-            selectedHowto: fullPathParts.selectedHowto,
+            selectedHowtoName: fullPathParts.selectedHowtoName,
             howtoSelectedFlag: fullPathParts.howtoSelectedFlag,
+            rootCategorySelectedFlag: fullPathParts.rootCategorySelectedFlag,
 
             // filled by data from service
             subCategoryList: null,
@@ -59,7 +60,7 @@ class HowTo extends React.Component {
     }
 
     serviceSuccessHandler(data) {
-        let { selectedCategoryName, selectedHowto, folderPath, howtoSelectedFlag } = this.state
+        let { selectedCategoryName, selectedHowtoName, folderPath, howtoSelectedFlag } = this.state
 
         console.log("url", constants.REST_URL + folderPath, "data", data)
 
@@ -82,9 +83,13 @@ class HowTo extends React.Component {
             howtoList: howtoList
         });
 
-        let howtoExistsFlag = (data[selectedCategoryName].howtoList[selectedHowto]) ? true : false
-        if (howtoSelectedFlag && howtoExistsFlag ) {
-            this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowto])
+        if (howtoSelectedFlag) {
+            let howtoExistsFlag = (data[selectedCategoryName].howtoList[selectedHowtoName]) ? true : false
+            if (howtoExistsFlag) {
+                // EMRETODO: howto content not f           
+            } else {
+                this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowtoName])
+            }
         } else if (Object.keys(howtoList).length === 0) {
             this.setState({
                 // notFound: true EMRETODO
@@ -147,26 +152,6 @@ class HowTo extends React.Component {
         // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
         // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
-        let breadcrumbElement = (
-            <Breadcrumb>
-                <Breadcrumb.Item
-                    key="root"
-                    href={"/howto"}
-                    active={1 === categoryNames.length && categoryNames[0] == ""}>
-                    <FontAwesomeIcon icon={faHome} />
-                </Breadcrumb.Item>
-                {
-                    categoryNames.map((item, index) =>
-                        <Breadcrumb.Item
-                            key={index}
-                            href={this.getBreadcrumbLink(index + 1)}
-                            active={index + 1 === categoryNames.length}>
-                            {item}
-                        </Breadcrumb.Item>
-                    )
-                }
-            </Breadcrumb>
-        )
 
 
         let contentElement
@@ -210,7 +195,24 @@ class HowTo extends React.Component {
 
         return (
             <Page span={{ span: 12 }}>
-                {breadcrumbElement}
+                <Breadcrumb>
+                    <Breadcrumb.Item
+                        key="root"
+                        href={"/howto"}
+                        active={this.state.rootCategorySelectedFlag}>
+                        <FontAwesomeIcon icon={faHome} />
+                    </Breadcrumb.Item>
+                    {
+                        categoryNames.map((item, index) =>
+                            <Breadcrumb.Item
+                                key={index}
+                                href={this.getBreadcrumbLink(index + 1)}
+                                active={index + 1 === categoryNames.length}>
+                                {item}
+                            </Breadcrumb.Item>
+                        )
+                    }
+                </Breadcrumb>
                 {contentElement}
             </Page>
         );

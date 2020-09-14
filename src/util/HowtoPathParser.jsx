@@ -33,7 +33,7 @@ import * as constants from '../constants';
  * categoryNames = ["ide, "Eclipse"]
  * folderPath = "ide/Eclipse"
  * selectedCategoryName = "Eclipse"
- * selectedHowto = "eclipse-shortcuts_configuration.howto"
+ * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
 var howtoPathParser = (fullPath) => {
 
@@ -42,10 +42,10 @@ var howtoPathParser = (fullPath) => {
 
     let folderPath
     let selectedCategoryName
-    let selectedHowto = null
+    let selectedHowtoName = null
 
     if (fullPath.endsWith(".howto")) {
-        selectedHowto = fullPathParts.pop()
+        selectedHowtoName = fullPathParts.pop()
         folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
         categoryNames = fullPathParts
     } else {
@@ -53,17 +53,17 @@ var howtoPathParser = (fullPath) => {
         categoryNames = fullPathParts
     }
 
-    // EMRETODO: needed ????
-
+    let rootCategorySelectedFlag = (categoryNames.length === 1) && (categoryNames.length[0] === "")
     if (folderPath === "") {
         selectedCategoryName = "howto"
+        categoryNames =  []
     } else {
         folderPath = "/" + folderPath
         selectedCategoryName = categoryNames[categoryNames.length - 1]
     }
 
-    let howtoSelectedFlag = selectedHowto !== null
-    return { folderPath, categoryNames, selectedCategoryName, selectedHowto, howtoSelectedFlag}
+    let howtoSelectedFlag = selectedHowtoName !== null
+    return { folderPath, categoryNames, selectedCategoryName, selectedHowtoName, howtoSelectedFlag, rootCategorySelectedFlag}
 }
 
 export default howtoPathParser;
