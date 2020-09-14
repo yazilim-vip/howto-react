@@ -1,5 +1,5 @@
 import React from "react";
-import {Breadcrumb, Col, Row} from "react-bootstrap";
+import { Breadcrumb, Col, Row } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToMenu from "../component/HowToMenu";
 import Page from "../component/Page";
@@ -9,32 +9,40 @@ class HowTo extends React.Component {
     constructor(props) {
         super(undefined);
 
-        let fullPath = props.match.params[0].replace(/\/$/, "")
+
+        let fullPath = props.match.params[0]
+            // trim trailing '/' chracter    
+            .replace(/\/$/, "")
+
+        let fullPathParts = fullPath.split("/")
+        let categoryNames
+
         let folderPath
-        let selectedCategory
+        let selectedCategoryName
         let selectedHowto = null
 
-        let categoryNames = fullPath.split("/")
-
         if (fullPath.endsWith(".howto")) {
-            selectedHowto = categoryNames.pop()
+            selectedHowto = fullPathParts.pop()
             folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
+            categoryNames = fullPathParts
         } else {
             folderPath = fullPath
+            categoryNames = fullPathParts
         }
 
+        // EMRETODO: needed ????
         categoryNames.unshift(constants.HOWTO_PATH)
 
         if (folderPath === "") {
-            selectedCategory = "howto"
+            selectedCategoryName = "howto"
         } else {
             folderPath = "/" + folderPath
-            selectedCategory = categoryNames[categoryNames.length - 1]
+            selectedCategoryName = categoryNames[categoryNames.length - 1]
         }
 
         console.log("folderPath", folderPath)
         console.log("selectedHowto", selectedHowto)
-        console.log("selectedCategory", selectedCategory)
+        console.log("selectedCategoryName", selectedCategoryName)
 
         this.state = {
             error: null,
@@ -44,7 +52,7 @@ class HowTo extends React.Component {
             subCategoryList: null,
             howtoList: null,
             categoryNames: categoryNames,
-            selectedCategory: selectedCategory,
+            selectedCategoryName: selectedCategoryName,
             selectedHowto: selectedHowto,
             markdownContent: null
         };
@@ -52,8 +60,48 @@ class HowTo extends React.Component {
         this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
     }
 
+    /**
+     *
+     * Example1
+     * url: https://www.yazilim.vip/howto
+     * fullPath = ""
+     * fullPathParts = ""
+     * categoryNames = null
+     * folderPath = ""
+     * selectedCategoryName = "howto"
+     *
+     * Example2
+     * url: https://www.yazilim.vip/howto/linux
+     * fullPath = "linux"
+     * fullPathParts = ["linux"]
+     * categoryNames = ["linux"]
+     * folderPath = "linux"
+     * selectedCategoryName = "linux"
+     *
+     * Example3
+     * url: https://www.yazilim.vip/howto/linux/specific_distro
+     * fullPath = "linux/specific_distro"
+     * fullPathParts = ["linux", "specific_distro"]
+     * categoryNames = ["linux", "specific_distro"]
+     * folderPath = "linux/specific_distro"
+     * selectedCategoryName = "specific_distro"
+     *
+     * Example4
+     * url: http://www.yazilim.vip/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto
+     * fullPath = "ide/Eclipse/eclipse-shortcuts_configuration.howto"
+     * fullPathParts = ["ide", "Eclipse", "eclipse-shortcuts_configuration.howto"]
+     * categoryNames = ["ide, "Eclipse"]
+     * folderPath = "ide/Eclipse"
+     * selectedCategoryName = "Eclipse"
+     * selectedHowto = "eclipse-shortcuts_configuration.howto"
+     */
+    parseFullPath(fullPath) {
+
+    }
+
+
     componentDidMount() {
-        let {selectedCategory, selectedHowto, folderPath} = this.state
+        let { selectedCategoryName, selectedHowto, folderPath } = this.state
 
         fetch(constants.REST_URL + "?path=" + folderPath)
             .then(res => res.json())
@@ -72,10 +120,10 @@ class HowTo extends React.Component {
                         return
                     }
 
-                    console.log("selectedCategory", selectedCategory)
+                    console.log("selectedCategoryName", selectedCategoryName)
 
-                    let subCategoryList = result[selectedCategory].subCategoryList
-                    let howtoList = result[selectedCategory].howtoList
+                    let subCategoryList = result[selectedCategoryName].subCategoryList
+                    let howtoList = result[selectedCategoryName].howtoList
 
                     this.setState({
                         isLoaded: true,
@@ -84,13 +132,13 @@ class HowTo extends React.Component {
                     });
 
                     if (selectedHowto !== null) {
-                        this.renderMarkdownContent(result[selectedCategory].howtoList[selectedHowto])
-                    } else if(Object.keys(howtoList).length !== 0){
+                        this.renderMarkdownContent(result[selectedCategoryName].howtoList[selectedHowto])
+                    } else if (Object.keys(howtoList).length !== 0) {
                         let firstHowtoIndex = Object.keys(howtoList)[0]
                         let firstHowto = howtoList[firstHowtoIndex]
 
                         this.renderMarkdownContent(firstHowto)
-                        this.props.history.push(selectedCategory + "/" + firstHowto.label);
+                        this.props.history.push(selectedCategoryName + "/" + firstHowto.label);
                     }
                 },
                 (error) => {
@@ -122,19 +170,19 @@ class HowTo extends React.Component {
     }
 
     render() {
-        const {error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath, selectedHowto} = this.state;
+        const { error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath, selectedHowto } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
-            // console.log("selectedCategory", selectedCategory)
-            // console.log("selectedCategory.subCategoryList", selectedCategory.subCategoryList)
-            // console.log("selectedCategory.howtoList", selectedCategory.howtoList)
+            // console.log("selectedCategoryName", selectedCategoryName)
+            // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
+            // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
             return (
-                <Page span={{span: 12}}>
+                <Page span={{ span: 12 }}>
                     <Breadcrumb>
                         {
                             categoryNames.map((item, index) =>
@@ -154,7 +202,7 @@ class HowTo extends React.Component {
                         items={subCategoryList}
                     />
 
-                    <hr/>
+                    <hr />
 
                     <Row>
                         {/*Menus*/}
@@ -170,7 +218,7 @@ class HowTo extends React.Component {
 
                         {/*Content*/}
                         <Col md="9">
-                            <ReactMarkdown source={this.state.markdownContent}/>
+                            <ReactMarkdown source={this.state.markdownContent} />
                         </Col>
                     </Row>
                 </Page>
