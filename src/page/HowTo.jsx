@@ -136,56 +136,58 @@ class HowTo extends React.Component {
 
         if (error) {
             return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            // console.log("selectedCategoryName", selectedCategoryName)
-            // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
-            // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
-
-            return (
-                <Page span={{ span: 12 }}>
-                    <Breadcrumb>
-                        {
-                            categoryNames.map((item, index) =>
-                                <Breadcrumb.Item
-                                    key={index}
-                                    href={this.getBreadcrumbLink(index + 1)}
-                                    active={index + 1 === categoryNames.length}>
-                                    {item}
-                                </Breadcrumb.Item>
-                            )
-                        }
-                    </Breadcrumb>
-
-                    <HowToMenu
-                        folderPath={folderPath}
-                        type="subcategory"
-                        items={subCategoryList}
-                    />
-
-                    <hr />
-
-                    <Row>
-                        {/*Menus*/}
-                        <Col md="3" className="border-right">
-                            <HowToMenu
-                                folderPath={folderPath}
-                                type="content"
-                                items={howtoList}
-                                selectedHowto={selectedHowto}
-                                onContentClick={this.renderMarkdownContent}
-                            />
-                        </Col>
-
-                        {/*Content*/}
-                        <Col md="9">
-                            <ReactMarkdown source={this.state.markdownContent} />
-                        </Col>
-                    </Row>
-                </Page>
-            );
         }
+
+        if (!isLoaded) {
+            return <div>Loading...</div>;
+        }
+
+        // console.log("selectedCategoryName", selectedCategoryName)
+        // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
+        // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
+
+        return (
+            <Page span={{ span: 12 }}>
+                <Breadcrumb>
+                    {
+                        categoryNames.map((item, index) =>
+                            <Breadcrumb.Item
+                                key={index}
+                                href={this.getBreadcrumbLink(index + 1)}
+                                active={index + 1 === categoryNames.length}>
+                                {item}
+                            </Breadcrumb.Item>
+                        )
+                    }
+                </Breadcrumb>
+
+                <HowToMenu
+                    folderPath={folderPath}
+                    type="subcategory"
+                    items={subCategoryList}
+                />
+
+                <hr />
+
+                <Row>
+                    {/*Menus*/}
+                    <Col md="3" className="border-right">
+                        <HowToMenu
+                            folderPath={folderPath}
+                            type="content"
+                            items={howtoList}
+                            selectedHowto={selectedHowto}
+                            onContentClick={this.renderMarkdownContent}
+                        />
+                    </Col>
+
+                    {/*Content*/}
+                    <Col md="9">
+                        <ReactMarkdown source={this.state.markdownContent} />
+                    </Col>
+                </Row>
+            </Page>
+        );
     }
 
 }
