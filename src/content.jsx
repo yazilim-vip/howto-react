@@ -20,6 +20,15 @@ export const portfolioList = [
         "https://marketplace.visualstudio.com/items?itemName=yazilim-vip.time-countdown&ssr=false#overview",
     },
   },
+  {
+    name: "SpringVIP",
+    description:
+      "A Java Spring Library that provides helpful generic and utility classes. Some of features provided by library are generic CRUD Service and Rest controllers. See more from documentation",
+    links: {
+      gitlab: "https://gitlab.com/yazilim.vip/projects/spring-vip/spring-vip",
+      
+    },
+  },
 ];
 
 export const teamMemberList = [
