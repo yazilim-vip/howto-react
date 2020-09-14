@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Col, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Row, Alert } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToMenu from "../component/HowToMenu";
 import Page from "../component/Page";
@@ -22,7 +22,9 @@ class HowTo extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            notFound: false,
+            categoryNotFound: false,
+            howtoNotFound: false,
+
 
             // filled by user request
             fullPath: fullPath,
@@ -68,7 +70,7 @@ class HowTo extends React.Component {
         if (Object.keys(data).length === 0) {
             this.setState({
                 isLoaded: true,
-                notFound: true
+                categoryNotFound: true
             });
             return
         }
@@ -78,7 +80,7 @@ class HowTo extends React.Component {
 
         this.setState({
             isLoaded: true,
-            notFound: false,
+            categoryNotFound: false,
             subCategoryList: subCategoryList,
             howtoList: howtoList
         });
@@ -86,13 +88,15 @@ class HowTo extends React.Component {
         if (howtoSelectedFlag) {
             let howtoExistsFlag = (data[selectedCategoryName].howtoList[selectedHowtoName]) ? true : false
             if (howtoExistsFlag) {
-                // EMRETODO: howto content not f           
-            } else {
                 this.renderMarkdownContent(data[selectedCategoryName].howtoList[selectedHowtoName])
+            } else {
+                this.setState({
+                    howtoNotFound: true
+                });
             }
         } else if (Object.keys(howtoList).length === 0) {
             this.setState({
-                // notFound: true EMRETODO
+                howtoNotFound: true
             });
         } else {
             this.loadFirstHowtoContent()
@@ -155,11 +159,11 @@ class HowTo extends React.Component {
 
 
         let contentElement
-        if (this.state.notFound) {
+        if (this.state.categoryNotFound) {
             contentElement = (
-                <div>
+                <Alert key={1} variant={"danger"}>
                     {this.state.fullPath} not found on archive.
-                </div>
+                </Alert>
             )
         } else {
             contentElement = (
