@@ -14,7 +14,6 @@ class HowTo extends React.Component {
         let selectedHowto = null
 
         let categoryNames = fullPath.split("/")
-        categoryNames.unshift("howto")
 
         if (fullPath.endsWith(".howto")) {
             selectedHowto = categoryNames.pop()
@@ -23,7 +22,17 @@ class HowTo extends React.Component {
             folderPath = fullPath
         }
 
-        selectedCategory = categoryNames[categoryNames.length - 1]
+        if(folderPath === ""){
+            selectedCategory = "howto"
+            categoryNames.unshift("howto")
+        }else {
+            folderPath = "/" + folderPath
+            selectedCategory = categoryNames[categoryNames.length - 1]
+        }
+
+        console.log("folderPath", folderPath)
+        console.log("selectedHowto", selectedHowto)
+        console.log("selectedCategory", selectedCategory)
 
         this.state = {
             error: null,
@@ -44,13 +53,25 @@ class HowTo extends React.Component {
     componentDidMount() {
         let {selectedCategory, selectedHowto, folderPath} = this.state
 
-        fetch("http://yazilim.vip:9999/" + folderPath)
+        // fetch("http://yazilim.vip:9999/howto" + folderPath)
+        fetch("http://localhost:5000/howto" + folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log("url", "http://localhost:5000/howto/" + folderPath)
+                    console.log("result", result)
+
+                    // howto-service should return error response if content is empty, this check is temporary
+                    if (Object.keys(result).length === 0) {
+                        let error = "error"
+                        this.setState({
+                            error
+                        });
+
+                        return
+                    }
+
                     console.log("selectedCategory", selectedCategory)
-                    console.log("selectedHowto", selectedHowto)
-                    console.log("markdownContent", result[selectedCategory].howtoList)
 
                     let subCategoryList = result[selectedCategory].subCategoryList
                     let howtoList = result[selectedCategory].howtoList
@@ -63,13 +84,14 @@ class HowTo extends React.Component {
 
                     if (selectedHowto !== null) {
                         this.renderMarkdownContent(result[selectedCategory].howtoList[selectedHowto])
-                    }else if(Object.keys(howtoList).length !== 0){
-                        let firstHowtoIndex = Object.keys(howtoList)[0]
-                        let firstHowto = howtoList[firstHowtoIndex]
-
-                        this.renderMarkdownContent(firstHowto)
-                        this.props.history.push(selectedCategory + "/" + firstHowto.label);
                     }
+                    // else if(Object.keys(howtoList).length !== 0){
+                    //     let firstHowtoIndex = Object.keys(howtoList)[0]
+                    //     let firstHowto = howtoList[firstHowtoIndex]
+                    //
+                    //     this.renderMarkdownContent(firstHowto)
+                    //     this.props.history.push(selectedCategory + "/" + firstHowto.label);
+                    // }
                 },
                 (error) => {
                     this.setState({

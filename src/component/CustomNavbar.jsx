@@ -43,7 +43,7 @@ const CustomNavbar = () => {
           <NavLink
             activeclassname="active"
             className="text-light nav-link"
-            to="/howto"
+            to="/armut"
           >
             HowTo
           </NavLink>
