@@ -85,14 +85,13 @@ class HowTo extends React.Component {
 
                     if (selectedHowto !== null) {
                         this.renderMarkdownContent(result[selectedCategory].howtoList[selectedHowto])
+                    } else if(Object.keys(howtoList).length !== 0){
+                        let firstHowtoIndex = Object.keys(howtoList)[0]
+                        let firstHowto = howtoList[firstHowtoIndex]
+
+                        this.renderMarkdownContent(firstHowto)
+                        this.props.history.push(selectedCategory + "/" + firstHowto.label);
                     }
-                    // else if(Object.keys(howtoList).length !== 0){
-                    //     let firstHowtoIndex = Object.keys(howtoList)[0]
-                    //     let firstHowto = howtoList[firstHowtoIndex]
-                    //
-                    //     this.renderMarkdownContent(firstHowto)
-                    //     this.props.history.push(selectedCategory + "/" + firstHowto.label);
-                    // }
                 },
                 (error) => {
                     this.setState({

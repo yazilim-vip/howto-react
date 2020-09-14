@@ -35,9 +35,9 @@ const App = () => (
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/portfolio' component={Portfolio} />
-          <Route path='/armut/*' component={HowTo} />
+          <Route path='/howto/*' component={HowTo} />
           <Route path='/about' component={About} />
-          <Redirect path='/armut' to="/armut/" />
+          <Redirect path='/howto' to="/howto/" />
         </Switch>
       </Col>
     </main>
