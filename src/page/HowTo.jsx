@@ -1,12 +1,17 @@
 import React from "react";
+
 import { Breadcrumb, Col, Row, Alert } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
-import HowToMenu from "../component/HowToMenu";
-import Page from "../component/Page";
-import * as constants from '../constants';
-import howtoPathParser from '../util/HowtoPathParser'
+
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import * as constants from '../constants';
+
+import HowToMenu from "../component/HowToMenu";
+import Page from "../component/Page";
+import howtoPathParser from '../util/HowtoPathParser'
+
 
 class HowTo extends React.Component {
     constructor(props) {
@@ -24,7 +29,6 @@ class HowTo extends React.Component {
             isLoaded: false,
             categoryNotFound: false,
             howtoNotFound: false,
-
 
             // filled by user request
             fullPath: fullPath,
@@ -164,7 +168,7 @@ class HowTo extends React.Component {
                     {this.state.fullPath} not found on archive.
                 </Alert>
             )
-        } else if(this.state.howtoSelectedFlag && this.state.howtoNotFound) {
+        } else if (this.state.howtoSelectedFlag && this.state.howtoNotFound) {
             contentElement = (
                 <div>
                     <HowToMenu
