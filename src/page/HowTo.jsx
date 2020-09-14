@@ -23,7 +23,7 @@ class HowTo extends React.Component {
             folderPath = fullPath
         }
 
-        categoryNames.unshift(constants.howtoPath)
+        categoryNames.unshift(constants.HOWTO_PATH)
 
         if (folderPath === "") {
             selectedCategory = "howto"
@@ -55,11 +55,11 @@ class HowTo extends React.Component {
     componentDidMount() {
         let {selectedCategory, selectedHowto, folderPath} = this.state
 
-        fetch(constants.apiUrl + "?path=" + folderPath)
+        fetch(constants.REST_URL + "?path=" + folderPath)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("url", constants.apiUrl + folderPath)
+                    console.log("url", constants.REST_URL + folderPath)
                     console.log("result", result)
 
                     // howto-service should return error response if content is empty, this check is temporary

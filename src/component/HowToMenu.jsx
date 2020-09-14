@@ -17,7 +17,7 @@ const HowToMenu = (props) => {
         switch (type) {
             case "subcategory":
                 return (
-                    <ListGroup.Item key={key} href={`${constants.howtoPath}${folderPath}/${items[key].name}`} action>
+                    <ListGroup.Item key={key} href={`${constants.HOWTO_PATH}${folderPath}/${items[key].name}`} action>
                         <FontAwesomeIcon icon={faFolder} className="mr-3" />
                         {items[key].name}
                     </ListGroup.Item>
@@ -25,7 +25,7 @@ const HowToMenu = (props) => {
             case "content":
                 return (
                     <BrowserRouter key={key}>
-                        <Link to={`${constants.howtoPath}${folderPath}/${items[key].label}`}>
+                        <Link to={`${constants.HOWTO_PATH}${folderPath}/${items[key].label}`}>
                             <ListGroup.Item
                                 onClick={() => {props.onContentClick(items[key])}}
                                 action
