@@ -9,13 +9,9 @@ import HowToBreadcrumb from "./HowToBreadcrumb";
 
 var HowToBrowser = (props) => {
 
-    const { howtoRequest, selectedCategory, selectedHowto, onContentClick } = props
+    const { howtoRequest, selectedCategory, selectedHowto, onContentClick, onCategoryClick} = props
 
     var renderHowtoContentElement = () => {
-        console.log("Trying to render NEW howto content")
-
-        console.log("WELL DONE, you select a howto to read", howtoRequest.selectedHowtoName)
-
 
         if (selectedHowto !== null) {
             return <ReactMarkdown source={selectedHowto.markdownContent} />
@@ -34,8 +30,8 @@ var HowToBrowser = (props) => {
     var renderMainContentElement = () => {
 
         if (selectedCategory === null) {
-            return (<Alert key={1} variant={"danger"}>
-
+            return (
+            <Alert key={1} variant={"danger"}>
                 {howtoRequest.fullPath} not found on archive.
             </Alert>
             )
@@ -47,6 +43,9 @@ var HowToBrowser = (props) => {
                     folderPath={howtoRequest.folderPath}
                     type="subcategory"
                     items={selectedCategory.subCategoryList}
+                    selectedCategory={selectedCategory}
+                    onCategoryClick={onCategoryClick}
+                    rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
                 />
 
                 <hr />
@@ -100,6 +99,7 @@ HowToBrowser.propTypes = {
     selectedCategory: PropTypes.object,
     selectedHowto: PropTypes.object,
     onContentClick: PropTypes.func,
+    onCategoryClick: PropTypes.func
 };
 
 export default HowToBrowser 

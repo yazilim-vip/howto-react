@@ -35,7 +35,10 @@
  */
 var howtoRequestParser = (fullPath) => {
 
+
     let fullPathParts = fullPath.split("/")
+    console.log(fullPath, " ==> ", fullPathParts)
+
     let categoryNames
 
     let folderPath
@@ -45,18 +48,18 @@ var howtoRequestParser = (fullPath) => {
     if (fullPath.endsWith(".howto")) {
         selectedHowtoName = fullPathParts.pop()
         folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
-        categoryNames = fullPathParts
     } else {
         folderPath = fullPath
-        categoryNames = fullPathParts
     }
+
+    categoryNames = fullPathParts
 
     let rootCategorySelectedFlag = (folderPath === "");
     if (rootCategorySelectedFlag) {
         selectedCategoryName = null
         categoryNames = []
     } else {
-        folderPath = "/" + folderPath
+        // folderPath = "/" + folderPath
         selectedCategoryName = categoryNames[categoryNames.length - 1]
     }
 
