@@ -201,7 +201,7 @@ class HowTo extends React.Component {
             <Page span={{ span: 12 }}>
                 <HowToBreadcrumb 
                     categoryNames={categoryNames}
-                    rootFalg = {this.state.rootCategorySelectedFlag}
+                    rootFlag = {this.state.rootCategorySelectedFlag}
                 />
                 {contentElement}
             </Page>
