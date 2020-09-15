@@ -16,7 +16,12 @@ var HowToBrowser = (props) => {
 
         console.log("WELL DONE, you select a howto to read", howtoRequest.selectedHowtoName)
 
-        if (selectedHowto === null) {
+
+        if (selectedHowto !== null) {
+            return <ReactMarkdown source={selectedHowto.markdownContent} />
+        }
+
+        if (howtoRequest.howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
             return (
                 <Alert key={1} variant={"danger"}>
                     {howtoRequest.fullPath} not found on archive.
@@ -24,7 +29,6 @@ var HowToBrowser = (props) => {
             )
         }
 
-        return <ReactMarkdown source={selectedHowto.markdownContent} />
     }
 
     var renderMainContentElement = () => {
@@ -61,7 +65,7 @@ var HowToBrowser = (props) => {
 
                     {/*Content*/}
                     <Col md="9">
-                         {renderHowtoContentElement()}
+                        {renderHowtoContentElement()}
                     </Col>
                 </Row>
             </div>
@@ -88,6 +92,7 @@ HowToBrowser.propTypes = {
         folderPath: PropTypes.string,
         categoryNames: PropTypes.array,
         selectedHowtoName: PropTypes.string,
+        howtoSelectedFlag: PropTypes.bool,
         rootCategorySelectedFlag: PropTypes.bool
     }),
 
