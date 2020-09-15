@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Breadcrumb, Col, Row, Alert } from "react-bootstrap";
+import {Col, Row, Alert } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import * as constants from '../constants';
+import * as constants from '../constants'
 
 import HowToMenu from "../component/HowToMenu";
+import HowToBreadcrumb from "../component/HowToBreadcrumb";
+
+
 import Page from "../component/Page";
 import howtoPathParser from '../util/HowtoPathParser'
 
@@ -135,20 +135,6 @@ class HowTo extends React.Component {
         });
     }
 
-
-    getBreadcrumbLink(index) {
-        let link = constants.HOWTO_PATH + "/"
-
-        for (let i = 0; i < index; i++) {
-            link += this.state.categoryNames[i] + "/"
-        }
-
-        // console.log("breadcrumbLink = ", link)
-
-        return link
-    }
-
-
     render() {
         const { error, isLoaded, selectedCategory, categoryNames, folderPath, selectedHowto } = this.state;
 
@@ -213,24 +199,10 @@ class HowTo extends React.Component {
 
         return (
             <Page span={{ span: 12 }}>
-                <Breadcrumb>
-                    <Breadcrumb.Item
-                        key="root"
-                        href={"/howto"}
-                        active={this.state.rootCategorySelectedFlag}>
-                        <FontAwesomeIcon icon={faHome} />
-                    </Breadcrumb.Item>
-                    {
-                        categoryNames.map((item, index) =>
-                            <Breadcrumb.Item
-                                key={index}
-                                href={this.getBreadcrumbLink(index + 1)}
-                                active={index + 1 === categoryNames.length}>
-                                {item}
-                            </Breadcrumb.Item>
-                        )
-                    }
-                </Breadcrumb>
+                <HowToBreadcrumb 
+                    categoryNames={categoryNames}
+                    rootFalg = {this.state.rootCategorySelectedFlag}
+                />
                 {contentElement}
             </Page>
         );
