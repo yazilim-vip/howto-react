@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // Bootstrap
-import { Col, Navbar } from 'react-bootstrap';
+import { Col, Navbar, Row } from 'react-bootstrap';
 
 // Pages
 import Home from "./page/Home";
@@ -17,8 +17,11 @@ import CustomNavbar from './component/CustomNavbar';
 // Fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 library.add(fab)
+library.add(fas)
 
 
 const App = () => (
@@ -43,10 +46,21 @@ const App = () => (
     </main>
 
     {/* FOOTER */}
-    <footer>
-      <Navbar bg="dark" className="justify-content-center">
-        <span className="text-white-50">© yazilim.vip All Rights Reserved</span>
+    <footer className="text-white-50">
+      <Navbar bg="dark">
+        <Col md="12">
+          <Row>
+            <Col md="12">
+              <span><FontAwesomeIcon icon={faEnvelope} className="ml-3" /></span>
+              <span> : info@yazilim.vip</span>
+            </Col>
+            <Col md="12">
+              © yazilim.vip All Rights Reserved
+            </Col>
+          </Row>
+        </Col>
       </Navbar>
+
     </footer>
 
   </Router>

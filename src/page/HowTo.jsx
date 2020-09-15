@@ -134,8 +134,64 @@ class HowTo extends React.Component {
         });
     }
 
+
+    renderHowtoContentElement(){
+        let noHowtoContentFound = this.state.howtoSelectedFlag && this.state.howtoNotFoundFlag;
+        if (noHowtoContentFound) {
+            return (
+                <Alert key={1} variant={"danger"}>
+                    {this.state.fullPath} not found on archive.
+                </Alert>
+            )
+        } 
+        return <ReactMarkdown source={this.state.markdownContent} />
+    }
+
+    
+    renderMainContentElement(){
+        
+        const {selectedCategory, folderPath, selectedHowto } = this.state;
+
+        if (this.state.categoryNotFoundFlag) {
+            return (
+                <Alert key={1} variant={"danger"}>
+                    {this.state.fullPath} not found on archive.
+                </Alert>
+            )
+        }
+
+        return (
+            <div>
+                <HowToMenu
+                    folderPath={folderPath}
+                    type="subcategory"
+                    items={selectedCategory.subCategoryList}
+                />
+
+                <hr />
+
+                <Row>
+                    {/*Menus*/}
+                    <Col md="3" className="border-right">
+                        <HowToMenu
+                            folderPath={folderPath}
+                            type="content"
+                            items={selectedCategory.howtoList}
+                            selectedHowto={selectedHowto}
+                            onContentClick={this.renderMarkdownContent}
+                        />
+                    </Col>
+
+                    {/*Content*/}
+                    <Col md="9">
+                        {this.renderHowtoContentElement()}
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
     render() {
-        const { error, isLoaded, selectedCategory, categoryNames, folderPath, selectedHowto } = this.state;
+        const { error, isLoaded, categoryNames } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -145,64 +201,13 @@ class HowTo extends React.Component {
             return <div>Loading...</div>;
         }
 
-        let contentElement
-        if (this.state.categoryNotFoundFlag) {
-            contentElement = (
-                <Alert key={1} variant={"danger"}>
-                    {this.state.fullPath} not found on archive.
-                </Alert>
-            )
-        } else {
-
-            let howtoContentElement
-            if (this.state.howtoSelectedFlag && this.state.howtoNotFoundFlag) {
-                howtoContentElement = (
-                    <Alert key={1} variant={"danger"}>
-                        {this.state.fullPath} not found on archive.
-                    </Alert>
-                )
-            } else {
-                howtoContentElement = <ReactMarkdown source={this.state.markdownContent} />
-            }
-
-            contentElement = (
-                <div>
-                    <HowToMenu
-                        folderPath={folderPath}
-                        type="subcategory"
-                        items={selectedCategory.subCategoryList}
-                    />
-
-                    <hr />
-
-                    <Row>
-                        {/*Menus*/}
-                        <Col md="3" className="border-right">
-                            <HowToMenu
-                                folderPath={folderPath}
-                                type="content"
-                                items={selectedCategory.howtoList}
-                                selectedHowto={selectedHowto}
-                                onContentClick={this.renderMarkdownContent}
-                            />
-                        </Col>
-
-                        {/*Content*/}
-                        <Col md="9">
-                            {howtoContentElement}
-                        </Col>
-                    </Row>
-                </div>
-            )
-        }
-
         return (
             <Page span={{ span: 12 }}>
                 <HowToBreadcrumb 
                     categoryNames={categoryNames}
                     rootFlag = {this.state.rootCategorySelectedFlag}
                 />
-                {contentElement}
+                {this.renderMainContentElement()}
             </Page>
         );
     }
