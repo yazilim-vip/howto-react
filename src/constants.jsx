@@ -1,2 +1,2 @@
-export const REST_URL = "http://yazilim.vip:9999"
+export const REST_URL = "http://localhost:5000"
 export const HOWTO_PATH = "/howto"

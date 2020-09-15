@@ -34,14 +34,12 @@ class HowTo extends React.Component {
             fullPath: fullPath,
             folderPath: fullPathParts.folderPath,
             categoryNames: fullPathParts.categoryNames,
-            selectedCategoryName: fullPathParts.selectedCategoryName,
             selectedHowtoName: fullPathParts.selectedHowtoName,
             howtoSelectedFlag: fullPathParts.howtoSelectedFlag,
             rootCategorySelectedFlag: fullPathParts.rootCategorySelectedFlag,
 
             // filled by data from service
-            subCategoryList: null,
-            howtoList: null,
+            selectedCategory: null,
             markdownContent: null
         };
 
@@ -66,7 +64,7 @@ class HowTo extends React.Component {
     }
 
     serviceSuccessHandler(data) {
-        let { selectedCategoryName, selectedHowtoName, folderPath, howtoSelectedFlag } = this.state
+        let { selectedHowtoName, folderPath, howtoSelectedFlag } = this.state
 
         console.log("url", constants.REST_URL + folderPath, "data", data)
 
@@ -79,18 +77,17 @@ class HowTo extends React.Component {
             return
         }
 
-        let subCategoryList = data[selectedCategoryName].subCategoryList
-        let howtoList = data[selectedCategoryName].howtoList
+        // EMRETODO data coming 
+        let selectedCategory = data
 
         this.setState({
             isLoaded: true,
-            categoryNotFoundFlag: false,
-            subCategoryList: subCategoryList,
-            howtoList: howtoList
+            selectedCategory: selectedCategory,
+            categoryNotFoundFlag: false
         });
 
         if (howtoSelectedFlag) {
-            let howto = data[selectedCategoryName].howtoList[selectedHowtoName]
+            let howto = selectedCategory.howtoList[selectedHowtoName]
             this.renderMarkdownContent(howto)
         } else {
             this.loadFirstHowtoContent()
@@ -98,8 +95,9 @@ class HowTo extends React.Component {
     }
 
     loadFirstHowtoContent() {
-        let { howtoList } = this.state
+        let { selectedCategory, rootCategorySelectedFlag } = this.state
 
+        let howtoList = selectedCategory.howtoList
         if (Object.keys(howtoList).length === 0) {
             // NO HowTo found under selectedCategory
             // So, there is no  first HowTo :)
@@ -110,7 +108,10 @@ class HowTo extends React.Component {
         let firstHowto = howtoList[firstHowtoIndex]
 
         this.renderMarkdownContent(firstHowto)
-        this.props.history.push(this.state.selectedCategoryName + "/" + firstHowto.label);
+        console.log("firstHowto", firstHowto)
+
+        let prefix = (rootCategorySelectedFlag) ? "" : (selectedCategory.name + "/")
+        this.props.history.push(prefix + firstHowto.label);
     }
 
     renderMarkdownContent(selectedHowto) {
@@ -149,7 +150,7 @@ class HowTo extends React.Component {
 
 
     render() {
-        const { error, isLoaded, subCategoryList, howtoList, categoryNames, folderPath, selectedHowto } = this.state;
+        const { error, isLoaded, selectedCategory, categoryNames, folderPath, selectedHowto } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -158,10 +159,6 @@ class HowTo extends React.Component {
         if (!isLoaded) {
             return <div>Loading...</div>;
         }
-
-        // console.log("selectedCategoryName", selectedCategoryName)
-        // console.log("selectedCategoryName.subCategoryList", selectedCategoryName.subCategoryList)
-        // console.log("selectedCategoryName.howtoList", selectedCategoryName.howtoList)
 
         let contentElement
         if (this.state.categoryNotFoundFlag) {
@@ -188,7 +185,7 @@ class HowTo extends React.Component {
                     <HowToMenu
                         folderPath={folderPath}
                         type="subcategory"
-                        items={subCategoryList}
+                        items={selectedCategory.subCategoryList}
                     />
 
                     <hr />
@@ -199,7 +196,7 @@ class HowTo extends React.Component {
                             <HowToMenu
                                 folderPath={folderPath}
                                 type="content"
-                                items={howtoList}
+                                items={selectedCategory.howtoList}
                                 selectedHowto={selectedHowto}
                                 onContentClick={this.renderMarkdownContent}
                             />
