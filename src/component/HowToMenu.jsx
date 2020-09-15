@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {ListGroup} from "react-bootstrap";
@@ -68,8 +68,8 @@ HowToMenu.propTypes = {
     folderPath: PropTypes.string,
     type: PropTypes.string,
     title: PropTypes.string,
-    items: PropTypes.array,
-    selectedHowto: PropTypes.string,
+    items: PropTypes.object,
+    selectedHowto: PropTypes.object,
     onContentClick: PropTypes.func
 };
 
