@@ -12,9 +12,9 @@ var HowToBrowser = (props) => {
     const { howtoRequest, selectedCategory, selectedHowto, onContentClick } = props
 
     var renderHowtoContentElement = () => {
-        if (!howtoRequest.howtoSelectedFlag) {
-            return
-        }
+        console.log("Trying to render NEW howto content")
+
+        console.log("WELL DONE, you select a howto to read", howtoRequest.selectedHowtoName)
 
         if (selectedHowto === null) {
             return (
@@ -23,7 +23,6 @@ var HowToBrowser = (props) => {
                 </Alert>
             )
         }
-        console.log('hehehe ====>> ', selectedHowto)
 
         return <ReactMarkdown source={selectedHowto.markdownContent} />
     }
@@ -89,7 +88,6 @@ HowToBrowser.propTypes = {
         folderPath: PropTypes.string,
         categoryNames: PropTypes.array,
         selectedHowtoName: PropTypes.string,
-        howtoSelectedFlag: PropTypes.bool,
         rootCategorySelectedFlag: PropTypes.bool
     }),
 

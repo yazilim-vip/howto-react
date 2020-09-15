@@ -33,7 +33,7 @@
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-var howtoPathParser = (fullPath) => {
+var howtoRequestParser = (fullPath) => {
 
     let fullPathParts = fullPath.split("/")
     let categoryNames
@@ -71,4 +71,4 @@ var howtoPathParser = (fullPath) => {
     }
 }
 
-export default howtoPathParser;
+export default howtoRequestParser;

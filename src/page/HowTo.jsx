@@ -6,7 +6,7 @@ import * as constants from '../constants'
 
 
 import Page from "../component/Page";
-import howtoPathParser from '../util/HowtoPathParser'
+import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/HowToBrowser";
 
 
@@ -23,7 +23,7 @@ class HowTo extends React.Component {
             isLoaded: false,
 
             // filled by user request
-            howtoRequest: howtoPathParser(fullPath),
+            howtoRequest: howtoRequestParser(fullPath),
 
             // filled by data from service
             selectedCategory: null,
@@ -42,7 +42,7 @@ class HowTo extends React.Component {
     //------------------------
     fetchHowtoData() {
         // get request to the HowTo Service
-         fetch(constants.REST_URL + "?path=" + this.state.howtoRequest.folderPath)
+        fetch(constants.REST_URL + "?path=" + this.state.howtoRequest.folderPath)
             // convert response to json    
             .then(res => res.json())
 
@@ -70,7 +70,6 @@ class HowTo extends React.Component {
             selectedCategory: selectedCategory,
         });
 
-        console.log("this.state.howtoRequest.howtoSelectedFlag", this.state.howtoRequest.howtoSelectedFlag)
         if (this.state.howtoRequest.howtoSelectedFlag) {
             let howto = selectedCategory.howtoList[this.state.howtoRequest.selectedHowtoName]
             this.renderMarkdownContent(howto)
@@ -126,7 +125,10 @@ class HowTo extends React.Component {
             return <div>Loading...</div>;
         }
 
-        console.log('renderind', this.state.selectedHowto)
+        if (this.state.selectedHowto) {
+            // console.log('rendering HowTO', this.state.selectedHowto.label)
+        }
+        
         return (
             <Page span={{ span: 12 }}>
 
