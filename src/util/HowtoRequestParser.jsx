@@ -33,7 +33,7 @@
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-var howtoPathParser = (fullPath) => {
+var howtoRequestParser = (fullPath) => {
 
     let fullPathParts = fullPath.split("/")
     let categoryNames
@@ -54,14 +54,21 @@ var howtoPathParser = (fullPath) => {
     let rootCategorySelectedFlag = (folderPath === "");
     if (rootCategorySelectedFlag) {
         selectedCategoryName = null
-        categoryNames =  []
+        categoryNames = []
     } else {
         folderPath = "/" + folderPath
         selectedCategoryName = categoryNames[categoryNames.length - 1]
     }
 
     let howtoSelectedFlag = selectedHowtoName !== null
-    return { folderPath, categoryNames, selectedCategoryName, selectedHowtoName, howtoSelectedFlag, rootCategorySelectedFlag}
+    return {
+        folderPath: folderPath
+        , categoryNames: categoryNames
+        , selectedCategoryName: selectedCategoryName
+        , selectedHowtoName: selectedHowtoName
+        , howtoSelectedFlag: howtoSelectedFlag
+        , rootCategorySelectedFlag: rootCategorySelectedFlag
+    }
 }
 
-export default howtoPathParser;
+export default howtoRequestParser;
