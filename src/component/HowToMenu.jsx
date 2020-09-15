@@ -1,10 +1,13 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 import {ListGroup} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {BrowserRouter} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFile, faFolder} from "@fortawesome/free-solid-svg-icons";
 import * as constants from '../constants';
+
 
 const HowToMenu = (props) => {
     const folderPath = props.folderPath;
@@ -58,6 +61,16 @@ const HowToMenu = (props) => {
 
         </div>
     );
+};
+
+
+HowToMenu.propTypes = {
+    folderPath: PropTypes.string,
+    type: PropTypes.string,
+    title: PropTypes.string,
+    items: PropTypes.array,
+    selectedHowto: PropTypes.string,
+    onContentClick: PropTypes.func
 };
 
 export default HowToMenu;
