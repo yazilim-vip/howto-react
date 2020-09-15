@@ -23,6 +23,14 @@ export const portfolioList = [
     },
   },
   {
+    name: "maescript",
+    description:
+      "Contains useful functions with autocomplete feauteres and comes with useful set of shell scripts",
+    links: {
+      gitlab: "https://gitlab.com/yazilim.vip/projects/maescript/maescript"
+    },
+  },
+  {
     name: "SpringVIP",
     description:
       "A Java Spring Library that provides helpful generic and utility classes. Some of features provided by library are generic CRUD Service and Rest controllers. See more from documentation",
