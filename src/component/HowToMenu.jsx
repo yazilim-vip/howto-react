@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {BrowserRouter} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFile, faFolder} from "@fortawesome/free-solid-svg-icons";
-
+import * as constants from '../constants';
 
 const HowToMenu = (props) => {
     const folderPath = props.folderPath;
@@ -17,7 +17,7 @@ const HowToMenu = (props) => {
         switch (type) {
             case "subcategory":
                 return (
-                    <ListGroup.Item key={key} href={`/howto/${folderPath}/${items[key].name}`} action>
+                    <ListGroup.Item key={key} href={`${constants.HOWTO_PATH}${folderPath}/${items[key].name}`} action>
                         <FontAwesomeIcon icon={faFolder} className="mr-3" />
                         {items[key].name}
                     </ListGroup.Item>
@@ -25,7 +25,7 @@ const HowToMenu = (props) => {
             case "content":
                 return (
                     <BrowserRouter key={key}>
-                        <Link to={`/howto/${folderPath}/${items[key].label}`}>
+                        <Link to={`${constants.HOWTO_PATH}${folderPath}/${items[key].label}`}>
                             <ListGroup.Item
                                 onClick={() => {props.onContentClick(items[key])}}
                                 action

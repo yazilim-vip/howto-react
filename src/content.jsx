@@ -1,3 +1,5 @@
+import React from "react";
+
 export const portfolioList = [
   {
     name: "Play2Gether",
@@ -20,6 +22,15 @@ export const portfolioList = [
         "https://marketplace.visualstudio.com/items?itemName=yazilim-vip.time-countdown&ssr=false#overview",
     },
   },
+  {
+    name: "SpringVIP",
+    description:
+      "A Java Spring Library that provides helpful generic and utility classes. Some of features provided by library are generic CRUD Service and Rest controllers. See more from documentation",
+    links: {
+      gitlab: "https://gitlab.com/yazilim.vip/projects/spring-vip/spring-vip",
+
+    },
+  },
 ];
 
 export const teamMemberList = [
@@ -39,8 +50,17 @@ export const teamMemberList = [
   },
   {
     name: "Burak Erkan",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    description: (
+      <div>
+        <span>yazilim.vip patriot</span>
+        <ul>
+          <li>2008 - now (software developer & team lead & manager)</li>
+          <li>2000 - now (still a software amateur)</li>
+        </ul>
+      </div>
+    )
+
+    ,
     imageSource: "/img/burak.jpeg",
     title: "Major Contributor",
     links: {
