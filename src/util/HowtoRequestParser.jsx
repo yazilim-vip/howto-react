@@ -37,7 +37,6 @@ var howtoRequestParser = (fullPath) => {
 
 
     let fullPathParts = fullPath.split("/")
-    console.log(fullPath, " ==> ", fullPathParts)
 
     let categoryNames
 

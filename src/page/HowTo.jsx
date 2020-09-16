@@ -103,10 +103,8 @@ class HowTo extends React.Component {
             let tmpCategory = rootCategory
             
 
-            console.log("beforeLoop", categoryNames)
             for (var catIndex in categoryNames) {
                 let cat = categoryNames[catIndex]
-                console.log("cat", cat)
 
                 if (!tmpCategory.subCategoryList[cat]) {
                     tmpCategory =  null
@@ -118,9 +116,6 @@ class HowTo extends React.Component {
             
             selectedCategory = tmpCategory
         }
-
-        // console.log("categoryNames", this.state.howtoRequest.categoryNames)
-        console.log("selectedCategory", selectedCategory)
 
         this.setState({
             selectedCategory: selectedCategory
@@ -157,9 +152,9 @@ class HowTo extends React.Component {
     }
 
     renderCategoryContent(folderPath) {
-        console.log("====> new folderPath", folderPath)
-
+        console.log('incoming folder path = ', folderPath)
         let howtoRequest = howtoRequestParser(folderPath)
+        console.log('new howtoRequest = ', howtoRequest)
         // linux/specific_distor
         // ! this.setState is async function 
         this.setState({
@@ -181,7 +176,6 @@ class HowTo extends React.Component {
         }
 
         if (this.state.selectedHowto) {
-            // console.log('rendering HowTO', this.state.selectedHowto.label)
         }
 
         return (

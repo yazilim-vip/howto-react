@@ -76,6 +76,7 @@ var HowToBrowser = (props) => {
             <HowToBreadcrumb
                 categoryNames={howtoRequest.categoryNames}
                 rootFlag={howtoRequest.rootCategorySelectedFlag}
+                onCategoryClick={onCategoryClick}
             />
             {renderMainContentElement()}
         </div>
