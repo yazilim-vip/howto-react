@@ -20,7 +20,7 @@ var HowToBrowser = (props) => {
         if (howtoRequest.howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
             return (
                 <Alert key={1} variant={"danger"}>
-                    Howto {howtoRequest.selectedHowtoName} not found on archive.
+                    Howto <b>{howtoRequest.selectedHowtoName}</b> not found on archive.
                 </Alert>
             )
         }
@@ -32,7 +32,7 @@ var HowToBrowser = (props) => {
         if (selectedCategory === null) {
             return (
             <Alert key={1} variant={"danger"}>
-                Category {howtoRequest.folderPath} not found on archive.
+                Category <b>{howtoRequest.folderPath}</b> not found on archive.
             </Alert>
             )
         }
