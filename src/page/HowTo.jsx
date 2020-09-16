@@ -6,16 +6,12 @@ import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/HowToBrowser";
 
-
 class HowTo extends React.Component {
     constructor(props) {
         super(undefined);
         let fullPath = props.match.params[0]
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
-
-        console.log("fullPath", fullPath)
-
 
         this.state = {
             error: null,
@@ -162,11 +158,15 @@ class HowTo extends React.Component {
 
     renderCategoryContent(folderPath) {
         console.log("====> new folderPath", folderPath)
+
+        let howtoRequest = howtoRequestParser(folderPath)
         // linux/specific_distor
+        // ! this.setState is async function 
         this.setState({
-            howtoRequest: howtoRequestParser(folderPath)
-        })
-        this.loadCategory()
+            howtoRequest: howtoRequest,
+            selectedHowto: null
+        }, () => this.loadCategory())
+    
     }
 
     render() {
