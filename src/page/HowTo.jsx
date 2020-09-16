@@ -26,8 +26,8 @@ class HowTo extends React.Component {
             selectedHowto: null
         };
 
-        this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
-        this.renderCategoryContent = this.renderCategoryContent.bind(this)
+        this.renderHowto = this.renderHowto.bind(this)
+        this.renderCategory = this.renderCategory.bind(this)
     }
 
     componentDidMount() {
@@ -71,11 +71,19 @@ class HowTo extends React.Component {
         // set selected category to state
         this.loadCategory()
 
+        
+
         let selectedCategory = this.state.selectedCategory
+        if (selectedCategory === null) {
+            return
+        }
+
         let selectedHowtoName = this.state.howtoRequest.selectedHowtoName
         if (this.state.howtoRequest.howtoSelectedFlag) {
-            let howto = selectedCategory.howtoList[selectedHowtoName]
-            this.renderMarkdownContent(howto)
+            if(selectedCategory.howtoList[selectedHowtoName]){
+                let howto = selectedCategory.howtoList[selectedHowtoName]
+                this.renderHowto(howto)
+            }
         } else {
             // this.loadFirstHowtoContent()
         }
@@ -101,19 +109,19 @@ class HowTo extends React.Component {
 
             //......
             let tmpCategory = rootCategory
-            
+
 
             for (var catIndex in categoryNames) {
                 let cat = categoryNames[catIndex]
 
                 if (!tmpCategory.subCategoryList[cat]) {
-                    tmpCategory =  null
+                    tmpCategory = null
                     break /// category not exists
                 }
 
                 tmpCategory = tmpCategory.subCategoryList[cat]
             }
-            
+
             selectedCategory = tmpCategory
         }
 
@@ -136,22 +144,34 @@ class HowTo extends React.Component {
         let firstHowtoIndex = Object.keys(howtoList)[0]
         let firstHowto = howtoList[firstHowtoIndex]
 
-        this.renderMarkdownContent(firstHowto)
+        this.renderHowto(firstHowto)
 
         let rootCategorySelectedFlag = this.state.howtoRequest.rootCategorySelectedFlag
         let prefix = (rootCategorySelectedFlag) ? "" : (selectedCategory.name + "/")
         this.props.history.push(prefix + firstHowto.label);
     }
 
-    renderMarkdownContent(selectedHowto) {
+
+    renderHowto(selectedHowto) {
+        let categoryPath = selectedHowto.categoryList.join("/")
+        let howtoLabel = selectedHowto.label;
+
+        console.log(this.state)
+        let prefix = (this.state.howtoRequest.rootCategorySelectedFlag) ? "" : (categoryPath + "/")
+        let newFullPath = prefix + howtoLabel
+        console.log("newFullPath", newFullPath)
+        let howtoRequest = howtoRequestParser(newFullPath)
         if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
             this.setState({
-                selectedHowto: selectedHowto
+                selectedHowto: selectedHowto,
+                howtoRequest: howtoRequest
+            }, () => {
+                this.props.history.push(constants.HOWTO_PATH + "/" + newFullPath);
             })
         }
     }
 
-    renderCategoryContent(folderPath) {
+    renderCategory(folderPath) {
         console.log('incoming folder path = ', folderPath)
         let howtoRequest = howtoRequestParser(folderPath)
         console.log('new howtoRequest = ', howtoRequest)
@@ -160,8 +180,13 @@ class HowTo extends React.Component {
         this.setState({
             howtoRequest: howtoRequest,
             selectedHowto: null
-        }, () => this.loadCategory())
-    
+        }, () => {
+            this.loadCategory()
+            console.log('hebeeeee', this.state.howtoRequest.folderPath)
+            this.props.history.push(constants.HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
+        })
+
+
     }
 
     render() {
@@ -189,8 +214,8 @@ class HowTo extends React.Component {
                     // filled by data from service
                     selectedCategory={this.state.selectedCategory}
                     selectedHowto={this.state.selectedHowto}
-                    onContentClick={this.renderMarkdownContent}
-                    onCategoryClick={this.renderCategoryContent}
+                    renderCategory={this.renderCategory}
+                    renderHowto={this.renderHowto}
                 />
             </Page>
         );

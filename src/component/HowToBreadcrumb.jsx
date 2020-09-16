@@ -9,6 +9,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 const HowToBreadcrumb = (props) => {
     const rootFlag = props.rootFlag;
     const categoryNames = props.categoryNames;
+    const renderCategory = props.renderCategory;
 
     const getLink = (index) => {
         let link = ""
@@ -16,7 +17,7 @@ const HowToBreadcrumb = (props) => {
         for (let i = 0; i < index; i++) {
             link += categoryNames[i] + "/"
         }
-        
+
         return link.replace(/\/$/, "")
     }
 
@@ -24,7 +25,7 @@ const HowToBreadcrumb = (props) => {
         <Breadcrumb.Item
             key={index}
             active={index + 1 === categoryNames.length}
-            onClick={() => props.onCategoryClick(getLink(index + 1))}>
+            onClick={() => renderCategory(getLink(index + 1))}>
             {item}
         </Breadcrumb.Item>
     )
@@ -38,7 +39,7 @@ const HowToBreadcrumb = (props) => {
             <Breadcrumb.Item
                 key="root"
                 active={rootFlag}
-                onClick={() => props.onCategoryClick("")}>
+                onClick={() => renderCategory("")}>
                 <FontAwesomeIcon icon={faHome} />
             </Breadcrumb.Item>
             {categoryNames !== undefined ? renderItems : null}
@@ -46,11 +47,10 @@ const HowToBreadcrumb = (props) => {
     )
 }
 
-
 HowToBreadcrumb.propTypes = {
     categoryNames: PropTypes.array.isRequired,
     rootFlag: PropTypes.bool.isRequired,
-    onCategoryClick: PropTypes.func.isRequired,
+    renderCategory: PropTypes.func.isRequired,
 };
 
 export default HowToBreadcrumb
