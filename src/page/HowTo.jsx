@@ -1,14 +1,10 @@
 import React from "react";
 
-
 import * as constants from '../constants'
-
-
 
 import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/HowToBrowser";
-
 
 class HowTo extends React.Component {
     constructor(props) {
@@ -16,7 +12,6 @@ class HowTo extends React.Component {
         let fullPath = props.match.params[0]
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
-
 
         this.state = {
             error: null,
@@ -26,11 +21,13 @@ class HowTo extends React.Component {
             howtoRequest: howtoRequestParser(fullPath),
 
             // filled by data from service
+            rootCategory: null,
             selectedCategory: null,
             selectedHowto: null
         };
 
-        this.renderMarkdownContent = this.renderMarkdownContent.bind(this)
+        this.renderHowto = this.renderHowto.bind(this)
+        this.renderCategory = this.renderCategory.bind(this)
     }
 
     componentDidMount() {
@@ -42,7 +39,7 @@ class HowTo extends React.Component {
     //------------------------
     fetchHowtoData() {
         // get request to the HowTo Service
-        fetch(constants.REST_URL + "?path=" + this.state.howtoRequest.folderPath)
+        fetch(constants.REST_URL + "/")
             // convert response to json    
             .then(res => res.json())
 
@@ -51,10 +48,13 @@ class HowTo extends React.Component {
     }
 
     serviceSuccessHandler(data) {
-        let { howtoRequest } = this.state
-
-        console.log("url", constants.REST_URL + howtoRequest.folderPath, "data", data)
-
+        // howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
+        if (Object.keys(data).length === 0) {
+            this.setState({
+                isLoaded: true,
+            });
+            return
+        }
         // howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
         if (Object.keys(data).length === 0) {
             this.setState({
@@ -63,20 +63,73 @@ class HowTo extends React.Component {
             return
         }
 
-        let selectedCategory = data
-
         this.setState({
             isLoaded: true,
-            selectedCategory: selectedCategory,
+            rootCategory: data,
         });
 
+        // set selected category to state
+        this.loadCategory()
+
+        
+
+        let selectedCategory = this.state.selectedCategory
+        if (selectedCategory === null) {
+            return
+        }
+
+        let selectedHowtoName = this.state.howtoRequest.selectedHowtoName
         if (this.state.howtoRequest.howtoSelectedFlag) {
-            let howto = selectedCategory.howtoList[this.state.howtoRequest.selectedHowtoName]
-            this.renderMarkdownContent(howto)
+            if(selectedCategory.howtoList[selectedHowtoName]){
+                let howto = selectedCategory.howtoList[selectedHowtoName]
+                this.renderHowto(howto)
+            }
         } else {
-            this.loadFirstHowtoContent()
+            // this.loadFirstHowtoContent()
         }
     }
+
+    serviceErrorHandler(error) {
+        this.setState({
+            isLoaded: true,
+            error
+        });
+    }
+
+    loadCategory() {
+        let selectedCategory
+        let rootCategory = this.state.rootCategory
+
+        if (this.state.howtoRequest.rootCategorySelectedFlag) {
+            selectedCategory = rootCategory
+        } else {
+
+            // linux, specific_distro, manjaro
+            let categoryNames = this.state.howtoRequest.categoryNames
+
+            //......
+            let tmpCategory = rootCategory
+
+
+            for (var catIndex in categoryNames) {
+                let cat = categoryNames[catIndex]
+
+                if (!tmpCategory.subCategoryList[cat]) {
+                    tmpCategory = null
+                    break /// category not exists
+                }
+
+                tmpCategory = tmpCategory.subCategoryList[cat]
+            }
+
+            selectedCategory = tmpCategory
+        }
+
+        this.setState({
+            selectedCategory: selectedCategory
+        })
+    }
+
 
     loadFirstHowtoContent() {
         let { selectedCategory } = this.state
@@ -91,27 +144,49 @@ class HowTo extends React.Component {
         let firstHowtoIndex = Object.keys(howtoList)[0]
         let firstHowto = howtoList[firstHowtoIndex]
 
-        this.renderMarkdownContent(firstHowto)
-        console.log("firstHowto", firstHowto)
+        this.renderHowto(firstHowto)
 
         let rootCategorySelectedFlag = this.state.howtoRequest.rootCategorySelectedFlag
         let prefix = (rootCategorySelectedFlag) ? "" : (selectedCategory.name + "/")
         this.props.history.push(prefix + firstHowto.label);
     }
 
-    renderMarkdownContent(selectedHowto) {
+
+    renderHowto(selectedHowto) {
+        let categoryPath = selectedHowto.categoryList.join("/")
+        let howtoLabel = selectedHowto.label;
+
+        console.log(this.state)
+        let prefix = (this.state.howtoRequest.rootCategorySelectedFlag) ? "" : (categoryPath + "/")
+        let newFullPath = prefix + howtoLabel
+        console.log("newFullPath", newFullPath)
+        let howtoRequest = howtoRequestParser(newFullPath)
         if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
             this.setState({
-                selectedHowto: selectedHowto
+                selectedHowto: selectedHowto,
+                howtoRequest: howtoRequest
+            }, () => {
+                this.props.history.push(constants.HOWTO_PATH + "/" + newFullPath);
             })
         }
     }
 
-    serviceErrorHandler(error) {
+    renderCategory(folderPath) {
+        console.log('incoming folder path = ', folderPath)
+        let howtoRequest = howtoRequestParser(folderPath)
+        console.log('new howtoRequest = ', howtoRequest)
+        // linux/specific_distor
+        // ! this.setState is async function 
         this.setState({
-            isLoaded: true,
-            error
-        });
+            howtoRequest: howtoRequest,
+            selectedHowto: null
+        }, () => {
+            this.loadCategory()
+            console.log('hebeeeee', this.state.howtoRequest.folderPath)
+            this.props.history.push(constants.HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
+        })
+
+
     }
 
     render() {
@@ -126,9 +201,8 @@ class HowTo extends React.Component {
         }
 
         if (this.state.selectedHowto) {
-            // console.log('rendering HowTO', this.state.selectedHowto.label)
         }
-        
+
         return (
             <Page span={{ span: 12 }}>
 
@@ -140,7 +214,8 @@ class HowTo extends React.Component {
                     // filled by data from service
                     selectedCategory={this.state.selectedCategory}
                     selectedHowto={this.state.selectedHowto}
-                    onContentClick={this.renderMarkdownContent}
+                    renderCategory={this.renderCategory}
+                    renderHowto={this.renderHowto}
                 />
             </Page>
         );

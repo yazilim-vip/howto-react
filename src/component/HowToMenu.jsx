@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ListGroup} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import {BrowserRouter} from 'react-router-dom';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFile, faFolder} from "@fortawesome/free-solid-svg-icons";
-import * as constants from '../constants';
+import { ListGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 
 
 const HowToMenu = (props) => {
@@ -15,34 +12,41 @@ const HowToMenu = (props) => {
     const title = props.title;
     const items = props.items;
     const selectedHowto = props.selectedHowto;
+    const selectedCategory = props.selectedCategory;
+    const rootCategorySelected = props.rootCategorySelected;
+    
+    const renderCategory = props.renderCategory;
+    const renderHowto = props.renderHowto;
 
     const renderItem = (key) => {
+        let prefix = (rootCategorySelected ? "" : (folderPath + "/"))
         switch (type) {
             case "subcategory":
                 return (
-                    <ListGroup.Item key={key} href={`${constants.HOWTO_PATH}${folderPath}/${items[key].name}`} action>
+                    <ListGroup.Item
+                        key={key}
+                        action
+                        onClick={() => { renderCategory(prefix + items[key].name) }}
+                        active={items[key] === selectedCategory}
+                    >
                         <FontAwesomeIcon icon={faFolder} className="mr-3" />
                         {items[key].name}
                     </ListGroup.Item>
                 )
             case "content":
                 return (
-                    <BrowserRouter key={key}>
-                        <Link to={`${constants.HOWTO_PATH}${folderPath}/${items[key].label}`}>
-                            <ListGroup.Item
-                                onClick={() => {props.onContentClick(items[key])}}
-                                action
-                                id={key}
-                                active={items[key] === selectedHowto}
-                            >
-                                <FontAwesomeIcon icon={faFile} className="mr-3" />
-                                {items[key].label.replace(".howto", "")}
-                            </ListGroup.Item>
-                        </Link>
-                    </BrowserRouter>
+                    <ListGroup.Item
+                        id={key}
+                        action
+                        onClick={() => { renderHowto(items[key]) }}
+                        active={items[key] === selectedHowto}
+                    >
+                        <FontAwesomeIcon icon={faFile} className="mr-3" />
+                        {items[key].label.replace(".howto", "")}
+                    </ListGroup.Item>
                 )
             default:
-                return (<div/>)
+                return (<div />)
         }
     }
 
@@ -55,7 +59,7 @@ const HowToMenu = (props) => {
         <div>
             {Object.keys(items).length !== 0 ? renderTitle : null}
 
-            <ListGroup horizontal={type==="subcategory"}>
+            <ListGroup horizontal={type === "subcategory"}>
                 {items !== undefined ? renderItems : null}
             </ListGroup>
 
@@ -69,8 +73,11 @@ HowToMenu.propTypes = {
     type: PropTypes.string,
     title: PropTypes.string,
     items: PropTypes.object,
+    selectedCategory: PropTypes.object,
     selectedHowto: PropTypes.object,
-    onContentClick: PropTypes.func
+    
+    renderCategory: PropTypes.func,
+    renderHowto: PropTypes.func
 };
 
 export default HowToMenu;

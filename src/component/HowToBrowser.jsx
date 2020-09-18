@@ -9,13 +9,9 @@ import HowToBreadcrumb from "./HowToBreadcrumb";
 
 var HowToBrowser = (props) => {
 
-    const { howtoRequest, selectedCategory, selectedHowto, onContentClick } = props
+    const { howtoRequest, selectedCategory, selectedHowto, renderCategory, renderHowto} = props
 
     var renderHowtoContentElement = () => {
-        console.log("Trying to render NEW howto content")
-
-        console.log("WELL DONE, you select a howto to read", howtoRequest.selectedHowtoName)
-
 
         if (selectedHowto !== null) {
             return <ReactMarkdown source={selectedHowto.markdownContent} />
@@ -24,7 +20,7 @@ var HowToBrowser = (props) => {
         if (howtoRequest.howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
             return (
                 <Alert key={1} variant={"danger"}>
-                    {howtoRequest.fullPath} not found on archive.
+                    Howto <b>{howtoRequest.selectedHowtoName}</b> not found on archive.
                 </Alert>
             )
         }
@@ -34,9 +30,9 @@ var HowToBrowser = (props) => {
     var renderMainContentElement = () => {
 
         if (selectedCategory === null) {
-            return (<Alert key={1} variant={"danger"}>
-
-                {howtoRequest.fullPath} not found on archive.
+            return (
+            <Alert key={1} variant={"danger"}>
+                Category <b>{howtoRequest.folderPath}</b> not found on archive.
             </Alert>
             )
         }
@@ -47,6 +43,9 @@ var HowToBrowser = (props) => {
                     folderPath={howtoRequest.folderPath}
                     type="subcategory"
                     items={selectedCategory.subCategoryList}
+                    selectedCategory={selectedCategory}
+                    rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
+                    renderCategory={renderCategory}
                 />
 
                 <hr />
@@ -59,7 +58,7 @@ var HowToBrowser = (props) => {
                             type="content"
                             items={selectedCategory.howtoList}
                             selectedHowto={selectedHowto}
-                            onContentClick={onContentClick}
+                            renderHowto={renderHowto}
                         />
                     </Col>
 
@@ -77,6 +76,7 @@ var HowToBrowser = (props) => {
             <HowToBreadcrumb
                 categoryNames={howtoRequest.categoryNames}
                 rootFlag={howtoRequest.rootCategorySelectedFlag}
+                renderCategory={renderCategory}
             />
             {renderMainContentElement()}
         </div>
@@ -99,7 +99,8 @@ HowToBrowser.propTypes = {
     // filled by data from service
     selectedCategory: PropTypes.object,
     selectedHowto: PropTypes.object,
-    onContentClick: PropTypes.func,
+    renderCategory: PropTypes.func,
+    renderHowto: PropTypes.func
 };
 
 export default HowToBrowser 
