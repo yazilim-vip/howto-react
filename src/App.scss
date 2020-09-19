@@ -282,3 +282,29 @@ $link-color: $section-color;
     box-shadow: 1px 1px 10px #777;
   }
 }
+
+.modal-90w {
+  max-width: 90vw !important;
+  width: 90vw !important;
+}
+
+
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
