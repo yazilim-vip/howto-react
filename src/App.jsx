@@ -5,6 +5,19 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 // Bootstrap
 import { Col, Navbar, Row } from 'react-bootstrap';
 
+// Fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Styles
+import './style/EmreCv.scss';
+import './style/App.scss';
+
+// Components
+import CustomNavbar from './component/CustomNavbar';
+
 // Pages
 import Home from "./page/Home";
 import Portfolio from "./page/Portfolio";
@@ -13,18 +26,9 @@ import About from "./page/About";
 import Resume from './page/Resume';
 import NotFound from './page/NotFound';
 
-import './App.scss';
-import CustomNavbar from './component/CustomNavbar';
-
-// Fontawesome
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 library.add(fab)
 library.add(fas)
-
 
 const App = () => (
   <Router>

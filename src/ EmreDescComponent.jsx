@@ -34,8 +34,9 @@ class EmreDescComp extends React.Component {
                 </Button>
 
                 <Modal
+                    size="xl"
                     show={this.state.show} on
-                    Hide={this.closeModal}
+                    onHide={this.closeModal}
                     backdrop="static"
                     dialogClassName="modal-90w"
 
