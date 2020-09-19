@@ -10,6 +10,8 @@ import Home from "./page/Home";
 import Portfolio from "./page/Portfolio";
 import HowTo from './page/HowTo';
 import About from "./page/About";
+import Resume from './page/Resume';
+import NotFound from './page/NotFound';
 
 import './App.scss';
 import CustomNavbar from './component/CustomNavbar';
@@ -33,16 +35,19 @@ const App = () => (
     </header>
 
     {/* BODY */}
-    <main className="py-4">
-      <Col md={{ span: 12 }}>
+    <main>
+      
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/portfolio' component={Portfolio} />
           <Route path='/howto/*' component={HowTo} />
           <Route path='/about' component={About} />
+          <Route path='/cv/:name' component={Resume} />
           <Redirect path='/howto' to="/howto/" />
+          <Route path='/404' component={NotFound} />
+          <Redirect to="/404" />
         </Switch>
-      </Col>
+
     </main>
 
     {/* FOOTER */}
