@@ -62,6 +62,44 @@ const Cv = () => {
         "Advanced": ["Java"]
     }
 
+
+    const getSkillsSection = (skills) => {
+
+        return (
+            <ul class="cv-item-list">
+                {Object.keys(skills).map(key => {
+                    let value = skills[key]
+                    return (
+                        <li class="cv-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span class="cv-item-title">
+                                        {key}
+                                    </span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <span class="d-none d-sm-inline">:</span>
+                                    {value.map((el, i) => {
+                                        let suffix = ""
+                                        if (i < value.length - 1) {
+                                            suffix = ","
+                                        }
+                                        return (
+                                            <span>
+                                                {el}{suffix}
+                                            </span>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+        )
+    }
+
+
     const skills = {
         "IDE": ["Eclipse"
             , "Spring Tool Suite (STS)"
@@ -71,7 +109,7 @@ const Cv = () => {
         "Database Management": ["SQL"
             , "MySQL"
             , "phpmyadmin"
-            , "<br/>&nbsp&nbsp<b>ORM :</b> JDBC"
+            , (<><b>ORM :</b>JDBC</>)
             , "MyBatis"
             , "Hibernate"],
         "System Management": ["Maven"
@@ -93,7 +131,7 @@ const Cv = () => {
     }
 
     const languages = {
-        "English": ["<b>Reading :</b> good, <b>Writing :</b> good, <b>Speaking :</b> good"]
+        "English": [(<><b>Reading :</b> good, <b>Writing :</b> good, <b>Speaking :</b> good</>)]
     }
 
 
@@ -116,7 +154,7 @@ const Cv = () => {
     ]
 
 
-    const get_section = (section_title, section_content) => {
+    const getSection = (section_title, section_content) => {
         return (
             <div class="cv-section">
                 <div class="cv-section-title">
@@ -146,22 +184,12 @@ const Cv = () => {
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        {get_section("Personal Info", getPersonalInfoSection())}
+                        {getSection("Personal Info", getPersonalInfoSection())}
                     </div>
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        <div className="cv-section">
-                            <div className="cv-section-title">
-                                About Me
-               </div>
-                            <div className="cv-section-content">
-                                <ul className="cv-item-list">
-                                    I am a Computer Science Engineering undergraduate student who wants to learn new
-                                    technologies and use them to make things easier...
-                  </ul>
-                            </div>
-                        </div>
+                        {getSection("About Me", ABOUT_ME)}
                     </div>
                 </div>
                 <div className="col-lg-12">
@@ -209,167 +237,17 @@ const Cv = () => {
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        <div className="cv-section">
-                            <div className="cv-section-title">
-                                Programming Languages
-               </div>
-                            <div className="cv-section-content">
-                                <ul className="cv-item-list">
-                                    <ul className="cv-item-list">
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Basic
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Assembly, Visual Basic, TeX, Python
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Intermediate
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Bash Script, C, C++, PHP, XML, JavaScript, HTML5, CSS3
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Advanced
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Java
-                              </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
+                        {getSection("Programming Languages", getSkillsSection(programmingLanguages))}
                     </div>
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        <div className="cv-section">
-                            <div className="cv-section-title">
-                                Other Skills
-               </div>
-                            <div className="cv-section-content">
-                                <ul className="cv-item-list">
-                                    <ul className="cv-item-list">
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        IDE
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Eclipse, Spring Tool Suite (STS), Intellij Idea, Intellij Phpstorm, Netbeans
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Database Management
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> SQL, MySQL, phpmyadmin, <br />&nbsp;&nbsp;<b>ORM :</b> JDBC, MyBatis, Hibernate
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        System Management
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Maven, Composer, SVN, GIT, Jenkins, JavaDoc, Tomcat, CPANEL
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Web Technologies
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Hybrid Mobile Apps (Phonegap, Cordova), AJAX, JSP, JSTL, Bootstrap
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Technologies
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> JavaFX, Spring Web-MVC, Spring Boot, RESTful Web Service, micro service, NodeJS
-                              </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        Computer Skills
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> Office Apps; (Linux Terminal), Windows CMD; Effective Search Engine Usage
-                              </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
+                        {getSection("Skills", getSkillsSection(skills))}
                     </div>
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        <div className="cv-section">
-                            <div className="cv-section-title">
-                                Languages
-               </div>
-                            <div className="cv-section-content">
-                                <ul className="cv-item-list">
-                                    <ul className="cv-item-list">
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-sm-3">
-                                                    <span className="cv-item-title">
-                                                        English
-                                 </span>
-                                                </div>
-                                                <div className="col-sm-9">
-                                                    <span className="d-none d-sm-inline">:</span> <b>Reading :</b> good, <b>Writing :</b> good, <b>Speaking :</b> good
-                              </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
+                        {getSection("Languages", getSkillsSection(languages))}
                     </div>
                 </div>
                 <div className="col-lg-12">
