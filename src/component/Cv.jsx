@@ -62,6 +62,39 @@ const Cv = () => {
         "Advanced": ["Java"]
     }
 
+    const skills = {
+        "IDE": ["Eclipse"
+            , "Spring Tool Suite (STS)"
+            , "Intellij Idea"
+            , "Intellij Phpstorm"
+            , "Netbeans"],
+        "Database Management": ["SQL"
+            , "MySQL"
+            , "phpmyadmin"
+            , (<><b>ORM :</b>JDBC</>)
+            , "MyBatis"
+            , "Hibernate"],
+        "System Management": ["Maven"
+            , "Composer"
+            , "SVN"
+            , "GIT"
+            , "Jenkins"
+            , "JavaDoc"
+            , "Tomcat"
+            , "CPANEL"],
+        "Web Technologies": ["Hybrid Mobile Apps (Phonegap, Cordova), AJAX, JSP, JSTL, Bootstrap"],
+        "Technologies": ["JavaFX"
+            , "Spring Web-MVC"
+            , "Spring Boot"
+            , "RESTful Web Service"
+            , "micro service"
+            , "NodeJS"],
+        "Computer Skills": ["Office Apps; (Linux Terminal), Windows CMD; Effective Search Engine Usage"],
+    }
+
+    const languages = {
+        "English": [(<><b>Reading :</b> good, <b>Writing :</b> good, <b>Speaking :</b> good</>)]
+    }
 
     const getSkillsSection = (skills) => {
 
@@ -100,58 +133,53 @@ const Cv = () => {
     }
 
 
-    const skills = {
-        "IDE": ["Eclipse"
-            , "Spring Tool Suite (STS)"
-            , "Intellij Idea"
-            , "Intellij Phpstorm"
-            , "Netbeans"],
-        "Database Management": ["SQL"
-            , "MySQL"
-            , "phpmyadmin"
-            , (<><b>ORM :</b>JDBC</>)
-            , "MyBatis"
-            , "Hibernate"],
-        "System Management": ["Maven"
-            , "Composer"
-            , "SVN"
-            , "GIT"
-            , "Jenkins"
-            , "JavaDoc"
-            , "Tomcat"
-            , "CPANEL"],
-        "Web Technologies": ["Hybrid Mobile Apps (Phonegap, Cordova), AJAX, JSP, JSTL, Bootstrap"],
-        "Technologies": ["JavaFX"
-            , "Spring Web-MVC"
-            , "Spring Boot"
-            , "RESTful Web Service"
-            , "micro service"
-            , "NodeJS"],
-        "Computer Skills": ["Office Apps; (Linux Terminal), Windows CMD; Effective Search Engine Usage"],
-    }
-
-    const languages = {
-        "English": [(<><b>Reading :</b> good, <b>Writing :</b> good, <b>Speaking :</b> good</>)]
-    }
-
-
     /*- Education Info --------------------------------------*/
 
     const TYPE = "type";
     const TITLE = "title";
     const DESC = "desc";
-    const educationList = [
-        {
-            TYPE: "Under Graduate",
-            TITLE: "Akdeniz University Antalya",
-            DESC: "Computer Science Engineering – 2015 — On Going"
-        },
-        {
-            TYPE: "High School",
-            TITLE: "Antalya High School Antalya",
-            DESC: "Matematik-Fen – 2011 – 2015"
-        },
-    ]
+
+    let ed1 = {}
+    ed1[TYPE] = "Under Graduate"
+    ed1[TITLE] = "Akdeniz University Antalya"
+    ed1[DESC] = "Computer Science Engineering – 2015 — On Going"
+
+    let ed2 = {}
+    ed2[TYPE] = "High School"
+    ed2[TITLE] = "Antalya High School Antalya"
+    ed2[DESC] = "Matematik-Fen – 2011 – 2015"
+
+    const educationList = [ed1, ed2]
+
+    const getEducationSection = () => {
+        return (
+            <ul class="cv-item-list">
+                {
+                    educationList.map(education => {
+                        console.log()
+                        return (
+                            <li class="cv-item">
+                                <div class="row">
+                                    <div class="col-md-3 col-print-3">
+                                        <span class="cv-item-title">{education[TYPE]}</span>
+                                    </div>
+                                    <div class="col-md-9 col-print-9">
+                                        <span class="d-none d-md-inline">:</span>
+                                        <span class="cv-item-title">{education[TITLE]}</span>
+                                        <div>
+                                            {education[DESC]}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        )
+                    }
+                    )
+                }
+            </ul>
+        )
+    }
+
 
 
     const getSection = (section_title, section_content) => {
@@ -170,7 +198,6 @@ const Cv = () => {
 
 
     }
-
 
     return (
         <div className="cv-wrapper">
@@ -194,45 +221,7 @@ const Cv = () => {
                 </div>
                 <div className="col-lg-12">
                     <div className="row">
-                        <div className="cv-section">
-                            <div className="cv-section-title">
-                                Educations
-               </div>
-                            <div className="cv-section-content">
-                                <ul className="cv-item-list">
-                                    <ul className="cv-item-list">
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-md-3 col-print-3">
-                                                    <span className="cv-item-title">Under Graduate</span>
-                                                </div>
-                                                <div className="col-md-9 col-print-9">
-                                                    <span className="d-none d-md-inline">:</span>
-                                                    <span className="cv-item-title">Akdeniz University Antalya</span>
-                                                    <div>
-                                                        Computer Science Engineering – 2015 — On Going
-                                 </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className="cv-item">
-                                            <div className="row">
-                                                <div className="col-md-3 col-print-3">
-                                                    <span className="cv-item-title">High School</span>
-                                                </div>
-                                                <div className="col-md-9 col-print-9">
-                                                    <span className="d-none d-md-inline">:</span>
-                                                    <span className="cv-item-title">Antalya High School Antalya</span>
-                                                    <div>
-                                                        Matematik-Fen – 2011 – 2015
-                                 </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
+                        {getSection("Education", getEducationSection("Education", educationList))}
                     </div>
                 </div>
                 <div className="col-lg-12">
