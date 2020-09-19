@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import EmreDescComp from "./ EmreDescComponent";
 
 export const portfolioList = [
   {
@@ -41,11 +43,11 @@ export const portfolioList = [
   },
 ];
 
+
 export const teamMemberList = [
   {
     name: "Mehmet Arif Emre Sen",
-    description:
-      "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
+    description: <EmreDescComp />,
     imageSource: "/img/emre.jpeg",
     title: "Major Contributor",
     links: {

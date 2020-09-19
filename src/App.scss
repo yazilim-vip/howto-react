@@ -227,6 +227,8 @@ $link-color: $section-color;
       font-size: 20px;
       font-weight: bold;
       font-style: italic;
+
+      -webkit-print-color-adjust: exact;
     }
 
     .cv-section-content {
@@ -266,17 +268,17 @@ $link-color: $section-color;
       padding-bottom: 0.5em;
     }
   }
-}
 
-.item-details {
-  margin-top: 0.5em;
-}
+  .item-details {
+    margin-top: 0.5em;
+  }
 
-.cv-wrapper .cv-img-wrapper {
-  text-align: center;
-}
+  .cv-wrapper .cv-img-wrapper {
+    text-align: center;
+  }
 
-.cv-wrapper .cv-img-wrapper > img {
-  border-color: #ccc !important;
-  box-shadow: 1px 1px 10px #777;
+  .cv-wrapper .cv-img-wrapper > img {
+    border-color: #ccc !important;
+    box-shadow: 1px 1px 10px #777;
+  }
 }
