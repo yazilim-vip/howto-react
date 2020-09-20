@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import * as Constants from "../constants/constants"
 
-import EmreCv from "../content/EmreCv";
+import EmreCv from "./EmreCv";
 
 
 

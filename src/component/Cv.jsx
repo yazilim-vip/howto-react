@@ -1,5 +1,5 @@
 
-import { faDownload, faPrint } from '@fortawesome/free-solid-svg-icons'
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'

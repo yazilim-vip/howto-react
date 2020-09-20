@@ -1,11 +1,8 @@
-import { faPrint } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-
-import { Alert, Toast } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 
 import Page from '../component/Page';
-import EmreCv from '../content/EmreCv';
+import EmreCv from '../component/EmreCv';
 
 const Resume = (props) => {
 

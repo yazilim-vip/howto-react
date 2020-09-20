@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import Cv from '../component/Cv';
+import Cv from './Cv';
 import * as Constants from '../constants/constants';
 
 const EmreCv = (props) => {
