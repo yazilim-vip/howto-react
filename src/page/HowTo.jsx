@@ -1,7 +1,5 @@
 import React from "react";
 
-import * as constants from '../constants/constants'
-
 import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/HowToBrowser";
@@ -39,7 +37,7 @@ class HowTo extends React.Component {
     //------------------------
     fetchHowtoData() {
         // get request to the HowTo Service
-        fetch(constants.REST_URL + "/")
+        fetch(process.env.REACT_APP_HOWTO_SERVICE_URL + "/")
             // convert response to json    
             .then(res => res.json())
 
@@ -166,7 +164,7 @@ class HowTo extends React.Component {
                 selectedHowto: selectedHowto,
                 howtoRequest: howtoRequest
             }, () => {
-                this.props.history.push(constants.HOWTO_PATH + "/" + newFullPath);
+                this.props.history.push(process.env.HOWTO_PATH + "/" + newFullPath);
             })
         }
     }
@@ -183,7 +181,7 @@ class HowTo extends React.Component {
         }, () => {
             this.loadCategory()
             console.log('hebeeeee', this.state.howtoRequest.folderPath)
-            this.props.history.push(constants.HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
+            this.props.history.push(process.env.HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
         })
 
 
