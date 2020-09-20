@@ -128,27 +128,25 @@ class HowTo extends React.Component {
         })
     }
 
-
-    loadFirstHowtoContent() {
-        let { selectedCategory } = this.state
-
-        let howtoList = selectedCategory.howtoList
-        if (Object.keys(howtoList).length === 0) {
-            // NO HowTo found under selectedCategory
-            // So, there is no  first HowTo :)
-            return;
-        }
-
-        let firstHowtoIndex = Object.keys(howtoList)[0]
-        let firstHowto = howtoList[firstHowtoIndex]
-
-        this.renderHowto(firstHowto)
-
-        let rootCategorySelectedFlag = this.state.howtoRequest.rootCategorySelectedFlag
-        let prefix = (rootCategorySelectedFlag) ? "" : (selectedCategory.name + "/")
-        this.props.history.push(prefix + firstHowto.label);
-    }
-
+    // loadFirstHowtoContent() {
+    //     let { selectedCategory } = this.state
+    //
+    //     let howtoList = selectedCategory.howtoList
+    //     if (Object.keys(howtoList).length === 0) {
+    //         // NO HowTo found under selectedCategory
+    //         // So, there is no  first HowTo :)
+    //         return;
+    //     }
+    //
+    //     let firstHowtoIndex = Object.keys(howtoList)[0]
+    //     let firstHowto = howtoList[firstHowtoIndex]
+    //
+    //     this.renderHowto(firstHowto)
+    //
+    //     let rootCategorySelectedFlag = this.state.howtoRequest.rootCategorySelectedFlag
+    //     let prefix = (rootCategorySelectedFlag) ? "" : (selectedCategory.name + "/")
+    //     this.props.history.push(prefix + firstHowto.label);
+    // }
 
     renderHowto(selectedHowto) {
         let categoryPath = selectedHowto.categoryList.join("/")
@@ -198,8 +196,8 @@ class HowTo extends React.Component {
             return <div>Loading...</div>;
         }
 
-        if (this.state.selectedHowto) {
-        }
+        // if (this.state.selectedHowto) {
+        // }
 
         return (
             <Page span={{ span: 12 }}>

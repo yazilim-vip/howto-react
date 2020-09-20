@@ -6,7 +6,6 @@ import {Col, Row, Alert} from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
 import HowToBreadcrumb from "./HowToBreadcrumb";
-import CustomHits from "./algolia/CustomHits";
 
 import algoliasearch from 'algoliasearch/lite';
 import {InstantSearch, SearchBox, connectStateResults} from 'react-instantsearch-dom';
@@ -14,11 +13,29 @@ import {InstantSearch, SearchBox, connectStateResults} from 'react-instantsearch
 const searchClient = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET);
 const indexName = process.env.REACT_APP_ALGOLIA_INDEX_NAME
 
-// const Results = connectStateResults(
-// 	({searchState, searchResults, children}) =>
-// 		 searchResults && searchResults.nbHits !== 0 ? (children) : (
-// 			<div>No results have been found for {searchState.query}.</div>)
-// )
+const SearchStateResults = ({searchResults}) => {
+  const hasResults = searchResults && searchResults.nbHits !== 0
+
+  let categoryHits = []
+  let howtoHits = []
+
+  if (hasResults) {
+	searchResults.hits.map(hit => {
+	  if (hit.type === "howto") {
+		howtoHits.push(hit)
+	  } else if (hit.type === "category") {
+		categoryHits.push(hit)
+	  }
+	})
+
+	console.log("categoryHits", categoryHits)
+	console.log("howtoHits", howtoHits)
+  }
+
+  return (<div/>)
+}
+
+const CustomStateResults = connectStateResults(SearchStateResults);
 
 const conditionalQuery = {
   search(requests) {
@@ -117,10 +134,9 @@ var HowToBrowser = (props) => {
 				   indexName={indexName}
 				   onSearchStateChange={searchState => console.log('=====> ', searchState)}>
 	  <SearchBox/>
-
-		<CustomHits/>
-
+	  <CustomStateResults/>
 	</InstantSearch>
+
 	{renderMainContentElement()}
   </div>;
 
