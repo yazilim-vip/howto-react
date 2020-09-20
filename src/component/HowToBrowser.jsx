@@ -9,6 +9,7 @@ import HowToBreadcrumb from "./HowToBreadcrumb";
 
 import algoliasearch from 'algoliasearch/lite';
 import {InstantSearch, SearchBox, connectStateResults} from 'react-instantsearch-dom';
+import HOWTO_ITEM_TYPE from '../constants/types';
 
 const searchClient = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET);
 const indexName = process.env.REACT_APP_ALGOLIA_INDEX_NAME
@@ -21,9 +22,9 @@ const SearchStateResults = ({searchResults}) => {
 
   if (hasResults) {
 	searchResults.hits.map(hit => {
-	  if (hit.type === "howto") {
+	  if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
 		howtoHits.push(hit)
-	  } else if (hit.type === "category") {
+	  } else if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
 		categoryHits.push(hit)
 	  }
 	})
@@ -61,7 +62,6 @@ var HowToBrowser = (props) => {
   const {howtoRequest, selectedCategory, selectedHowto, renderCategory, renderHowto} = props
 
   var renderHowtoContentElement = () => {
-
 	if (selectedHowto !== null) {
 	  return <ReactMarkdown source={selectedHowto.markdownContent}/>
 	}
@@ -73,11 +73,9 @@ var HowToBrowser = (props) => {
 		  </Alert>
 	  )
 	}
-
   }
 
   var renderMainContentElement = () => {
-
 	if (selectedCategory === null) {
 	  return (
 		  <Alert key={1} variant={"danger"}>
@@ -92,7 +90,7 @@ var HowToBrowser = (props) => {
 		  {/*Sub Category Menu*/}
 		  <HowToMenu
 			  folderPath={howtoRequest.folderPath}
-			  type="subcategory"
+			  type={HOWTO_ITEM_TYPE.CATEGORY}
 			  items={selectedCategory.subCategoryList}
 			  selectedCategory={selectedCategory}
 			  rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
@@ -106,7 +104,7 @@ var HowToBrowser = (props) => {
 			<Col md="3" className="border-right">
 			  <HowToMenu
 				  folderPath={howtoRequest.folderPath}
-				  type="content"
+				  type={HOWTO_ITEM_TYPE.HOWTO}
 				  items={selectedCategory.howtoList}
 				  selectedHowto={selectedHowto}
 				  renderHowto={renderHowto}
@@ -122,24 +120,25 @@ var HowToBrowser = (props) => {
 	)
   }
 
-  return <div>
+  return (
+	  <div>
 
-	<HowToBreadcrumb
-		categoryNames={howtoRequest.categoryNames}
-		rootFlag={howtoRequest.rootCategorySelectedFlag}
-		renderCategory={renderCategory}
-	/>
+		<HowToBreadcrumb
+			categoryNames={howtoRequest.categoryNames}
+			rootFlag={howtoRequest.rootCategorySelectedFlag}
+			renderCategory={renderCategory}
+		/>
 
-	<InstantSearch searchClient={conditionalQuery}
-				   indexName={indexName}
-				   onSearchStateChange={searchState => console.log('=====> ', searchState)}>
-	  <SearchBox/>
-	  <CustomStateResults/>
-	</InstantSearch>
+		<InstantSearch searchClient={conditionalQuery}
+					   indexName={indexName}
+					   onSearchStateChange={searchState => console.log('=====> ', searchState)}>
+		  <SearchBox/>
+		  <CustomStateResults/>
+		</InstantSearch>
 
-	{renderMainContentElement()}
-  </div>;
-
+		{renderMainContentElement()}
+	  </div>
+  )
 }
 
 HowToBrowser.propTypes = {

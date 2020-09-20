@@ -5,6 +5,7 @@ import { ListGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 
+import HOWTO_ITEM_TYPE from '../constants/types';
 
 const HowToMenu = (props) => {
     const folderPath = props.folderPath;
@@ -21,7 +22,7 @@ const HowToMenu = (props) => {
     const renderItem = (key) => {
         let prefix = (rootCategorySelected ? "" : (folderPath + "/"))
         switch (type) {
-            case "subcategory":
+            case HOWTO_ITEM_TYPE.CATEGORY:
                 return (
                     <ListGroup.Item
                         key={key}
@@ -33,7 +34,7 @@ const HowToMenu = (props) => {
                         {items[key].name}
                     </ListGroup.Item>
                 )
-            case "content":
+            case HOWTO_ITEM_TYPE.HOWTO:
                 return (
                     <ListGroup.Item
                         id={key}
@@ -59,7 +60,7 @@ const HowToMenu = (props) => {
         <div>
             {Object.keys(items).length !== 0 ? renderTitle : null}
 
-            <ListGroup horizontal={type === "subcategory"}>
+            <ListGroup horizontal={type === HOWTO_ITEM_TYPE.CATEGORY}>
                 {items !== undefined ? renderItems : null}
             </ListGroup>
 
