@@ -9,6 +9,7 @@ const EmreCv = (props) => {
     const cvSections = [
         {
             name: "Personal Info",
+            // imgSection: true,
             content: {
                 "Phone": "Contact me through mail",
                 "E-mail": "maemresen07@gmail.com",
@@ -76,12 +77,11 @@ const EmreCv = (props) => {
             ]
         },
         {
+            pageBreakAfter: true,
             name: "Work Experience",
             content: [
                 {
-                    // dates: "08/2016 – ongoing",
-                    // place: "Akdeniz University BAUM – Antalya",
-
+                    "Place": (<b>Akdeniz University BAUM – Antalya (08/2016 – ongoing)</b>),
                     "Positon": "Java Developer",
                     "Job Description": (
                         <>
@@ -103,8 +103,7 @@ const EmreCv = (props) => {
                 },
 
                 {
-                    // dates: "06/2016 – 08/2016 (Volunteer)",
-                    // place: "Front-end Developer",
+                    "Place": (<b>Front-end Developer 06/2016 – 08/2016 (Volunteer)</b>),
                     "Position": "Java Developer",
                     "Job Description": (
                         <>
@@ -128,18 +127,18 @@ const EmreCv = (props) => {
             name: "Studies",
             content: [
                 {
-                    // Computer Based Assessment System -- ongoing" :
+                    "Name": (<b>Computer Based Assessment System -- ongoing</b>),
                     "Platform": "Java",
                     "Description": "Exam preparation, application and evaluation system in computer environment."
                 },
                 {
-                    // Icon Conference 2017
+                    "Name": (<b>Student Automation</b>),
                     "Platform ": "Java",
                     "Type ": "JavaFX App",
                     "Description ": "JavaFX application for storing information of graduated students in database,"
                 },
                 {
-                    // Icon Conference 2017
+                    "Name": (<b>Icon Conference 2017</b>),
                     "Platform ": "Web",
                     "Type ": "Wordpress Theme",
                     "Description ": "Web application designed for the conference web-site",

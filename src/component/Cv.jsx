@@ -40,21 +40,44 @@ const CvSectionItemList = (props) => {
     )
 }
 
-const CvSection = (props) => (
-    <Col lg="12">
-        <Row>
-            <div className="cv-section">
-                <div className="cv-section-title">
-                    {props.title}
+const CvSection = (props) => {
+
+    let elements = null
+    if (props.imgSection) {
+        elements = (
+            <div class="row">
+                <div class="col-lg-9 col-md-7">
+                    <ul class="cv-item-list">
+                        {props.children}
+                    </ul>
                 </div>
-                <div className="cv-section-content">
-                    {props.children}
+                <div class="col-lg-3 col-md-5 d-none d-md-block d-print-block">
+                    <div class="cv-img-wrapper">
+                        <img src="/img/emre_formal.jpeg" class="img-fluid" alt="" />
+                    </div>
                 </div>
             </div>
-        </Row>
-    </Col>
-)
+        )
+    } else {
+        elements = props.children
+    }
 
+
+    return (
+        <Col lg="12">
+            <Row>
+                <div className="cv-section">
+                    <div className="cv-section-title">
+                        {props.title}
+                    </div>
+                    <div className="cv-section-content">
+                        {elements}
+                    </div>
+                </div>
+            </Row>
+        </Col>
+    )
+}
 const Cv = (props) => {
 
     let toolbarElement
@@ -64,7 +87,7 @@ const Cv = (props) => {
                 width: "100%"
             }}>
                 <span style={{ cursor: "pointer" }} onClick={() => window.print()}>
-                    <FontAwesomeIcon icon={faDownload}  className="mr-2" />
+                    <FontAwesomeIcon icon={faDownload} className="mr-2" />
                     Download
                 </span>
             </div>
@@ -92,10 +115,14 @@ const Cv = (props) => {
                         } else {
                             element = <CvSectionItem item={content} />
                         }
+
                         return (
-                            <CvSection title={each.name}>
-                                {element}
-                            </CvSection>
+                            <>
+                                <CvSection title={each.name} imgSection={each.imgSection}>
+                                    {element}
+                                </CvSection>
+                                {each.pageBreakAfter ? (<div className="page-break"></div>) : null}
+                            </>
                         )
                     })
                 }
