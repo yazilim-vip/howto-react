@@ -6,7 +6,8 @@ import HowToBrowser from "../component/HowToBrowser";
 
 class HowTo extends React.Component {
     constructor(props) {
-        super(undefined);
+        super(props);
+
         let fullPath = props.match.params[0]
             // trim trailing '/' chracter    
             .replace(/\/$/, "")
