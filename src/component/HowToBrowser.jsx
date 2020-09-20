@@ -6,12 +6,38 @@ import {Col, Row, Alert} from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
 import HowToBreadcrumb from "./HowToBreadcrumb";
+import CustomHits from "./algolia/CustomHits";
 
 import algoliasearch from 'algoliasearch/lite';
-import {InstantSearch, SearchBox, Hits, Panel} from 'react-instantsearch-dom';
+import {InstantSearch, SearchBox, connectStateResults} from 'react-instantsearch-dom';
 
 const searchClient = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET);
+const indexName = process.env.REACT_APP_ALGOLIA_INDEX_NAME
 
+// const Results = connectStateResults(
+// 	({searchState, searchResults, children}) =>
+// 		 searchResults && searchResults.nbHits !== 0 ? (children) : (
+// 			<div>No results have been found for {searchState.query}.</div>)
+// )
+
+const conditionalQuery = {
+  search(requests) {
+	if (requests.every(({params}) => !params.query.trim())) {
+	  console.log('Empty Query');
+
+	  return Promise.resolve({
+		results: requests.map(() => ({
+		  hits: [],
+		  nbHits: 0,
+		  nbPages: 0,
+		  processingTimeMS: 0,
+		})),
+	  });
+	}
+
+	return searchClient.search(requests);
+  }
+}
 
 var HowToBrowser = (props) => {
 
@@ -46,6 +72,7 @@ var HowToBrowser = (props) => {
 	return (
 		<div>
 
+		  {/*Sub Category Menu*/}
 		  <HowToMenu
 			  folderPath={howtoRequest.folderPath}
 			  type="subcategory"
@@ -58,6 +85,7 @@ var HowToBrowser = (props) => {
 		  <hr/>
 
 		  <Row>
+			{/*HowTo Menu*/}
 			<Col md="3" className="border-right">
 			  <HowToMenu
 				  folderPath={howtoRequest.folderPath}
@@ -77,25 +105,26 @@ var HowToBrowser = (props) => {
 	)
   }
 
-  return (
-	  <div>
+  return <div>
 
-		  <HowToBreadcrumb
-			  categoryNames={howtoRequest.categoryNames}
-			  rootFlag={howtoRequest.rootCategorySelectedFlag}
-			  renderCategory={renderCategory}
-		  />
+	<HowToBreadcrumb
+		categoryNames={howtoRequest.categoryNames}
+		rootFlag={howtoRequest.rootCategorySelectedFlag}
+		renderCategory={renderCategory}
+	/>
 
-		  <InstantSearch searchClient={searchClient} indexName={process.env.REACT_APP_ALGOLIA_INDEX_NAME}>
-			<SearchBox />
-			  <Hits />
-		  </InstantSearch>
-		{renderMainContentElement()}
-	  </div>
-  );
+	<InstantSearch searchClient={conditionalQuery}
+				   indexName={indexName}
+				   onSearchStateChange={searchState => console.log('=====> ', searchState)}>
+	  <SearchBox/>
+
+		<CustomHits/>
+
+	</InstantSearch>
+	{renderMainContentElement()}
+  </div>;
 
 }
-
 
 HowToBrowser.propTypes = {
 
