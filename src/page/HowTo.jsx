@@ -162,7 +162,7 @@ class HowTo extends React.Component {
                 selectedHowto: selectedHowto,
                 howtoRequest: howtoRequest
             }, () => {
-                this.props.history.push(process.env.HOWTO_PATH + "/" + newFullPath);
+                this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
             })
         }
     }
@@ -179,7 +179,7 @@ class HowTo extends React.Component {
         }, () => {
             this.loadCategory()
             console.log('hebeeeee', this.state.howtoRequest.folderPath)
-            this.props.history.push(process.env.HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
+            this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
         })
 
 
