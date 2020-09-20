@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as constants from '../constants'
+import * as constants from '../constants/constants'
 
 import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'

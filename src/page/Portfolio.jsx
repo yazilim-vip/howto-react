@@ -4,7 +4,7 @@ import React from 'react';
 import Page from '../component/Page';
 import PortfolioCard from '../component/PortfolioCard';
 import { CardColumns } from 'react-bootstrap';
-import * as Content from '../content';
+import * as Content from '../constants/projectPortfolioList';
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
 

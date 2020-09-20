@@ -1,10 +1,15 @@
+import React from "react";
+
 import { faDownload, faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
 
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Cv from "./component/Cv";
+
+import * as Constants from "../constants/constants"
+
+import EmreCv from "../content/EmreCv";
+
 
 
 class EmreDescComp extends React.Component {
@@ -25,7 +30,7 @@ class EmreDescComp extends React.Component {
             <div>
 
                 <span>
-                    I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm
+                {Constants.EMRE_ABOUT}
                 </span>
                 <hr />
 
@@ -39,17 +44,17 @@ class EmreDescComp extends React.Component {
                     show={this.state.show} on
                     onHide={this.closeModal}
                     backdrop="static"
-                    dialogClassName="modal-90w"
-
                 >
                     <Modal.Header closeButton>
-                        <FontAwesomeIcon icon={faDownload} />
+                        <Link to="/cv/emre">
+                            <FontAwesomeIcon icon={faDownload} />
+                        </Link>
                     </Modal.Header>
                     <Modal.Body style={{
                         backgroundColor: "#eee"
                     }}>
-                        <Cv />
-                        </Modal.Body>
+                        <EmreCv />
+                    </Modal.Body>
                     <Modal.Footer className="pull-left">
                         <Button variant="secondary" onClick={this.closeModal}>
                             Close
