@@ -5,7 +5,9 @@ import { ListGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 
-import HOWTO_ITEM_TYPE from '../constants/types';
+import HOWTO_ITEM_TYPE from '../../constants/types';
+
+import _ from 'underscore';
 
 const HowToMenu = (props) => {
     const folderPath = props.folderPath;
@@ -37,7 +39,7 @@ const HowToMenu = (props) => {
             case HOWTO_ITEM_TYPE.HOWTO:
                 return (
                     <ListGroup.Item
-                        id={key}
+                        key={key}
                         action
                         onClick={() => { renderHowto(items[key]) }}
                         active={items[key] === selectedHowto}
@@ -59,7 +61,7 @@ const HowToMenu = (props) => {
             {Object.keys(items).length !== 0 ? renderTitle : null}
 
             <ListGroup horizontal={type === HOWTO_ITEM_TYPE.CATEGORY}>
-                {items !== undefined ? renderItems : null}
+                {items !== undefined && !_.isEmpty(items) ? renderItems : null}
             </ListGroup>
 
         </div>

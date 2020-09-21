@@ -2,7 +2,7 @@ import React from "react";
 
 import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
-import HowToBrowser from "../component/HowToBrowser";
+import HowToBrowser from "../component/howto/HowToBrowser";
 
 class HowTo extends React.Component {
     constructor(props) {

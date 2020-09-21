@@ -6,11 +6,11 @@ import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
-import {InstantSearch, SearchBox, connectStateResults} from 'react-instantsearch-dom';
-import HOWTO_ITEM_TYPE from '../constants/types';
+import HOWTO_ITEM_TYPE from '../../constants/types';
+import SearchField from "react-search-field";
 
-const searchClient = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET);
-const indexName = process.env.REACT_APP_ALGOLIA_INDEX_NAME
+const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
+const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 class HowToBrowser extends React.Component {
   constructor(props) {
@@ -22,56 +22,48 @@ class HowToBrowser extends React.Component {
 	}
   }
 
+  search = (value, event) => {
+	let query = value
+
+	console.log(query)
+	let categoryHits = []
+	let howtoHits = []
+
+	if (_.isEmpty(query)) {
+	  this.setState({
+		categoryHits: categoryHits,
+		howtoHits: howtoHits
+	  })
+	} else {
+	  return index
+		  .search(query)
+		  .then(res => {
+			let hits = res.hits
+			console.log(hits)
+
+			if (!_.isEmpty(hits)) {
+
+			  hits.map(hit => {
+				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
+				  categoryHits.push(hit)
+				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
+				  howtoHits.push(hit)
+				}
+			  })
+
+			  this.setState({
+				categoryHits: categoryHits,
+				howtoHits: howtoHits
+			  })
+			}
+
+			return res
+		  })
+		  .catch(exception => console.error(exception))
+	}
+  }
+
   render() {
-
-	const SearchStateResults = ({searchResults}) => {
-	  let categoryHits = []
-	  let howtoHits = []
-
-	  const hasResults = searchResults && searchResults.nbHits !== 0
-
-	  if (hasResults) {
-		searchResults.hits.map(hit => {
-		  if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
-			howtoHits.push(hit)
-		  } else if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
-			categoryHits.push(hit)
-		  }
-		})
-
-		console.log("categoryHits", categoryHits)
-		console.log("howtoHits", howtoHits)
-
-		this.setState({
-		  categoryHits: categoryHits,
-		  howtoHits: howtoHits
-		})
-	  }
-
-	  return (<div/>)
-	}
-
-	const CustomStateResults = connectStateResults(SearchStateResults);
-
-	const conditionalQuery = {
-	  search(requests) {
-		if (requests.every(({params}) => !params.query.trim())) {
-		  console.log('Empty Query');
-		  // todo(empty the hit lists)
-
-		  return Promise.resolve({
-			results: requests.map(() => ({
-			  hits: [],
-			  nbHits: 0,
-			  nbPages: 0,
-			  processingTimeMS: 0,
-			})),
-		  });
-		}
-
-		return searchClient.search(requests);
-	  }
-	}
 
 	const {howtoRequest, selectedCategory, selectedHowto, renderCategory, renderHowto} = this.props
 
@@ -105,7 +97,7 @@ class HowToBrowser extends React.Component {
 			<HowToMenu
 				folderPath={howtoRequest.folderPath}
 				type={HOWTO_ITEM_TYPE.CATEGORY}
-				items={_.isEmpty(this.state.categoryHits) ? selectedCategory.subCategoryList : this.state.categoryHits}
+				items={_.isEmpty(this.state.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.state.categoryHits)}
 				selectedCategory={selectedCategory}
 				rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
 				renderCategory={renderCategory}
@@ -119,7 +111,7 @@ class HowToBrowser extends React.Component {
 				<HowToMenu
 					folderPath={howtoRequest.folderPath}
 					type={HOWTO_ITEM_TYPE.HOWTO}
-					items={_.isEmpty(this.state.howtoHits) ? selectedCategory.howtoList : this.state.howtoHits}
+					items={_.isEmpty(this.state.howtoHits) ? selectedCategory.howtoList : _.extend({}, this.state.howtoHits)}
 					selectedHowto={selectedHowto}
 					renderHowto={renderHowto}
 				/>
@@ -137,18 +129,19 @@ class HowToBrowser extends React.Component {
 	return (
 		<div>
 
-		  <HowToBreadcrumb
-			  categoryNames={howtoRequest.categoryNames}
-			  rootFlag={howtoRequest.rootCategorySelectedFlag}
-			  renderCategory={renderCategory}
-		  />
+		  <Row className="justify-content-between">
+			<HowToBreadcrumb
+				categoryNames={howtoRequest.categoryNames}
+				rootFlag={howtoRequest.rootCategorySelectedFlag}
+				renderCategory={renderCategory}
+			/>
 
-		  <InstantSearch searchClient={conditionalQuery}
-						 indexName={indexName}
-						 onSearchStateChange={searchState => console.log('searchState =====> ', searchState)}>
-			<SearchBox/>
-			<CustomStateResults/>
-		  </InstantSearch>
+			<SearchField
+				placeholder="Search..."
+				onChange={(value, event) => this.search(value, event)}
+				classNames="mr-3"
+			/>
+		  </Row>
 
 		  {renderMainContentElement()}
 		</div>
