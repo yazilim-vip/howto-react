@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import HowToMenu from "./HowToMenu";
-import {Col, Row, Alert, InputGroup, FormControl} from "react-bootstrap";
+import {Col, Row, Alert, InputGroup, FormControl, Container} from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
@@ -91,11 +91,9 @@ class HowToBrowser extends React.Component {
 	  }
 
 	  return (
-		  <div>
 			<Row>
 
-			  <Col md="3" className="border-right">
-
+			  <Col md="3" className="border-right left-col">
 				<InputGroup className="mb-3">
 				  <FormControl
 					  value={this.state.query}
@@ -130,11 +128,11 @@ class HowToBrowser extends React.Component {
 			  </Col>
 
 			  {/*Content*/}
-			  <Col md="9">
+			  <Col md="9" className="right-col">
 				{renderHowtoContentElement()}
 			  </Col>
+
 			</Row>
-		  </div>
 	  )
 	};
 

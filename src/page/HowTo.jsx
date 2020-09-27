@@ -47,14 +47,6 @@ class HowTo extends React.Component {
   }
 
   serviceSuccessHandler(data) {
-	// howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
-	if (Object.keys(data).length === 0) {
-	  this.setState({
-		isLoaded: true,
-	  });
-	  return
-	}
-	// howto-service should return error response if content is empty, this check is temporary (QUESTION: Why Temporary??)
 	if (Object.keys(data).length === 0) {
 	  this.setState({
 		isLoaded: true,
@@ -69,7 +61,6 @@ class HowTo extends React.Component {
 
 	// set selected category to state
 	this.loadCategory()
-
 
 	let selectedCategory = this.state.selectedCategory
 	if (selectedCategory === null) {

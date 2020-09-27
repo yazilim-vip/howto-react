@@ -29,7 +29,6 @@ footer {
   .nav-link {
     border-bottom: 3px solid gray;
     transition: border-color 300ms ease-in-out;
-    transition: border-color 300ms ease-in-out;
   }
 
   .nav-link.active {
@@ -147,3 +146,9 @@ footer {
   }
 }
 
+.left-col,
+.right-col {
+  height: 80vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
