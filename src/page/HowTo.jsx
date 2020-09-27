@@ -204,7 +204,6 @@ class HowTo extends React.Component {
             <Page span={{ span: 12 }}>
 
                 <HowToBrowser
-
                     // filled by user request
                     howtoRequest={this.state.howtoRequest}
 

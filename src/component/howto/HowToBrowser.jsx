@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import HowToMenu from "./HowToMenu";
-import {Col, Row, Alert} from "react-bootstrap";
+import {Col, Row, Alert, InputGroup, FormControl} from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
 import HOWTO_ITEM_TYPE from '../../constants/types';
-import SearchField from "react-search-field";
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 class HowToBrowser extends React.Component {
+
   constructor(props) {
 	super(props);
 
@@ -20,11 +20,22 @@ class HowToBrowser extends React.Component {
 	  categoryHits: [],
 	  howtoHits: []
 	}
+
+	this.clearHits = this.clearHits.bind(this)
   }
 
-  search = (value, event) => {
-	let query = value
+  clearHits() {
+	console.log("HITS CLEARED")
 
+	// todo(find a way to delete search input)
+
+	this.state = {
+	  categoryHits: [],
+	  howtoHits: []
+	}
+  }
+
+  search = (query) => {
 	console.log(query)
 	let categoryHits = []
 	let howtoHits = []
@@ -44,9 +55,9 @@ class HowToBrowser extends React.Component {
 			if (!_.isEmpty(hits)) {
 
 			  hits.map(hit => {
-				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
+				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
 				  categoryHits.push(hit)
-				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
+				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
 				  howtoHits.push(hit)
 				}
 			  })
@@ -92,25 +103,44 @@ class HowToBrowser extends React.Component {
 
 	  return (
 		  <div>
-
-			{/*Sub Category Menu*/}
-			<HowToMenu
-				folderPath={howtoRequest.folderPath}
-				type={HOWTO_ITEM_TYPE.CATEGORY}
-				items={_.isEmpty(this.state.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.state.categoryHits)}
-				selectedCategory={selectedCategory}
-				rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
-				renderCategory={renderCategory}
-			/>
-
-			<hr/>
-
 			<Row>
-			  {/*HowTo Menu*/}
+
 			  <Col md="3" className="border-right">
+
+				<form>
+				  <InputGroup className="mb-3">
+					<FormControl
+						componentClass="input"
+						inputRef={(ref) => {this.input = ref}}
+						placeholder="Search..."
+						aria-label="Search"
+						onChange={event => this.search(event.target.value)}
+					/>
+
+				  </InputGroup>
+				</form>
+
+				<hr/>
+
+				{/*Sub Category Menu*/}
 				<HowToMenu
 					folderPath={howtoRequest.folderPath}
-					type={HOWTO_ITEM_TYPE.HOWTO}
+					type={_.isEmpty(this.state.categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
+					title="Categories"
+					items={_.isEmpty(this.state.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.state.categoryHits)}
+					selectedCategory={selectedCategory}
+					rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
+					renderCategory={renderCategory}
+					clearHits={this.clearHits}
+				/>
+
+				<hr/>
+
+				{/*HowTo Menu*/}
+				<HowToMenu
+					folderPath={howtoRequest.folderPath}
+					type={_.isEmpty(this.state.howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
+					title="Howtos"
 					items={_.isEmpty(this.state.howtoHits) ? selectedCategory.howtoList : _.extend({}, this.state.howtoHits)}
 					selectedHowto={selectedHowto}
 					renderHowto={renderHowto}
@@ -128,20 +158,11 @@ class HowToBrowser extends React.Component {
 
 	return (
 		<div>
-
-		  <Row className="justify-content-between">
-			<HowToBreadcrumb
-				categoryNames={howtoRequest.categoryNames}
-				rootFlag={howtoRequest.rootCategorySelectedFlag}
-				renderCategory={renderCategory}
-			/>
-
-			<SearchField
-				placeholder="Search..."
-				onChange={(value, event) => this.search(value, event)}
-				classNames="mr-3"
-			/>
-		  </Row>
+		  <HowToBreadcrumb
+			  categoryNames={howtoRequest.categoryNames}
+			  rootFlag={howtoRequest.rootCategorySelectedFlag}
+			  renderCategory={renderCategory}
+		  />
 
 		  {renderMainContentElement()}
 		</div>
