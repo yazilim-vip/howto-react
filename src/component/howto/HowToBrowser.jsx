@@ -18,20 +18,8 @@ class HowToBrowser extends React.Component {
 
 	this.state = {
 	  categoryHits: [],
-	  howtoHits: []
-	}
-
-	this.clearHits = this.clearHits.bind(this)
-  }
-
-  clearHits() {
-	console.log("HITS CLEARED")
-
-	// todo(find a way to delete search input)
-
-	this.state = {
-	  categoryHits: [],
-	  howtoHits: []
+	  howtoHits: [],
+	  query: ""
 	}
   }
 
@@ -43,7 +31,8 @@ class HowToBrowser extends React.Component {
 	if (_.isEmpty(query)) {
 	  this.setState({
 		categoryHits: categoryHits,
-		howtoHits: howtoHits
+		howtoHits: howtoHits,
+		query: query
 	  })
 	} else {
 	  return index
@@ -53,7 +42,6 @@ class HowToBrowser extends React.Component {
 			console.log(hits)
 
 			if (!_.isEmpty(hits)) {
-
 			  hits.map(hit => {
 				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
 				  categoryHits.push(hit)
@@ -64,7 +52,8 @@ class HowToBrowser extends React.Component {
 
 			  this.setState({
 				categoryHits: categoryHits,
-				howtoHits: howtoHits
+				howtoHits: howtoHits,
+				query: query
 			  })
 			}
 
@@ -107,20 +96,15 @@ class HowToBrowser extends React.Component {
 
 			  <Col md="3" className="border-right">
 
-				<form>
-				  <InputGroup className="mb-3">
-					<FormControl
-						componentClass="input"
-						inputRef={(ref) => {this.input = ref}}
-						placeholder="Search..."
-						aria-label="Search"
-						onChange={event => this.search(event.target.value)}
-					/>
+				<InputGroup className="mb-3">
+				  <FormControl
+					  value={this.state.query}
+					  placeholder="Search..."
+					  aria-label="Search"
+					  onChange={event => this.search(event.target.value)}
+				  />
 
-				  </InputGroup>
-				</form>
-
-				<hr/>
+				</InputGroup>
 
 				{/*Sub Category Menu*/}
 				<HowToMenu
@@ -131,10 +115,8 @@ class HowToBrowser extends React.Component {
 					selectedCategory={selectedCategory}
 					rootCategorySelected={howtoRequest.rootCategorySelectedFlag}
 					renderCategory={renderCategory}
-					clearHits={this.clearHits}
+					clearHits={() => this.search("")}
 				/>
-
-				<hr/>
 
 				{/*HowTo Menu*/}
 				<HowToMenu

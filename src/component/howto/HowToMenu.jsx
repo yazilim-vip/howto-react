@@ -96,7 +96,10 @@ const HowToMenu = (props) => {
   const renderItems = Object.keys(items).map(key => {
 	return (renderItem(key))
   })
-  const renderTitle = <h5 className="pl-3">{title}</h5>
+  const renderTitle = <div>
+	<hr/>
+	<h5 className="pl-3">{title}</h5>
+  </div>
 
   return (
 	  <div>
