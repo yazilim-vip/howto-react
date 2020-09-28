@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import HowToMenu from "./HowToMenu";
-import {Col, Row, Alert, InputGroup, FormControl, Container} from "react-bootstrap";
+import {Col, Row, Alert, InputGroup, FormControl} from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
@@ -42,7 +42,7 @@ class HowToBrowser extends React.Component {
 			console.log(hits)
 
 			if (!_.isEmpty(hits)) {
-			  hits.map(hit => {
+			  hits.forEach(hit => {
 				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
 				  categoryHits.push(hit)
 				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
