@@ -35,7 +35,6 @@
  */
 var howtoRequestParser = (fullPath) => {
 
-
     let fullPathParts = fullPath.split("/")
 
     let categoryNames

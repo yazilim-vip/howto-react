@@ -42,7 +42,7 @@ const HowToBreadcrumb = (props) => {
                 onClick={() => renderCategory("")}>
                 <FontAwesomeIcon icon={faHome} />
             </Breadcrumb.Item>
-            {categoryNames !== undefined ? renderItems : null}
+            {renderItems}
         </Breadcrumb>
     )
 }
