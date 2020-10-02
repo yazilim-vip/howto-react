@@ -1,8 +1,11 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 // Bootstrap
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import YvipIcon from "./YvipIcon";
+
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
@@ -18,9 +21,11 @@ const linkToIcon = (linkMap) => {
 const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
   const portfolioLinks = portfolio.links;
+  const cvSource = portfolio.cvSource;
 
   var portfolioFooterElement;
   var portfolioImgElement;
+  var cvElement;
 
   if (portfolio.imageSource) {
     portfolioImgElement = (
@@ -36,6 +41,21 @@ const PortfolioCard = (props) => {
     );
   }
 
+  if (cvSource !== undefined && cvSource !== null) {
+    cvElement = (
+      <div>
+        <hr/>
+        
+        <Button variant="warning"
+        // onClick={this.showModal}
+        >
+          <FontAwesomeIcon icon={faFile} className="mr-3" />
+       Resume
+      </Button>
+      </div>
+    )
+  }
+
   return (
     <Card className="mb-4 portfolio-card shadow">
       {portfolioImgElement}
@@ -45,6 +65,7 @@ const PortfolioCard = (props) => {
           {props.portfolio.title}
         </Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
+        {cvElement}
       </Card.Body>
       {portfolioFooterElement}
     </Card>

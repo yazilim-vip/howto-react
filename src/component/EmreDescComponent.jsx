@@ -6,20 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import * as Constants from "../constants/constants"
 
-import EmreCv from "./EmreCv";
+import * as Constants from "../constants/constants"
 
 
 
 class EmreDescComp extends React.Component {
 
-    constructor(props) {
+    constructor() {
         super()
+    
         this.state = {
-            show: false
+            show: false,
         }
-        console.log('here')
     }
 
     closeModal = () => this.setState({ show: false });
@@ -30,7 +29,7 @@ class EmreDescComp extends React.Component {
             <div>
 
                 <span>
-                {Constants.EMRE_ABOUT}
+                    {Constants.EMRE_ABOUT}
                 </span>
                 <hr />
 
@@ -53,7 +52,7 @@ class EmreDescComp extends React.Component {
                     <Modal.Body style={{
                         backgroundColor: "#eee"
                     }}>
-                        <EmreCv />
+                        {/* <Cv printable={printable} title="Mehmet Arif Emre Şen" sections={emreCvSections} /> */}
                     </Modal.Body>
                     <Modal.Footer className="pull-left">
                         <Button variant="secondary" onClick={this.closeModal}>

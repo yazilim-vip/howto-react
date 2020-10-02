@@ -43,6 +43,7 @@ export const members = {
       description:
         "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
       imageSource: "/img/arif.jpeg",
+      cvSource: "/cv/arif.pdf",
       links: {
         gitlab: "https://gitlab.com/arifsisman",
         github: "https://github.com/arifsisman",
