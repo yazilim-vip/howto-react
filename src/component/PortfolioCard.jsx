@@ -1,11 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 // Bootstrap
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import YvipIcon from "./YvipIcon";
-
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+import Cv from "./Cv";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
@@ -42,18 +40,7 @@ const PortfolioCard = (props) => {
   }
 
   if (cvSource !== undefined && cvSource !== null) {
-    cvElement = (
-      <div>
-        <hr/>
-        
-        <Button variant="warning"
-        // onClick={this.showModal}
-        >
-          <FontAwesomeIcon icon={faFile} className="mr-3" />
-       Resume
-      </Button>
-      </div>
-    )
+    cvElement = (<Cv />)
   }
 
   return (

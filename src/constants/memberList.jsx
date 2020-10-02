@@ -1,11 +1,11 @@
 import React from 'react';
-import EmreDescComp from '../component/EmreDescComponent';
+import Cv from '../component/Cv';
 
 export const members = {
   teamMemberList: [
     {
       name: "Mehmet Arif Emre Sen",
-      description: <EmreDescComp />,
+      description: <Cv />,
       imageSource: "/img/emre.jpeg",
       title: "Major Contributor",
       links: {
