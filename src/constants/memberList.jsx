@@ -1,11 +1,10 @@
 import React from 'react';
-import Cv from '../component/Cv';
 
 export const members = {
   teamMemberList: [
     {
       name: "Mehmet Arif Emre Sen",
-      description: <Cv />,
+      // description: <Cv />,
       imageSource: "/img/emre.jpeg",
       title: "Major Contributor",
       links: {
@@ -31,11 +30,6 @@ export const members = {
       ,
       imageSource: "/img/burak.jpeg",
       title: "Major Contributor",
-      links: {
-        gitlab: "https://thispersondoesnotexist.com/image",
-        medium: "https://thispersondoesnotexist.com/image",
-        "google-play": "https://thispersondoesnotexist.com/image",
-      },
     },
     {
       name: "Mustafa Arif Sisman",
@@ -43,7 +37,7 @@ export const members = {
       description:
         "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
       imageSource: "/img/arif.jpeg",
-      cvSource: "/cv/arif.pdf",
+      cvSource: "public/cv/arif.pdf",
       links: {
         gitlab: "https://gitlab.com/arifsisman",
         github: "https://github.com/arifsisman",
@@ -62,11 +56,6 @@ export const members = {
       description:
         "I am just a simple guy who loves technology and science. I am interested in almost anything about technology; Machine Learning, Arduino, Mobile App Development, Web Development, Automatization stuff, Financial Applications, etc. I hope one day, I can create something that I can be really proud of.",
       imageSource: "/img/ahmet.jpeg",
-      links: {
-        gitlab: "https://thispersondoesnotexist.com/image",
-        medium: "https://thispersondoesnotexist.com/image",
-        "google-play": "https://thispersondoesnotexist.com/image",
-      },
     },
   ]
 }

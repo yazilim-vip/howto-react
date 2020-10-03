@@ -10,7 +10,7 @@ const linkToIcon = (linkMap) => {
   const url = linkMap[1];
 
   return (
-    <a href={url} target="blank" className={`text-muted portfolio-link`}>
+    <a href={url} key={url} target="blank" className={`text-muted portfolio-link`}>
       <YvipIcon iconCode={iconCode} />
     </a>
   );
@@ -40,7 +40,7 @@ const PortfolioCard = (props) => {
   }
 
   if (cvSource !== undefined && cvSource !== null) {
-    cvElement = (<Cv />)
+    cvElement = (<Cv cvSource={cvSource} />)
   }
 
   return (

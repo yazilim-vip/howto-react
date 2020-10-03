@@ -12,7 +12,6 @@ import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
-import './style/EmreCv.scss';
 import './style/App.scss';
 
 // Components
@@ -25,9 +24,13 @@ import HowTo from './page/HowTo';
 import About from "./page/About";
 import NotFound from './page/NotFound';
 
+// React-PDF
+import { pdfjs } from 'react-pdf';
 
 library.add(fab)
 library.add(fas)
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const App = () => (
   <Router>
