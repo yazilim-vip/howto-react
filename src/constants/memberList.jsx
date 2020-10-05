@@ -6,6 +6,7 @@ export const members = {
       name: "Mehmet Arif Emre Sen",
       description: "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
       imageSource: "/img/emre.jpeg",
+      cvSource: "/cv/emre.pdf",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
@@ -15,6 +16,7 @@ export const members = {
         linkedin: "https://www.linkedin.com/in/maemresen",
       },
     },
+
     {
       name: "Burak Erkan",
       description: (
@@ -25,12 +27,12 @@ export const members = {
             <li>2000 - now (still a software amateur)</li>
           </ul>
         </div>
-      )
-
-      ,
+      ),
       imageSource: "/img/burak.jpeg",
+      cvSource: "/cv/burak.pdf",
       title: "Major Contributor",
     },
+
     {
       name: "Mustafa Arif Sisman",
       title: "Major Contributor",
@@ -55,6 +57,7 @@ export const members = {
       description:
         "I am just a simple guy who loves technology and science. I am interested in almost anything about technology; Machine Learning, Arduino, Mobile App Development, Web Development, Automatization stuff, Financial Applications, etc. I hope one day, I can create something that I can be really proud of.",
       imageSource: "/img/ahmet.jpeg",
+      cvSource: "/cv/ahmet.pdf",
     },
   ]
 }
