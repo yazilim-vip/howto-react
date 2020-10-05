@@ -4,7 +4,7 @@ export const members = {
   teamMemberList: [
     {
       name: "Mehmet Arif Emre Sen",
-      // description: <Cv />,
+      description: "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
       imageSource: "/img/emre.jpeg",
       title: "Major Contributor",
       links: {
@@ -35,16 +35,15 @@ export const members = {
       name: "Mustafa Arif Sisman",
       title: "Major Contributor",
       description:
-        "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
-        imageSource: "/img/arif.jpeg",
-        cvSource: "/cv/arif.pdf",
+        "I am interested in web technologies and artificial intelligence. I am familiar with agile software development principles and I am an active learner. I try to get an analytical result with my analytical thinking skills and technology in the problems I encounter.",
+      imageSource: "/img/arif.jpeg",
+      cvSource: "/cv/arif.pdf",
       links: {
         gitlab: "https://gitlab.com/arifsisman",
         github: "https://github.com/arifsisman",
         bitbucket: "https://bitbucket.org/arifsisman",
         medium: "https://medium.com/@arifsisman",
-        linkedin: "https://www.linkedin.com/in/mustafaarifsisman",
-        instagram: "https://www.instagram.com/arifssmn",
+        linkedin: "https://www.linkedin.com/in/mustafaarifsisman"
       },
     },
   ],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { faDownload, faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,13 +46,12 @@ class Cv extends React.Component {
                 </Button>
 
                 <Modal
-                    size="xl"
-                    show={this.state.show} on
+                    size="lg"
+                    show={this.state.show}
                     onHide={this.closeModal}
-                    backdrop="static"
                 >
-                    <Modal.Header closeButton>
-                        <Link to={this.state.cvSource}>
+                    <Modal.Header closeButton className="modal-header-footer">
+                        <Link to={this.state.cvSource} target="_blank">
                             <FontAwesomeIcon icon={faDownload} />
                         </Link>
                     </Modal.Header>
@@ -73,11 +72,11 @@ class Cv extends React.Component {
                         </Document>
                     </Modal.Body>
 
-                    <Modal.Footer className="pull-left">
+                    {/* <Modal.Footer className="pull-left" className="modal-header-footer">
                         <Button variant="secondary" onClick={this.closeModal}>
                             Close
-                    </Button>
-                    </Modal.Footer>
+                        </Button>
+                    </Modal.Footer> */}
                 </Modal>
             </div>
         )
