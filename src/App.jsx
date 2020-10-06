@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
 import './style/App.scss';
+import './style/vip-cv.scss';
 
 // Components
 import CustomNavbar from './component/CustomNavbar';

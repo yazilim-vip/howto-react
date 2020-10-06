@@ -35,6 +35,28 @@ class Cv extends React.Component {
     }
 
     render = () => {
+
+        let modalBody = ""
+        if (React.isValidElement(this.state.cvSource)) {
+            modalBody = this.state.cvSource 
+        } else {
+            modalBody = (
+                <Document file={this.state.cvSource} onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}>
+                    {
+                        Array.from(
+                            new Array(this.state.numPages),
+                            (el, index) => (
+                                <Page
+                                    key={`page_${index + 1}`}
+                                    pageNumber={index + 1}
+                                />
+                            )
+                        )
+                    }
+                </Document>
+            )
+        }
+
         return (
             <div className="text-center">
 
@@ -57,19 +79,7 @@ class Cv extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Document file={this.state.cvSource} onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}>
-                            {
-                                Array.from(
-                                    new Array(this.state.numPages),
-                                    (el, index) => (
-                                        <Page
-                                            key={`page_${index + 1}`}
-                                            pageNumber={index + 1}
-                                        />
-                                    )
-                                )
-                            }
-                        </Document>
+                        {modalBody}
                     </Modal.Body>
 
                     {/* <Modal.Footer className="pull-left" className="modal-header-footer">

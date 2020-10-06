@@ -1,4 +1,8 @@
 import React from 'react';
+import { VipCv } from '../component/VipCv';
+
+
+import emreCvSections from './emreCvSections';
 
 export const members = {
   teamMemberList: [
@@ -6,7 +10,9 @@ export const members = {
       name: "Mehmet Arif Emre Sen",
       description: "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
       imageSource: "/img/emre.jpeg",
-      cvSource: "/cv/emre.pdf",
+      cvSource: (
+        <VipCv printable={false} title="Mehmet Arif Emre Şen" sections={emreCvSections} />
+      ),
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
