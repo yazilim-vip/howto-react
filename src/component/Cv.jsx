@@ -16,7 +16,9 @@ class Cv extends React.Component {
             show: false,
             cvSource: props.cvSource,
             numPages: null,
-            currentPage: null
+            currentPage: null,
+            modalSize: props.modalSize ? props.modalSize : "lg",
+            htmlMode: React.isValidElement(props.cvSource)
         }
     }
 
@@ -37,8 +39,8 @@ class Cv extends React.Component {
     render = () => {
 
         let modalBody = ""
-        if (React.isValidElement(this.state.cvSource)) {
-            modalBody = this.state.cvSource 
+        if (this.state.htmlMode) {
+            modalBody = this.state.cvSource
         } else {
             modalBody = (
                 <Document file={this.state.cvSource} onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}>
@@ -64,18 +66,21 @@ class Cv extends React.Component {
 
                 <Button variant="primary" onClick={this.showModal}>
                     <FontAwesomeIcon icon={faFile} className="mr-3" />
-                Resume
+                    Resume
                 </Button>
 
+
                 <Modal
-                    size="lg"
+                    size={this.state.modalSize}
                     show={this.state.show}
                     onHide={this.closeModal}
                 >
                     <Modal.Header closeButton className="modal-header-footer">
-                        <Link to={this.state.cvSource} target="_blank">
-                            <FontAwesomeIcon icon={faDownload} />
-                        </Link>
+                        {this.state.htmlMode ? "" : (
+                            <Link to={this.state.cvSource} target="_blank">
+                                <FontAwesomeIcon icon={faDownload} />
+                            </Link>
+                        )}
                     </Modal.Header>
 
                     <Modal.Body>

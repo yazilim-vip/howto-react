@@ -20,10 +20,14 @@ const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
   const portfolioLinks = portfolio.links;
   const cvSource = portfolio.cvSource;
+  const modalSize = portfolio.modalSize;
 
   var portfolioFooterElement;
   var portfolioImgElement;
   var cvElement;
+
+  const cvExists = (cvSource !== undefined && cvSource !== null) ? true : false
+  console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>" , cvSource)
 
   if (portfolio.imageSource) {
     portfolioImgElement = (
@@ -39,9 +43,6 @@ const PortfolioCard = (props) => {
     );
   }
 
-  if (cvSource !== undefined && cvSource !== null) {
-    cvElement = (<Cv cvSource={cvSource} />)
-  }
 
   return (
     <Card className="mb-4 portfolio-card shadow">
@@ -52,7 +53,7 @@ const PortfolioCard = (props) => {
           {props.portfolio.title}
         </Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
-        {cvElement}
+        {cvExists ? <Cv cvSource={cvSource} modalSize={modalSize} /> : ""}
       </Card.Body>
       {portfolioFooterElement}
     </Card>

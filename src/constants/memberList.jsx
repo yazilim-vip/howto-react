@@ -13,6 +13,7 @@ export const members = {
       cvSource: (
         <VipCv printable={false} title="Mehmet Arif Emre Şen" sections={emreCvSections} />
       ),
+      modalSize: "xl",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
@@ -35,7 +36,7 @@ export const members = {
         </div>
       ),
       imageSource: "/img/burak.jpeg",
-      cvSource: "/cv/burak.pdf",
+      // cvSource: "/cv/burak.pdf",
       title: "Major Contributor",
     },
 
@@ -63,7 +64,7 @@ export const members = {
       description:
         "I am just a simple guy who loves technology and science. I am interested in almost anything about technology; Machine Learning, Arduino, Mobile App Development, Web Development, Automatization stuff, Financial Applications, etc. I hope one day, I can create something that I can be really proud of.",
       imageSource: "/img/ahmet.jpeg",
-      cvSource: "/cv/ahmet.pdf",
+      // cvSource: "/cv/ahmet.pdf",
     },
   ]
 }
