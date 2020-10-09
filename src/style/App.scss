@@ -152,3 +152,12 @@ footer {
   overflow: hidden;
   overflow-y: scroll;
 }
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.modal-header-footer {
+  background-color: #e9ebf0;
+}

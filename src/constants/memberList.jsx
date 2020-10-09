@@ -1,12 +1,19 @@
 import React from 'react';
-import EmreDescComp from '../component/EmreDescComponent';
+import { VipCv } from '../component/VipCv';
+
+
+import emreCvSections from './emreCvSections';
 
 export const members = {
   teamMemberList: [
     {
       name: "Mehmet Arif Emre Sen",
-      description: <EmreDescComp />,
+      description: "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
       imageSource: "/img/emre.jpeg",
+      cvSource: (
+        <VipCv printable={false} title="Mehmet Arif Emre Şen" sections={emreCvSections} />
+      ),
+      modalSize: "xl",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
@@ -16,6 +23,7 @@ export const members = {
         linkedin: "https://www.linkedin.com/in/maemresen",
       },
     },
+
     {
       name: "Burak Erkan",
       description: (
@@ -26,30 +34,25 @@ export const members = {
             <li>2000 - now (still a software amateur)</li>
           </ul>
         </div>
-      )
-
-      ,
+      ),
       imageSource: "/img/burak.jpeg",
+      // cvSource: "/cv/burak.pdf",
       title: "Major Contributor",
-      links: {
-        gitlab: "https://thispersondoesnotexist.com/image",
-        medium: "https://thispersondoesnotexist.com/image",
-        "google-play": "https://thispersondoesnotexist.com/image",
-      },
     },
+
     {
       name: "Mustafa Arif Sisman",
       title: "Major Contributor",
       description:
-        "I am interested in web technologies and artificial intelligence. I'm familiar with the agile software development principles. In the problems I encountered, I try to get an analytical result with help of my analytical thinking skills and technology. I am an active learner.",
+        "I am interested in web technologies and artificial intelligence. I am familiar with agile software development principles and I am an active learner. I try to get an analytical result with my analytical thinking skills and technology in the problems I encounter.",
       imageSource: "/img/arif.jpeg",
+      cvSource: "/cv/arif.pdf",
       links: {
         gitlab: "https://gitlab.com/arifsisman",
         github: "https://github.com/arifsisman",
         bitbucket: "https://bitbucket.org/arifsisman",
         medium: "https://medium.com/@arifsisman",
-        linkedin: "https://www.linkedin.com/in/mustafaarifsisman",
-        instagram: "https://www.instagram.com/arifssmn",
+        linkedin: "https://www.linkedin.com/in/mustafaarifsisman"
       },
     },
   ],
@@ -61,11 +64,7 @@ export const members = {
       description:
         "I am just a simple guy who loves technology and science. I am interested in almost anything about technology; Machine Learning, Arduino, Mobile App Development, Web Development, Automatization stuff, Financial Applications, etc. I hope one day, I can create something that I can be really proud of.",
       imageSource: "/img/ahmet.jpeg",
-      links: {
-        gitlab: "https://thispersondoesnotexist.com/image",
-        medium: "https://thispersondoesnotexist.com/image",
-        "google-play": "https://thispersondoesnotexist.com/image",
-      },
+      // cvSource: "/cv/ahmet.pdf",
     },
   ]
 }

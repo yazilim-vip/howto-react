@@ -171,6 +171,7 @@ $link-color: $section-color;
     font-weight: bold;
     color: darkblue !important;
 
+    color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 

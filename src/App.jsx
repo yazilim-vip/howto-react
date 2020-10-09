@@ -12,8 +12,8 @@ import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
-import './style/EmreCv.scss';
 import './style/App.scss';
+import './style/vip-cv.scss';
 
 // Components
 import CustomNavbar from './component/CustomNavbar';
@@ -23,9 +23,7 @@ import Home from "./page/Home";
 import Portfolio from "./page/Portfolio";
 import HowTo from './page/HowTo';
 import About from "./page/About";
-import Resume from './page/Resume';
 import NotFound from './page/NotFound';
-
 
 library.add(fab)
 library.add(fas)
@@ -46,7 +44,6 @@ const App = () => (
           <Route path='/portfolio' component={Portfolio} />
           <Route path='/howto/*' component={HowTo} />
           <Route path='/about' component={About} />
-          <Route path='/cv/:name' component={Resume} />
           <Redirect path='/howto' to="/howto/" />
           <Route path='/404' component={NotFound} />
           <Redirect to="/404" />

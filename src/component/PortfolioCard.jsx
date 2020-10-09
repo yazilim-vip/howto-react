@@ -3,13 +3,14 @@ import React from "react";
 // Bootstrap
 import { Card } from "react-bootstrap";
 import YvipIcon from "./YvipIcon";
+import Cv from "./Cv";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
   const url = linkMap[1];
 
   return (
-    <a href={url} target="blank" className={`text-muted portfolio-link`}>
+    <a href={url} key={url} target="blank" className={`text-muted portfolio-link`}>
       <YvipIcon iconCode={iconCode} />
     </a>
   );
@@ -18,9 +19,15 @@ const linkToIcon = (linkMap) => {
 const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
   const portfolioLinks = portfolio.links;
+  const cvSource = portfolio.cvSource;
+  const modalSize = portfolio.modalSize;
 
   var portfolioFooterElement;
   var portfolioImgElement;
+  var cvElement;
+
+  const cvExists = (cvSource !== undefined && cvSource !== null) ? true : false
+  console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>" , cvSource)
 
   if (portfolio.imageSource) {
     portfolioImgElement = (
@@ -36,6 +43,7 @@ const PortfolioCard = (props) => {
     );
   }
 
+
   return (
     <Card className="mb-4 portfolio-card shadow">
       {portfolioImgElement}
@@ -45,6 +53,7 @@ const PortfolioCard = (props) => {
           {props.portfolio.title}
         </Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
+        {cvExists ? <Cv cvSource={cvSource} modalSize={modalSize} /> : ""}
       </Card.Body>
       {portfolioFooterElement}
     </Card>

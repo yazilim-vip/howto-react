@@ -7,24 +7,22 @@ import { Row, Col } from "react-bootstrap";
 import * as Content from '../constants/memberList';
 
 const memberToComponent = (tm) => (
-  <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 12 }}>
+  <Col key={tm.name} lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 12 }}>
     <PortfolioCard portfolio={tm} />
   </Col>
 );
 
 const About = () => (
   <Page>
-    <div className="about-page">
-      <Col md={{ span: 12 }}>
-        <Row>{Content.members.teamMemberList.map(memberToComponent)}</Row>
-      </Col>
+      <Row>
+        {Content.members.teamMemberList.map(memberToComponent)}
+      </Row>
 
       <hr />
 
-      <Col md={{ span: 12 }}>
-        <Row>{Content.members.contributorList.map(memberToComponent)}</Row>
-      </Col>
-    </div>
+      <Row>{
+        Content.members.contributorList.map(memberToComponent)}
+      </Row>
   </Page>
 );
 
