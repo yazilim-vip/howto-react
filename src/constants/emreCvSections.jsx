@@ -1,5 +1,4 @@
 import React from "react";
-import * as Constants from "../constants/constants"
 
 export default [
     {
