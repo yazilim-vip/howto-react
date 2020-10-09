@@ -16,7 +16,4 @@ pages:
     paths:
     - public # mandatory, other folder won't work
   only:
-  - master # or dev, the branch you want to publish
-  after_script:
-    - touch public/example.json
-    - echo '{ "name":"John", "age":30, "car":null }' > public/example.json
+  - master # or dev, the branch you want to publish   
