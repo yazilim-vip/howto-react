@@ -24,7 +24,6 @@ const PortfolioCard = (props) => {
 
   var portfolioFooterElement;
   var portfolioImgElement;
-  var cvElement;
 
   const cvExists = (cvSource !== undefined && cvSource !== null) ? true : false
   console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>" , cvSource)
