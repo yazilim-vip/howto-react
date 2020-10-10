@@ -3,18 +3,11 @@ import React from "react";
 import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/howto/HowToBrowser";
-
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
-import * as firebase from "firebase/app";
-
-// Add the Firebase services that you want to use
-import "firebase/database";
-
+import Firebase from "../util/Firebase";
 
 class HowTo extends React.Component {
 	constructor(props) {
-		super(props);
+		super();
 
 		let fullPath = props.match.params[0]
 			// trim trailing '/' chracter
@@ -45,19 +38,7 @@ class HowTo extends React.Component {
 	// Fetching HowTo Data From Service
 	//------------------------
 	fetchHowtoData() {
-
-		// TODO: Replace the following with your app's Firebase project configuration
-		// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-		// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-		var firebaseConfig = {
-			databaseURL: "https://yvip-howto.firebaseio.com",
-			projectId: "yvip-howto",
-		};
-
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-
-		firebase.database().ref('howto').on('value', (snapshot) => {
+		Firebase.database().ref('howto').on('value', (snapshot) => {
 			const val = snapshot.val()
 			const json = val.substring(1, val.length - 1)
 			this.serviceSuccessHandler(JSON.parse(json))
@@ -139,7 +120,6 @@ class HowTo extends React.Component {
 		let categoryPath = selectedHowto.categoryList.join("/")
 		let howtoLabel = selectedHowto.label;
 
-		// console.log(this.state)
 		let prefix = (this.state.howtoRequest.rootCategorySelectedFlag) ? "" : (categoryPath + "/")
 		let newFullPath = prefix + howtoLabel
 		console.log("newFullPath", newFullPath)
@@ -166,7 +146,6 @@ class HowTo extends React.Component {
 			selectedHowto: null
 		}, () => {
 			this.loadCategory()
-			console.log('hebeeeee', this.state.howtoRequest.folderPath)
 			this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
 		})
 	}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import YvipIcon from "./YvipIcon";
+import VipIcon from "./VipIcon";
 
 const CustomNavbar = () => {
   return (
@@ -58,37 +58,37 @@ const CustomNavbar = () => {
         </Nav>
         <Nav>
           <span activeclassname="active" className="text-light nav-link">
-            <YvipIcon
+            <VipIcon
               iconCode={"gitlab"}
               className="animate__animated animate__zoomInLeft"
               link="https://gitlab.com/yazilim.vip"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"github"}
               className="animate__animated animate__zoomInLeft"
               link="https://github.com/yazilim-vip"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"bitbucket"}
               className="animate__animated animate__zoomInLeft"
               link="https://bitbucket.org/yazilimvip/"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"docker"}
               className="animate__animated animate__zoomInLeft"
               link="https://hub.docker.com/orgs/yazilimvip/repositories"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"linkedin"}
               className="animate__animated animate__zoomInLeft"
               link="https://www.linkedin.com/company/yazilimvip"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"medium"}
               className="animate__animated animate__zoomInLeft"
               link="https://medium.com/yazilim-vip"
             />
-            <YvipIcon
+            <VipIcon
               iconCode={"discord"}
               className="animate__animated animate__zoomInLeft"
               link=""

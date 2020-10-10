@@ -43,7 +43,7 @@ var howtoRequestParser = (fullPath) => {
     let selectedCategoryName
     let selectedHowtoName = null
 
-    if (fullPath.endsWith(".howto")) {
+    if (fullPath.endsWith(".howto") || fullPath.endsWith(".md")) {
         selectedHowtoName = fullPathParts.pop()
         folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
     } else {

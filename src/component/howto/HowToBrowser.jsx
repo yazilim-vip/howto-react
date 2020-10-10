@@ -14,7 +14,7 @@ const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 class HowToBrowser extends React.Component {
 
   constructor(props) {
-	super(props);
+	super();
 
 	this.state = {
 	  categoryHits: [],
@@ -23,7 +23,7 @@ class HowToBrowser extends React.Component {
 	}
   }
 
-  search = (query) => {
+  search = async (query) => {
 	console.log(query)
 	let categoryHits = []
 	let howtoHits = []
@@ -35,31 +35,31 @@ class HowToBrowser extends React.Component {
 		query: query
 	  })
 	} else {
-	  return index
-		  .search(query)
-		  .then(res => {
-			let hits = res.hits
-			console.log(hits)
+	  try {
+			const res = await index
+				.search(query);
+			let hits = res.hits;
+			console.log(hits);
 
 			if (!_.isEmpty(hits)) {
-			  hits.forEach(hit => {
-				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
-				  categoryHits.push(hit)
-				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
-				  howtoHits.push(hit)
-				}
-			  })
+				hits.forEach(hit => {
+					if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
+						categoryHits.push(hit);
+					} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
+						howtoHits.push(hit);
+					}
+				});
 
-			  this.setState({
-				categoryHits: categoryHits,
-				howtoHits: howtoHits,
-				query: query
-			  })
+				this.setState({
+					categoryHits: categoryHits,
+					howtoHits: howtoHits,
+					query: query
+				});
 			}
-
-			return res
-		  })
-		  .catch(exception => console.error(exception))
+			return res;
+		} catch (exception) {
+			return console.error(exception);
+		}
 	}
   }
 

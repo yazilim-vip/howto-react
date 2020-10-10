@@ -2,7 +2,7 @@ import React from "react";
 
 // Bootstrap
 import { Card } from "react-bootstrap";
-import YvipIcon from "./YvipIcon";
+import VipIcon from "./VipIcon";
 import Cv from "./Cv";
 
 const linkToIcon = (linkMap) => {
@@ -11,7 +11,7 @@ const linkToIcon = (linkMap) => {
 
   return (
     <a href={url} key={url} target="blank" className={`text-muted portfolio-link`}>
-      <YvipIcon iconCode={iconCode} />
+      <VipIcon iconCode={iconCode} />
     </a>
   );
 };
