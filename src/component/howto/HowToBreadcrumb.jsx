@@ -5,13 +5,6 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 const HowToBreadcrumb = ({renderCategory, categoryNames, rootCategorySelectedFlag}) => {
 
-    console.log("renderCategoryasdsds", renderCategory);
-    // let rootFlag = props.rootFlag
-    // let categoryNames = props.categoryNames
-    // let renderCategory = props.renderCategory
-
-    console.log("categoryNames", categoryNames);
-
     const getLink = (index) => {
         let link = ""
 

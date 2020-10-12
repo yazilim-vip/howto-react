@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./redux/reducers";
+import howtoReducer from "./redux/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import WebFont from "webfontloader";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,7 +16,7 @@ const composeEnhancers = composeWithDevTools({
   traceLimit: 25,
 });
 
-const store = createStore(reducer, composeEnhancers());
+const store = createStore(howtoReducer, composeEnhancers());
 
 ReactDOM.render(
   <Provider store={store}>

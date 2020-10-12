@@ -1,29 +1,28 @@
-const ON_ERROR = 'ON_ERROR';
-const CHANGE_PATH = 'CHANGE_PATH';
-const CHANGE_ROOT_CATEGORY = 'CHANGE_ROOT_CATEGORY';
-const CHANGE_SELECTED_CATEGORY = 'CHANGE_SELECTED_CATEGORY';
-const CHANGE_SELECTED_HOWTO = 'CHANGE_SELECTED_HOWTO';
-
+const ON_API_SUCCESS = 'ON_API_SUCCESS';
+const ON_API_ERROR = 'ON_API_ERROR';
+const ON_PATH_CHANGE = 'ON_PATH_CHANGE';
+const SELECT_CATEGORY = 'SELECT_CATEGORY';
+const SELECT_HOWTO = 'SELECT_HOWTO';
 const ON_SEARCH = 'ON_SEARCH';
 
-const onError = (error) => {
-    return { type: ON_ERROR, error }
+const onApiSuccess = (category) => {
+    return { type: ON_API_SUCCESS, rootCategory: category }
 };
 
-const changePath = (path) => {
-    return { type: CHANGE_PATH, path }
+const onApiError = (error) => {
+    return { type: ON_API_ERROR, error }
 };
 
-const changeRootCategory = (category) => {
-    return { type: CHANGE_ROOT_CATEGORY, rootCategory: category }
+const onPathChange = (path) => {
+    return { type: ON_PATH_CHANGE, path }
 };
 
-const changeSelectedCategory = (category) => {
-    return { type: CHANGE_SELECTED_CATEGORY, selectedCategory: category }
+const selectCategory = (category) => {
+    return { type: SELECT_CATEGORY, selectedCategory: category }
 };
 
-const changeSelectedHowto = (howto) => {
-    return { type: CHANGE_SELECTED_HOWTO, selectedHowto: howto }
+const selectHowto = (howto) => {
+    return { type: SELECT_HOWTO, selectedHowto: howto }
 };
 
 const onSearch = (query, categoryHits, howtoHits) => {
@@ -31,20 +30,20 @@ const onSearch = (query, categoryHits, howtoHits) => {
 };
 
 const actionTypes = {
-    ON_ERROR,
-    CHANGE_PATH,
-    CHANGE_ROOT_CATEGORY,
-    CHANGE_SELECTED_CATEGORY,
-    CHANGE_SELECTED_HOWTO,
+    ON_PATH_CHANGE,
+    ON_API_ERROR,
+    ON_API_SUCCESS,
+    SELECT_CATEGORY,
+    SELECT_HOWTO,
     ON_SEARCH
 }
 
 const actionCreators = {
-    onError,
-    changePath,
-    changeRootCategory,
-    changeSelectedCategory,
-    changeSelectedHowto,
+    onApiError,
+    onPathChange,
+    onApiSuccess,
+    selectCategory,
+    selectHowto,
     onSearch
 }
 

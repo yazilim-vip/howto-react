@@ -4,21 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
 import HOWTO_ITEM_TYPE from '../../constants/types';
+import { connect } from 'react-redux';
+import { actionCreators } from "../../redux/actions";
 
-const HowToMenu = (props) => {
-	const folderPath = props.folderPath;
-	const type = props.type;
-	const title = props.title;
-	const items = props.items;
-	const selectedHowto = props.selectedHowto;
-	const selectedCategory = props.selectedCategory;
-	const rootCategorySelected = props.rootCategorySelected;
-
-	const renderCategory = props.renderCategory;
-	const renderHowto = props.renderHowto;
-
-	const clearHits = props.clearHits;
-
+const HowToMenu = ({
+	folderPath,
+	type,
+	title,
+	items,
+	selectedCategory,
+	selectedHowto,
+	rootCategorySelected,
+	renderCategory,
+	renderHowto,
+	clearHits
+}) => {
 	const renderItem = (key) => {
 		let prefix = (rootCategorySelected ? "" : (folderPath + "/"))
 
@@ -30,8 +30,8 @@ const HowToMenu = (props) => {
 						key={key}
 						action
 						onClick={() => {
-							renderCategory(prefix + items[key].name, items[key])
-							//   renderCategory(items[key].name, items[key])
+							renderCategory(prefix + items[key].name)
+							renderCategory(items[key].name)
 						}}
 						active={items[key] === selectedCategory}
 					>
@@ -90,9 +90,8 @@ const HowToMenu = (props) => {
 		}
 	}
 
-	const renderItems = Object.keys(items).map(key => {
-		return (renderItem(key))
-	})
+	const renderItems = Object.keys(items).map(key => { return (renderItem(key)) })
+
 	const renderTitle = <div>
 		<hr />
 		<h5 className="pl-3">{title}</h5>
@@ -110,4 +109,14 @@ const HowToMenu = (props) => {
 	);
 };
 
-export default HowToMenu;
+const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+
+	return {
+		onPathChange: howtoReducer.onPathChange
+	}
+}
+
+const mapDispatchToProps = actionCreators
+
+export default connect(mapStateToProps, mapDispatchToProps)(HowToMenu)

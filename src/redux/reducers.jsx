@@ -1,42 +1,59 @@
 import { actionTypes } from './actions';
 import { pathParser } from '../util/HowToUtil'
+import { combineReducers } from 'redux';
 
-const initialState = {
-    error: null,
+const howtoInitialState = {
     isLoaded: false,
-    path: null,
-    rootCategory: null,
+    selectedCategory: null,
+    query: "",
+}
+
+const howtoBrowserInitialState = {
+    howtoSelectedFlag: false,
     selectedCategory: null,
     selectedHowto: null,
+    selectedHowtoName: null,
+    categoryNames: [],
+    folderPath: "",
     query: "",
     categoryHits: [],
     howtoHits: [],
-    categoryNames: []
 }
 
-const reducer = (state = initialState, action) => {
+const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
-        // howto
-        case actionTypes.ON_ERROR:
+        case actionTypes.ON_API_ERROR:
             return Object.assign({}, state, {
                 error: action.error,
                 isLoaded: false
             })
-        case actionTypes.CHANGE_PATH:
+
+        case actionTypes.ON_PATH_CHANGE:
             return Object.assign({}, state, pathParser(action.path))
-        case actionTypes.CHANGE_ROOT_CATEGORY:
+
+        case actionTypes.ON_API_SUCCESS:
             return Object.assign({}, state, {
                 rootCategory: action.rootCategory,
-                selectedCategory: action.rootCategory, // !
+                // selectedCategory: action.rootCategory, // !
                 selectedHowto: null,
                 isLoaded: true
             })
-        case actionTypes.CHANGE_SELECTED_CATEGORY:
-            return Object.assign({}, state, action.selectedCategory)
-        case actionTypes.CHANGE_SELECTED_HOWTO:
-            return Object.assign({}, state, action.selectedHowto)
 
-        // howtoBrowser
+        case actionTypes.SELECT_CATEGORY:
+            return { ...state, selectedCategory: action.selectedCategory }
+
+        case actionTypes.SELECT_HOWTO:
+            return Object.assign({}, state, {
+                selectedHowto: action.selectedHowto
+            })
+
+        default:
+            return state
+    }
+};
+
+const howtoBrowserReducer = (state = howtoBrowserInitialState, action) => {
+    switch (action.type) {
         case actionTypes.ON_SEARCH:
             return Object.assign({}, state, {
                 query: action.query,
@@ -48,4 +65,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer
+export default combineReducers({ howtoReducer, howtoBrowserReducer })

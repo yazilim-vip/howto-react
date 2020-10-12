@@ -11,10 +11,7 @@ class HowTo extends React.Component {
 
 		// replace trailing '/' chracter
 		let fullPath = props.match.params[0].replace(/\/$/, "")
-		props.changePath(fullPath)
-
-		this.renderHowto = this.renderHowto.bind(this)
-		this.renderCategory = this.renderCategory.bind(this)
+		props.onPathChange(fullPath)
 	}
 
 	componentDidMount() {
@@ -36,8 +33,8 @@ class HowTo extends React.Component {
 	}
 
 	serviceSuccessHandler = (data, selectedCategory) => {
-		this.props.changeRootCategory(data)
-		this.selectCategory()
+		this.props.onApiSuccess(data)
+		this.loadCategory()
 
 		if (selectedCategory === null) {
 			return
@@ -56,10 +53,12 @@ class HowTo extends React.Component {
 		this.props.onError(error)
 	}
 
-	selectCategory = (rootCategory, categoryNames) => {
+	loadCategory = () => {
+		console.log("HEREEE");
 		let selectedCategory
 
-		let tmpCategory = rootCategory
+		let tmpCategory = this.props.rootCategory
+		let categoryNames = this.props.categoryNames
 
 		for (let catIndex in categoryNames) {
 			let cat = categoryNames[catIndex]
@@ -74,7 +73,7 @@ class HowTo extends React.Component {
 
 		selectedCategory = tmpCategory
 
-		this.props.changeSelectedCategory(selectedCategory)
+		this.props.selectCategory(selectedCategory)
 	}
 
 	renderHowto = (selectedHowto) => {
@@ -85,38 +84,37 @@ class HowTo extends React.Component {
 		let newFullPath = prefix + howtoLabel
 
 		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
-			this.props.changePath(newFullPath);
-			this.props.changeSelectedHowto(selectedHowto);
+			this.props.onPathChange(newFullPath);
+			this.props.selectHowto(selectedHowto);
 			this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
 		}
 	}
 
 	renderCategory = (folderPath) => {
-		this.props.changePath(folderPath)
-		this.selectCategory()
+		this.props.onPathChange(folderPath)
+		this.loadCategory()
 		this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
 	}
 	
 	renderInfoPage = (message) => { return (<Page>{message}</Page>) }
 
 	render() {
-		console.log("this.props.isLoaded", this.props.isLoaded);
-		if (!this.props.isLoaded) {
+		if (!this.isLoaded) {
 			this.renderInfoPage("Loading...")
 		}
 
-		if (this.props.error) {
+		if (this.error) {
 			this.renderInfoPage(this.props.error.message)
 		}
 
 		return (
 			<Page span={{ span: 12 }}>
 				<HowToBrowser
-					categoryNames={this.props.categoryNames}
-					selectedCategory={this.props.selectedCategory}
-					selectedHowto={this.props.selectedHowto}
-					renderCategory={this.renderCategory}
-					renderHowto={this.renderHowto}
+					// categoryNames={this.props.categoryNames}
+					// selectedCategory={this.props.selectedCategory}
+					// selectedHowto={this.props.selectedHowto}
+					renderCategory={this.renderCategory.bind(this)}
+					renderHowto={this.renderHowto.bind(this)}
 				/>
 			</Page>
 		);
@@ -124,13 +122,15 @@ class HowTo extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+
 	return {
-		error: state.error,
-		isLoaded: state.isLoaded,
-		rootCategory: state.rootCategory,
-		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto,
-		categoryNames: state.categoryNames
+		error: howtoReducer.error,
+		isLoaded: howtoReducer.isLoaded,
+		rootCategory: howtoReducer.rootCategory,
+		selectedCategory: howtoReducer.selectedCategory,
+		selectedHowto: howtoReducer.selectedHowto,
+		categoryNames: howtoReducer.categoryNames
 	}
 }
 

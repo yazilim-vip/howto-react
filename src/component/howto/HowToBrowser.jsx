@@ -5,9 +5,9 @@ import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
+import { connect } from "react-redux";
 import HOWTO_ITEM_TYPE from '../../constants/types';
 import { actionCreators } from "../../redux/actions";
-import { connect } from "react-redux";
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
@@ -29,15 +29,20 @@ const HowToBrowser = ({
 }) => {
 
 	const search = (query) => {
+		let categoryHits = []
+		let howtoHits = []
+
+		if(_.isEmpty(query)){
+			onSearch("", [], [])
+			return
+		}
+
 		index
 			.search(query)
 			.then(res => {
-				let categoryHits = []
-				let howtoHits = []
-
 				let hits = res.hits;
 
-				if (!_.isEmpty(hits)) {
+				if (hits) {
 					hits.forEach(hit => {
 						if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
 							categoryHits.push(hit);
@@ -135,16 +140,20 @@ const HowToBrowser = ({
 }
 
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+	const howtoBrowserReducer = state.howtoBrowserReducer
+
 	return {
-		howtoSelectedFlag: state.howtoSelectedFlag,
-		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto,
-		selectedHowtoName: state.selectedHowtoName,
-		renderCategory: state.renderCategory,
-		renderHowto: state.renderHowto,
-		categoryNames: state.categoryNames,
-		folderPath: state.folderPath,
-		onSearch : state.onSearch
+		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
+		selectedCategory: howtoReducer.selectedCategory,
+		selectedHowto: howtoReducer.selectedHowto,
+		selectedHowtoName: howtoReducer.selectedHowtoName,
+		categoryNames: howtoReducer.categoryNames,
+		folderPath: howtoReducer.folderPath,
+
+		query: howtoBrowserReducer.query,
+		categoryHits: howtoBrowserReducer.categoryHits,
+		howtoHits: howtoBrowserReducer.howtoHits
 	}
 }
 
