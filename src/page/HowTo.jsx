@@ -4,7 +4,14 @@ import Page from "../component/Page";
 import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/howto/HowToBrowser";
 import Firebase from "../util/Firebase";
-
+import { connect } from "react-redux";
+import {
+	onError,
+	changeHowtoRequest,
+	changeRootCategory,
+	changeSelectedCategory,
+	changeSelectedHowto
+} from "../redux/actions";
 class HowTo extends React.Component {
 	constructor(props) {
 		super();
@@ -53,10 +60,11 @@ class HowTo extends React.Component {
 			return
 		}
 
-		this.setState({
-			isLoaded: true,
-			rootCategory: data,
-		});
+		changeRootCategory(data)
+		// this.setState({
+		// 	isLoaded: true,
+		// 	rootCategory: data,
+		// });
 
 		// set selected category to state
 		this.loadCategory()
@@ -179,4 +187,23 @@ class HowTo extends React.Component {
 	}
 }
 
-export default HowTo
+const mapStateToProps = (state) => {
+	return {
+		error: state.error,
+		isLoaded: state.isLoaded,
+		howtoRequest: state.howtoRequest,
+		rootCategory: state.rootCategory,
+		selectedCategory: state.selectedCategory,
+		selectedHowto: state.selectedHowto
+	}
+}
+
+const mapDispatchToProps = {
+	onError,
+	changeHowtoRequest,
+	changeRootCategory,
+	changeSelectedCategory,
+	changeSelectedHowto
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HowTo)

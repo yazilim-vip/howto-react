@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import * as actions from './actions';
 
 const howtoInitialState = {
+    error: null,
+    isLoaded: false,
     howtoRequest: null,
     rootCategory: null,
     selectedCategory: null,
@@ -16,10 +18,18 @@ const howtoBrowserInitialState = {
 
 const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
+        case actions.ON_ERROR:
+            return Object.assign({}, state, {
+                error: action.error,
+                isLoaded: false
+            })
         case actions.CHANGE_HOWTO_REQUEST:
             return Object.assign({}, state, action.howtoRequest)
         case actions.CHANGE_ROOT_CATEGORY:
-            return Object.assign({}, state, action.rootCategory)
+            return Object.assign({}, state, {
+                rootCategory: action.rootCategory,
+                isLoaded: true
+            })
         case actions.CHANGE_SELECTED_CATEGORY:
             return Object.assign({}, state, action.selectedCategory)
         case actions.CHANGE_SELECTED_HOWTO:
