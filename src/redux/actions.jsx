@@ -3,8 +3,6 @@ const CHANGE_PATH = 'CHANGE_PATH';
 const CHANGE_ROOT_CATEGORY = 'CHANGE_ROOT_CATEGORY';
 const CHANGE_SELECTED_CATEGORY = 'CHANGE_SELECTED_CATEGORY';
 const CHANGE_SELECTED_HOWTO = 'CHANGE_SELECTED_HOWTO';
-const CHANGE_CATEGORY_HITS = 'CHANGE_CATEGORY_HITS';
-const CHANGE_HOWTO_HITS = 'CHANGE_HOWTO_HITS';
 
 const ON_SEARCH = 'ON_SEARCH';
 
@@ -28,14 +26,6 @@ const changeSelectedHowto = (howto) => {
     return { type: CHANGE_SELECTED_HOWTO, selectedHowto: howto }
 };
 
-const changeCategoryHits = (hits) => {
-    return { type: CHANGE_CATEGORY_HITS, categoryHits: hits }
-};
-
-const changeHowtoHits = (hits) => {
-    return { type: CHANGE_HOWTO_HITS, howtoHits: hits }
-};
-
 const onSearch = (query, categoryHits, howtoHits) => {
     return { type: ON_SEARCH, query, categoryHits, howtoHits }
 };
@@ -46,9 +36,7 @@ const actionTypes = {
     CHANGE_ROOT_CATEGORY,
     CHANGE_SELECTED_CATEGORY,
     CHANGE_SELECTED_HOWTO,
-    ON_SEARCH,
-    CHANGE_CATEGORY_HITS,
-    CHANGE_HOWTO_HITS
+    ON_SEARCH
 }
 
 const actionCreators = {
@@ -57,9 +45,7 @@ const actionCreators = {
     changeRootCategory,
     changeSelectedCategory,
     changeSelectedHowto,
-    onSearch,
-    changeCategoryHits,
-    changeHowtoHits
+    onSearch
 }
 
 export { actionTypes, actionCreators }

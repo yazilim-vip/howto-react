@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CHANGE_ROOT_CATEGORY:
             return Object.assign({}, state, {
                 rootCategory: action.rootCategory,
-                selectedCategory: action.rootCategory,
+                selectedCategory: action.rootCategory, // !
                 selectedHowto: null,
                 isLoaded: true
             })
@@ -43,10 +43,6 @@ const reducer = (state = initialState, action) => {
                 categoryHits: action.categoryHits,
                 howtoHits: action.howtoHits
             })
-        case actionTypes.CHANGE_CATEGORY_HITS:
-            return Object.assign({}, state, action.categoryHits)
-        case actionTypes.CHANGE_HOWTO_HITS:
-            return Object.assign({}, state, action.howtoHits)
         default:
             return state
     }
