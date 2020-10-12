@@ -24,26 +24,20 @@ class HowTo extends React.Component {
 	//------------------------
 	// Fetching HowTo Data From Service
 	//------------------------
-	fetchHowtoData() {
-		Firebase.database().ref('howto').on('value', (snapshot) => {
-			const val = snapshot.val()
-			const json = val.substring(1, val.length - 1)
-			this.serviceSuccessHandler(JSON.parse(json))
-		});
+	fetchHowtoData = () => {
+		Firebase
+			.database()
+			.ref('howto')
+			.on('value', (snapshot) => {
+				const val = snapshot.val()
+				const json = val.substring(1, val.length - 1)
+				this.serviceSuccessHandler(JSON.parse(json))
+			});
 	}
 
-	serviceSuccessHandler(data, selectedCategory) {
-		if (Object.keys(data).length === 0) {
-			// this.setState({
-			// 	isLoaded: true,
-			// });
-			return
-		}
-
+	serviceSuccessHandler = (data, selectedCategory) => {
 		this.props.changeRootCategory(data)
-
-		// set selected category to state
-		this.loadCategory()
+		this.selectCategory()
 
 		if (selectedCategory === null) {
 			return
@@ -58,37 +52,27 @@ class HowTo extends React.Component {
 		}
 	}
 
-	serviceErrorHandler(error) {
+	serviceErrorHandler = (error) => {
 		this.props.onError(error)
 	}
 
-	loadCategory(rootCategory, selectedCategory) {
-		// ! let selectedCategory
+	selectCategory = (rootCategory, categoryNames) => {
+		let selectedCategory
 
-		if (this.props.rootCategorySelectedFlag) {
-			selectedCategory = rootCategory
-		} else {
+		let tmpCategory = rootCategory
 
-			// linux, specific_distro, manjaro
-			let categoryNames = this.props.categoryNames
+		for (let catIndex in categoryNames) {
+			let cat = categoryNames[catIndex]
 
-			//......
-			let tmpCategory = rootCategory
-
-
-			for (let catIndex in categoryNames) {
-				let cat = categoryNames[catIndex]
-
-				if (!tmpCategory.subCategoryList[cat]) {
-					tmpCategory = null
-					break /// category not exists
-				}
-
-				tmpCategory = tmpCategory.subCategoryList[cat]
+			if (!tmpCategory.subCategoryList[cat]) {
+				tmpCategory = null
+				break /// category not exists
 			}
 
-			selectedCategory = tmpCategory
+			tmpCategory = tmpCategory.subCategoryList[cat]
 		}
+
+		selectedCategory = tmpCategory
 
 		this.props.changeSelectedCategory(selectedCategory)
 	}
@@ -108,13 +92,8 @@ class HowTo extends React.Component {
 	}
 
 	renderCategory = (folderPath) => {
-		// linux/specific_distor
-		// ! this.setState is async function
-
 		this.props.changePath(folderPath)
-		this.props.changeSelectedHowto(null)
-
-		this.loadCategory()
+		this.selectCategory()
 		this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
 	}
 
@@ -126,27 +105,21 @@ class HowTo extends React.Component {
 		}
 	}
 
-	info = (message) => {
-		return (
-			<Page>
-				{message}
-			</Page>
-		)
-	}
+	renderInfoPage = (message) => { return (<Page>{message}</Page>) }
 
 	render() {
 		if (!this.props.isLoaded) {
-			this.info("Loading...")
+			this.renderInfoPage("Loading...")
 		}
 
 		if (this.props.error) {
-			this.info(this.props.error.message)
+			this.renderInfoPage(this.props.error.message)
 		}
 
 		return (
 			<Page span={{ span: 12 }}>
 				<HowToBrowser
-					// howtoRequest={this.props.howtoRequest}
+					categoryNames={this.props.categoryNames}
 					selectedCategory={this.props.selectedCategory}
 					selectedHowto={this.props.selectedHowto}
 					renderCategory={this.renderCategory}
@@ -166,7 +139,8 @@ const mapStateToProps = (state) => {
 		selectedHowto: state.selectedHowto,
 		query: state.query,
 		categoryHits: state.categoryHits,
-		howtoHits: state.howtoHits
+		howtoHits: state.howtoHits,
+		categoryNames: state.categoryNames
 	}
 }
 

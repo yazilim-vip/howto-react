@@ -1,5 +1,5 @@
 import { actionTypes } from './actions';
-import howtoRequestParser from '../util/HowtoRequestParser'
+import { pathParser } from '../util/HowToUtil'
 
 const initialState = {
     error: null,
@@ -10,7 +10,8 @@ const initialState = {
     selectedHowto: null,
     query: "",
     categoryHits: [],
-    howtoHits: []
+    howtoHits: [],
+    categoryNames: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -22,16 +23,18 @@ const reducer = (state = initialState, action) => {
                 isLoaded: false
             })
         case actionTypes.CHANGE_PATH:
-            return Object.assign({}, state, howtoRequestParser(action.path))
+            return Object.assign({}, state, pathParser(action.path))
         case actionTypes.CHANGE_ROOT_CATEGORY:
             return Object.assign({}, state, {
                 rootCategory: action.rootCategory,
+                selectedHowto: null,
                 isLoaded: true
             })
         case actionTypes.CHANGE_SELECTED_CATEGORY:
             return Object.assign({}, state, action.selectedCategory)
         case actionTypes.CHANGE_SELECTED_HOWTO:
             return Object.assign({}, state, action.selectedHowto)
+
         // howtoBrowser
         case actionTypes.CHANGE_QUERY:
             return Object.assign({}, state, action.query)

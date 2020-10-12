@@ -1,15 +1,16 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
-
 import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-const HowToBreadcrumb = (props) => {
-    const rootFlag = props.rootFlag;
-    const categoryNames = props.categoryNames;
-    const renderCategory = props.renderCategory;
+const HowToBreadcrumb = ({renderCategory, categoryNames, rootCategorySelectedFlag}) => {
+
+    console.log("renderCategoryasdsds", renderCategory);
+    // let rootFlag = props.rootFlag
+    // let categoryNames = props.categoryNames
+    // let renderCategory = props.renderCategory
+
+    console.log("categoryNames", categoryNames);
 
     const getLink = (index) => {
         let link = ""
@@ -38,7 +39,7 @@ const HowToBreadcrumb = (props) => {
         <Breadcrumb>
             <Breadcrumb.Item
                 key="root"
-                active={rootFlag}
+                active={rootCategorySelectedFlag}
                 onClick={() => renderCategory("")}>
                 <FontAwesomeIcon icon={faHome} />
             </Breadcrumb.Item>
@@ -47,10 +48,10 @@ const HowToBreadcrumb = (props) => {
     )
 }
 
-HowToBreadcrumb.propTypes = {
-    categoryNames: PropTypes.array.isRequired,
-    rootFlag: PropTypes.bool.isRequired,
-    renderCategory: PropTypes.func.isRequired,
-};
+// HowToBreadcrumb.propTypes = {
+//     categoryNames: PropTypes.array.isRequired,
+//     rootFlag: PropTypes.bool.isRequired,
+//     renderCategory: PropTypes.func.isRequired,
+// };
 
 export default HowToBreadcrumb

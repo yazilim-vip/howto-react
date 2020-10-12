@@ -6,26 +6,15 @@ import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
 import HOWTO_ITEM_TYPE from '../../constants/types';
+import { actionCreators } from "../../redux/actions";
+import { connect } from "react-redux";
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
-class HowToBrowser extends React.Component {
+const HowToBrowser = ({ howtoSelectedFlag, selectedCategory, selectedHowto, selectedHowtoName, renderCategory, renderHowto, categoryNames, rootCategorySelectedFlag, folderPath }) => {
 
-	constructor(props) {
-		super();
-
-		// console.log("props", props);
-
-		// this.state = {
-		//   categoryHits: [],
-		//   howtoHits: [],
-		//   query: ""
-		// }
-	}
-
-	search = async (query) => {
-		console.log(query)
+	const search = async (query) => {
 		let categoryHits = []
 		let howtoHits = []
 
@@ -37,8 +26,7 @@ class HowToBrowser extends React.Component {
 			})
 		} else {
 			try {
-				const res = await index
-					.search(query);
+				const res = await index.search(query);
 				let hits = res.hits;
 				console.log(hits);
 
@@ -64,109 +52,101 @@ class HowToBrowser extends React.Component {
 		}
 	}
 
-	render() {
-		const { howtoSelectedFlag, selectedCategory, selectedHowto, selectedHowtoName, renderCategory, renderHowto } = this.props
+	const renderHowtoContentElement = () => {
+		if (selectedHowto !== null) {
+			return <ReactMarkdown source={selectedHowto.markdownContent} />
+		}
 
-		const renderHowtoContentElement = () => {
-			if (selectedHowto !== null) {
-				return <ReactMarkdown source={selectedHowto.markdownContent} />
-			}
-
-			if (howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
-				return (
-					<Alert key={1} variant={"danger"}>
-						Howto <b>{selectedHowtoName}</b> not found on archive.
-					</Alert>
-				)
-			}
-		};
-
-		const renderMainContentElement = () => {
-			if (selectedCategory === null) {
-				return (
-					<Alert key={1} variant={"danger"}>
-						Category <b>{this.props.folderPath}</b> not found on archive.
-					</Alert>
-				)
-			}
-
+		if (howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
 			return (
-				<Row>
-
-					<Col md="3" className="border-right left-col">
-						<InputGroup className="mb-3">
-							<FormControl
-								value={this.props.query}
-								placeholder="Search..."
-								aria-label="Search"
-								onChange={event => this.search(event.target.value)}
-							/>
-
-						</InputGroup>
-
-						{/*Sub Category Menu*/}
-						<HowToMenu
-							folderPath={this.props.folderPath}
-							type={_.isEmpty(this.props.categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
-							title="Categories"
-							items={_.isEmpty(this.props.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.props.categoryHits)}
-							selectedCategory={selectedCategory}
-							rootCategorySelected={this.props.rootCategorySelectedFlag}
-							renderCategory={renderCategory}
-							clearHits={() => this.search("")}
-						/>
-
-						{/*HowTo Menu*/}
-						<HowToMenu
-							folderPath={this.props.folderPath}
-							type={_.isEmpty(this.props.howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
-							title="Howtos"
-							items={_.isEmpty(this.props.howtoHits) ? selectedCategory.howtoList : _.extend({}, this.props.howtoHits)}
-							selectedHowto={selectedHowto}
-							renderHowto={renderHowto}
-						/>
-					</Col>
-
-					{/*Content*/}
-					<Col md="9" className="right-col">
-						{renderHowtoContentElement()}
-					</Col>
-
-				</Row>
+				<Alert key={1} variant={"danger"}>
+					Howto <b>{selectedHowtoName}</b> not found on archive.
+				</Alert>
 			)
-		};
+		}
+	};
+
+	const renderMainContentElement = () => {
+		if (selectedCategory === null) {
+			return (
+				<Alert key={1} variant={"danger"}>
+					Category <b>{folderPath}</b> not found on archive.
+				</Alert>
+			)
+		}
 
 		return (
-			<div>
-				<HowToBreadcrumb
-					categoryNames={this.props.categoryNames}
-					rootFlag={this.props.rootCategorySelectedFlag}
-					renderCategory={renderCategory}
-				/>
+			<Row>
 
-				{renderMainContentElement()}
-			</div>
+				<Col md="3" className="border-right left-col">
+					<InputGroup className="mb-3">
+						<FormControl
+							value={this.query}
+							placeholder="Search..."
+							aria-label="Search"
+							onChange={event => search(event.target.value)}
+						/>
+
+					</InputGroup>
+
+					{/*Sub Category Menu*/}
+					<HowToMenu
+						folderPath={this.folderPath}
+						type={_.isEmpty(this.categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
+						title="Categories"
+						items={_.isEmpty(this.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.categoryHits)}
+						selectedCategory={selectedCategory}
+						rootCategorySelected={this.rootCategorySelectedFlag}
+						renderCategory={renderCategory}
+						clearHits={() => this.search("")}
+					/>
+
+					{/*HowTo Menu*/}
+					<HowToMenu
+						folderPath={this.folderPath}
+						type={_.isEmpty(this.howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
+						title="Howtos"
+						items={_.isEmpty(this.howtoHits) ? selectedCategory.howtoList : _.extend({}, this.howtoHits)}
+						selectedHowto={selectedHowto}
+						renderHowto={renderHowto}
+					/>
+				</Col>
+
+				{/*Content*/}
+				<Col md="9" className="right-col">
+					{renderHowtoContentElement()}
+				</Col>
+
+			</Row>
 		)
+	}
+
+	return (
+		<div>
+			<HowToBreadcrumb
+				categoryNames={categoryNames}
+				rootFlag={rootCategorySelectedFlag}
+				renderCategory={renderCategory}
+			/>
+
+			{renderMainContentElement()}
+		</div>
+	)
+}
+
+const mapStateToProps = (state) => {
+	return {
+		howtoSelectedFlag: state.howtoSelectedFlag,
+		selectedCategory: state.selectedCategory,
+		selectedHowto: state.selectedHowto,
+		selectedHowtoName: state.selectedHowtoName,
+		renderCategory: state.renderCategory,
+		renderHowto: state.renderHowto,
+		categoryNames: state.categoryNames,
+		folderPath: state.folderPath
 	}
 }
 
-// import PropTypes from 'prop-types';
-// HowToBrowser.propTypes = {
+const mapDispatchToProps = actionCreators
 
-//   howtoRequest: PropTypes.shape({
-// 	fullPath: PropTypes.string,
-// 	folderPath: PropTypes.string,
-// 	categoryNames: PropTypes.array,
-// 	selectedHowtoName: PropTypes.string,
-// 	howtoSelectedFlag: PropTypes.bool,
-// 	rootCategorySelectedFlag: PropTypes.bool
-//   }),
-
-//   // filled by data from service
-//   selectedCategory: PropTypes.object,
-//   selectedHowto: PropTypes.object,
-//   renderCategory: PropTypes.func,
-//   renderHowto: PropTypes.func
-// }
-
-export default HowToBrowser
+export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)
