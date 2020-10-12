@@ -12,23 +12,30 @@ import { connect } from "react-redux";
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
-const HowToBrowser = ({ howtoSelectedFlag, selectedCategory, selectedHowto, selectedHowtoName, renderCategory, renderHowto, categoryNames, rootCategorySelectedFlag, folderPath }) => {
+const HowToBrowser = ({
+	howtoSelectedFlag,
+	selectedCategory,
+	selectedHowto,
+	selectedHowtoName,
+	renderCategory,
+	renderHowto,
+	categoryNames,
+	rootCategorySelectedFlag,
+	folderPath,
+	query,
+	categoryHits,
+	howtoHits,
+	onSearch
+}) => {
 
-	const search = async (query) => {
-		let categoryHits = []
-		let howtoHits = []
+	const search = (query) => {
+		index
+			.search(query)
+			.then(res => {
+				let categoryHits = []
+				let howtoHits = []
 
-		if (_.isEmpty(query)) {
-			this.setState({
-				categoryHits: categoryHits,
-				howtoHits: howtoHits,
-				query: query
-			})
-		} else {
-			try {
-				const res = await index.search(query);
 				let hits = res.hits;
-				console.log(hits);
 
 				if (!_.isEmpty(hits)) {
 					hits.forEach(hit => {
@@ -38,18 +45,11 @@ const HowToBrowser = ({ howtoSelectedFlag, selectedCategory, selectedHowto, sele
 							howtoHits.push(hit);
 						}
 					});
-
-					this.setState({
-						categoryHits: categoryHits,
-						howtoHits: howtoHits,
-						query: query
-					});
 				}
-				return res;
-			} catch (exception) {
-				return console.error(exception);
-			}
-		}
+
+				onSearch(query, categoryHits, howtoHits)
+			})
+			.catch(err => console.error(err))
 	}
 
 	const renderHowtoContentElement = () => {
@@ -81,7 +81,7 @@ const HowToBrowser = ({ howtoSelectedFlag, selectedCategory, selectedHowto, sele
 				<Col md="3" className="border-right left-col">
 					<InputGroup className="mb-3">
 						<FormControl
-							value={this.query}
+							value={query}
 							placeholder="Search..."
 							aria-label="Search"
 							onChange={event => search(event.target.value)}
@@ -91,22 +91,22 @@ const HowToBrowser = ({ howtoSelectedFlag, selectedCategory, selectedHowto, sele
 
 					{/*Sub Category Menu*/}
 					<HowToMenu
-						folderPath={this.folderPath}
-						type={_.isEmpty(this.categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
+						folderPath={folderPath}
+						type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
 						title="Categories"
-						items={_.isEmpty(this.categoryHits) ? selectedCategory.subCategoryList : _.extend({}, this.categoryHits)}
+						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
 						selectedCategory={selectedCategory}
-						rootCategorySelected={this.rootCategorySelectedFlag}
+						rootCategorySelected={rootCategorySelectedFlag}
 						renderCategory={renderCategory}
-						clearHits={() => this.search("")}
+						clearHits={() => search("")}
 					/>
 
 					{/*HowTo Menu*/}
 					<HowToMenu
-						folderPath={this.folderPath}
-						type={_.isEmpty(this.howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
+						folderPath={folderPath}
+						type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
 						title="Howtos"
-						items={_.isEmpty(this.howtoHits) ? selectedCategory.howtoList : _.extend({}, this.howtoHits)}
+						items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
 						selectedHowto={selectedHowto}
 						renderHowto={renderHowto}
 					/>
@@ -143,7 +143,8 @@ const mapStateToProps = (state) => {
 		renderCategory: state.renderCategory,
 		renderHowto: state.renderHowto,
 		categoryNames: state.categoryNames,
-		folderPath: state.folderPath
+		folderPath: state.folderPath,
+		onSearch : state.onSearch
 	}
 }
 

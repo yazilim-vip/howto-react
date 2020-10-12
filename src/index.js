@@ -8,7 +8,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import WebFont from "webfontloader";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const store = createStore(reducer, composeWithDevTools());
+import { actionCreators } from "../src/redux/actions";
+
+const composeEnhancers = composeWithDevTools({
+  actionCreators,
+  trace: true,
+  traceLimit: 25,
+});
+
+const store = createStore(reducer, composeEnhancers());
 
 ReactDOM.render(
   <Provider store={store}>

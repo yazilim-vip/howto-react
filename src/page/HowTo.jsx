@@ -96,18 +96,11 @@ class HowTo extends React.Component {
 		this.selectCategory()
 		this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
 	}
-
-	preLoad = (isLoaded, error) => {
-		if (!isLoaded) {
-			return <div>Loading...</div>;
-		} else if (error) {
-			return <div>Error: {error.message}</div>;
-		}
-	}
-
+	
 	renderInfoPage = (message) => { return (<Page>{message}</Page>) }
 
 	render() {
+		console.log("this.props.isLoaded", this.props.isLoaded);
 		if (!this.props.isLoaded) {
 			this.renderInfoPage("Loading...")
 		}
@@ -137,9 +130,6 @@ const mapStateToProps = (state) => {
 		rootCategory: state.rootCategory,
 		selectedCategory: state.selectedCategory,
 		selectedHowto: state.selectedHowto,
-		query: state.query,
-		categoryHits: state.categoryHits,
-		howtoHits: state.howtoHits,
 		categoryNames: state.categoryNames
 	}
 }
