@@ -1,55 +1,47 @@
-import { combineReducers } from 'redux'
-import * as actions from './actions';
+import { actionTypes } from './actions';
+import howtoRequestParser from '../util/HowtoRequestParser'
 
-const howtoInitialState = {
+const initialState = {
     error: null,
     isLoaded: false,
-    howtoRequest: null,
+    path: null,
     rootCategory: null,
     selectedCategory: null,
-    selectedHowto: null
-}
-
-const howtoBrowserInitialState = {
+    selectedHowto: null,
+    query: "",
     categoryHits: [],
-    howtoHits: [],
-    query: ""
+    howtoHits: []
 }
 
-const howtoReducer = (state = howtoInitialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.ON_ERROR:
+        // howto
+        case actionTypes.ON_ERROR:
             return Object.assign({}, state, {
                 error: action.error,
                 isLoaded: false
             })
-        case actions.CHANGE_HOWTO_REQUEST:
-            return Object.assign({}, state, action.howtoRequest)
-        case actions.CHANGE_ROOT_CATEGORY:
+        case actionTypes.CHANGE_PATH:
+            return Object.assign({}, state, howtoRequestParser(action.path))
+        case actionTypes.CHANGE_ROOT_CATEGORY:
             return Object.assign({}, state, {
                 rootCategory: action.rootCategory,
                 isLoaded: true
             })
-        case actions.CHANGE_SELECTED_CATEGORY:
+        case actionTypes.CHANGE_SELECTED_CATEGORY:
             return Object.assign({}, state, action.selectedCategory)
-        case actions.CHANGE_SELECTED_HOWTO:
+        case actionTypes.CHANGE_SELECTED_HOWTO:
             return Object.assign({}, state, action.selectedHowto)
-        default:
-            return state
-    }
-};
-
-const howtoBrowserReducer = (state = howtoBrowserInitialState, action) => {
-    switch (action.type) {
-        case actions.CHANGE_QUERY:
+        // howtoBrowser
+        case actionTypes.CHANGE_QUERY:
             return Object.assign({}, state, action.query)
-        case actions.CHANGE_CATEGORY_HITS:
+        case actionTypes.CHANGE_CATEGORY_HITS:
             return Object.assign({}, state, action.categoryHits)
-        case actions.CHANGE_HOWTO_HITS:
+        case actionTypes.CHANGE_HOWTO_HITS:
             return Object.assign({}, state, action.howtoHits)
         default:
             return state
     }
 };
 
-export default combineReducers({ howtoReducer, howtoBrowserReducer })
+export default reducer

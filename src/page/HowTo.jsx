@@ -1,37 +1,17 @@
 import React from "react";
 
 import Page from "../component/Page";
-import howtoRequestParser from '../util/HowtoRequestParser'
 import HowToBrowser from "../component/howto/HowToBrowser";
 import Firebase from "../util/Firebase";
 import { connect } from "react-redux";
-import {
-	onError,
-	changeHowtoRequest,
-	changeRootCategory,
-	changeSelectedCategory,
-	changeSelectedHowto
-} from "../redux/actions";
+import { actionCreators } from "../redux/actions";
 class HowTo extends React.Component {
 	constructor(props) {
 		super();
 
-		let fullPath = props.match.params[0]
-			// trim trailing '/' chracter
-			.replace(/\/$/, "")
-
-		this.state = {
-			error: null,
-			isLoaded: false,
-
-			// filled by user request
-			howtoRequest: howtoRequestParser(fullPath),
-
-			// filled by data from service
-			rootCategory: null,
-			selectedCategory: null,
-			selectedHowto: null
-		};
+		// replace trailing '/' chracter
+		let fullPath = props.match.params[0].replace(/\/$/, "")
+		props.changePath(fullPath)
 
 		this.renderHowto = this.renderHowto.bind(this)
 		this.renderCategory = this.renderCategory.bind(this)
@@ -52,30 +32,25 @@ class HowTo extends React.Component {
 		});
 	}
 
-	serviceSuccessHandler(data) {
+	serviceSuccessHandler(data, selectedCategory) {
 		if (Object.keys(data).length === 0) {
-			this.setState({
-				isLoaded: true,
-			});
+			// this.setState({
+			// 	isLoaded: true,
+			// });
 			return
 		}
 
-		changeRootCategory(data)
-		// this.setState({
-		// 	isLoaded: true,
-		// 	rootCategory: data,
-		// });
+		this.props.changeRootCategory(data)
 
 		// set selected category to state
 		this.loadCategory()
 
-		let selectedCategory = this.state.selectedCategory
 		if (selectedCategory === null) {
 			return
 		}
 
-		let selectedHowtoName = this.state.howtoRequest.selectedHowtoName
-		if (this.state.howtoRequest.howtoSelectedFlag) {
+		if (this.props.howtoSelectedFlag) {
+			let selectedHowtoName = this.props.selectedHowtoName
 			if (selectedCategory.howtoList[selectedHowtoName]) {
 				let howto = selectedCategory.howtoList[selectedHowtoName]
 				this.renderHowto(howto)
@@ -84,22 +59,18 @@ class HowTo extends React.Component {
 	}
 
 	serviceErrorHandler(error) {
-		this.setState({
-			isLoaded: true,
-			error
-		});
+		this.props.onError(error)
 	}
 
-	loadCategory() {
-		let selectedCategory
-		let rootCategory = this.state.rootCategory
+	loadCategory(rootCategory, selectedCategory) {
+		// ! let selectedCategory
 
-		if (this.state.howtoRequest.rootCategorySelectedFlag) {
+		if (this.props.rootCategorySelectedFlag) {
 			selectedCategory = rootCategory
 		} else {
 
 			// linux, specific_distro, manjaro
-			let categoryNames = this.state.howtoRequest.categoryNames
+			let categoryNames = this.props.categoryNames
 
 			//......
 			let tmpCategory = rootCategory
@@ -119,66 +90,65 @@ class HowTo extends React.Component {
 			selectedCategory = tmpCategory
 		}
 
-		this.setState({
-			selectedCategory: selectedCategory
-		})
+		this.props.changeSelectedCategory(selectedCategory)
 	}
 
-	renderHowto(selectedHowto) {
+	renderHowto = (selectedHowto) => {
 		let categoryPath = selectedHowto.categoryList.join("/")
 		let howtoLabel = selectedHowto.label;
 
-		let prefix = (this.state.howtoRequest.rootCategorySelectedFlag) ? "" : (categoryPath + "/")
+		let prefix = (this.props.rootCategorySelectedFlag) ? "" : (categoryPath + "/")
 		let newFullPath = prefix + howtoLabel
-		console.log("newFullPath", newFullPath)
-		let howtoRequest = howtoRequestParser(newFullPath)
 
 		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
-			this.setState({
-				selectedHowto: selectedHowto,
-				howtoRequest: howtoRequest
-			}, () => {
-				this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
-			})
+			this.props.changePath(newFullPath);
+			this.props.changeSelectedHowto(selectedHowto);
+			this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
 		}
 	}
 
-	renderCategory(folderPath) {
-		console.log('incoming folder path = ', folderPath)
-		let howtoRequest = howtoRequestParser(folderPath)
-		console.log('new howtoRequest = ', howtoRequest)
+	renderCategory = (folderPath) => {
 		// linux/specific_distor
 		// ! this.setState is async function
-		this.setState({
-			howtoRequest: howtoRequest,
-			selectedHowto: null
-		}, () => {
-			this.loadCategory()
-			this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + this.state.howtoRequest.folderPath);
-		})
+
+		this.props.changePath(folderPath)
+		this.props.changeSelectedHowto(null)
+
+		this.loadCategory()
+		this.props.history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
+	}
+
+	preLoad = (isLoaded, error) => {
+		if (!isLoaded) {
+			return <div>Loading...</div>;
+		} else if (error) {
+			return <div>Error: {error.message}</div>;
+		}
+	}
+
+	info = (message) => {
+		return (
+			<Page>
+				{message}
+			</Page>
+		)
 	}
 
 	render() {
-		const { error, isLoaded } = this.state;
-
-		if (error) {
-			return <div>Error: {error.message}</div>;
+		if (!this.props.isLoaded) {
+			this.info("Loading...")
 		}
 
-		if (!isLoaded) {
-			return <div>Loading...</div>;
+		if (this.props.error) {
+			this.info(this.props.error.message)
 		}
 
 		return (
 			<Page span={{ span: 12 }}>
-
 				<HowToBrowser
-					// filled by user request
-					howtoRequest={this.state.howtoRequest}
-
-					// filled by data from service
-					selectedCategory={this.state.selectedCategory}
-					selectedHowto={this.state.selectedHowto}
+					// howtoRequest={this.props.howtoRequest}
+					selectedCategory={this.props.selectedCategory}
+					selectedHowto={this.props.selectedHowto}
 					renderCategory={this.renderCategory}
 					renderHowto={this.renderHowto}
 				/>
@@ -191,19 +161,15 @@ const mapStateToProps = (state) => {
 	return {
 		error: state.error,
 		isLoaded: state.isLoaded,
-		howtoRequest: state.howtoRequest,
 		rootCategory: state.rootCategory,
 		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto
+		selectedHowto: state.selectedHowto,
+		query: state.query,
+		categoryHits: state.categoryHits,
+		howtoHits: state.howtoHits
 	}
 }
 
-const mapDispatchToProps = {
-	onError,
-	changeHowtoRequest,
-	changeRootCategory,
-	changeSelectedCategory,
-	changeSelectedHowto
-}
+const mapDispatchToProps = actionCreators
 
 export default connect(mapStateToProps, mapDispatchToProps)(HowTo)
