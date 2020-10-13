@@ -113,8 +113,10 @@ const HowToMenu = ({
 
 const mapStateToProps = (state) => {
 	return {
+		folderPath: state.folderPath,
+		selectedCategory: state.selectedCategory,
+		selectedHowto: state.selectedHowto,
 		rootCategorySelectedFlag: state.rootCategorySelectedFlag,
-		folderPath: state.folderPath
 	}
 }
 

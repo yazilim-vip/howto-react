@@ -6,13 +6,6 @@ import Firebase from "../util/Firebase";
 import { connect } from "react-redux";
 import { actionCreators } from "../redux/actions";
 class HowTo extends React.Component {
-	constructor(props) {
-		super();
-
-		// replace trailing '/' chracter
-		let fullPath = props.match.params[0].replace(/\/$/, "")
-		props.onPathChange(fullPath)
-	}
 
 	componentDidMount() {
 		this.fetchHowtoData()
@@ -27,7 +20,7 @@ class HowTo extends React.Component {
 				.database()
 				.ref('howto')
 				.on(
-					'value', (snapshot) => {
+					'value', snapshot => {
 						const val = snapshot.val()
 						const json = val.substring(1, val.length - 1)
 						this.serviceSuccessHandler(JSON.parse(json))
@@ -43,7 +36,10 @@ class HowTo extends React.Component {
 		let selectedCategory = this.props.selectedCategory
 
 		this.props.onApiSuccess(data)
-		this.props.selectCategory()
+
+		// replace trailing '/' chracter
+		let fullPath = this.props.match.params[0].replace(/\/$/, "")
+		this.props.onPathChange(fullPath)
 
 		if (selectedCategory === null) {
 			return
@@ -63,7 +59,7 @@ class HowTo extends React.Component {
 			<Page>
 				<div className="row h-100 text-center">
 					<div className="col-sm-12 my-auto">
-							{message}
+						{message}
 					</div>
 				</div>
 			</Page>)
@@ -71,7 +67,6 @@ class HowTo extends React.Component {
 
 	render() {
 		const { error, isLoaded } = this.props;
-		console.log("isloaded", isLoaded);
 
 		if (!isLoaded) {
 			return this.renderInfoPage("Loading...")

@@ -24,9 +24,12 @@ const howtoInitialState = {
 const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
         case actionTypes.ON_PATH_CHANGE:
+            let pathVars = parsePath(action.path)
             return {
                 ...state,
-                ...parsePath(action.path)
+                ...pathVars,
+                ...loadCategory(state.rootCategory, pathVars.categoryNames, pathVars.rootCategorySelectedFlag),
+                selectedHowto: null
             }
 
         case actionTypes.ON_API_SUCCESS:
@@ -40,14 +43,7 @@ const howtoReducer = (state = howtoInitialState, action) => {
             return {
                 ...state,
                 error: action.error,
-                isLoaded: false
-            }
-
-        case actionTypes.SELECT_CATEGORY:
-            return {
-                ...state,
-                ...loadCategory(state.rootCategory, state.categoryNames, state.rootCategorySelectedFlag),
-                selectedHowto: null
+                isLoaded: true
             }
 
         case actionTypes.SELECT_HOWTO:

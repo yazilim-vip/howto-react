@@ -29,8 +29,7 @@ const HowToBrowser = ({
 	onSearchResult,
 
 	onPathChange,
-	selectHowto,
-	selectCategory
+	selectHowto
 }) => {
 
 	const history = useHistory();
@@ -51,7 +50,6 @@ const HowToBrowser = ({
 
 	const renderCategory = (folderPath) => {
 		onPathChange(folderPath);
-		selectCategory()
 		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
 	}
 
@@ -119,22 +117,17 @@ const HowToBrowser = ({
 
 					{/*Sub Category Menu*/}
 					<HowToMenu
-						folderPath={folderPath}
-						type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
 						title="Categories"
+						type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
 						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
-						selectedCategory={selectedCategory}
-						rootCategorySelected={rootCategorySelectedFlag}
 						renderCategory={renderCategory}
 					/>
 
 					{/*HowTo Menu*/}
 					<HowToMenu
-						folderPath={folderPath}
-						type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
 						title="Howtos"
+						type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
 						items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
-						selectedHowto={selectedHowto}
 						renderHowto={renderHowto}
 					/>
 				</Col>
