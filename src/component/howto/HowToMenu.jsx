@@ -16,9 +16,10 @@ const HowToMenu = ({
 	rootCategorySelectedFlag,
 	folderPath,
 
-	clearHits,
 	renderCategory,
-	renderHowto
+	renderHowto,
+
+	onSearchResult
 }) => {
 
 	const renderItem = (key) => {
@@ -62,7 +63,7 @@ const HowToMenu = ({
 						key={key}
 						action
 						onClick={() => {
-							clearHits()
+							onSearchResult([], [])
 							renderCategory(items[key].objectID, items[key])
 						}}
 						active={items[key].obj === selectedCategory}

@@ -14,17 +14,19 @@ const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
-	howtoSelectedFlag,
+	folderPath,
+	categoryNames,
 	selectedCategory,
+
 	selectedHowto,
 	selectedHowtoName,
-	categoryNames,
+
 	rootCategorySelectedFlag,
-	folderPath,
-	query,
+	howtoSelectedFlag,
+
 	categoryHits,
 	howtoHits,
-	onSearch,
+	onSearchResult,
 
 	onPathChange,
 	selectHowto,
@@ -53,18 +55,17 @@ const HowToBrowser = ({
 		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
 	}
 
-	const search = (query) => {
-		let categoryHits = []
-		let howtoHits = []
-
+	const search = _.debounce((query) => {
 		if (_.isEmpty(query)) {
-			return onSearch(query, categoryHits, howtoHits)
+			return onSearchResult([], [])
 		}
 
 		index
 			.search(query)
 			.then(res => {
-				let hits = res.hits;
+				let categoryHits = []
+				let howtoHits = []
+				let hits = res.hits
 
 				if (hits) {
 					hits.forEach(hit => {
@@ -76,10 +77,10 @@ const HowToBrowser = ({
 					});
 				}
 
-				onSearch(query, categoryHits, howtoHits)
+				onSearchResult(categoryHits, howtoHits)
 			})
 			.catch(err => console.error(err))
-	}
+	}, 500)
 
 	const renderHowtoContentElement = () => {
 		if (selectedHowto !== null) {
@@ -110,12 +111,10 @@ const HowToBrowser = ({
 				<Col md="3" className="border-right left-col">
 					<InputGroup className="mb-3">
 						<FormControl
-							value={query}
 							placeholder="Search..."
 							aria-label="Search"
 							onChange={event => search(event.target.value)}
 						/>
-
 					</InputGroup>
 
 					{/*Sub Category Menu*/}
@@ -126,7 +125,6 @@ const HowToBrowser = ({
 						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
 						selectedCategory={selectedCategory}
 						rootCategorySelected={rootCategorySelectedFlag}
-						clearHits={() => search("")}
 						renderCategory={renderCategory}
 					/>
 
@@ -158,6 +156,8 @@ const HowToBrowser = ({
 				renderCategory={renderCategory}
 			/>
 
+			<hr />
+
 			{renderMainContentElement()}
 		</div>
 	)
@@ -172,7 +172,6 @@ const mapStateToProps = (state) => {
 		categoryNames: state.categoryNames,
 		folderPath: state.folderPath,
 
-		query: state.query,
 		categoryHits: state.categoryHits,
 		howtoHits: state.howtoHits
 	}

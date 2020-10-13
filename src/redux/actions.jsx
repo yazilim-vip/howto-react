@@ -25,8 +25,8 @@ const selectHowto = (howto) => {
     return { type: SELECT_HOWTO, selectedHowto: howto }
 };
 
-const onSearch = (query, categoryHits, howtoHits) => {
-    return { type: ON_SEARCH, query, categoryHits, howtoHits }
+const onSearchResult = (categoryHits, howtoHits) => {
+    return { type: ON_SEARCH, categoryHits, howtoHits }
 };
 
 const actionTypes = {
@@ -44,7 +44,7 @@ const actionCreators = {
     onApiSuccess,
     selectCategory,
     selectHowto,
-    onSearch
+    onSearchResult
 }
 
 export { actionTypes, actionCreators }

@@ -4,6 +4,7 @@ import { parsePath, loadCategory } from '../util/HowToUtil'
 const howtoInitialState = {
     isLoaded: false,
     error: null,
+
     folderPath: "",
     categoryNames: [],
 
@@ -16,7 +17,6 @@ const howtoInitialState = {
     rootCategorySelectedFlag: null,
     howtoSelectedFlag: false,
 
-    query: "",
     categoryHits: [],
     howtoHits: [],
 }
@@ -59,7 +59,6 @@ const howtoReducer = (state = howtoInitialState, action) => {
         case actionTypes.ON_SEARCH:
             return {
                 ...state,
-                query: action.query,
                 categoryHits: action.categoryHits,
                 howtoHits: action.howtoHits
             }
