@@ -5,6 +5,7 @@ import HowToBrowser from "../component/howto/HowToBrowser";
 import Firebase from "../util/Firebase";
 import { connect } from "react-redux";
 import { actionCreators } from "../redux/actions";
+import { Alert, Spinner } from "react-bootstrap";
 class HowTo extends React.Component {
 
 	componentDidMount() {
@@ -21,45 +22,33 @@ class HowTo extends React.Component {
 				.ref('howto')
 				.on(
 					'value', snapshot => {
-						const val = snapshot.val()
-						const json = val.substring(1, val.length - 1)
-						this.serviceSuccessHandler(JSON.parse(json))
+						if (snapshot.exists()) {
+							const val = snapshot.val()
+							const json = val.substring(1, val.length - 1)
+
+							this.serviceSuccessHandler(JSON.parse(json), this.props.match.params[0])
+						} else {
+							this.props.onApiError("Snapshot can not found on firebase.")
+						}
 					},
 					error => {
-						this.onError(error)
+						this.props.onApiError(error)
 					}
 				)
 		}
 	}
 
-	serviceSuccessHandler = (data) => {
-		let selectedCategory = this.props.selectedCategory
-
+	serviceSuccessHandler = (data, path) => {
 		this.props.onApiSuccess(data)
-
-		// replace trailing '/' chracter
-		let fullPath = this.props.match.params[0].replace(/\/$/, "")
-		this.props.onPathChange(fullPath)
-
-		if (selectedCategory === null) {
-			return
-		}
-
-		if (this.props.howtoSelectedFlag) {
-			let selectedHowtoName = this.props.selectedHowtoName
-			if (selectedCategory.howtoList[selectedHowtoName]) {
-				let howto = selectedCategory.howtoList[selectedHowtoName]
-				this.renderHowto(howto)
-			}
-		}
+		this.props.onPathChange(path)
 	}
 
-	renderInfoPage = (message) => {
+	renderInfoPage = (content) => {
 		return (
 			<Page>
 				<div className="row h-100 text-center">
 					<div className="col-sm-12 my-auto">
-						{message}
+						{content}
 					</div>
 				</div>
 			</Page>)
@@ -69,11 +58,15 @@ class HowTo extends React.Component {
 		const { error, isLoaded } = this.props;
 
 		if (!isLoaded) {
-			return this.renderInfoPage("Loading...")
+			return this.renderInfoPage(<Spinner animation="border" />)
 		}
 
 		if (error) {
-			return this.renderInfoPage(error.message)
+			return this.renderInfoPage(
+				<Alert key={1} variant={"danger"}>
+					{error}
+				</Alert>
+			)
 		}
 
 		return (
