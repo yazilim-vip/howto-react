@@ -70,12 +70,12 @@ const parsePath = (fullPath) => {
     }
 }
 
-const loadCategory = (rootCategory, categoryNames, rootCategorySelectedFlag) => {
-    let selectedCategory
+const setContent = (rootCategory, categoryNames, rootCategorySelectedFlag, selectedHowtoName) => {
+    let selectedCategory = rootCategory
+    let selectedHowto = null
 
-    if (rootCategorySelectedFlag) {
-        selectedCategory = rootCategory
-    } else {
+    // set selectedCategory
+    if (!rootCategorySelectedFlag) {
         let tmpCategory = rootCategory
 
         for (let catIndex in categoryNames) {
@@ -92,9 +92,17 @@ const loadCategory = (rootCategory, categoryNames, rootCategorySelectedFlag) => 
         selectedCategory = tmpCategory
     }
 
+    // set selectedHowto
+    if (selectedHowtoName !== null) {
+        selectedHowto = selectedCategory.howtoList[selectedHowtoName]
+    }
+
+    console.log("selectedHowto", selectedHowto);
+
     return {
-        selectedCategory: selectedCategory
+        selectedCategory: selectedCategory,
+        selectedHowto: selectedHowto
     }
 }
 
-export { parsePath , loadCategory };
+export { parsePath, setContent };

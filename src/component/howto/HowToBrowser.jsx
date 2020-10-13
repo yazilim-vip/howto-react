@@ -6,8 +6,8 @@ import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
-import HOWTO_ITEM_TYPE from '../../constants/types';
 import { actionCreators } from "../../redux/actions";
+import HOWTO_ITEM_TYPE from '../../constants/types';
 import { useHistory } from 'react-router-dom';
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
@@ -15,7 +15,6 @@ const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
 	folderPath,
-	categoryNames,
 	selectedCategory,
 
 	selectedHowto,
@@ -35,16 +34,15 @@ const HowToBrowser = ({
 	const history = useHistory();
 
 	const renderHowto = (selectedHowto) => {
-		let categoryPath = selectedHowto.categoryList.join("/")
-		let howtoLabel = selectedHowto.label;
-
-		let prefix = (rootCategorySelectedFlag) ? "" : (categoryPath + "/")
-		let newFullPath = prefix + howtoLabel
-
 		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
-			onPathChange(newFullPath);
-			selectHowto(selectedHowto);
-			history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
+			let categoryPath = selectedHowto.categoryList.join("/")
+			let howtoLabel = selectedHowto.label;
+
+			let prefix = (rootCategorySelectedFlag) ? "" : (categoryPath + "/")
+			let newPath = prefix + howtoLabel
+
+			onPathChange(newPath);
+			history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newPath);
 		}
 	}
 
@@ -143,14 +141,8 @@ const HowToBrowser = ({
 
 	return (
 		<div>
-			<HowToBreadcrumb
-				categoryNames={categoryNames}
-				rootFlag={rootCategorySelectedFlag}
-				renderCategory={renderCategory}
-			/>
-
+			<HowToBreadcrumb renderCategory={renderCategory} />
 			<hr />
-
 			{renderMainContentElement()}
 		</div>
 	)
@@ -158,11 +150,11 @@ const HowToBrowser = ({
 
 const mapStateToProps = (state) => {
 	return {
+		rootCategorySelectedFlag: state.rootCategorySelectedFlag,
 		howtoSelectedFlag: state.howtoSelectedFlag,
 		selectedCategory: state.selectedCategory,
 		selectedHowto: state.selectedHowto,
 		selectedHowtoName: state.selectedHowtoName,
-		categoryNames: state.categoryNames,
 		folderPath: state.folderPath,
 
 		categoryHits: state.categoryHits,

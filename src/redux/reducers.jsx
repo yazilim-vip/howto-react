@@ -1,5 +1,5 @@
 import { actionTypes } from './actions';
-import { parsePath, loadCategory } from '../util/HowToUtil'
+import { parsePath, setContent } from '../util/HowToUtil'
 
 const howtoInitialState = {
     isLoaded: false,
@@ -28,8 +28,12 @@ const howtoReducer = (state = howtoInitialState, action) => {
             return {
                 ...state,
                 ...pathVars,
-                ...loadCategory(state.rootCategory, pathVars.categoryNames, pathVars.rootCategorySelectedFlag),
-                selectedHowto: null
+                ...setContent(
+                    state.rootCategory,
+                    pathVars.categoryNames,
+                    pathVars.rootCategorySelectedFlag,
+                    pathVars.selectedHowtoName
+                )
             }
 
         case actionTypes.ON_API_SUCCESS:
@@ -44,12 +48,6 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 ...state,
                 error: action.error,
                 isLoaded: true
-            }
-
-        case actionTypes.SELECT_HOWTO:
-            return {
-                ...state,
-                selectedHowto: action.selectedHowto
             }
 
         case actionTypes.ON_SEARCH:

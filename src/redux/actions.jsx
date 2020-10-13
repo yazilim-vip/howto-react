@@ -16,10 +16,6 @@ const onPathChange = (path) => {
     return { type: ON_PATH_CHANGE, path }
 };
 
-const selectHowto = (howto) => {
-    return { type: SELECT_HOWTO, selectedHowto: howto }
-};
-
 const onSearchResult = (categoryHits, howtoHits) => {
     return { type: ON_SEARCH, categoryHits, howtoHits }
 };
@@ -28,7 +24,6 @@ const actionTypes = {
     ON_PATH_CHANGE,
     ON_API_ERROR,
     ON_API_SUCCESS,
-    SELECT_HOWTO,
     ON_SEARCH
 }
 
@@ -36,7 +31,6 @@ const actionCreators = {
     onApiError,
     onPathChange,
     onApiSuccess,
-    selectHowto,
     onSearchResult
 }
 

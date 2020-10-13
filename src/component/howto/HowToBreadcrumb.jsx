@@ -2,6 +2,8 @@ import React from "react";
 import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { actionCreators } from "../../redux/actions"
 
 const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFlag }) => {
 
@@ -38,5 +40,13 @@ const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFl
         </Breadcrumb>
     )
 }
+const mapStateToProps = (state) => {
+	return {
+		categoryNames: state.categoryNames,
+		rootCategorySelectedFlag: state.rootCategorySelectedFlag
+	}
+}
 
-export default HowToBreadcrumb
+const mapDispatchToProps = actionCreators
+
+export default connect(mapStateToProps, mapDispatchToProps)(HowToBreadcrumb)
