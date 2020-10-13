@@ -93,7 +93,7 @@ const setContent = (rootCategory, categoryNames, rootCategorySelectedFlag, selec
     }
 
     // set selectedHowto
-    if (selectedHowtoName !== null) {
+    if (selectedHowtoName !== null && selectedCategory.howtoList.hasOwnProperty(selectedHowtoName)) {
         selectedHowto = selectedCategory.howtoList[selectedHowtoName]
     }
 

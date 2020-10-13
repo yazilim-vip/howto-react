@@ -1,7 +1,6 @@
 const ON_API_SUCCESS = 'ON_API_SUCCESS';
 const ON_API_ERROR = 'ON_API_ERROR';
 const ON_PATH_CHANGE = 'ON_PATH_CHANGE';
-const SELECT_HOWTO = 'SELECT_HOWTO';
 const ON_SEARCH = 'ON_SEARCH';
 
 const onApiSuccess = (category) => {

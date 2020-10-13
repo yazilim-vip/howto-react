@@ -35,9 +35,9 @@ const HowToBrowser = ({
 
 	const renderHowto = (selectedHowto) => {
 		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
-			let categoryPath = selectedHowto.categoryList.join("/")
 			let howtoLabel = selectedHowto.label;
-
+			
+			let categoryPath = selectedHowto.categoryList.join("/")
 			let prefix = (rootCategorySelectedFlag) ? "" : (categoryPath + "/")
 			let newPath = prefix + howtoLabel
 
