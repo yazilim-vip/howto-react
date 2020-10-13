@@ -20,35 +20,20 @@ const HowToBrowser = ({
 	selectedHowto,
 	selectedHowtoName,
 
-	rootCategorySelectedFlag,
 	howtoSelectedFlag,
 
 	categoryHits,
 	howtoHits,
 	onSearchResult,
 
-	onPathChange,
-	selectHowto
+	onPathChange
 }) => {
 
 	const history = useHistory();
 
-	const renderHowto = (selectedHowto) => {
-		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
-			let howtoLabel = selectedHowto.label;
-			
-			let categoryPath = selectedHowto.categoryList.join("/")
-			let prefix = (rootCategorySelectedFlag) ? "" : (categoryPath + "/")
-			let newPath = prefix + howtoLabel
-
-			onPathChange(newPath);
-			history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newPath);
-		}
-	}
-
-	const renderCategory = (folderPath) => {
-		onPathChange(folderPath);
-		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
+	const changePath = (path) => {
+		onPathChange(path);
+		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + path);
 	}
 
 	const search = _.debounce((query) => {
@@ -86,7 +71,7 @@ const HowToBrowser = ({
 		if (howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
 			return (
 				<Alert key={1} variant={"danger"}>
-					Howto <b>{selectedHowtoName}</b> not found on archive.
+					<b>{selectedHowtoName}</b> not found on <b>{selectedCategory.name}</b> folder.
 				</Alert>
 			)
 		}
@@ -118,7 +103,7 @@ const HowToBrowser = ({
 						title="Categories"
 						type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
 						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
-						renderCategory={renderCategory}
+						changePath={changePath}
 					/>
 
 					{/*HowTo Menu*/}
@@ -126,7 +111,7 @@ const HowToBrowser = ({
 						title="Howtos"
 						type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
 						items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
-						renderHowto={renderHowto}
+						changePath={changePath}
 					/>
 				</Col>
 
@@ -141,7 +126,7 @@ const HowToBrowser = ({
 
 	return (
 		<div>
-			<HowToBreadcrumb renderCategory={renderCategory} />
+			<HowToBreadcrumb changePath={changePath} />
 			<hr />
 			{renderMainContentElement()}
 		</div>
@@ -150,7 +135,6 @@ const HowToBrowser = ({
 
 const mapStateToProps = (state) => {
 	return {
-		rootCategorySelectedFlag: state.rootCategorySelectedFlag,
 		howtoSelectedFlag: state.howtoSelectedFlag,
 		selectedCategory: state.selectedCategory,
 		selectedHowto: state.selectedHowto,

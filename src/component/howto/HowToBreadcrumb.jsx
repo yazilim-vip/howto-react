@@ -5,7 +5,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions"
 
-const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFlag }) => {
+const HowToBreadcrumb = ({ changePath, categoryNames, rootCategorySelectedFlag }) => {
 
     const getLink = (index) => {
         let link = ""
@@ -22,7 +22,7 @@ const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFl
             <Breadcrumb.Item
                 key={index}
                 active={index + 1 === categoryNames.length}
-                onClick={() => renderCategory(getLink(index + 1))}>
+                onClick={() => changePath(getLink(index + 1))}>
                 {item}
             </Breadcrumb.Item>
         )
@@ -33,7 +33,7 @@ const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFl
             <Breadcrumb.Item
                 key="root"
                 active={rootCategorySelectedFlag}
-                onClick={() => renderCategory("")}>
+                onClick={() => changePath("")}>
                 <FontAwesomeIcon icon={faHome} />
             </Breadcrumb.Item>
             {renderItems}

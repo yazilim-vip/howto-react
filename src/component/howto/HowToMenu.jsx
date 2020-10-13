@@ -16,25 +16,21 @@ const HowToMenu = ({
 	rootCategorySelectedFlag,
 	folderPath,
 
-	renderCategory,
-	renderHowto,
-
-	onSearchResult
+	changePath
 }) => {
 
+	const prefix = (rootCategorySelectedFlag ? "" : (folderPath + "/"))
+
 	const renderItem = (key) => {
-		let prefix = (rootCategorySelectedFlag ? "" : (folderPath + "/"))
 
 		switch (type) {
 			// DEFAULT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY:
 				return (
 					<ListGroup.Item
-						key={key}
 						action
-						onClick={() => {
-							renderCategory(prefix + items[key].name)
-						}}
+						key={key}
+						onClick={() => { changePath(prefix + items[key].name) }}
 						active={items[key] === selectedCategory}
 					>
 						<FontAwesomeIcon icon={faFolder} className="mr-3" />
@@ -44,11 +40,9 @@ const HowToMenu = ({
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
 					<ListGroup.Item
-						key={key}
 						action
-						onClick={() => {
-							renderHowto(items[key])
-						}}
+						key={key}
+						onClick={() => { changePath(prefix + items[key].label) }}
 						active={items[key] === selectedHowto}
 					>
 						<FontAwesomeIcon icon={faFile} className="mr-3" />
@@ -60,12 +54,9 @@ const HowToMenu = ({
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
 					<ListGroup.Item
-						key={key}
 						action
-						onClick={() => {
-							onSearchResult([], [])
-							renderCategory(items[key].objectID, items[key])
-						}}
+						key={key}
+						onClick={() => { changePath(items[key].objectID) }}
 						active={items[key].obj === selectedCategory}
 					>
 						<FontAwesomeIcon icon={faFolder} className="mr-3" />
@@ -75,11 +66,9 @@ const HowToMenu = ({
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
 					<ListGroup.Item
-						key={key}
 						action
-						onClick={() => {
-							renderHowto(items[key].obj)
-						}}
+						key={key}
+						onClick={() => { changePath(items[key].objectID) }}
 						active={items[key].obj === selectedHowto}
 					>
 						<FontAwesomeIcon icon={faFile} className="mr-3" />
