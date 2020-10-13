@@ -1,5 +1,5 @@
 import { actionTypes } from './actions';
-import { parsePath, setContent } from '../util/HowToUtil'
+import { parsePathAndSetContent } from '../util/HowToUtil'
 
 const howtoInitialState = {
     isLoaded: false,
@@ -24,16 +24,9 @@ const howtoInitialState = {
 const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
         case actionTypes.ON_PATH_CHANGE:
-            let pathVars = parsePath(action.path)
             return {
                 ...state,
-                ...pathVars,
-                ...setContent(
-                    state.rootCategory,
-                    pathVars.categoryNames,
-                    pathVars.rootCategorySelectedFlag,
-                    pathVars.selectedHowtoName
-                )
+                ...parsePathAndSetContent(state.rootCategory, action.path)
             }
 
         case actionTypes.ON_API_SUCCESS:

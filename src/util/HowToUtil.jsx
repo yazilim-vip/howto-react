@@ -33,7 +33,7 @@
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-const parsePath = (fullPath) => {
+const parsePathAndSetContent = (rootCategory, fullPath) => {
     let fullPathParts = fullPath.split("/")
 
     let categoryNames
@@ -60,13 +60,15 @@ const parsePath = (fullPath) => {
     }
 
     let howtoSelectedFlag = selectedHowtoName !== null
+
     return {
-        folderPath: folderPath
-        , categoryNames: categoryNames
-        , selectedCategoryName: selectedCategoryName
-        , selectedHowtoName: selectedHowtoName
-        , howtoSelectedFlag: howtoSelectedFlag
-        , rootCategorySelectedFlag: rootCategorySelectedFlag
+        folderPath: folderPath,
+        categoryNames: categoryNames,
+        selectedCategoryName: selectedCategoryName,
+        selectedHowtoName: selectedHowtoName,
+        howtoSelectedFlag: howtoSelectedFlag,
+        rootCategorySelectedFlag: rootCategorySelectedFlag,
+        ...setContent(rootCategory, categoryNames, rootCategorySelectedFlag, selectedHowtoName)
     }
 }
 
@@ -97,12 +99,10 @@ const setContent = (rootCategory, categoryNames, rootCategorySelectedFlag, selec
         selectedHowto = selectedCategory.howtoList[selectedHowtoName]
     }
 
-    console.log("selectedHowto", selectedHowto);
-
     return {
         selectedCategory: selectedCategory,
         selectedHowto: selectedHowto
     }
 }
 
-export { parsePath, setContent };
+export { parsePathAndSetContent };
