@@ -1,13 +1,8 @@
 import { actionTypes } from './actions';
 import { parsePath, loadCategory } from '../util/HowToUtil'
-import { combineReducers } from 'redux';
 
 const howtoInitialState = {
     isLoaded: false,
-    selectedCategory: null,
-}
-
-const howtoBrowserInitialState = {
     folderPath: "",
     categoryNames: [],
     selectedCategoryName: null,
@@ -57,13 +52,6 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 selectedHowto: action.selectedHowto
             }
 
-        default:
-            return state
-    }
-};
-
-const howtoBrowserReducer = (state = howtoBrowserInitialState, action) => {
-    switch (action.type) {
         case actionTypes.ON_SEARCH:
             return {
                 ...state,
@@ -77,4 +65,4 @@ const howtoBrowserReducer = (state = howtoBrowserInitialState, action) => {
     }
 };
 
-export default combineReducers({ howtoReducer, howtoBrowserReducer })
+export default howtoReducer

@@ -3,7 +3,7 @@ import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-const HowToBreadcrumb = ({renderCategory, categoryNames, rootCategorySelectedFlag}) => {
+const HowToBreadcrumb = ({ renderCategory, categoryNames, rootCategorySelectedFlag }) => {
 
     const getLink = (index) => {
         let link = ""
@@ -15,17 +15,15 @@ const HowToBreadcrumb = ({renderCategory, categoryNames, rootCategorySelectedFla
         return link.replace(/\/$/, "")
     }
 
-    const renderItem = (item, index) => (
-        <Breadcrumb.Item
-            key={index}
-            active={index + 1 === categoryNames.length}
-            onClick={() => renderCategory(getLink(index + 1))}>
-            {item}
-        </Breadcrumb.Item>
-    )
-    
     const renderItems = categoryNames.map((item, index) => {
-        return renderItem(item, index)
+        return (
+            <Breadcrumb.Item
+                key={index}
+                active={index + 1 === categoryNames.length}
+                onClick={() => renderCategory(getLink(index + 1))}>
+                {item}
+            </Breadcrumb.Item>
+        )
     })
 
     return (

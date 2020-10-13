@@ -58,8 +58,7 @@ const HowToBrowser = ({
 		let howtoHits = []
 
 		if (_.isEmpty(query)) {
-			onSearch("", [], [])
-			return
+			return onSearch(query, categoryHits, howtoHits)
 		}
 
 		index
@@ -165,20 +164,17 @@ const HowToBrowser = ({
 }
 
 const mapStateToProps = (state) => {
-	const howtoReducer = state.howtoReducer
-	const howtoBrowserReducer = state.howtoBrowserReducer
-
 	return {
-		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
-		selectedCategory: howtoReducer.selectedCategory,
-		selectedHowto: howtoReducer.selectedHowto,
-		selectedHowtoName: howtoReducer.selectedHowtoName,
-		categoryNames: howtoReducer.categoryNames,
-		folderPath: howtoReducer.folderPath,
+		howtoSelectedFlag: state.howtoSelectedFlag,
+		selectedCategory: state.selectedCategory,
+		selectedHowto: state.selectedHowto,
+		selectedHowtoName: state.selectedHowtoName,
+		categoryNames: state.categoryNames,
+		folderPath: state.folderPath,
 
-		query: howtoBrowserReducer.query,
-		categoryHits: howtoBrowserReducer.categoryHits,
-		howtoHits: howtoBrowserReducer.howtoHits
+		query: state.query,
+		categoryHits: state.categoryHits,
+		howtoHits: state.howtoHits
 	}
 }
 
