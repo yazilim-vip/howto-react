@@ -17,8 +17,8 @@ const onPathChange = (path) => {
     return { type: ON_PATH_CHANGE, path }
 };
 
-const selectCategory = (category) => {
-    return { type: SELECT_CATEGORY, selectedCategory: category }
+const selectCategory = () => {
+    return { type: SELECT_CATEGORY }
 };
 
 const selectHowto = (howto) => {

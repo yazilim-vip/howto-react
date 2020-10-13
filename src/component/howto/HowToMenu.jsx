@@ -7,6 +7,7 @@ import HOWTO_ITEM_TYPE from '../../constants/types';
 import { connect } from 'react-redux';
 import { actionCreators } from "../../redux/actions";
 
+
 const HowToMenu = ({
 	folderPath,
 	type,
@@ -14,13 +15,16 @@ const HowToMenu = ({
 	items,
 	selectedCategory,
 	selectedHowto,
-	rootCategorySelected,
+	clearHits,
+	rootCategorySelectedFlag,
+
 	renderCategory,
-	renderHowto,
-	clearHits
+	renderHowto
 }) => {
+
+
 	const renderItem = (key) => {
-		let prefix = (rootCategorySelected ? "" : (folderPath + "/"))
+		let prefix = (rootCategorySelectedFlag ? "" : (folderPath + "/"))
 
 		switch (type) {
 			// DEFAULT TYPES
@@ -30,7 +34,7 @@ const HowToMenu = ({
 						key={key}
 						action
 						onClick={() => {
-							renderCategory(prefix + items[key].name)
+							// ! renderCategory(prefix + items[key].name)
 							renderCategory(items[key].name)
 						}}
 						active={items[key] === selectedCategory}
@@ -111,9 +115,10 @@ const HowToMenu = ({
 
 const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
+	const howtoBrowserReducer = state.howtoBrowserReducer
 
 	return {
-		onPathChange: howtoReducer.onPathChange
+		rootCategorySelectedFlag: howtoBrowserReducer.rootCategorySelectedFlag
 	}
 }
 

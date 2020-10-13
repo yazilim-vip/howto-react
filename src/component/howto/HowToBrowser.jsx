@@ -8,6 +8,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
 import HOWTO_ITEM_TYPE from '../../constants/types';
 import { actionCreators } from "../../redux/actions";
+import { useHistory } from 'react-router-dom';
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
@@ -17,22 +18,46 @@ const HowToBrowser = ({
 	selectedCategory,
 	selectedHowto,
 	selectedHowtoName,
-	renderCategory,
-	renderHowto,
 	categoryNames,
 	rootCategorySelectedFlag,
 	folderPath,
 	query,
 	categoryHits,
 	howtoHits,
-	onSearch
+	onSearch,
+
+	onPathChange,
+	selectHowto,
+	selectCategory
 }) => {
+
+	const history = useHistory();
+
+	const renderHowto = (selectedHowto) => {
+		let categoryPath = selectedHowto.categoryList.join("/")
+		let howtoLabel = selectedHowto.label;
+
+		let prefix = (rootCategorySelectedFlag) ? "" : (categoryPath + "/")
+		let newFullPath = prefix + howtoLabel
+
+		if (selectedHowto && (Object.keys(selectedHowto).length !== 0)) {
+			onPathChange(newFullPath);
+			selectHowto(selectedHowto);
+			history.push(process.env.REACT_APP_HOWTO_PATH + "/" + newFullPath);
+		}
+	}
+
+	const renderCategory = (folderPath) => {
+		onPathChange(folderPath);
+		selectCategory()
+		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + folderPath);
+	}
 
 	const search = (query) => {
 		let categoryHits = []
 		let howtoHits = []
 
-		if(_.isEmpty(query)){
+		if (_.isEmpty(query)) {
 			onSearch("", [], [])
 			return
 		}
@@ -102,8 +127,8 @@ const HowToBrowser = ({
 						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
 						selectedCategory={selectedCategory}
 						rootCategorySelected={rootCategorySelectedFlag}
-						renderCategory={renderCategory}
 						clearHits={() => search("")}
+						renderCategory={renderCategory}
 					/>
 
 					{/*HowTo Menu*/}

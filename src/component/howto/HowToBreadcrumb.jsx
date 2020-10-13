@@ -41,10 +41,4 @@ const HowToBreadcrumb = ({renderCategory, categoryNames, rootCategorySelectedFla
     )
 }
 
-// HowToBreadcrumb.propTypes = {
-//     categoryNames: PropTypes.array.isRequired,
-//     rootFlag: PropTypes.bool.isRequired,
-//     renderCategory: PropTypes.func.isRequired,
-// };
-
 export default HowToBreadcrumb

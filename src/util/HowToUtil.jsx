@@ -33,7 +33,7 @@
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-const pathParser = (fullPath) => {
+const parsePath = (fullPath) => {
     let fullPathParts = fullPath.split("/")
 
     let categoryNames
@@ -56,7 +56,6 @@ const pathParser = (fullPath) => {
         selectedCategoryName = null
         categoryNames = []
     } else {
-        // folderPath = "/" + folderPath
         selectedCategoryName = categoryNames[categoryNames.length - 1]
     }
 
@@ -71,4 +70,31 @@ const pathParser = (fullPath) => {
     }
 }
 
-export { pathParser };
+const loadCategory = (rootCategory, categoryNames, rootCategorySelectedFlag) => {
+    let selectedCategory
+
+    if (rootCategorySelectedFlag) {
+        selectedCategory = rootCategory
+    } else {
+        let tmpCategory = rootCategory
+
+        for (let catIndex in categoryNames) {
+            let cat = categoryNames[catIndex]
+
+            if (!tmpCategory.subCategoryList[cat]) {
+                tmpCategory = null
+                break /// category not exists
+            }
+
+            tmpCategory = tmpCategory.subCategoryList[cat]
+        }
+
+        selectedCategory = tmpCategory
+    }
+
+    return {
+        selectedCategory: selectedCategory
+    }
+}
+
+export { parsePath , loadCategory };
