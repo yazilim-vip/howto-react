@@ -58,19 +58,27 @@ class HowTo extends React.Component {
 		}
 	}
 
-	renderInfoPage = (message) => { return (<Page>{message}</Page>) }
+	renderInfoPage = (message) => {
+		return (
+			<Page>
+				<div className="row h-100 text-center">
+					<div className="col-sm-12 my-auto">
+							{message}
+					</div>
+				</div>
+			</Page>)
+	}
 
 	render() {
-		let isLoaded = this.props.isLoaded
-		let error = this.props.error
-		// console.log("IS LOADED ?", isLoaded);
+		const { error, isLoaded } = this.props;
+		console.log("isloaded", isLoaded);
 
 		if (!isLoaded) {
-			this.renderInfoPage("Loading...")
+			return this.renderInfoPage("Loading...")
 		}
 
 		if (error) {
-			this.renderInfoPage(error.message)
+			return this.renderInfoPage(error.message)
 		}
 
 		return (

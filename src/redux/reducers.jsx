@@ -3,14 +3,18 @@ import { parsePath, loadCategory } from '../util/HowToUtil'
 
 const howtoInitialState = {
     isLoaded: false,
+    error: null,
     folderPath: "",
     categoryNames: [],
-    selectedCategoryName: null,
-    selectedHowtoName: null,
-    howtoSelectedFlag: false,
-    rootCategorySelectedFlag: null,
+
     selectedCategory: null,
     selectedHowto: null,
+
+    selectedCategoryName: null,
+    selectedHowtoName: null,
+
+    rootCategorySelectedFlag: null,
+    howtoSelectedFlag: false,
 
     query: "",
     categoryHits: [],
@@ -29,7 +33,6 @@ const howtoReducer = (state = howtoInitialState, action) => {
             return {
                 ...state,
                 rootCategory: action.rootCategory,
-                selectedHowto: null,
                 isLoaded: true
             }
 
@@ -43,7 +46,8 @@ const howtoReducer = (state = howtoInitialState, action) => {
         case actionTypes.SELECT_CATEGORY:
             return {
                 ...state,
-                ...loadCategory(state.rootCategory, state.categoryNames, state.rootCategorySelectedFlag)
+                ...loadCategory(state.rootCategory, state.categoryNames, state.rootCategorySelectedFlag),
+                selectedHowto: null
             }
 
         case actionTypes.SELECT_HOWTO:
