@@ -15,6 +15,7 @@ jobs:
           npm install
           npm run build
           echo "www.yazilim.vip" > ./build/CNAME
+          cp build/index.html build/404.html
       - uses: actions/upload-artifact@master
         with:
           name: build
