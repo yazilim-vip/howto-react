@@ -8,14 +8,18 @@ import { connect } from 'react-redux';
 import { actionCreators } from "../../redux/actions";
 
 const HowToMenu = ({
+	// values from props
 	type,
 	title,
 	items,
+
+	// values from mapStateToProps
+	folderPath,
 	selectedCategory,
 	selectedHowto,
 	rootCategorySelectedFlag,
-	folderPath,
 
+	// methods from props
 	changePath
 }) => {
 
@@ -109,6 +113,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispatchToProps = actionCreators
-
-export default connect(mapStateToProps, mapDispatchToProps)(HowToMenu)
+export default connect(mapStateToProps, null)(HowToMenu)

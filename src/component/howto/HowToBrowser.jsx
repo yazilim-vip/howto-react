@@ -14,26 +14,25 @@ const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
+	// values from mapStateToProps
 	folderPath,
 	selectedCategory,
-
 	selectedHowto,
 	selectedHowtoName,
-
-	howtoSelectedFlag,
-
 	categoryHits,
 	howtoHits,
+	howtoSelectedFlag,
+	
+	// methods from props
 	onSearchResult,
-
 	onPathChange
 }) => {
 
 	const history = useHistory();
 
 	const changePath = (path) => {
-		onPathChange(path);
 		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + path);
+		onPathChange(path);
 	}
 
 	const search = _.debounce((query) => {
@@ -61,17 +60,17 @@ const HowToBrowser = ({
 				onSearchResult(categoryHits, howtoHits)
 			})
 			.catch(err => console.error(err))
-	}, 500)
+	}, 300)
 
 	const renderHowtoContentElement = () => {
-		if (selectedHowto !== null) {
+		if (selectedHowto) {
 			return <ReactMarkdown source={selectedHowto.markdownContent} />
 		}
 
 		if (howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
 			return (
 				<Alert key={1} variant={"danger"}>
-					<b>{selectedHowtoName}</b> not found on <b>{selectedCategory.name}</b> folder.
+					<b>{selectedHowtoName}</b> not found in <b>{selectedCategory.name}</b> folder.
 				</Alert>
 			)
 		}
@@ -81,66 +80,62 @@ const HowToBrowser = ({
 		if (selectedCategory === null) {
 			return (
 				<Alert key={1} variant={"danger"}>
-					Category <b>{folderPath}</b> not found on archive.
+					Category <b>{folderPath}</b> not found in archive.
 				</Alert>
 			)
 		}
 
 		return (
-			<Row>
+			<div>
+				<HowToBreadcrumb changePath={changePath} />
+				<hr />
 
-				<Col md="3" className="border-right left-col">
-					<InputGroup className="mb-3">
-						<FormControl
-							placeholder="Search..."
-							aria-label="Search"
-							onChange={event => search(event.target.value)}
+				<Row>
+					<Col md="3" className="border-right left-col">
+						<InputGroup className="mb-3">
+							<FormControl
+								placeholder="Search..."
+								aria-label="Search"
+								onChange={event => search(event.target.value)}
+							/>
+						</InputGroup>
+
+						{/*Sub Category Menu*/}
+						<HowToMenu
+							title="Categories"
+							type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
+							items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
+							changePath={changePath}
 						/>
-					</InputGroup>
 
-					{/*Sub Category Menu*/}
-					<HowToMenu
-						title="Categories"
-						type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
-						items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
-						changePath={changePath}
-					/>
+						{/*HowTo Menu*/}
+						<HowToMenu
+							title="Howtos"
+							type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
+							items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
+							changePath={changePath}
+						/>
+					</Col>
 
-					{/*HowTo Menu*/}
-					<HowToMenu
-						title="Howtos"
-						type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
-						items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
-						changePath={changePath}
-					/>
-				</Col>
-
-				{/*Content*/}
-				<Col md="9" className="right-col">
-					{renderHowtoContentElement()}
-				</Col>
-
-			</Row>
+					{/*Content*/}
+					<Col md="9" className="right-col">
+						{renderHowtoContentElement()}
+					</Col>
+				</Row>
+			</div>
 		)
 	}
 
-	return (
-		<div>
-			<HowToBreadcrumb changePath={changePath} />
-			<hr />
-			{renderMainContentElement()}
-		</div>
-	)
+	return renderMainContentElement()
 }
 
 const mapStateToProps = (state) => {
 	return {
-		howtoSelectedFlag: state.howtoSelectedFlag,
+		folderPath: state.folderPath,
 		selectedCategory: state.selectedCategory,
 		selectedHowto: state.selectedHowto,
 		selectedHowtoName: state.selectedHowtoName,
-		folderPath: state.folderPath,
-
+		howtoSelectedFlag: state.howtoSelectedFlag,
 		categoryHits: state.categoryHits,
 		howtoHits: state.howtoHits
 	}

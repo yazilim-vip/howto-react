@@ -5,7 +5,14 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions"
 
-const HowToBreadcrumb = ({ changePath, categoryNames, rootCategorySelectedFlag }) => {
+const HowToBreadcrumb = ({
+    // values from mapStateToProps
+    categoryNames,
+    rootCategorySelectedFlag,
+
+    // methods from props
+    changePath
+}) => {
 
     const getLink = (index) => {
         let link = ""
@@ -34,19 +41,19 @@ const HowToBreadcrumb = ({ changePath, categoryNames, rootCategorySelectedFlag }
                 key="root"
                 active={rootCategorySelectedFlag}
                 onClick={() => changePath("")}>
-                <FontAwesomeIcon icon={faHome} />
+                <span>
+                    <FontAwesomeIcon icon={faHome} />
+                </span>
             </Breadcrumb.Item>
             {renderItems}
         </Breadcrumb>
     )
 }
 const mapStateToProps = (state) => {
-	return {
-		categoryNames: state.categoryNames,
-		rootCategorySelectedFlag: state.rootCategorySelectedFlag
-	}
+    return {
+        categoryNames: state.categoryNames,
+        rootCategorySelectedFlag: state.rootCategorySelectedFlag
+    }
 }
 
-const mapDispatchToProps = actionCreators
-
-export default connect(mapStateToProps, mapDispatchToProps)(HowToBreadcrumb)
+export default connect(mapStateToProps, null)(HowToBreadcrumb)

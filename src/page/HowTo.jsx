@@ -16,26 +16,24 @@ class HowTo extends React.Component {
 	// Fetching HowTo Data From Service
 	//------------------------
 	fetchHowtoData = () => {
-		if (!this.rootCategory) {
-			Firebase
-				.database()
-				.ref('howto')
-				.on(
-					'value', snapshot => {
-						if (snapshot.exists()) {
-							const val = snapshot.val()
-							const json = val.substring(1, val.length - 1)
+		Firebase
+			.database()
+			.ref('howto')
+			.on(
+				'value', snapshot => {
+					if (snapshot.exists()) {
+						const val = snapshot.val()
+						const json = val.substring(1, val.length - 1)
 
-							this.serviceSuccessHandler(JSON.parse(json), this.props.match.params[0])
-						} else {
-							this.props.onApiError("Snapshot can not found on firebase.")
-						}
-					},
-					error => {
-						this.props.onApiError(error)
+						this.serviceSuccessHandler(JSON.parse(json), this.props.match.params[0])
+					} else {
+						this.props.onApiError("Snapshot can not found on firebase.")
 					}
-				)
-		}
+				},
+				error => {
+					this.props.onApiError(error)
+				}
+			)
 	}
 
 	serviceSuccessHandler = (data, path) => {
@@ -80,13 +78,7 @@ class HowTo extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		error: state.error,
-		isLoaded: state.isLoaded,
-		rootCategory: state.rootCategory,
-		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto,
-		categoryNames: state.categoryNames,
-		folderPath: state.folderPath,
-		rootCategorySelectedFlag: state.rootCategorySelectedFlag
+		isLoaded: state.isLoaded
 	}
 }
 
