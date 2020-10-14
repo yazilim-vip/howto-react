@@ -12,7 +12,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: ReactJS Build
         run: |
-          echo "${{ github.event_name }}"
+          echo "${{ github.event_name }} ${{ github.ref }}"
           npm install
           npm run build
           echo "www.yazilim.vip" > ./build/CNAME
