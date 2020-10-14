@@ -8,14 +8,11 @@ import { Link } from "react-router-dom";
 const HowToBreadcrumb = ({
     // values from mapStateToProps
     categoryNames,
-    rootCategorySelectedFlag,
-
-    // methods from props
-    changePath
+    rootCategorySelectedFlag
 }) => {
 
     const getLink = (index) => {
-        let link = ""
+        let link = "/howto/"
 
         for (let i = 0; i < index; i++) {
             link += categoryNames[i] + "/"
@@ -25,22 +22,21 @@ const HowToBreadcrumb = ({
     }
 
     const renderItems = categoryNames.map((item, index) => {
+        let to = getLink(index + 1)
+        console.log("TO", to);
+
         return (
-            <Breadcrumb.Item key={index} active={index + 1 === categoryNames.length}>
-                <Link to={getLink(index + 1)} replace>
-                    {item}
-                </Link>
+            <Breadcrumb.Item key={index} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: to }}>
+                {item}
             </Breadcrumb.Item>
         )
     })
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item active={rootCategorySelectedFlag}>
+            <Breadcrumb.Item key="root" active={rootCategorySelectedFlag} linkAs={Link} linkProps={{ to: "/howto" }}>
                 <span>
-                    <Link to="/howto/" replace key="root">
-                        <FontAwesomeIcon icon={faHome} />
-                    </Link>
+                    <FontAwesomeIcon icon={faHome} />
                 </span>
             </Breadcrumb.Item>
 

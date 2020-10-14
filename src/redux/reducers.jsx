@@ -9,7 +9,7 @@ const howtoInitialState = {
     isLoaded: false,
     error: null,
 
-    folderPath: "",
+    folderPath: "/howto",
     categoryNames: [],
 
     selectedCategory: null,

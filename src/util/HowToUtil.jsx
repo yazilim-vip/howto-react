@@ -33,71 +33,45 @@
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-const parsePathAndSetContent = (rootCategory, fullPath) => {
-    let path = fullPath.replace("/howto/", "")
-    let pathParts = path.split("/")
-
-    let categoryNames
-
-    let folderPath
-    let selectedCategoryName
-    let selectedHowtoName = null
-
-    if (path.endsWith(".howto") || path.endsWith(".md")) {
-        selectedHowtoName = pathParts.pop()
-        folderPath = path.substring(0, path.lastIndexOf("/"))
-    } else {
-        folderPath = path
-    }
-
-    categoryNames = pathParts
-
-    let rootCategorySelectedFlag = (folderPath === "");
-    if (rootCategorySelectedFlag) {
-        selectedCategoryName = null
-        categoryNames = []
-    } else {
-        selectedCategoryName = categoryNames[categoryNames.length - 1]
-    }
-
-    let howtoSelectedFlag = selectedHowtoName !== null
+const parsePathAndSetContent = (rootCategory, path) => {
+    let rootCategorySelectedFlag = (path === "/howto")
+    let categoryNames = path.slice(1).split("/")
+    let howtoSelectedFlag = (path.endsWith(".howto") || path.endsWith(".md"))
+    let selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
+    let selectedCategoryName = categoryNames[categoryNames.length - 1]
 
     return {
-        folderPath: folderPath,
+        folderPath: path,
         categoryNames: categoryNames,
         selectedCategoryName: selectedCategoryName,
         selectedHowtoName: selectedHowtoName,
         howtoSelectedFlag: howtoSelectedFlag,
         rootCategorySelectedFlag: rootCategorySelectedFlag,
-        ...setContent(rootCategory, categoryNames, rootCategorySelectedFlag, selectedHowtoName)
+        ...setContent(rootCategory, categoryNames, selectedHowtoName)
     }
 }
 
-const setContent = (rootCategory, categoryNames, rootCategorySelectedFlag, selectedHowtoName) => {
-    let selectedCategory = rootCategory
-    let selectedHowto = null
-
+const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     // set selectedCategory
-    if (!rootCategorySelectedFlag) {
-        let tmpCategory = rootCategory
+    let tmpCategory = rootCategory
 
-        for (let catIndex in categoryNames) {
-            let cat = categoryNames[catIndex]
-
-            if (!tmpCategory.subCategoryList[cat]) {
-                tmpCategory = null
-                break /// category not exists
-            }
-
-            tmpCategory = tmpCategory.subCategoryList[cat]
+    categoryNames.shift() // shift first category (howto)
+    for (let cat of categoryNames) {
+        if (!tmpCategory.subCategoryList[cat]) {
+            tmpCategory = null
+            break /// category not exists
         }
 
-        selectedCategory = tmpCategory
+        tmpCategory = tmpCategory.subCategoryList[cat]
     }
 
+    let selectedCategory = tmpCategory
+
     // set selectedHowto
+    let selectedHowto = null
+
     if (selectedHowtoName &&
-        selectedCategory.howtoList &&
+        selectedCategory &&
         selectedCategory.howtoList.hasOwnProperty(selectedHowtoName)) {
         selectedHowto = selectedCategory.howtoList[selectedHowtoName]
     }

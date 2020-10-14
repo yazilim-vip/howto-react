@@ -20,7 +20,7 @@ const HowToMenu = ({
 	rootCategorySelectedFlag
 }) => {
 
-	const prefix = (rootCategorySelectedFlag ? "" : (folderPath + "/"))
+	const prefix = (rootCategorySelectedFlag ? "/howto" : (folderPath)) + "/"
 
 	const renderItem = (key) => {
 
@@ -28,11 +28,8 @@ const HowToMenu = ({
 			// DEFAULT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY:
 				return (
-					<Link to={prefix + items[key].name} replace key={key}>
-						<ListGroup.Item
-							action
-							active={items[key] === selectedCategory}
-						>
+					<Link to={prefix + items[key].name} key={key} replace>
+						<ListGroup.Item action active={items[key] === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
 						</ListGroup.Item>
@@ -40,13 +37,14 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
-					<Link to={prefix + items[key].label} replace key={key}>
-						<ListGroup.Item
-							action
-							active={items[key] === selectedHowto}
-						>
+					<Link to={prefix + items[key].label} key={key} replace>
+						<ListGroup.Item action active={items[key] === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
-							{items[key].label.replace(".howto", "")}
+							{
+								items[key].label
+									.replace(".howto", "")
+									.replace(".md", "")
+							}
 						</ListGroup.Item>
 					</Link>
 				)
@@ -54,11 +52,8 @@ const HowToMenu = ({
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<Link to={items[key].objectID} replace key={key}>
-						<ListGroup.Item
-							action
-							active={items[key].obj === selectedCategory}
-						>
+					<Link to={items[key].objectID} key={key} replace>
+						<ListGroup.Item action active={items[key].obj === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
 						</ListGroup.Item>
@@ -66,11 +61,8 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<Link to={items[key].objectID} replace key={key}>
-						<ListGroup.Item
-							action
-							active={items[key].obj === selectedHowto}
-						>
+					<Link to={items[key].objectID} key={key} replace>
+						<ListGroup.Item action active={items[key].obj === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
 							{items[key].name}
 						</ListGroup.Item>

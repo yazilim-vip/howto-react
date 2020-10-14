@@ -15,8 +15,8 @@ const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
 	// values from mapStateToProps
-	folderPath,
 	selectedCategory,
+	selectedCategoryName,
 	selectedHowto,
 	selectedHowtoName,
 	categoryHits,
@@ -59,7 +59,7 @@ const HowToBrowser = ({
 			return <ReactMarkdown source={selectedHowto.markdownContent} />
 		}
 
-		if (howtoSelectedFlag || selectedCategory.howtoList.length > 0) {
+		if (howtoSelectedFlag) {
 			return (
 				<Alert key={1} variant={"danger"}>
 					<b>{selectedHowtoName}</b> not found in <b>{selectedCategory.name}</b> folder.
@@ -72,7 +72,7 @@ const HowToBrowser = ({
 		if (selectedCategory === null) {
 			return (
 				<Alert key={1} variant={"danger"}>
-					Category <b>{folderPath}</b> not found in archive.
+					Category <b>{selectedCategoryName}</b> not found in path.
 				</Alert>
 			)
 		}
@@ -123,8 +123,8 @@ const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
 
 	return {
-		folderPath: howtoReducer.folderPath,
 		selectedCategory: howtoReducer.selectedCategory,
+		selectedCategoryName: howtoReducer.selectedCategoryName,
 		selectedHowto: howtoReducer.selectedHowto,
 		selectedHowtoName: howtoReducer.selectedHowtoName,
 		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
