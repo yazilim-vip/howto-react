@@ -46,7 +46,8 @@ class HowTo extends React.Component {
 						{content}
 					</div>
 				</div>
-			</Page>)
+			</Page>
+		)
 	}
 
 	render() {
