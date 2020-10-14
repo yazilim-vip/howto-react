@@ -22,11 +22,8 @@ const HowToBreadcrumb = ({
     }
 
     const renderItems = categoryNames.map((item, index) => {
-        let to = getLink(index + 1)
-        console.log("TO", to);
-
         return (
-            <Breadcrumb.Item key={index} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: to }}>
+            <Breadcrumb.Item key={item} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: getLink(index + 1) }}>
                 {item}
             </Breadcrumb.Item>
         )

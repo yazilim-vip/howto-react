@@ -16,19 +16,17 @@ const HowToMenu = ({
 	// values from mapStateToProps
 	folderPath,
 	selectedCategory,
-	selectedHowto,
-	rootCategorySelectedFlag
+	selectedHowto
 }) => {
 
-	const prefix = (rootCategorySelectedFlag ? "/howto" : (folderPath)) + "/"
-
 	const renderItem = (key) => {
+		const prefix = "/" + folderPath + "/"
 
 		switch (type) {
 			// DEFAULT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY:
 				return (
-					<Link to={prefix + items[key].name} key={key} replace>
+					<Link to={prefix + items[key].name} key={key}>
 						<ListGroup.Item action active={items[key] === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
@@ -37,7 +35,7 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
-					<Link to={prefix + items[key].label} key={key} replace>
+					<Link to={prefix + items[key].label} key={key}>
 						<ListGroup.Item action active={items[key] === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
 							{
@@ -52,7 +50,7 @@ const HowToMenu = ({
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<Link to={items[key].objectID} key={key} replace>
+					<Link to={"/howto/" + items[key].objectID} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
@@ -61,7 +59,7 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<Link to={items[key].objectID} key={key} replace>
+					<Link to={"/howto/" + items[key].objectID} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
 							{items[key].name}
@@ -99,8 +97,7 @@ const mapStateToProps = (state) => {
 	return {
 		folderPath: howtoReducer.folderPath,
 		selectedCategory: howtoReducer.selectedCategory,
-		selectedHowto: howtoReducer.selectedHowto,
-		rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
+		selectedHowto: howtoReducer.selectedHowto
 	}
 }
 

@@ -41,7 +41,7 @@ const parsePathAndSetContent = (rootCategory, path) => {
     let selectedCategoryName = categoryNames[categoryNames.length - 1]
 
     return {
-        folderPath: path,
+        folderPath: categoryNames.join("/"),
         categoryNames: categoryNames,
         selectedCategoryName: selectedCategoryName,
         selectedHowtoName: selectedHowtoName,
