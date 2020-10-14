@@ -9,12 +9,11 @@ import { Alert, Spinner } from "react-bootstrap";
 class HowTo extends React.Component {
 
 	componentDidMount() {
-		this.fetchHowtoData()
+		if (!this.props.rootCategory) {
+			this.fetchHowtoData()
+		}
 	}
 
-	//------------------------
-	// Fetching HowTo Data From Service
-	//------------------------
 	fetchHowtoData = () => {
 		Firebase
 			.database()
@@ -56,7 +55,9 @@ class HowTo extends React.Component {
 		const { error, isLoaded } = this.props;
 
 		if (!isLoaded) {
-			return this.renderInfoPage(<Spinner animation="border" />)
+			return this.renderInfoPage(
+				<Spinner animation="border" />
+			)
 		}
 
 		if (error) {
@@ -78,7 +79,8 @@ class HowTo extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		error: state.error,
-		isLoaded: state.isLoaded
+		isLoaded: state.isLoaded,
+		rootCategory: state.rootCategory
 	}
 }
 

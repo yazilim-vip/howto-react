@@ -5,7 +5,6 @@ import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
 import HOWTO_ITEM_TYPE from '../../constants/types';
 import { connect } from 'react-redux';
-import { actionCreators } from "../../redux/actions";
 
 const HowToMenu = ({
 	// values from props

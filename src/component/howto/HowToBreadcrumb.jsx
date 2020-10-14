@@ -3,7 +3,6 @@ import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
-import { actionCreators } from "../../redux/actions"
 
 const HowToBreadcrumb = ({
     // values from mapStateToProps
@@ -36,17 +35,17 @@ const HowToBreadcrumb = ({
     })
 
     return (
-        <Breadcrumb>
-            <Breadcrumb.Item
-                key="root"
-                active={rootCategorySelectedFlag}
-                onClick={() => changePath("")}>
-                <span>
-                    <FontAwesomeIcon icon={faHome} />
-                </span>
-            </Breadcrumb.Item>
-            {renderItems}
-        </Breadcrumb>
+            <Breadcrumb>
+                <Breadcrumb.Item
+                    key="root"
+                    active={rootCategorySelectedFlag}
+                    onClick={() => changePath("")}>
+                    <span>
+                        <FontAwesomeIcon icon={faHome} />
+                    </span>
+                </Breadcrumb.Item>
+                {renderItems}
+            </Breadcrumb>
     )
 }
 const mapStateToProps = (state) => {
