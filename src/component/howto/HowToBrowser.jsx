@@ -24,24 +24,8 @@ const HowToBrowser = ({
 	howtoSelectedFlag,
 
 	// methods from props
-	onSearchResult,
-	onPathChange
+	onSearchResult
 }) => {
-
-	// const history = createBrowserHistory();
-
-	// history.listen((location) => {
-	// 	let path = location.pathname.replace("/howto/", "")
-	// 	onPathChange(path)
-	// });
-
-	// console.log(history);
-
-	const changePath = (path) => {
-		// onPathChange(path);
-		console.log("HEREEE");
-		push(process.env.REACT_APP_HOWTO_PATH + "/" + path);
-	}
 
 	const search = _.debounce((query) => {
 		if (_.isEmpty(query)) {
@@ -95,7 +79,7 @@ const HowToBrowser = ({
 
 		return (
 			<div>
-				<HowToBreadcrumb changePath={changePath} />
+				<HowToBreadcrumb />
 				<hr />
 
 				<Row>
@@ -113,7 +97,6 @@ const HowToBrowser = ({
 							title="Categories"
 							type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
 							items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
-							changePath={changePath}
 						/>
 
 						{/*HowTo Menu*/}
@@ -121,7 +104,6 @@ const HowToBrowser = ({
 							title="Howtos"
 							type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
 							items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
-							changePath={changePath}
 						/>
 					</Col>
 
@@ -139,7 +121,6 @@ const HowToBrowser = ({
 
 const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
-	const router = state.router
 
 	return {
 		folderPath: howtoReducer.folderPath,
@@ -149,8 +130,6 @@ const mapStateToProps = (state) => {
 		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
 		categoryHits: howtoReducer.categoryHits,
 		howtoHits: howtoReducer.howtoHits,
-
-		history: router.location
 	}
 }
 

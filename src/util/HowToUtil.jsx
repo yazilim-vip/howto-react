@@ -34,7 +34,8 @@
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
 const parsePathAndSetContent = (rootCategory, fullPath) => {
-    let fullPathParts = fullPath.split("/")
+    let path = fullPath.replace("/howto/", "")
+    let pathParts = path.split("/")
 
     let categoryNames
 
@@ -42,14 +43,14 @@ const parsePathAndSetContent = (rootCategory, fullPath) => {
     let selectedCategoryName
     let selectedHowtoName = null
 
-    if (fullPath.endsWith(".howto") || fullPath.endsWith(".md")) {
-        selectedHowtoName = fullPathParts.pop()
-        folderPath = fullPath.substring(0, fullPath.lastIndexOf("/"))
+    if (path.endsWith(".howto") || path.endsWith(".md")) {
+        selectedHowtoName = pathParts.pop()
+        folderPath = path.substring(0, path.lastIndexOf("/"))
     } else {
-        folderPath = fullPath
+        folderPath = path
     }
 
-    categoryNames = fullPathParts
+    categoryNames = pathParts
 
     let rootCategorySelectedFlag = (folderPath === "");
     if (rootCategorySelectedFlag) {

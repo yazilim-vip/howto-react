@@ -24,7 +24,10 @@ class HowTo extends React.Component {
 						const val = snapshot.val()
 						const json = val.substring(1, val.length - 1)
 
-						this.serviceSuccessHandler(JSON.parse(json), this.props.match.params[0])
+						const data = JSON.parse(json)
+						const path = this.props.history.location.pathname
+
+						this.props.onApiSuccess(data, path)
 					} else {
 						this.props.onApiError("Snapshot can not found on firebase.")
 					}
@@ -33,11 +36,6 @@ class HowTo extends React.Component {
 					this.props.onApiError(error)
 				}
 			)
-	}
-
-	serviceSuccessHandler = (data, path) => {
-		this.props.onApiSuccess(data)
-		this.props.onPathChange(path)
 	}
 
 	renderInfoPage = (content) => {

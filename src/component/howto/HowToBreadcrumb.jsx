@@ -3,6 +3,7 @@ import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const HowToBreadcrumb = ({
     // values from mapStateToProps
@@ -25,31 +26,30 @@ const HowToBreadcrumb = ({
 
     const renderItems = categoryNames.map((item, index) => {
         return (
-            <Breadcrumb.Item
-                key={index}
-                active={index + 1 === categoryNames.length}
-                onClick={() => changePath(getLink(index + 1))}>
-                {item}
+            <Breadcrumb.Item key={index} active={index + 1 === categoryNames.length}>
+                <Link to={getLink(index + 1)} replace>
+                    {item}
+                </Link>
             </Breadcrumb.Item>
         )
     })
 
     return (
-            <Breadcrumb>
-                <Breadcrumb.Item
-                    key="root"
-                    active={rootCategorySelectedFlag}
-                    onClick={() => changePath("")}>
-                    <span>
+        <Breadcrumb>
+            <Breadcrumb.Item active={rootCategorySelectedFlag}>
+                <span>
+                    <Link to="/howto/" replace key="root">
                         <FontAwesomeIcon icon={faHome} />
-                    </span>
-                </Breadcrumb.Item>
-                {renderItems}
-            </Breadcrumb>
+                    </Link>
+                </span>
+            </Breadcrumb.Item>
+
+            {renderItems}
+        </Breadcrumb>
     )
 }
 const mapStateToProps = (state) => {
-	const howtoReducer = state.howtoReducer
+    const howtoReducer = state.howtoReducer
 
     return {
         categoryNames: howtoReducer.categoryNames,

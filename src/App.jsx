@@ -1,6 +1,6 @@
 // ReactJS 
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Bootstrap
 import { Col, Navbar, Row } from 'react-bootstrap';

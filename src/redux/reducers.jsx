@@ -28,13 +28,14 @@ const howtoInitialState = {
 const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
         case LOCATION_CHANGE:
-            const path = action.payload.location.pathname
-            console.log("PATH", path);
-
-            if (state.rootCategory && path.startsWith("/howto")) {
+            let path = action.payload.location.pathname
+            if (path.startsWith("/howto") && state.rootCategory) {
                 return {
                     ...state,
-                    ...parsePathAndSetContent(state.rootCategory, path.replace("/howto/", ""))
+                    ...parsePathAndSetContent(
+                        state.rootCategory,
+                        path
+                    )
                 }
             } else {
                 return {
@@ -42,17 +43,15 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 }
             }
 
-        case actionTypes.ON_PATH_CHANGE:
-            return {
-                ...state,
-                ...parsePathAndSetContent(state.rootCategory, action.path)
-            }
-
         case actionTypes.ON_API_SUCCESS:
             return {
                 ...state,
                 rootCategory: action.rootCategory,
-                isLoaded: true
+                isLoaded: true,
+                ...parsePathAndSetContent(
+                    action.rootCategory,
+                    action.path
+                )
             }
 
         case actionTypes.ON_API_ERROR:

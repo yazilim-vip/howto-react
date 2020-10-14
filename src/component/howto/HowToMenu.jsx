@@ -17,10 +17,7 @@ const HowToMenu = ({
 	folderPath,
 	selectedCategory,
 	selectedHowto,
-	rootCategorySelectedFlag,
-
-	// methods from props
-	changePath
+	rootCategorySelectedFlag
 }) => {
 
 	const prefix = (rootCategorySelectedFlag ? "" : (folderPath + "/"))
@@ -31,10 +28,9 @@ const HowToMenu = ({
 			// DEFAULT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY:
 				return (
-					<Link to={prefix + items[key].name} replace={true} key={key}>
+					<Link to={prefix + items[key].name} replace key={key}>
 						<ListGroup.Item
 							action
-							key={key}
 							active={items[key] === selectedCategory}
 						>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
@@ -44,10 +40,9 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
-					<Link to={prefix + items[key].label} replace={true} key={key}>
+					<Link to={prefix + items[key].label} replace key={key}>
 						<ListGroup.Item
 							action
-							key={key}
 							active={items[key] === selectedHowto}
 						>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
@@ -59,10 +54,9 @@ const HowToMenu = ({
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<Link to={items[key].objectID} replace={true} key={key}>
+					<Link to={items[key].objectID} replace key={key}>
 						<ListGroup.Item
 							action
-							key={key}
 							active={items[key].obj === selectedCategory}
 						>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
@@ -72,10 +66,9 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<Link to={items[key].objectID} replace={true} key={key}>
+					<Link to={items[key].objectID} replace key={key}>
 						<ListGroup.Item
 							action
-							key={key}
 							active={items[key].obj === selectedHowto}
 						>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
