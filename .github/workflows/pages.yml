@@ -2,7 +2,7 @@ name: Websites Publisher
 on: [push]
 jobs:
   website_build:
-    if: ${{ github.event_name == 'pull_request' }}
+    # if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -13,6 +13,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: ReactJS Build
       run: | 
+        echo "${{ github.event_name }}"
         npm install
         npm run build
         echo "www.yazilim.vip" > ./build/CNAME
