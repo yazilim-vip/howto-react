@@ -1,24 +1,36 @@
 name: Websites Publisher
-on:
-  push:
-      branches: [master]
+on: [push]
 jobs:
   website_build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-        registry-url: 'https://registry.npmjs.org'
-    - name: ReactJS Build
-      run: | 
-        npm install
-        npm run build
-        echo "www.yazilim.vip" > ./build/CNAME
-    - name: GH Pages Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+      - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: ReactJS Build
+        run: |
+          echo "${{ github.event_name }}"
+          npm install
+          npm run build
+          echo "www.yazilim.vip" > ./build/CNAME
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build
+  website_publish:
+    needs: [website_build]
+    if: ${{ github.ref == 'master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build
+      - name: GH Pages Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
