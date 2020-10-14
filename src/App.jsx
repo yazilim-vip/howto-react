@@ -1,6 +1,6 @@
 // ReactJS 
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Bootstrap
 import { Col, Navbar, Row } from 'react-bootstrap';
@@ -25,11 +25,14 @@ import HowTo from './page/HowTo';
 import About from "./page/About";
 import NotFound from './page/NotFound';
 
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./redux/configureStore";
+
 library.add(fab)
 library.add(fas)
 
 const App = () => (
-  <Router>
+  <ConnectedRouter history={history}>
 
     {/* HEADER */}
     <header>
@@ -42,9 +45,8 @@ const App = () => (
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/portfolio' component={Portfolio} />
-          <Route path='/howto/*' component={HowTo} />
+          <Route path='/howto*' component={HowTo} />
           <Route path='/about' component={About} />
-          <Redirect path='/howto' to="/howto/" />
           <Route path='/404' component={NotFound} />
           <Redirect to="/404" />
         </Switch>
@@ -69,7 +71,7 @@ const App = () => (
 
     </footer>
 
-  </Router>
+  </ConnectedRouter>
 );
 
 export default App;

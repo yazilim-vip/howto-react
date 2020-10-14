@@ -15,7 +15,7 @@ const CustomNavbar = () => {
       <div className="animate__animated animate__flipInX">
         <Navbar.Brand className="my-2">
           <a href="/">
-            <img alt="" src="/logo.svg" width="250" />
+            <img alt="" src="/logo.svg" width="220" />
           </a>
         </Navbar.Brand>
       </div>

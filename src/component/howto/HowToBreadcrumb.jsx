@@ -1,56 +1,47 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
-
 import { Breadcrumb } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-const HowToBreadcrumb = (props) => {
-    const rootFlag = props.rootFlag;
-    const categoryNames = props.categoryNames;
-    const renderCategory = props.renderCategory;
+const HowToBreadcrumb = ({
+    // values from mapStateToProps
+    categoryNames,
+    rootCategorySelectedFlag
+}) => {
 
     const getLink = (index) => {
-        let link = ""
-
-        for (let i = 0; i < index; i++) {
-            link += categoryNames[i] + "/"
-        }
-
-        return link.replace(/\/$/, "")
+        return "/howto/" + categoryNames.slice(0, index).join("/")
     }
 
-    const renderItem = (item, index) => (
-        <Breadcrumb.Item
-            key={index}
-            active={index + 1 === categoryNames.length}
-            onClick={() => renderCategory(getLink(index + 1))}>
-            {item}
-        </Breadcrumb.Item>
-    )
-    
     const renderItems = categoryNames.map((item, index) => {
-        return renderItem(item, index)
+        return (
+            <Breadcrumb.Item key={item} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: getLink(index + 1) }}>
+                {item}
+            </Breadcrumb.Item>
+        )
     })
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item
-                key="root"
-                active={rootFlag}
-                onClick={() => renderCategory("")}>
-                <FontAwesomeIcon icon={faHome} />
+            <Breadcrumb.Item key="root" active={rootCategorySelectedFlag} linkAs={Link} linkProps={{ to: "/howto" }}>
+                <span>
+                    <FontAwesomeIcon icon={faHome} />
+                </span>
             </Breadcrumb.Item>
+
             {renderItems}
         </Breadcrumb>
     )
 }
+const mapStateToProps = (state) => {
+    const howtoReducer = state.howtoReducer
 
-HowToBreadcrumb.propTypes = {
-    categoryNames: PropTypes.array.isRequired,
-    rootFlag: PropTypes.bool.isRequired,
-    renderCategory: PropTypes.func.isRequired,
-};
+    return {
+        categoryNames: howtoReducer.categoryNames,
+        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
+    }
+}
 
-export default HowToBreadcrumb
+export default connect(mapStateToProps, null)(HowToBreadcrumb)
