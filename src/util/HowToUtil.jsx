@@ -2,34 +2,30 @@
  *
  * Example1
  * url: https://www.yazilim.vip/howto
- * fullPath = ""
- * fullPathParts = ""
- * categoryNames = null
- * folderPath = ""
+ * path = "/howto"
+ * categoryNames = []
+ * folderPath = "howto"
  * selectedCategoryName = "howto"
  *
  * Example2
  * url: https://www.yazilim.vip/howto/linux
- * fullPath = "linux"
- * fullPathParts = ["linux"]
+ * path = "linux"
  * categoryNames = ["linux"]
- * folderPath = "linux"
+ * folderPath = "howto/linux"
  * selectedCategoryName = "linux"
  *
  * Example3
  * url: https://www.yazilim.vip/howto/linux/specific_distro
- * fullPath = "linux/specific_distro"
- * fullPathParts = ["linux", "specific_distro"]
+ * path = "/howtolinux/specific_distro"
  * categoryNames = ["linux", "specific_distro"]
- * folderPath = "linux/specific_distro"
+ * folderPath = "howto/linux/specific_distro"
  * selectedCategoryName = "specific_distro"
  *
  * Example4
  * url: http://www.yazilim.vip/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto
- * fullPath = "ide/Eclipse/eclipse-shortcuts_configuration.howto"
- * fullPathParts = ["ide", "Eclipse", "eclipse-shortcuts_configuration.howto"]
+ * path = "/howtoide/Eclipse/eclipse-shortcuts_configuration.howto"
  * categoryNames = ["ide, "Eclipse"]
- * folderPath = "ide/Eclipse"
+ * folderPath = "howto/ide/Eclipse"
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
@@ -39,9 +35,10 @@ const parsePathAndSetContent = (rootCategory, path) => {
     let howtoSelectedFlag = (path.endsWith(".howto") || path.endsWith(".md"))
     let selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
     let selectedCategoryName = categoryNames[categoryNames.length - 1]
+    let folderPath = categoryNames.join("/")
 
     return {
-        folderPath: categoryNames.join("/"),
+        folderPath: folderPath,
         categoryNames: categoryNames,
         selectedCategoryName: selectedCategoryName,
         selectedHowtoName: selectedHowtoName,
@@ -55,7 +52,7 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     // set selectedCategory
     let tmpCategory = rootCategory
 
-    categoryNames.shift() // shift first category (howto)
+    categoryNames.shift() // shift first category (howto), because rootCategory is not wrapped with "howto" key
     for (let cat of categoryNames) {
         if (!tmpCategory.subCategoryList[cat]) {
             tmpCategory = null

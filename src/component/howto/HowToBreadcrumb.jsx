@@ -12,13 +12,7 @@ const HowToBreadcrumb = ({
 }) => {
 
     const getLink = (index) => {
-        let link = "/howto/"
-
-        for (let i = 0; i < index; i++) {
-            link += categoryNames[i] + "/"
-        }
-
-        return link.replace(/\/$/, "")
+        return "/howto/" + categoryNames.slice(0, index).join("/")
     }
 
     const renderItems = categoryNames.map((item, index) => {
