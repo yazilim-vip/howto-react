@@ -5,6 +5,7 @@ import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
 import HOWTO_ITEM_TYPE from '../../constants/types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const HowToMenu = ({
 	// values from props
@@ -30,53 +31,57 @@ const HowToMenu = ({
 			// DEFAULT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY:
 				return (
-					<ListGroup.Item
-						action
-						key={key}
-						onClick={() => { changePath(prefix + items[key].name) }}
-						active={items[key] === selectedCategory}
-					>
-						<FontAwesomeIcon icon={faFolder} className="mr-3" />
-						{items[key].name}
-					</ListGroup.Item>
+					<Link to={prefix + items[key].name} replace={true} key={key}>
+						<ListGroup.Item
+							action
+							key={key}
+							active={items[key] === selectedCategory}
+						>
+							<FontAwesomeIcon icon={faFolder} className="mr-3" />
+							{items[key].name}
+						</ListGroup.Item>
+					</Link>
 				)
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
-					<ListGroup.Item
-						action
-						key={key}
-						onClick={() => { changePath(prefix + items[key].label) }}
-						active={items[key] === selectedHowto}
-					>
-						<FontAwesomeIcon icon={faFile} className="mr-3" />
-						{items[key].label.replace(".howto", "")}
-					</ListGroup.Item>
+					<Link to={prefix + items[key].label} replace={true} key={key}>
+						<ListGroup.Item
+							action
+							key={key}
+							active={items[key] === selectedHowto}
+						>
+							<FontAwesomeIcon icon={faFile} className="mr-3" />
+							{items[key].label.replace(".howto", "")}
+						</ListGroup.Item>
+					</Link>
 				)
 
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<ListGroup.Item
-						action
-						key={key}
-						onClick={() => { changePath(items[key].objectID) }}
-						active={items[key].obj === selectedCategory}
-					>
-						<FontAwesomeIcon icon={faFolder} className="mr-3" />
-						{items[key].name}
-					</ListGroup.Item>
+					<Link to={items[key].objectID} replace={true} key={key}>
+						<ListGroup.Item
+							action
+							key={key}
+							active={items[key].obj === selectedCategory}
+						>
+							<FontAwesomeIcon icon={faFolder} className="mr-3" />
+							{items[key].name}
+						</ListGroup.Item>
+					</Link>
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<ListGroup.Item
-						action
-						key={key}
-						onClick={() => { changePath(items[key].objectID) }}
-						active={items[key].obj === selectedHowto}
-					>
-						<FontAwesomeIcon icon={faFile} className="mr-3" />
-						{items[key].name}
-					</ListGroup.Item>
+					<Link to={items[key].objectID} replace={true} key={key}>
+						<ListGroup.Item
+							action
+							key={key}
+							active={items[key].obj === selectedHowto}
+						>
+							<FontAwesomeIcon icon={faFile} className="mr-3" />
+							{items[key].name}
+						</ListGroup.Item>
+					</Link>
 				)
 
 			default:
@@ -104,11 +109,13 @@ const HowToMenu = ({
 };
 
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+
 	return {
-		folderPath: state.folderPath,
-		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto,
-		rootCategorySelectedFlag: state.rootCategorySelectedFlag,
+		folderPath: howtoReducer.folderPath,
+		selectedCategory: howtoReducer.selectedCategory,
+		selectedHowto: howtoReducer.selectedHowto,
+		rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
 	}
 }
 

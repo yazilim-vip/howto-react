@@ -77,10 +77,12 @@ class HowTo extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+
 	return {
-		error: state.error,
-		isLoaded: state.isLoaded,
-		rootCategory: state.rootCategory
+		error: howtoReducer.error,
+		isLoaded: howtoReducer.isLoaded,
+		rootCategory: howtoReducer.rootCategory
 	}
 }
 

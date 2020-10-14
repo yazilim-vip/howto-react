@@ -49,9 +49,11 @@ const HowToBreadcrumb = ({
     )
 }
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+
     return {
-        categoryNames: state.categoryNames,
-        rootCategorySelectedFlag: state.rootCategorySelectedFlag
+        categoryNames: howtoReducer.categoryNames,
+        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
     }
 }
 

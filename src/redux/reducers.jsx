@@ -1,5 +1,9 @@
+import { combineReducers } from 'redux';
+import { connectRouter, LOCATION_CHANGE } from 'connected-react-router';
+
 import { actionTypes } from './actions';
-import { parsePathAndSetContent } from '../util/HowToUtil'
+
+import { parsePathAndSetContent } from '../util/HowToUtil';
 
 const howtoInitialState = {
     isLoaded: false,
@@ -23,6 +27,21 @@ const howtoInitialState = {
 
 const howtoReducer = (state = howtoInitialState, action) => {
     switch (action.type) {
+        case LOCATION_CHANGE:
+            const path = action.payload.location.pathname
+            console.log("PATH", path);
+
+            if (state.rootCategory && path.startsWith("/howto")) {
+                return {
+                    ...state,
+                    ...parsePathAndSetContent(state.rootCategory, path.replace("/howto/", ""))
+                }
+            } else {
+                return {
+                    ...state,
+                }
+            }
+
         case actionTypes.ON_PATH_CHANGE:
             return {
                 ...state,
@@ -55,4 +74,9 @@ const howtoReducer = (state = howtoInitialState, action) => {
     }
 };
 
-export default howtoReducer
+const createRootReducer = (history) => combineReducers({
+    router: connectRouter(history),
+    howtoReducer
+})
+
+export default createRootReducer

@@ -12,6 +12,7 @@
     "@react-pdf/renderer": "^1.6.11",
     "algoliasearch": "^4.5.1",
     "bootstrap": "^4.5.3",
+    "connected-react-router": "^6.8.0",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "firebase": "^7.23.0",

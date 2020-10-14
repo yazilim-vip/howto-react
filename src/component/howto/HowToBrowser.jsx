@@ -8,7 +8,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
 import HOWTO_ITEM_TYPE from '../../constants/types';
-import { useHistory } from 'react-router-dom';
+import { push } from 'connected-react-router'
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
 const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
@@ -22,17 +22,25 @@ const HowToBrowser = ({
 	categoryHits,
 	howtoHits,
 	howtoSelectedFlag,
-	
+
 	// methods from props
 	onSearchResult,
 	onPathChange
 }) => {
 
-	const history = useHistory();
+	// const history = createBrowserHistory();
+
+	// history.listen((location) => {
+	// 	let path = location.pathname.replace("/howto/", "")
+	// 	onPathChange(path)
+	// });
+
+	// console.log(history);
 
 	const changePath = (path) => {
-		history.push(process.env.REACT_APP_HOWTO_PATH + "/" + path);
-		onPathChange(path);
+		// onPathChange(path);
+		console.log("HEREEE");
+		push(process.env.REACT_APP_HOWTO_PATH + "/" + path);
 	}
 
 	const search = _.debounce((query) => {
@@ -130,17 +138,22 @@ const HowToBrowser = ({
 }
 
 const mapStateToProps = (state) => {
+	const howtoReducer = state.howtoReducer
+	const router = state.router
+
 	return {
-		folderPath: state.folderPath,
-		selectedCategory: state.selectedCategory,
-		selectedHowto: state.selectedHowto,
-		selectedHowtoName: state.selectedHowtoName,
-		howtoSelectedFlag: state.howtoSelectedFlag,
-		categoryHits: state.categoryHits,
-		howtoHits: state.howtoHits
+		folderPath: howtoReducer.folderPath,
+		selectedCategory: howtoReducer.selectedCategory,
+		selectedHowto: howtoReducer.selectedHowto,
+		selectedHowtoName: howtoReducer.selectedHowtoName,
+		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
+		categoryHits: howtoReducer.categoryHits,
+		howtoHits: howtoReducer.howtoHits,
+
+		history: router.location
 	}
 }
 
-const mapDispatchToProps = actionCreators
+const mapDispatchToProps = { ...actionCreators, push }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)

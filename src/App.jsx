@@ -25,11 +25,14 @@ import HowTo from './page/HowTo';
 import About from "./page/About";
 import NotFound from './page/NotFound';
 
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./redux/configureStore";
+
 library.add(fab)
 library.add(fas)
 
 const App = () => (
-  <Router>
+  <ConnectedRouter history={history}>
 
     {/* HEADER */}
     <header>
@@ -69,7 +72,7 @@ const App = () => (
 
     </footer>
 
-  </Router>
+  </ConnectedRouter>
 );
 
 export default App;
