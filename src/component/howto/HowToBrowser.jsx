@@ -1,5 +1,5 @@
 import React from "react";
-import HowToMenu from "./HowToMenu";
+import HowToFileManager from "./HowToFileManager";
 import { Col, Row, Alert, FormControl } from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
@@ -63,6 +63,7 @@ const HowToBrowser = ({
 					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
 					title={selectedHowto.label.replace(".howto", "")}
 					width="100"
+					from="bottom"
 					onRequestClose={() => { push(folderPath) }}
 				>
 				</SlidingPane>
@@ -106,7 +107,9 @@ const HowToBrowser = ({
 					</Col>
 				</Row>
 
-				<HowToMenu
+				<hr />
+
+				<HowToFileManager
 					isHit={categoryHits || howtoHits}
 					categoryList={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
 					howtoList={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
