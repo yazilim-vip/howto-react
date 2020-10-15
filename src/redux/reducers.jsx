@@ -5,36 +5,15 @@ import { actionTypes } from './actions';
 
 import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil';
 
-const howtoInitialState = {
-    isLoaded: false,
-    error: null,
-
-    folderPath: "/howto",
-    categoryNames: [],
-
-    selectedCategory: null,
-    selectedHowto: null,
-
-    selectedCategoryName: null,
-    selectedHowtoName: null,
-
-    rootCategorySelectedFlag: null,
-    howtoSelectedFlag: false,
-
-    categoryHits: null,
-    howtoHits: null,
-
-    index: null
-}
-
-const howtoReducer = (state = howtoInitialState, action) => {
+const howtoReducer = (state = [], action) => {
     switch (action.type) {
         case LOCATION_CHANGE:
             let path = action.payload.location.pathname
             if (path.startsWith("/howto") && state.rootCategory) {
                 return {
                     ...state,
-                    ...parsePathAndSetContent(state.rootCategory, path)
+                    ...parsePathAndSetContent(state.rootCategory, path),
+                    query: ""
                 }
             } else {
                 return {
@@ -48,7 +27,8 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 rootCategory: action.rootCategory,
                 isLoaded: true,
                 ...parsePathAndSetContent(action.rootCategory, action.path),
-                searchIndex: createSearchIndex(action.rootCategory)
+                searchIndex: createSearchIndex(action.rootCategory),
+                query: ""
             }
 
         case actionTypes.ON_API_ERROR:
@@ -61,6 +41,7 @@ const howtoReducer = (state = howtoInitialState, action) => {
         case actionTypes.ON_SEARCH:
             return {
                 ...state,
+                query: action.query,
                 categoryHits: action.categoryHits,
                 howtoHits: action.howtoHits
             }

@@ -62,7 +62,10 @@ const HowToMenu = ({
 					<Link to={items[key].path} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
-							{items[key].name}
+							{
+								items[key].name.replace(".howto", "")
+									.replace(".md", "")
+							}
 						</ListGroup.Item>
 					</Link>
 				)

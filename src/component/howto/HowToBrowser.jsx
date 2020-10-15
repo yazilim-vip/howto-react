@@ -1,6 +1,6 @@
 import React from "react";
 import HowToMenu from "./HowToMenu";
-import { Col, Row, Alert, InputGroup, FormControl } from "react-bootstrap";
+import { Col, Row, Alert, FormControl } from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
@@ -19,6 +19,7 @@ const HowToBrowser = ({
 	howtoHits,
 	howtoSelectedFlag,
 	searchIndex,
+	query,
 
 	// methods from props
 	onSearchResult
@@ -26,7 +27,7 @@ const HowToBrowser = ({
 
 	const search = (query) => {
 		if (_.isEmpty(query)) {
-			return onSearchResult(null, null)
+			return onSearchResult("", null, null)
 		}
 
 		let hits = searchIndex.filter(o => o.name.includes(query.toLowerCase()))
@@ -43,9 +44,9 @@ const HowToBrowser = ({
 				}
 			});
 
-			onSearchResult(categoryHits, howtoHits)
+			onSearchResult(query, categoryHits, howtoHits)
 		} else {
-			onSearchResult(null, null)
+			onSearchResult(query, null, null)
 		}
 	}
 
@@ -81,11 +82,11 @@ const HowToBrowser = ({
 					<Col md="3" className="border-right left-col">
 
 						<FormControl
-							className="my-1
-							"
+							className="my-1"
 							type="search"
 							placeholder="Search..."
 							aria-label="Search"
+							value={query}
 							onChange={event => search(event.target.value)}
 						/>
 
@@ -125,6 +126,7 @@ const mapStateToProps = (state) => {
 		selectedHowto: howtoReducer.selectedHowto,
 		selectedHowtoName: howtoReducer.selectedHowtoName,
 		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
+		query: howtoReducer.query,
 		categoryHits: howtoReducer.categoryHits,
 		howtoHits: howtoReducer.howtoHits,
 		searchIndex: howtoReducer.searchIndex
