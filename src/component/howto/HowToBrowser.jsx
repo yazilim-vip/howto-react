@@ -61,7 +61,7 @@ const HowToBrowser = ({
 				<SlidingPane
 					isOpen={howtoSelectedFlag}
 					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
-					title={selectedHowto.label.replace(".howto", "")}
+					title={selectedHowto.label}
 					width="100"
 					from="bottom"
 					onRequestClose={() => { push(folderPath) }}

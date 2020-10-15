@@ -177,6 +177,7 @@ canvas {
     }
   }
 }
+
 .glitch:after{
   content:attr(data-text);
   position:absolute;
@@ -198,6 +199,7 @@ canvas {
     }
   }
 }
+
 .glitch:before{
   content:attr(data-text);
   position:absolute;
@@ -209,4 +211,12 @@ canvas {
   overflow:hidden;
   clip:rect(0,900px,0,0); 
   animation:noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.link {
+  color: #353a3f;
+}
+
+.link:hover {
+   color: #646b73
 }

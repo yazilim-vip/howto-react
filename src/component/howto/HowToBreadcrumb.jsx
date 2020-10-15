@@ -17,7 +17,7 @@ const HowToBreadcrumb = ({
 
     const renderItems = categoryNames.map((item, index) => {
         return (
-            <Breadcrumb.Item key={item} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: getLink(index + 1) }}>
+            <Breadcrumb.Item key={item} active={index + 1 === categoryNames.length} linkAs={Link} linkProps={{ to: getLink(index + 1), className: "link" }}>
                 {item}
             </Breadcrumb.Item>
         )
@@ -25,7 +25,7 @@ const HowToBreadcrumb = ({
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item key="root" active={rootCategorySelectedFlag} linkAs={Link} linkProps={{ to: "/howto" }}>
+            <Breadcrumb.Item key="root" active={rootCategorySelectedFlag} linkAs={Link} linkProps={{ to: "/howto", className: "link" }}>
                 <span>
                     <FontAwesomeIcon icon={faHome} />
                 </span>
