@@ -22,9 +22,7 @@ class HowTo extends React.Component {
 				'value', snapshot => {
 					if (snapshot.exists()) {
 						const val = snapshot.val()
-						const json = val.substring(1, val.length - 1)
-
-						const data = JSON.parse(json)
+						const data = JSON.parse(val)
 						const path = this.props.history.location.pathname
 
 						this.props.onApiSuccess(data, path)
