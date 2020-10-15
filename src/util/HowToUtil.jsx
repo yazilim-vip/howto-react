@@ -19,14 +19,14 @@ import HOWTO_ITEM_TYPE from '../model/HowToItemType';
  *
  * Example3
  * url: https://www.yazilim.vip/howto/linux/specific_distro
- * path = "/howtolinux/specific_distro"
+ * path = "/howto/linux/specific_distro"
  * categoryNames = ["linux", "specific_distro"]
  * folderPath = "howto/linux/specific_distro"
  * selectedCategoryName = "specific_distro"
  *
  * Example4
  * url: http://www.yazilim.vip/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto
- * path = "/howtoide/Eclipse/eclipse-shortcuts_configuration.howto"
+ * path = "/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto"
  * categoryNames = ["ide, "Eclipse"]
  * folderPath = "howto/ide/Eclipse"
  * selectedCategoryName = "Eclipse"
@@ -85,40 +85,40 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
 }
 
 const createIndex = (rootCategory) => {
-
+    return indexContent(rootCategory, [], "/howto");
 }
 
 const indexContent = (data, arr, path) => {
     const howtoList = data.howtoList;
     const subCategoryList = data.subCategoryList;
-  
+
     Object.keys(howtoList).map(key => {
-      const label = howtoList[key].label;
-      const newPath = path + "/" + label;
-      const searchItem = new SearchItem(
-        newPath.substring(1, newPath.length),
-        HOWTO_ITEM_TYPE.HOWTO_HIT,
-        label.replace(".howto", "").replace("-", " ").replace("_", " ")
-      );
-  
-      arr.push(searchItem);
+        const name = howtoList[key].label;
+        const newPath = path + "/" + name;
+        const searchItem = new SearchItem(
+            newPath,
+            HOWTO_ITEM_TYPE.HOWTO_HIT,
+            name
+        );
+
+        arr.push(searchItem);
     });
-  
+
     Object.keys(subCategoryList).map(key => {
-      const name = subCategoryList[key].name;
-      const newPath = path + "/" + name;
-      const searchItem = new SearchItem(
-        newPath.substring(1, newPath.length),
-        HOWTO_ITEM_TYPE.CATEGORY_HIT,
-        name.replace(".howto", "").replace("-", " ").replace("_", " ")
-      );
-  
-      arr.push(searchItem);
-  
-      indexContent(subCategoryList[key], arr, newPath);
+        const name = subCategoryList[key].name;
+        const newPath = path + "/" + name;
+        const searchItem = new SearchItem(
+            newPath,
+            HOWTO_ITEM_TYPE.CATEGORY_HIT,
+            name
+        );
+
+        arr.push(searchItem);
+
+        indexContent(subCategoryList[key], arr, newPath);
     });
-  
+
     return arr;
-  };
+};
 
 export { parsePathAndSetContent, createIndex };

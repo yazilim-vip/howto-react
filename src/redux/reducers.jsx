@@ -3,7 +3,7 @@ import { connectRouter, LOCATION_CHANGE } from 'connected-react-router';
 
 import { actionTypes } from './actions';
 
-import { parsePathAndSetContent } from '../util/HowToUtil';
+import { parsePathAndSetContent, createIndex } from '../util/HowToUtil';
 
 const howtoInitialState = {
     isLoaded: false,
@@ -23,6 +23,8 @@ const howtoInitialState = {
 
     categoryHits: [],
     howtoHits: [],
+
+    index: null
 }
 
 const howtoReducer = (state = howtoInitialState, action) => {
@@ -51,7 +53,8 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 ...parsePathAndSetContent(
                     action.rootCategory,
                     action.path
-                )
+                ),
+                index: createIndex(action.rootCategory)
             }
 
         case actionTypes.ON_API_ERROR:
