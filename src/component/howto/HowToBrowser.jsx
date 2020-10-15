@@ -60,6 +60,7 @@ const HowToBrowser = ({
 		if (selectedHowto) {
 			return (
 				<SlidingPane
+					className="howto-sliding-pane"
 					isOpen={howtoSelectedFlag}
 					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
 					title={selectedHowto.label}
