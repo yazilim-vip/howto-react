@@ -50,7 +50,7 @@ const HowToMenu = ({
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<Link to={"/howto/" + items[key].objectID} key={key}>
+					<Link to={items[key].path} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
@@ -59,7 +59,7 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<Link to={"/howto/" + items[key].objectID} key={key}>
+					<Link to={items[key].path} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
 							{items[key].name}

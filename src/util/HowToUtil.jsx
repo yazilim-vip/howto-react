@@ -84,7 +84,7 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     }
 }
 
-const createIndex = (rootCategory) => {
+const createSearchIndex = (rootCategory) => {
     return indexContent(rootCategory, [], "/howto");
 }
 
@@ -98,7 +98,7 @@ const indexContent = (data, arr, path) => {
         const searchItem = new SearchItem(
             newPath,
             HOWTO_ITEM_TYPE.HOWTO_HIT,
-            name
+            name.toLowerCase()
         );
 
         arr.push(searchItem);
@@ -110,7 +110,7 @@ const indexContent = (data, arr, path) => {
         const searchItem = new SearchItem(
             newPath,
             HOWTO_ITEM_TYPE.CATEGORY_HIT,
-            name
+            name.toLowerCase()
         );
 
         arr.push(searchItem);
@@ -121,4 +121,4 @@ const indexContent = (data, arr, path) => {
     return arr;
 };
 
-export { parsePathAndSetContent, createIndex };
+export { parsePathAndSetContent, createSearchIndex };

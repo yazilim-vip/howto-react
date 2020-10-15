@@ -4,14 +4,10 @@ import { Col, Row, Alert, InputGroup, FormControl } from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
-import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
 import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
-
-const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
-const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -22,37 +18,34 @@ const HowToBrowser = ({
 	categoryHits,
 	howtoHits,
 	howtoSelectedFlag,
+	searchIndex,
 
 	// methods from props
 	onSearchResult
 }) => {
 
-	const search = _.debounce((query) => {
+	const search = (query) => {
 		if (_.isEmpty(query)) {
 			return onSearchResult([], [])
 		}
 
-		index
-			.search(query)
-			.then(res => {
-				let categoryHits = []
-				let howtoHits = []
-				let hits = res.hits
+		let hits = searchIndex.filter(o => o.name.includes(query.toLowerCase()))
 
-				if (hits) {
-					hits.forEach(hit => {
-						if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
-							categoryHits.push(hit);
-						} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
-							howtoHits.push(hit);
-						}
-					});
+		let categoryHits = []
+		let howtoHits = []
+
+		if (hits) {
+			hits.forEach(hit => {
+				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
+					categoryHits.push(hit);
+				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
+					howtoHits.push(hit);
 				}
+			});
+		}
 
-				onSearchResult(categoryHits, howtoHits)
-			})
-			.catch(err => console.error(err))
-	}, 300)
+		onSearchResult(categoryHits, howtoHits)
+	}
 
 	const renderHowtoContentElement = () => {
 		if (selectedHowto) {
@@ -130,6 +123,7 @@ const mapStateToProps = (state) => {
 		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
 		categoryHits: howtoReducer.categoryHits,
 		howtoHits: howtoReducer.howtoHits,
+		searchIndex: howtoReducer.searchIndex
 	}
 }
 

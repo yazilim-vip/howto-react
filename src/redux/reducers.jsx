@@ -3,7 +3,7 @@ import { connectRouter, LOCATION_CHANGE } from 'connected-react-router';
 
 import { actionTypes } from './actions';
 
-import { parsePathAndSetContent, createIndex } from '../util/HowToUtil';
+import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil';
 
 const howtoInitialState = {
     isLoaded: false,
@@ -34,10 +34,7 @@ const howtoReducer = (state = howtoInitialState, action) => {
             if (path.startsWith("/howto") && state.rootCategory) {
                 return {
                     ...state,
-                    ...parsePathAndSetContent(
-                        state.rootCategory,
-                        path
-                    )
+                    ...parsePathAndSetContent(state.rootCategory, path)
                 }
             } else {
                 return {
@@ -50,11 +47,8 @@ const howtoReducer = (state = howtoInitialState, action) => {
                 ...state,
                 rootCategory: action.rootCategory,
                 isLoaded: true,
-                ...parsePathAndSetContent(
-                    action.rootCategory,
-                    action.path
-                ),
-                index: createIndex(action.rootCategory)
+                ...parsePathAndSetContent(action.rootCategory, action.path),
+                searchIndex: createSearchIndex(action.rootCategory)
             }
 
         case actionTypes.ON_API_ERROR:
