@@ -92,8 +92,9 @@ const indexContent = (data, arr, path) => {
     const howtoList = data.howtoList;
     const subCategoryList = data.subCategoryList;
 
-    Object.keys(howtoList).map(key => {
-        const name = howtoList[key].label;
+    Object.keys(howtoList).forEach(key => {
+        const howto = howtoList[key]
+        const name = howto.label;
         const newPath = path + "/" + name;
         const searchItem = new SearchItem(
             newPath,
@@ -104,8 +105,9 @@ const indexContent = (data, arr, path) => {
         arr.push(searchItem);
     });
 
-    Object.keys(subCategoryList).map(key => {
-        const name = subCategoryList[key].name;
+    Object.keys(subCategoryList).forEach(key => {
+        const subCategory = subCategoryList[key]
+        const name = subCategory.name;
         const newPath = path + "/" + name;
         const searchItem = new SearchItem(
             newPath,
@@ -115,7 +117,7 @@ const indexContent = (data, arr, path) => {
 
         arr.push(searchItem);
 
-        indexContent(subCategoryList[key], arr, newPath);
+        indexContent(subCategory, arr, newPath);
     });
 
     return arr;
