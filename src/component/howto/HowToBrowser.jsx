@@ -10,7 +10,8 @@ import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -31,7 +32,7 @@ const HowToBrowser = ({
 }) => {
 
 	const search = (query) => {
-		if (_.isEmpty(query)) {
+		if (!query) {
 			return onSearchResult("", null, null)
 		}
 
@@ -64,6 +65,7 @@ const HowToBrowser = ({
 					title={selectedHowto.label}
 					width="100"
 					from="bottom"
+					closeIcon={<FontAwesomeIcon icon={faAngleDown} size="2x"/>}
 					onRequestClose={() => { push(folderPath) }}
 				>
 				</SlidingPane>
@@ -144,4 +146,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = { ...actionCreators, push }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HowToBrowser))
+export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)
