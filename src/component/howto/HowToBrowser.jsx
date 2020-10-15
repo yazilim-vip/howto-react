@@ -47,7 +47,6 @@ const HowToBrowser = ({
 		} else {
 			onSearchResult(null, null)
 		}
-
 	}
 
 	const renderHowtoContentElement = () => {
@@ -80,13 +79,15 @@ const HowToBrowser = ({
 
 				<Row>
 					<Col md="3" className="border-right left-col">
-						<InputGroup className="mb-3">
-							<FormControl
-								placeholder="Search..."
-								aria-label="Search"
-								onChange={event => search(event.target.value)}
-							/>
-						</InputGroup>
+
+						<FormControl
+							className="my-1
+							"
+							type="search"
+							placeholder="Search..."
+							aria-label="Search"
+							onChange={event => search(event.target.value)}
+						/>
 
 						{/*Sub Category Menu*/}
 						<HowToMenu
