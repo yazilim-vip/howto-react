@@ -21,8 +21,8 @@ const howtoInitialState = {
     rootCategorySelectedFlag: null,
     howtoSelectedFlag: false,
 
-    categoryHits: [],
-    howtoHits: [],
+    categoryHits: null,
+    howtoHits: null,
 
     index: null
 }

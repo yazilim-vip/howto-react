@@ -26,15 +26,15 @@ const HowToBrowser = ({
 
 	const search = (query) => {
 		if (_.isEmpty(query)) {
-			return onSearchResult([], [])
+			return onSearchResult(null, null)
 		}
 
 		let hits = searchIndex.filter(o => o.name.includes(query.toLowerCase()))
 
-		let categoryHits = []
-		let howtoHits = []
-
 		if (hits) {
+			let categoryHits = []
+			let howtoHits = []
+
 			hits.forEach(hit => {
 				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
 					categoryHits.push(hit);
@@ -42,9 +42,12 @@ const HowToBrowser = ({
 					howtoHits.push(hit);
 				}
 			});
+
+			onSearchResult(categoryHits, howtoHits)
+		} else {
+			onSearchResult(null, null)
 		}
 
-		onSearchResult(categoryHits, howtoHits)
 	}
 
 	const renderHowtoContentElement = () => {
@@ -88,15 +91,15 @@ const HowToBrowser = ({
 						{/*Sub Category Menu*/}
 						<HowToMenu
 							title="Categories"
-							type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
-							items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
+							type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
+							items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
 						/>
 
 						{/*HowTo Menu*/}
 						<HowToMenu
 							title="Howtos"
-							type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
-							items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
+							type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
+							items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
 						/>
 					</Col>
 

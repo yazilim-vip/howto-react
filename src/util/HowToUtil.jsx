@@ -79,8 +79,8 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     return {
         selectedCategory: selectedCategory,
         selectedHowto: selectedHowto,
-        categoryHits: [],
-        howtoHits: []
+        categoryHits: null,
+        howtoHits: null
     }
 }
 
