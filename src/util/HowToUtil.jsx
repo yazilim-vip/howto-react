@@ -93,9 +93,10 @@ const indexContent = (data, arr, path) => {
     const subCategoryList = data.subCategoryList;
 
     Object.keys(howtoList).forEach(key => {
-        const howto = howtoList[key]
+        const howto = howtoList[key];
         const name = howto.label;
         const newPath = path + "/" + name;
+
         const searchItem = new SearchItem(
             newPath,
             HOWTO_ITEM_TYPE.HOWTO_HIT,
@@ -106,9 +107,10 @@ const indexContent = (data, arr, path) => {
     });
 
     Object.keys(subCategoryList).forEach(key => {
-        const subCategory = subCategoryList[key]
+        const subCategory = subCategoryList[key];
         const name = subCategory.name;
         const newPath = path + "/" + name;
+        
         const searchItem = new SearchItem(
             newPath,
             HOWTO_ITEM_TYPE.CATEGORY_HIT,
