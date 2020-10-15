@@ -1,5 +1,5 @@
 import React from "react";
-import HowToMenu from "./HowToMenu";
+import HowToFileManager from "./HowToFileManager";
 import { Col, Row, Alert, FormControl } from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
@@ -8,9 +8,14 @@ import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
 import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const HowToBrowser = ({
 	// values from mapStateToProps
+	folderPath,
 	selectedCategory,
 	selectedCategoryName,
 	selectedHowto,
@@ -22,11 +27,12 @@ const HowToBrowser = ({
 	query,
 
 	// methods from props
-	onSearchResult
+	onSearchResult,
+	push
 }) => {
 
 	const search = (query) => {
-		if (_.isEmpty(query)) {
+		if (!query) {
 			return onSearchResult("", null, null)
 		}
 
@@ -52,7 +58,18 @@ const HowToBrowser = ({
 
 	const renderHowtoContentElement = () => {
 		if (selectedHowto) {
-			return <ReactMarkdown source={selectedHowto.markdownContent} />
+			return (
+				<SlidingPane
+					isOpen={howtoSelectedFlag}
+					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
+					title={selectedHowto.label}
+					width="100"
+					from="bottom"
+					closeIcon={<FontAwesomeIcon icon={faAngleDown} size="2x" />}
+					onRequestClose={() => { push(folderPath) }}
+				>
+				</SlidingPane>
+			)
 		}
 
 		if (howtoSelectedFlag) {
@@ -75,41 +92,33 @@ const HowToBrowser = ({
 
 		return (
 			<div>
-				<HowToBreadcrumb />
-				<hr />
-
 				<Row>
-					<Col md="3" className="border-right left-col">
+					<Col md="9">
+						<HowToBreadcrumb />
+					</Col>
 
+					<Col md="3">
 						<FormControl
-							className="my-1"
 							type="search"
 							placeholder="Search..."
 							aria-label="Search"
 							value={query}
 							onChange={event => search(event.target.value)}
 						/>
-
-						{/*Sub Category Menu*/}
-						<HowToMenu
-							title="Categories"
-							type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
-							items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
-						/>
-
-						{/*HowTo Menu*/}
-						<HowToMenu
-							title="Howtos"
-							type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
-							items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
-						/>
-					</Col>
-
-					{/*Content*/}
-					<Col md="9" className="right-col">
-						{renderHowtoContentElement()}
 					</Col>
 				</Row>
+
+				<hr />
+
+				<HowToFileManager
+					isHit={categoryHits || howtoHits}
+					categoryList={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
+					howtoList={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
+				/>
+
+				{/*Content*/}
+				{renderHowtoContentElement()}
+
 			</div>
 		)
 	}
@@ -121,6 +130,7 @@ const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
 
 	return {
+		folderPath: howtoReducer.folderPath,
 		selectedCategory: howtoReducer.selectedCategory,
 		selectedCategoryName: howtoReducer.selectedCategoryName,
 		selectedHowto: howtoReducer.selectedHowto,

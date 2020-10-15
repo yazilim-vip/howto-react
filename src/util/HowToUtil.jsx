@@ -38,7 +38,7 @@ const parsePathAndSetContent = (rootCategory, path) => {
     let howtoSelectedFlag = (path.endsWith(".howto") || path.endsWith(".md"))
     let selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
     let selectedCategoryName = categoryNames[categoryNames.length - 1]
-    let folderPath = categoryNames.join("/")
+    let folderPath = "/" + categoryNames.join("/")
 
     return {
         folderPath: folderPath,
@@ -110,7 +110,7 @@ const indexContent = (data, arr, path) => {
         const subCategory = subCategoryList[key];
         const name = subCategory.name;
         const newPath = path + "/" + name;
-        
+
         const searchItem = new SearchItem(
             newPath,
             HOWTO_ITEM_TYPE.CATEGORY_HIT,
