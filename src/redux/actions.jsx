@@ -11,8 +11,8 @@ const onApiError = (error) => {
     return { type: ON_API_ERROR, error }
 };
 
-const onSearchResult = (categoryHits, howtoHits) => {
-    return { type: ON_SEARCH, categoryHits, howtoHits }
+const onSearchResult = (query, categoryHits, howtoHits) => {
+    return { type: ON_SEARCH, query, categoryHits, howtoHits }
 };
 
 const actionTypes = {

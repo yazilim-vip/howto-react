@@ -1,17 +1,13 @@
 import React from "react";
 import HowToMenu from "./HowToMenu";
-import { Col, Row, Alert, InputGroup, FormControl } from "react-bootstrap";
+import { Col, Row, Alert, FormControl } from "react-bootstrap";
 import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
-import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
-import HOWTO_ITEM_TYPE from '../../constants/types';
+import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
-
-const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
-const index = client.initIndex(process.env.REACT_APP_ALGOLIA_INDEX_NAME)
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -22,37 +18,37 @@ const HowToBrowser = ({
 	categoryHits,
 	howtoHits,
 	howtoSelectedFlag,
+	searchIndex,
+	query,
 
 	// methods from props
 	onSearchResult
 }) => {
 
-	const search = _.debounce((query) => {
+	const search = (query) => {
 		if (_.isEmpty(query)) {
-			return onSearchResult([], [])
+			return onSearchResult("", null, null)
 		}
 
-		index
-			.search(query)
-			.then(res => {
-				let categoryHits = []
-				let howtoHits = []
-				let hits = res.hits
+		let hits = searchIndex.filter(o => o.name.includes(query.toLowerCase()))
 
-				if (hits) {
-					hits.forEach(hit => {
-						if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
-							categoryHits.push(hit);
-						} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
-							howtoHits.push(hit);
-						}
-					});
+		if (hits) {
+			let categoryHits = []
+			let howtoHits = []
+
+			hits.forEach(hit => {
+				if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
+					categoryHits.push(hit);
+				} else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
+					howtoHits.push(hit);
 				}
+			});
 
-				onSearchResult(categoryHits, howtoHits)
-			})
-			.catch(err => console.error(err))
-	}, 300)
+			onSearchResult(query, categoryHits, howtoHits)
+		} else {
+			onSearchResult(query, null, null)
+		}
+	}
 
 	const renderHowtoContentElement = () => {
 		if (selectedHowto) {
@@ -84,26 +80,28 @@ const HowToBrowser = ({
 
 				<Row>
 					<Col md="3" className="border-right left-col">
-						<InputGroup className="mb-3">
-							<FormControl
-								placeholder="Search..."
-								aria-label="Search"
-								onChange={event => search(event.target.value)}
-							/>
-						</InputGroup>
+
+						<FormControl
+							className="my-1"
+							type="search"
+							placeholder="Search..."
+							aria-label="Search"
+							value={query}
+							onChange={event => search(event.target.value)}
+						/>
 
 						{/*Sub Category Menu*/}
 						<HowToMenu
 							title="Categories"
-							type={_.isEmpty(categoryHits) ? HOWTO_ITEM_TYPE.CATEGORY : HOWTO_ITEM_TYPE.CATEGORY_HIT}
-							items={_.isEmpty(categoryHits) ? selectedCategory.subCategoryList : _.extend({}, categoryHits)}
+							type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
+							items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
 						/>
 
 						{/*HowTo Menu*/}
 						<HowToMenu
 							title="Howtos"
-							type={_.isEmpty(howtoHits) ? HOWTO_ITEM_TYPE.HOWTO : HOWTO_ITEM_TYPE.HOWTO_HIT}
-							items={_.isEmpty(howtoHits) ? selectedCategory.howtoList : _.extend({}, howtoHits)}
+							type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
+							items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
 						/>
 					</Col>
 
@@ -128,8 +126,10 @@ const mapStateToProps = (state) => {
 		selectedHowto: howtoReducer.selectedHowto,
 		selectedHowtoName: howtoReducer.selectedHowtoName,
 		howtoSelectedFlag: howtoReducer.howtoSelectedFlag,
+		query: howtoReducer.query,
 		categoryHits: howtoReducer.categoryHits,
 		howtoHits: howtoReducer.howtoHits,
+		searchIndex: howtoReducer.searchIndex
 	}
 }
 

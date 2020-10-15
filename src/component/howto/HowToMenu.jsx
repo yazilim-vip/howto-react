@@ -3,7 +3,7 @@ import { ListGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
-import HOWTO_ITEM_TYPE from '../../constants/types';
+import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ const HowToMenu = ({
 			// HIT TYPES
 			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
 				return (
-					<Link to={"/howto/" + items[key].objectID} key={key}>
+					<Link to={items[key].path} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedCategory}>
 							<FontAwesomeIcon icon={faFolder} className="mr-3" />
 							{items[key].name}
@@ -59,10 +59,13 @@ const HowToMenu = ({
 				)
 			case HOWTO_ITEM_TYPE.HOWTO_HIT:
 				return (
-					<Link to={"/howto/" + items[key].objectID} key={key}>
+					<Link to={items[key].path} key={key}>
 						<ListGroup.Item action active={items[key].obj === selectedHowto}>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
-							{items[key].name}
+							{
+								items[key].name.replace(".howto", "")
+									.replace(".md", "")
+							}
 						</ListGroup.Item>
 					</Link>
 				)

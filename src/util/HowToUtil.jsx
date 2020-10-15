@@ -1,3 +1,6 @@
+import { SearchItem } from "../model/SearchItem"
+import HOWTO_ITEM_TYPE from '../model/HowToItemType';
+
 /**
  *
  * Example1
@@ -16,14 +19,14 @@
  *
  * Example3
  * url: https://www.yazilim.vip/howto/linux/specific_distro
- * path = "/howtolinux/specific_distro"
+ * path = "/howto/linux/specific_distro"
  * categoryNames = ["linux", "specific_distro"]
  * folderPath = "howto/linux/specific_distro"
  * selectedCategoryName = "specific_distro"
  *
  * Example4
  * url: http://www.yazilim.vip/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto
- * path = "/howtoide/Eclipse/eclipse-shortcuts_configuration.howto"
+ * path = "/howto/ide/Eclipse/eclipse-shortcuts_configuration.howto"
  * categoryNames = ["ide, "Eclipse"]
  * folderPath = "howto/ide/Eclipse"
  * selectedCategoryName = "Eclipse"
@@ -76,9 +79,50 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     return {
         selectedCategory: selectedCategory,
         selectedHowto: selectedHowto,
-        categoryHits: [],
-        howtoHits: []
+        categoryHits: null,
+        howtoHits: null
     }
 }
 
-export { parsePathAndSetContent };
+const createSearchIndex = (rootCategory) => {
+    return indexContent(rootCategory, [], "/howto");
+}
+
+const indexContent = (data, arr, path) => {
+    const howtoList = data.howtoList;
+    const subCategoryList = data.subCategoryList;
+
+    Object.keys(howtoList).forEach(key => {
+        const howto = howtoList[key];
+        const name = howto.label;
+        const newPath = path + "/" + name;
+
+        const searchItem = new SearchItem(
+            newPath,
+            HOWTO_ITEM_TYPE.HOWTO_HIT,
+            name.toLowerCase()
+        );
+
+        arr.push(searchItem);
+    });
+
+    Object.keys(subCategoryList).forEach(key => {
+        const subCategory = subCategoryList[key];
+        const name = subCategory.name;
+        const newPath = path + "/" + name;
+        
+        const searchItem = new SearchItem(
+            newPath,
+            HOWTO_ITEM_TYPE.CATEGORY_HIT,
+            name.toLowerCase()
+        );
+
+        arr.push(searchItem);
+
+        indexContent(subCategory, arr, newPath);
+    });
+
+    return arr;
+};
+
+export { parsePathAndSetContent, createSearchIndex };
