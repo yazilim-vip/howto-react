@@ -8,9 +8,13 @@ import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
 import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
+import { withRouter } from "react-router-dom";
 
 const HowToBrowser = ({
 	// values from mapStateToProps
+	folderPath,
 	selectedCategory,
 	selectedCategoryName,
 	selectedHowto,
@@ -22,7 +26,8 @@ const HowToBrowser = ({
 	query,
 
 	// methods from props
-	onSearchResult
+	onSearchResult,
+	push
 }) => {
 
 	const search = (query) => {
@@ -52,7 +57,16 @@ const HowToBrowser = ({
 
 	const renderHowtoContentElement = () => {
 		if (selectedHowto) {
-			return <ReactMarkdown source={selectedHowto.markdownContent} />
+			return (
+				<SlidingPane
+					isOpen={howtoSelectedFlag}
+					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
+					title={selectedHowto.label.replace(".howto", "")}
+					width="100"
+					onRequestClose={() => { push(folderPath) }}
+				>
+				</SlidingPane>
+			)
 		}
 
 		if (howtoSelectedFlag) {
@@ -75,12 +89,12 @@ const HowToBrowser = ({
 
 		return (
 			<div>
-				<HowToBreadcrumb />
-				<hr />
-
 				<Row>
-					<Col md="3" className="border-right left-col">
+					<Col md="9">
+						<HowToBreadcrumb />
+					</Col>
 
+					<Col md="3">
 						<FormControl
 							className="my-1"
 							type="search"
@@ -89,27 +103,24 @@ const HowToBrowser = ({
 							value={query}
 							onChange={event => search(event.target.value)}
 						/>
-
-						{/*Sub Category Menu*/}
-						<HowToMenu
-							title="Categories"
-							type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
-							items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
-						/>
-
-						{/*HowTo Menu*/}
-						<HowToMenu
-							title="Howtos"
-							type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
-							items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
-						/>
-					</Col>
-
-					{/*Content*/}
-					<Col md="9" className="right-col">
-						{renderHowtoContentElement()}
 					</Col>
 				</Row>
+
+				{/*Sub Category Menu*/}
+				<HowToMenu
+					type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
+					items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
+				/>
+
+				{/*HowTo Menu*/}
+				<HowToMenu
+					type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
+					items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
+				/>
+
+				{/*Content*/}
+				{renderHowtoContentElement()}
+
 			</div>
 		)
 	}
@@ -121,6 +132,7 @@ const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
 
 	return {
+		folderPath: howtoReducer.folderPath,
 		selectedCategory: howtoReducer.selectedCategory,
 		selectedCategoryName: howtoReducer.selectedCategoryName,
 		selectedHowto: howtoReducer.selectedHowto,
@@ -135,4 +147,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = { ...actionCreators, push }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HowToBrowser))

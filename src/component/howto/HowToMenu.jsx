@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
@@ -20,7 +20,7 @@ const HowToMenu = ({
 }) => {
 
 	const renderItem = (key) => {
-		const prefix = "/" + folderPath + "/"
+		const prefix = folderPath + "/"
 
 		switch (type) {
 			// DEFAULT TYPES
@@ -36,7 +36,7 @@ const HowToMenu = ({
 			case HOWTO_ITEM_TYPE.HOWTO:
 				return (
 					<Link to={prefix + items[key].label} key={key}>
-						<ListGroup.Item action active={items[key] === selectedHowto}>
+						<ListGroup.Item>
 							<FontAwesomeIcon icon={faFile} className="mr-3" />
 							{
 								items[key].label
@@ -78,7 +78,6 @@ const HowToMenu = ({
 	const renderItems = Object.keys(items).map(key => { return (renderItem(key)) })
 
 	const renderTitle = <div>
-		<hr />
 		<h5 className="pl-3">{title}</h5>
 	</div>
 
