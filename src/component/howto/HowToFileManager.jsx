@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { connect } from 'react-redux';
@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 
 const HowToFileManager = ({
 	// values from props
-	isHit, // main or howto
-
+	isHit,
 	categoryList,
 	howtoList,
 
@@ -20,10 +19,10 @@ const HowToFileManager = ({
 	const renderItem = (name, link, icon) => {
 
 		return (
-			<Col sm="6" md="3" lg="2" className="py-4 text-center">
-				<Link to={link} key={link}>
-					<FontAwesomeIcon icon={icon} className="pb-2" size="4x" />
-					<br/>
+			<Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={link}>
+				<Link to={link} className="link">
+					<FontAwesomeIcon icon={icon} className="pb-1" size="4x" />
+					<br />
 					{name}
 				</Link>
 			</Col>
@@ -41,7 +40,7 @@ const HowToFileManager = ({
 
 
 	const renderHowtos = (items) => Object.keys(items).map(key => {
-		let name = isHit ? items[key].name : items[key].label.replace(".howto", "").replace(".md", "")
+		let name = isHit ? items[key].name : items[key].label
 		let link = isHit ? items[key].path : (prefix + items[key].label)
 
 		return (
