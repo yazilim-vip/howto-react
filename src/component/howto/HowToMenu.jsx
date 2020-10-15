@@ -3,7 +3,7 @@ import { ListGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import _ from 'underscore';
-import HOWTO_ITEM_TYPE from '../../constants/types';
+import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 

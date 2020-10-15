@@ -1,3 +1,6 @@
+import { SearchItem } from "../model/SearchItem"
+import HOWTO_ITEM_TYPE from '../model/HowToItemType';
+
 /**
  *
  * Example1
@@ -81,4 +84,41 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
     }
 }
 
-export { parsePathAndSetContent };
+const createIndex = (rootCategory) => {
+
+}
+
+const indexContent = (data, arr, path) => {
+    const howtoList = data.howtoList;
+    const subCategoryList = data.subCategoryList;
+  
+    Object.keys(howtoList).map(key => {
+      const label = howtoList[key].label;
+      const newPath = path + "/" + label;
+      const searchItem = new SearchItem(
+        newPath.substring(1, newPath.length),
+        HOWTO_ITEM_TYPE.HOWTO_HIT,
+        label.replace(".howto", "").replace("-", " ").replace("_", " ")
+      );
+  
+      arr.push(searchItem);
+    });
+  
+    Object.keys(subCategoryList).map(key => {
+      const name = subCategoryList[key].name;
+      const newPath = path + "/" + name;
+      const searchItem = new SearchItem(
+        newPath.substring(1, newPath.length),
+        HOWTO_ITEM_TYPE.CATEGORY_HIT,
+        name.replace(".howto", "").replace("-", " ").replace("_", " ")
+      );
+  
+      arr.push(searchItem);
+  
+      indexContent(subCategoryList[key], arr, newPath);
+    });
+  
+    return arr;
+  };
+
+export { parsePathAndSetContent, createIndex };

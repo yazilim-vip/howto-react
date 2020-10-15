@@ -7,7 +7,7 @@ import HowToBreadcrumb from "./HowToBreadcrumb";
 import algoliasearch from 'algoliasearch/lite';
 import { connect } from "react-redux";
 import { actionCreators } from "../../redux/actions";
-import HOWTO_ITEM_TYPE from '../../constants/types';
+import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { push } from 'connected-react-router'
 
 const client = algoliasearch(process.env.REACT_APP_ALGOLIA_ID, process.env.REACT_APP_ALGOLIA_READ_ONLY_SECRET)
