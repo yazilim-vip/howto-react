@@ -65,7 +65,7 @@ const HowToBrowser = ({
 					title={selectedHowto.label}
 					width="100"
 					from="bottom"
-					closeIcon={<FontAwesomeIcon icon={faAngleDown} size="2x"/>}
+					closeIcon={<FontAwesomeIcon icon={faAngleDown} size="2x" />}
 					onRequestClose={() => { push(folderPath) }}
 				>
 				</SlidingPane>
@@ -99,7 +99,6 @@ const HowToBrowser = ({
 
 					<Col md="3">
 						<FormControl
-							className="my-1"
 							type="search"
 							placeholder="Search..."
 							aria-label="Search"

@@ -17,7 +17,6 @@ const HowToFileManager = ({
 
 	const prefix = folderPath + "/"
 	const renderItem = (name, link, icon) => {
-
 		return (
 			<Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={link}>
 				<Link to={link} className="link">

@@ -9,7 +9,9 @@ import { Alert, Spinner } from "react-bootstrap";
 class HowTo extends React.Component {
 
 	componentDidMount() {
-		if (!this.props.rootCategory) {
+		const { rootCategory} = this.props;
+		
+		if (!rootCategory) {
 			this.fetchHowtoData()
 		}
 	}
@@ -17,7 +19,7 @@ class HowTo extends React.Component {
 	fetchHowtoData = () => {
 		Firebase
 			.database()
-			.ref('howto')
+			.ref('howto-dev')
 			.on(
 				'value', snapshot => {
 					if (snapshot.exists()) {
