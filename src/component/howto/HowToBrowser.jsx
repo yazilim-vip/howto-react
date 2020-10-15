@@ -106,16 +106,10 @@ const HowToBrowser = ({
 					</Col>
 				</Row>
 
-				{/*Sub Category Menu*/}
 				<HowToMenu
-					type={categoryHits ? HOWTO_ITEM_TYPE.CATEGORY_HIT : HOWTO_ITEM_TYPE.CATEGORY}
-					items={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
-				/>
-
-				{/*HowTo Menu*/}
-				<HowToMenu
-					type={howtoHits ? HOWTO_ITEM_TYPE.HOWTO_HIT : HOWTO_ITEM_TYPE.HOWTO}
-					items={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
+					isHit={categoryHits || howtoHits}
+					categoryList={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
+					howtoList={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
 				/>
 
 				{/*Content*/}

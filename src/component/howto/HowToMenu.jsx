@@ -1,17 +1,16 @@
 import React from 'react';
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
-import _ from 'underscore';
-import HOWTO_ITEM_TYPE from '../../model/HowToItemType';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const HowToMenu = ({
 	// values from props
-	type,
-	title,
-	items,
+	isHit, // main or howto
+
+	categoryList,
+	howtoList,
 
 	// values from mapStateToProps
 	folderPath,
@@ -19,79 +18,47 @@ const HowToMenu = ({
 	selectedHowto
 }) => {
 
-	const renderItem = (key) => {
-		const prefix = folderPath + "/"
+	const prefix = folderPath + "/"
+	const renderItem = (name, link, icon, active) => {
 
-		switch (type) {
-			// DEFAULT TYPES
-			case HOWTO_ITEM_TYPE.CATEGORY:
-				return (
-					<Link to={prefix + items[key].name} key={key}>
-						<ListGroup.Item action active={items[key] === selectedCategory}>
-							<FontAwesomeIcon icon={faFolder} className="mr-3" />
-							{items[key].name}
-						</ListGroup.Item>
-					</Link>
-				)
-			case HOWTO_ITEM_TYPE.HOWTO:
-				return (
-					<Link to={prefix + items[key].label} key={key}>
-						<ListGroup.Item>
-							<FontAwesomeIcon icon={faFile} className="mr-3" />
-							{
-								items[key].label
-									.replace(".howto", "")
-									.replace(".md", "")
-							}
-						</ListGroup.Item>
-					</Link>
-				)
-
-			// HIT TYPES
-			case HOWTO_ITEM_TYPE.CATEGORY_HIT:
-				return (
-					<Link to={items[key].path} key={key}>
-						<ListGroup.Item action active={items[key].obj === selectedCategory}>
-							<FontAwesomeIcon icon={faFolder} className="mr-3" />
-							{items[key].name}
-						</ListGroup.Item>
-					</Link>
-				)
-			case HOWTO_ITEM_TYPE.HOWTO_HIT:
-				return (
-					<Link to={items[key].path} key={key}>
-						<ListGroup.Item action active={items[key].obj === selectedHowto}>
-							<FontAwesomeIcon icon={faFile} className="mr-3" />
-							{
-								items[key].name.replace(".howto", "")
-									.replace(".md", "")
-							}
-						</ListGroup.Item>
-					</Link>
-				)
-
-			default:
-				return (<div />)
-		}
+		return (
+			<Link to={link} key={link}>
+				<ListGroup.Item active={active}>
+					<FontAwesomeIcon icon={icon} className="mr-3" />
+					{name}
+				</ListGroup.Item>
+			</Link>
+		)
 	}
 
-	const renderItems = Object.keys(items).map(key => { return (renderItem(key)) })
+	const renderCategories = (items) => Object.keys(items).map(key => {
+		let name = items[key].name
+		let link = isHit ? items[key].path : (prefix + items[key].name)
+		let active = selectedCategory === items[key]
 
-	const renderTitle = <div>
-		<h5 className="pl-3">{title}</h5>
-	</div>
+		return (
+			renderItem(name, link, faFolder, active)
+		)
+	})
+
+
+	const renderHowtos = (items) => Object.keys(items).map(key => {
+		let name = items[key].label.replace(".howto", "").replace(".md", "")
+		let link = isHit ? items[key].path : (prefix + items[key].label)
+		let active = selectedHowto === items[key]
+
+		return (
+			renderItem(name, link, faFile, active)
+		)
+	})
 
 	return (
-		<div>
-			{Object.keys(items).length !== 0 ? renderTitle : null}
-
-			<ListGroup>
-				{items !== undefined && !_.isEmpty(items) ? renderItems : null}
-			</ListGroup>
-
-		</div>
-	);
-};
+		<ListGroup>
+			{renderCategories(categoryList)}
+			{renderHowtos(howtoList)}
+		</ListGroup>
+	)
+}
 
 const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
