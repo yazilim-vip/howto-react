@@ -11,6 +11,7 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import Switch from "../Switch" 
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -19,8 +20,6 @@ const HowToBrowser = ({
 	selectedCategoryName,
 	selectedHowto,
 	selectedHowtoName,
-	categoryHits,
-	howtoHits,
 	howtoSelectedFlag,
 	searchIndex,
 	query,
@@ -82,7 +81,7 @@ const HowToBrowser = ({
 	};
 
 	const renderMainContentElement = () => {
-		if (selectedCategory === null) {
+		if (!selectedCategory) {
 			return (
 				<Alert key={1} variant={"danger"}>
 					Category <b>{selectedCategoryName}</b> not found in path.
@@ -98,6 +97,12 @@ const HowToBrowser = ({
 					</Col>
 
 					<Col md="3">
+						<Switch
+							isOn={false}
+							color="#06D6A0"
+						// handleToggle={() => setValue(!value)}
+						/>
+
 						<FormControl
 							type="search"
 							placeholder="Search..."
@@ -112,7 +117,6 @@ const HowToBrowser = ({
 
 				<HowToFileManager />
 
-				{/*Content*/}
 				{renderHowtoContentElement()}
 
 			</div>
