@@ -1,7 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
 import { Col, Row, Alert, FormControl } from "react-bootstrap";
-import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
@@ -111,11 +110,7 @@ const HowToBrowser = ({
 
 				<hr />
 
-				<HowToFileManager
-					isHit={categoryHits || howtoHits}
-					categoryList={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
-					howtoList={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
-				/>
+				<HowToFileManager />
 
 				{/*Content*/}
 				{renderHowtoContentElement()}

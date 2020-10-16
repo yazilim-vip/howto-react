@@ -4,15 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from "underscore"
 
 const HowToFileManager = ({
-	// values from props
+	// values from mapStateToProps
+	folderPath,
 	isHit,
 	categoryList,
 	howtoList,
-
-	// values from mapStateToProps
-	folderPath
 }) => {
 
 	const prefix = folderPath + "/"
@@ -59,9 +58,18 @@ const HowToFileManager = ({
 
 const mapStateToProps = (state) => {
 	const howtoReducer = state.howtoReducer
+	const categoryHits = howtoReducer.categoryHits
+	const howtoHits = howtoReducer.howtoHits
+	const selectedCategory = howtoReducer.selectedCategory
+
+	let categoryList = categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList
+	let howtoList = howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList
 
 	return {
-		folderPath: howtoReducer.folderPath
+		folderPath: howtoReducer.folderPath,
+		isHit: howtoReducer.categoryHits || howtoReducer.howtoHits,
+		categoryList: categoryList,
+		howtoList: howtoList
 	}
 }
 
