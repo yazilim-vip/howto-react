@@ -1,8 +1,5 @@
-import { combineReducers } from 'redux';
-import { connectRouter, LOCATION_CHANGE } from 'connected-react-router';
-
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './actions';
-
 import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil';
 
 const howtoReducer = (state = [], action) => {
@@ -28,8 +25,7 @@ const howtoReducer = (state = [], action) => {
                 isLoaded: true,
                 ...parsePathAndSetContent(action.rootCategory, action.path),
                 searchIndex: createSearchIndex(action.rootCategory),
-                query: "",
-                isToggleOn: false
+                query: ""
             }
 
         case actionTypes.ON_API_ERROR:
@@ -58,9 +54,4 @@ const howtoReducer = (state = [], action) => {
     }
 };
 
-const createRootReducer = (history) => combineReducers({
-    router: connectRouter(history),
-    howtoReducer
-})
-
-export default createRootReducer
+export default howtoReducer
