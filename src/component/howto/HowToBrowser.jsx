@@ -1,6 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
-import { Col, Row, Alert, FormControl, Container } from "react-bootstrap";
+import { Col, Row, Alert, FormControl } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
@@ -99,11 +99,7 @@ const HowToBrowser = ({
 
 					<Col md="3" className="d-flex justify-content-right">
 						<div className="mr-3 mt-2 align-items-center">
-							<Switch
-								isOn={false}
-								color="#06D6A0"
-							// handleToggle={() => setValue(!value)}
-							/>
+							<Switch />
 						</div>
 
 						<FormControl

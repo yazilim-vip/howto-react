@@ -28,7 +28,8 @@ const howtoReducer = (state = [], action) => {
                 isLoaded: true,
                 ...parsePathAndSetContent(action.rootCategory, action.path),
                 searchIndex: createSearchIndex(action.rootCategory),
-                query: ""
+                query: "",
+                isToggleOn: false
             }
 
         case actionTypes.ON_API_ERROR:
@@ -44,6 +45,12 @@ const howtoReducer = (state = [], action) => {
                 query: action.query,
                 categoryHits: action.categoryHits,
                 howtoHits: action.howtoHits
+            }
+
+        case actionTypes.ON_TOGGLE:
+            return {
+                ...state,
+                isToggleOn: !state.isToggleOn
             }
 
         default:
