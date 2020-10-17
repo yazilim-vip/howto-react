@@ -61,6 +61,7 @@ const HowToBrowser = ({
 			return (
 				<SlidingPane
 					className="howto-sliding-pane"
+					overlayClassName="howto-sliding-pane-overlay"
 					isOpen={howtoSelectedFlag}
 					children={<ReactMarkdown source={selectedHowto.markdownContent} />}
 					title={selectedHowto.label}

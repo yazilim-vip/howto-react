@@ -227,6 +227,9 @@ ol.breadcrumb {
 
 // ########### Sliding Pane
 .howto-sliding-pane {
-  height: 100vh!important;
-  margin-top: 0vh!important;
+  height: 100vh !important;
+  margin-top: 0vh !important;
+}
+.howto-sliding-pane-overlay {
+  z-index: 999 !important;
 }
