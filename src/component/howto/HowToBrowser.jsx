@@ -1,6 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
-import { Col, Row, Alert, FormControl } from "react-bootstrap";
+import { Col, Row, Alert, FormControl, ButtonGroup, ToggleButton, Container } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import Switch from "../Switch"
+import { faList, faFolder } from "@fortawesome/free-solid-svg-icons";
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -91,16 +91,43 @@ const HowToBrowser = ({
 
 		return (
 			<div>
-
 				<Row>
-					<Col md="9">
+					<Col md="7">
 						<HowToBreadcrumb />
 					</Col>
 
-					<Col md="3" className="d-flex justify-content-right">
-						<div className="mr-3 mt-2 align-items-center">
+					<Col md="2" sm="3" className="mb-2 mb-sm-0">
+						<ButtonGroup toggle className="float-right">
+							<ToggleButton
+								type="radio"
+								variant="secondary"
+								name="radio"
+								value={1}
+							// checked={radioValue === radio.value}
+							// onChange={(e) => setRadioValue(e.currentTarget.value)}
+							>
+								<FontAwesomeIcon icon={faFolder} />
+
+							</ToggleButton>
+
+							<ToggleButton
+								type="radio"
+								variant="secondary"
+								name="radio"
+								value={2}
+							// checked={radioValue === radio.value}
+							// onChange={(e) => setRadioValue(e.currentTarget.value)}
+							>
+								<FontAwesomeIcon icon={faList} />
+							</ToggleButton>
+						</ButtonGroup>
+					</Col>
+
+					<Col md="3" sm="9">
+
+						{/* <div className="mr-3 mt-2 align-items-center">
 							<Switch />
-						</div>
+						</div> */}
 
 						<FormControl
 							type="search"
