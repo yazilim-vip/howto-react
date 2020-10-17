@@ -34,6 +34,8 @@ library.add(fas)
 const App = () => (
   <ConnectedRouter history={history}>
 
+  
+    {console.log(history.location.pathname)}
     {/* HEADER */}
     <header>
       <CustomNavbar />
@@ -43,6 +45,7 @@ const App = () => (
     <main>
       
         <Switch>
+          <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
           <Route exact path='/' component={Home} />
           <Route path='/portfolio' component={Portfolio} />
           <Route path='/howto*' component={HowTo} />
