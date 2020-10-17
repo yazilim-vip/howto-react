@@ -23,9 +23,11 @@ const HowToBrowser = ({
 	howtoSelectedFlag,
 	searchIndex,
 	query,
+	isToggleOn,
 
 	// methods from props
 	onSearchResult,
+	onToggle,
 	push
 }) => {
 
@@ -102,9 +104,8 @@ const HowToBrowser = ({
 								type="radio"
 								variant="secondary"
 								name="radio"
-								value={1}
-							// checked={radioValue === radio.value}
-							// onChange={(e) => setRadioValue(e.currentTarget.value)}
+								checked={!isToggleOn}
+								onChange={() => onToggle()}
 							>
 								<FontAwesomeIcon icon={faFolder} />
 
@@ -114,9 +115,8 @@ const HowToBrowser = ({
 								type="radio"
 								variant="secondary"
 								name="radio"
-								value={2}
-							// checked={radioValue === radio.value}
-							// onChange={(e) => setRadioValue(e.currentTarget.value)}
+								checked={isToggleOn}
+								onChange={() => onToggle()}
 							>
 								<FontAwesomeIcon icon={faList} />
 							</ToggleButton>
@@ -164,7 +164,8 @@ const mapStateToProps = (state) => {
 		query: howtoReducer.query,
 		categoryHits: howtoReducer.categoryHits,
 		howtoHits: howtoReducer.howtoHits,
-		searchIndex: howtoReducer.searchIndex
+		searchIndex: howtoReducer.searchIndex,
+		isToggleOn: howtoReducer.isToggleOn
 	}
 }
 
