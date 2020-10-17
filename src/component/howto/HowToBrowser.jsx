@@ -1,6 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
-import { Col, Row, Alert, FormControl } from "react-bootstrap";
+import { Col, Row, Alert, FormControl, Container } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import Switch from "../Switch" 
+import Switch from "../Switch"
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -91,25 +91,27 @@ const HowToBrowser = ({
 
 		return (
 			<div>
+
 				<Row>
 					<Col md="9">
 						<HowToBreadcrumb />
 					</Col>
 
-					<Col md="3">
-						<Switch
-							isOn={false}
-							color="#06D6A0"
-						// handleToggle={() => setValue(!value)}
-						/>
+					<Col md="3" className="d-flex justify-content-right">
+						<div className="mr-3 mt-2 align-items-center">
+							<Switch
+								isOn={false}
+								color="#06D6A0"
+							// handleToggle={() => setValue(!value)}
+							/>
+						</div>
 
 						<FormControl
 							type="search"
 							placeholder="Search..."
 							aria-label="Search"
 							value={query}
-							onChange={event => search(event.target.value)}
-						/>
+							onChange={event => search(event.target.value)} />
 					</Col>
 				</Row>
 
