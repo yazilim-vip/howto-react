@@ -1,7 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
 import { Col, Row, Alert, FormControl } from "react-bootstrap";
-import _ from "underscore"
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
@@ -12,6 +11,7 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import Switch from "../Switch"
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -20,8 +20,6 @@ const HowToBrowser = ({
 	selectedCategoryName,
 	selectedHowto,
 	selectedHowtoName,
-	categoryHits,
-	howtoHits,
 	howtoSelectedFlag,
 	searchIndex,
 	query,
@@ -83,7 +81,7 @@ const HowToBrowser = ({
 	};
 
 	const renderMainContentElement = () => {
-		if (selectedCategory === null) {
+		if (!selectedCategory) {
 			return (
 				<Alert key={1} variant={"danger"}>
 					Category <b>{selectedCategoryName}</b> not found in path.
@@ -93,31 +91,30 @@ const HowToBrowser = ({
 
 		return (
 			<div>
+
 				<Row>
 					<Col md="9">
 						<HowToBreadcrumb />
 					</Col>
 
-					<Col md="3">
+					<Col md="3" className="d-flex justify-content-right">
+						<div className="mr-3 mt-2 align-items-center">
+							<Switch />
+						</div>
+
 						<FormControl
 							type="search"
 							placeholder="Search..."
 							aria-label="Search"
 							value={query}
-							onChange={event => search(event.target.value)}
-						/>
+							onChange={event => search(event.target.value)} />
 					</Col>
 				</Row>
 
 				<hr />
 
-				<HowToFileManager
-					isHit={categoryHits || howtoHits}
-					categoryList={categoryHits ? _.extend({}, categoryHits) : selectedCategory.subCategoryList}
-					howtoList={howtoHits ? _.extend({}, howtoHits) : selectedCategory.howtoList}
-				/>
+				<HowToFileManager />
 
-				{/*Content*/}
 				{renderHowtoContentElement()}
 
 			</div>

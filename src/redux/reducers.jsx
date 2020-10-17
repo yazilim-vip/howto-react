@@ -1,8 +1,5 @@
-import { combineReducers } from 'redux';
-import { connectRouter, LOCATION_CHANGE } from 'connected-react-router';
-
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './actions';
-
 import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil';
 
 const howtoReducer = (state = [], action) => {
@@ -46,14 +43,15 @@ const howtoReducer = (state = [], action) => {
                 howtoHits: action.howtoHits
             }
 
+        case actionTypes.ON_TOGGLE:
+            return {
+                ...state,
+                isToggleOn: !state.isToggleOn
+            }
+
         default:
             return state
     }
 };
 
-const createRootReducer = (history) => combineReducers({
-    router: connectRouter(history),
-    howtoReducer
-})
-
-export default createRootReducer
+export default howtoReducer
