@@ -34,8 +34,6 @@ library.add(fas)
 const App = () => (
   <ConnectedRouter history={history}>
 
-  
-    {console.log(history.location.pathname)}
     {/* HEADER */}
     <header>
       <CustomNavbar />
