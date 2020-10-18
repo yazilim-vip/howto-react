@@ -1,6 +1,6 @@
 // ReactJS 
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 // Bootstrap
 import { Col, Navbar, Row } from 'react-bootstrap';
@@ -9,7 +9,8 @@ import { Col, Navbar, Row } from 'react-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Styles
 import './style/App.scss';
@@ -30,6 +31,7 @@ import { history } from "./redux/configureStore";
 
 library.add(fab)
 library.add(fas)
+library.add(far)
 
 const App = () => (
   <ConnectedRouter history={history}>

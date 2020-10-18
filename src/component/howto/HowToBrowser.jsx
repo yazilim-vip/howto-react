@@ -11,7 +11,7 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { faList, faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faTh, faThList } from "@fortawesome/free-solid-svg-icons";
 
 const HowToBrowser = ({
 	// values from mapStateToProps
@@ -108,7 +108,7 @@ const HowToBrowser = ({
 								checked={!isToggleOn}
 								onChange={() => onToggle()}
 							>
-								<FontAwesomeIcon icon={faFolder} />
+								<FontAwesomeIcon icon={faTh} />
 
 							</ToggleButton>
 
@@ -119,7 +119,7 @@ const HowToBrowser = ({
 								checked={isToggleOn}
 								onChange={() => onToggle()}
 							>
-								<FontAwesomeIcon icon={faList} />
+								<FontAwesomeIcon icon={faThList} />
 							</ToggleButton>
 						</ButtonGroup>
 					</Col>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faFile } from "@fortawesome/free-regular-svg-icons";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from "underscore"
@@ -16,12 +17,12 @@ const HowToFileManager = ({
 }) => {
 
 	const prefix = folderPath + "/"
-	const renderItem = (name, link, icon) => {
+	const renderItem = (name, link, icon, color) => {
 		if (isToggleOn) {
 			return (
 				<Link to={link} className="link" key={link}>
 					<ListGroup.Item>
-						<FontAwesomeIcon icon={icon} className="mr-3" />
+						<FontAwesomeIcon icon={icon} className="mr-3" color={color} />
 						{name}
 					</ListGroup.Item>
 				</Link>
@@ -30,7 +31,7 @@ const HowToFileManager = ({
 			return (
 				<Col xs={4} sm={3} md={3} lg={2} className="py-4 text-center" key={link}>
 					<Link to={link} className="link">
-						<FontAwesomeIcon icon={icon} className="pb-1" size="4x" />
+						<FontAwesomeIcon icon={icon} className="pb-1" size="4x" color={color}  />
 						<br />
 						{name}
 					</Link>
@@ -44,7 +45,7 @@ const HowToFileManager = ({
 		let link = isHit ? items[key].path : (prefix + items[key].name)
 
 		return (
-			renderItem(name, link, faFolder)
+			renderItem(name, link, faFolder, "#50a4d4")
 		)
 	})
 
@@ -54,7 +55,7 @@ const HowToFileManager = ({
 		let link = isHit ? items[key].path : (prefix + items[key].label)
 
 		return (
-			renderItem(name, link, faFile)
+			renderItem(name, link, faFile, "#494d52")
 		)
 	})
 
