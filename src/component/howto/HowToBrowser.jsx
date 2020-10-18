@@ -1,6 +1,6 @@
 import React from "react";
 import HowToFileManager from "./HowToFileManager";
-import { Col, Row, Alert, FormControl, ButtonGroup, ToggleButton, Container } from "react-bootstrap";
+import { Col, Row, Alert, FormControl, ButtonGroup, ToggleButton } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import HowToBreadcrumb from "./HowToBreadcrumb";
 import { connect } from "react-redux";
