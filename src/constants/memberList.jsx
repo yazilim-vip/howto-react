@@ -58,13 +58,5 @@ export const members = {
   ],
 
   contributorList: [
-    {
-      name: "Ahmet Gurdal",
-      title: "Contributor",
-      description:
-        "I am just a simple guy who loves technology and science. I am interested in almost anything about technology; Machine Learning, Arduino, Mobile App Development, Web Development, Automatization stuff, Financial Applications, etc. I hope one day, I can create something that I can be really proud of.",
-      imageSource: "/img/ahmet.jpeg",
-      // cvSource: "/cv/ahmet.pdf",
-    },
   ]
 }
