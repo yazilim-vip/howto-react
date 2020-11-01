@@ -6,13 +6,12 @@ export const members = {
       name: "Mehmet Arif Emre Sen",
       description: (
         <>
-        I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm
-        <hr />
-        <b>Resume</b>: <a target="_blank" rel="noopener noreferrer" href="https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf">LINK</a>
+          I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm
         </>
       ),
+      cvSource: "https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf",
       imageSource: "/img/emre.jpeg",
-      modalSize: "xl",
+      modalSize: "lgç",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
