@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
+import { property } from "underscore";
 
 class Cv extends React.Component {
 
@@ -18,7 +19,15 @@ class Cv extends React.Component {
             numPages: null,
             currentPage: null,
             modalSize: props.modalSize ? props.modalSize : "lg",
-            htmlMode: React.isValidElement(props.cvSource)
+            htmlMode: React.isValidElement(props.cvSource),
+            modalTriggerElement: props.children ? props.children : (
+                <div className="text-center">
+                    <Button variant="primary">
+                        <FontAwesomeIcon icon={faFile} className="mr-3" />
+                        Resume
+                    </Button>
+                </div>
+            )
         }
     }
 
@@ -60,15 +69,8 @@ class Cv extends React.Component {
         }
 
         return (
-            <div className="text-center">
-
-                <hr />
-
-                <Button variant="primary" onClick={this.showModal}>
-                    <FontAwesomeIcon icon={faFile} className="mr-3" />
-                    Resume
-                </Button>
-
+            <>
+                {React.cloneElement(this.state.modalTriggerElement, { onClick: this.showModal })}
 
                 <Modal
                     size={this.state.modalSize}
@@ -76,10 +78,10 @@ class Cv extends React.Component {
                     onHide={this.closeModal}
                 >
                     <Modal.Header closeButton className="modal-header-footer">
-                        {this.state.htmlMode ? "" : (
-                            <Link to={this.state.cvSource} target="_blank">
+                        {!this.state.htmlMode && (
+                            <a href={this.state.cvSource} target="_blank">
                                 <FontAwesomeIcon icon={faDownload} />
-                            </Link>
+                            </a>
                         )}
                     </Modal.Header>
 
@@ -93,7 +95,7 @@ class Cv extends React.Component {
                         </Button>
                     </Modal.Footer> */}
                 </Modal>
-            </div>
+            </>
         )
     }
 }

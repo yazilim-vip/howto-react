@@ -20,13 +20,12 @@ const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
   const portfolioLinks = portfolio.links;
   const cvSource = portfolio.cvSource;
-  const modalSize = portfolio.modalSize;
 
   var portfolioFooterElement;
   var portfolioImgElement;
 
   const cvExists = (cvSource !== undefined && cvSource !== null) ? true : false
-  console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>" , cvSource)
+  console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>", cvSource)
 
   if (portfolio.imageSource) {
     portfolioImgElement = (
@@ -52,7 +51,12 @@ const PortfolioCard = (props) => {
           {props.portfolio.title}
         </Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
-        {cvExists ? <Cv cvSource={cvSource} modalSize={modalSize} /> : ""}
+        {cvExists && (
+          <>
+            <hr />
+            <Cv cvSource={cvSource} modalSize="lg" />
+          </>
+        )}
       </Card.Body>
       {portfolioFooterElement}
     </Card>

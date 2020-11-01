@@ -1,4 +1,5 @@
 import React from 'react';
+import Cv from '../component/Cv';
 
 export const members = {
   teamMemberList: [
@@ -11,7 +12,6 @@ export const members = {
       ),
       cvSource: "https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf",
       imageSource: "/img/emre.jpeg",
-      modalSize: "lg",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
