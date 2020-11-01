@@ -4,9 +4,7 @@ import { faDownload, faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-import { property } from "underscore";
 
 class Cv extends React.Component {
 
@@ -79,7 +77,7 @@ class Cv extends React.Component {
                 >
                     <Modal.Header closeButton className="modal-header-footer">
                         {!this.state.htmlMode && (
-                            <a href={this.state.cvSource} target="_blank">
+                            <a href={this.state.cvSource} target="_blank" without rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faDownload} />
                             </a>
                         )}
