@@ -1,18 +1,17 @@
 import React from 'react';
-import { VipCv } from '../component/VipCv';
-
-
-import emreCvSections from './emreCvSections';
 
 export const members = {
   teamMemberList: [
     {
       name: "Mehmet Arif Emre Sen",
-      description: "I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm",
-      imageSource: "/img/emre.jpeg",
-      cvSource: (
-        <VipCv printable={false} title="Mehmet Arif Emre Şen" sections={emreCvSections} />
+      description: (
+        <>
+        I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm
+        <hr />
+        <b>Resume</b>: <a target="_blank" href="https://maemresen.github.io/resume/index.pdf">LINK</a>
+        </>
       ),
+      imageSource: "/img/emre.jpeg",
       modalSize: "xl",
       title: "Major Contributor",
       links: {
