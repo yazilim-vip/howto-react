@@ -77,7 +77,7 @@ class Cv extends React.Component {
                 >
                     <Modal.Header closeButton className="modal-header-footer">
                         {!this.state.htmlMode && (
-                            <a href={this.state.cvSource} target="_blank" without rel="noopener noreferrer">
+                            <a href={this.state.cvSource} target="_blank" rel="noopener noreferrer">
                                 <FontAwesomeIcon icon={faDownload} />
                             </a>
                         )}
