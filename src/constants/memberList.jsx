@@ -1,5 +1,4 @@
 import React from 'react';
-import Cv from '../component/Cv';
 
 export const members = {
   teamMemberList: [
