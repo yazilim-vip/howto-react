@@ -11,7 +11,7 @@ export const members = {
       ),
       cvSource: "https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf",
       imageSource: "/img/emre.jpeg",
-      modalSize: "lgç",
+      modalSize: "lg",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
