@@ -26,7 +26,7 @@ export const members = {
           </b>
         </>
       ),
-      imageSource: "/img/emre.jpeg",
+      imageSource: "/img/emre_portrait_cropped.jpeg",
       title: "Major Contributor",
       links: {
         gitlab: "https://gitlab.com/emresen",
