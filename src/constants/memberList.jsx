@@ -8,7 +8,7 @@ export const members = {
         <>
         I am an entrepreneur who wants to learn new technologies and use them to make things easier. My life goal is having my own job and creating a software community that everyone can get benefit from. I have deep interest to Object Oriented Paradigm
         <hr />
-        <b>Resume</b>: <a target="_blank" rel="noopener noreferrer" href="https://maemresen.github.io/resume/index.pdf">LINK</a>
+        <b>Resume</b>: <a target="_blank" rel="noopener noreferrer" href="https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf">LINK</a>
         </>
       ),
       imageSource: "/img/emre.jpeg",
