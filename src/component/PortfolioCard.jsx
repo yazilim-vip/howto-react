@@ -3,7 +3,6 @@ import React from "react";
 // Bootstrap
 import { Card } from "react-bootstrap";
 import VipIcon from "./VipIcon";
-import Cv from "./Cv";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
