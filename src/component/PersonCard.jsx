@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Bootstrap
-import { Card, Collapse } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import VipIcon from "./VipIcon";
 import Cv from "./Cv";
 
@@ -16,7 +16,7 @@ const linkToIcon = (linkMap) => {
   );
 };
 
-const PersonCard = (props) => {
+const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
   const portfolioLinks = portfolio.links;
   const cvSource = portfolio.cvSource;
@@ -28,7 +28,7 @@ const PersonCard = (props) => {
     <Card className="portfolio-card shadow">
       {(portfolio.imageSource) && (
         <Card.Img className="mx-auto mt-2 border border-secondary" style={{
-          width: "50%"
+          width: "70%"
         }} variant="top" src={`${portfolio.imageSource}`} />
       )}
 
@@ -61,4 +61,4 @@ const PersonCard = (props) => {
   );
 };
 
-export default PersonCard;
+export default PortfolioCard;

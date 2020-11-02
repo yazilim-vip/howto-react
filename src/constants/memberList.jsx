@@ -6,6 +6,12 @@ export const members = {
       name: "Mehmet Arif Emre Sen",
       description: (
         <>
+          <a className="d-block text-center" href="https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf" target="_blank" rel="noopener noreferrer">
+            <b>
+              Resume Link
+            </b>
+          </a>
+          <hr />
           <ul>
             <li>
               I am an entrepreneur who wants to learn new technologies and use them to make things easier.
@@ -17,13 +23,7 @@ export const members = {
               I have deep interest to Object Oriented Paradigm
             </li>
           </ul>
-          <hr />
-          <b>
-            Resume:
-            <a className="ml-1" href="https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf" target="_blank" rel="noopener noreferrer">
-              Link
-            </a>
-          </b>
+
         </>
       ),
       imageSource: "/img/emre_portrait_cropped.jpeg",
@@ -31,7 +31,6 @@ export const members = {
       links: {
         gitlab: "https://gitlab.com/emresen",
         github: "https://github.com/maemresen",
-        bitbucket: "https://bitbucket.org/emresen",
         medium: "https://medium.com/@maemresen",
         linkedin: "https://www.linkedin.com/in/maemresen",
       },
