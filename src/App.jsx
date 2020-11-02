@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Styles
 import './style/App.scss';
-import './style/vip-cv.scss';
 
 // Components
 import CustomNavbar from './component/CustomNavbar';
@@ -42,24 +41,30 @@ const App = () => (
     </header>
 
     {/* BODY */}
-    <main>
-      
-        <Switch>
-          <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
-          <Route exact path='/' component={Home} />
-          <Route path='/portfolio' component={Portfolio} />
-          <Route path='/howto*' component={HowTo} />
-          <Route path='/about' component={About} />
-          <Route path='/404' component={NotFound} />
-          <Redirect to="/404" />
-        </Switch>
+    <main className="py-4">
+      <Col md="12">
+        <Row>
+          <Switch>
+            <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
+            <Route exact path='/' component={Home} />
+            <Route path='/portfolio' component={Portfolio} />
+            <Route path='/howto' component={HowTo} />
+            <Route path='/about' component={About} />
+            <Route path='/404' component={NotFound} />
+            <Redirect to="/404" />
+          </Switch>
 
+        </Row>
+      </Col>
     </main>
 
     {/* FOOTER */}
     <footer className="text-white-50">
       <Navbar bg="dark">
-        <Col md="12">
+        <Col md={{
+          span: 8,
+          offset: 2
+        }}>
           <Row>
             <Col md="12">
               <span><FontAwesomeIcon icon={faEnvelope} className="ml-3" /></span>
