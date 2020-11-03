@@ -1,7 +1,13 @@
 import React from 'react'
 
-// Bootstrap
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { Card } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import VipIcon from './VipIcon'
 import Cv from './Cv'
 

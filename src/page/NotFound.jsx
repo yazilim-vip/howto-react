@@ -1,6 +1,8 @@
 import React from 'react'
 
-// Component
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import Page from '../component/Page'
 
 const NotFound = () => (

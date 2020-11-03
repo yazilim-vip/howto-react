@@ -1,9 +1,17 @@
 import React from 'react'
 
-// Component
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { Row, Col } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import Page from '../component/Page'
 import PersonCard from '../component/PersonCard'
-import { Row, Col } from 'react-bootstrap'
+
+// Constants
 import * as Content from '../constants/memberList'
 
 const memberToComponent = (tm) => (

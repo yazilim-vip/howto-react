@@ -1,3 +1,6 @@
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import firebase from 'firebase/app'

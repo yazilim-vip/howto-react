@@ -1,4 +1,11 @@
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { LOCATION_CHANGE } from 'connected-react-router'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import { actionTypes } from './actions'
 import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil'
 

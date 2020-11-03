@@ -1,5 +1,10 @@
 // ReactJS
 import React from 'react'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 // Bootstrap
@@ -12,6 +17,9 @@ import { fas, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 // Styles
 import './style/App.scss'
 
@@ -25,7 +33,6 @@ import HowTo from './page/HowTo'
 import About from './page/About'
 import NotFound from './page/NotFound'
 
-import { ConnectedRouter } from 'connected-react-router'
 import { history } from './redux/configureStore'
 
 library.add(fab)

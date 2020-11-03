@@ -1,11 +1,19 @@
 import React from 'react'
 
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { connect } from 'react-redux'
+import { Alert, Spinner } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import Page from '../component/Page'
 import HowToBrowser from '../component/howto/HowToBrowser'
 import Firebase from '../util/Firebase'
-import { connect } from 'react-redux'
 import { actionCreators } from '../redux/actions'
-import { Alert, Spinner } from 'react-bootstrap'
+
 class HowTo extends React.Component {
   componentDidMount() {
     const { rootCategory } = this.props

@@ -1,8 +1,10 @@
 import React from 'react'
 
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { faDownload, faFile } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { Button, Modal } from 'react-bootstrap'
 import { Document, Page, pdfjs } from 'react-pdf'
 

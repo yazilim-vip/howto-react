@@ -1,8 +1,14 @@
 import React from 'react'
 
-// Component
-import Page from '../component/Page'
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { Card } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
+import Page from '../component/Page'
 
 const Home = (props) => (
   <Page>

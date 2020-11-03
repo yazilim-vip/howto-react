@@ -1,11 +1,15 @@
 import React from 'react'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Col, Container, ListGroup, Row } from 'react-bootstrap'
+import _ from 'underscore'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-regular-svg-icons'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import _ from 'underscore'
 
 const HowToFileManager = ({
   // values from mapStateToProps

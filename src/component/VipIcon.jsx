@@ -1,4 +1,8 @@
 import React from 'react'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const VipIcon = (props) => (

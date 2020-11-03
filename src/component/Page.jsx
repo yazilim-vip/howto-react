@@ -1,4 +1,8 @@
 import React from 'react'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { Col, Row } from 'react-bootstrap'
 
 const Page = (props) => {

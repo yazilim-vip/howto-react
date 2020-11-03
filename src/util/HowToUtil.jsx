@@ -1,3 +1,7 @@
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import { SearchItem } from '../model/SearchItem'
 import HOWTO_ITEM_TYPE from '../model/HowToItemType'
 

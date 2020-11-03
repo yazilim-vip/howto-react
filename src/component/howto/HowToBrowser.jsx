@@ -1,5 +1,11 @@
+// ReactJS Core
 import React from 'react'
-import HowToFileManager from './HowToFileManager'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { push } from 'connected-react-router'
+import { connect } from 'react-redux'
 import {
   Col,
   Row,
@@ -9,15 +15,24 @@ import {
   ToggleButton
 } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
-import HowToBreadcrumb from './HowToBreadcrumb'
-import { connect } from 'react-redux'
-import { actionCreators } from '../../redux/actions'
-import HOWTO_ITEM_TYPE from '../../model/HowToItemType'
-import { push } from 'connected-react-router'
 import SlidingPane from 'react-sliding-pane'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
+import { actionCreators } from '../../redux/actions'
+
+// Project Components
+import HowToFileManager from './HowToFileManager'
+import HowToBreadcrumb from './HowToBreadcrumb'
+
+// Constants
+import HOWTO_ITEM_TYPE from '../../model/HowToItemType'
+
 
 const HowToBrowser = ({
   // values from mapStateToProps

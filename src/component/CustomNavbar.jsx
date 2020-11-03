@@ -1,6 +1,16 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { NavLink } from 'react-router-dom'
+import { Navbar, Nav } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
+
+// Project Components
 import VipIcon from './VipIcon'
 
 const CustomNavbar = () => {

@@ -1,9 +1,17 @@
 import React from 'react'
 
-// Component
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { CardColumns } from 'react-bootstrap'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import Page from '../component/Page'
 import PortfolioCard from '../component/PortfolioCard'
-import { CardColumns } from 'react-bootstrap'
+
+// constants
 import * as Content from '../constants/projectPortfolioList'
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
