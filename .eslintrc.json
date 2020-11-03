@@ -1,22 +1,35 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
+    "parser": "babel-eslint",
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+      "standard",
+      "standard-react",
+      "plugin:prettier/recommended",
+      "prettier/standard",
+      "prettier/react"
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+    "env": {
+      "node": true
     },
-    "plugins": [
-        "react"
-    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "legacyDecorators": true,
+        "jsx": true
+      }
+    },
+    "settings": {
+      "react": {
+        "version": "16"
+      }
+    },
     "rules": {
+      "space-before-function-paren": 0,
+      "react/prop-types": 0,
+      "react/jsx-handler-names": 0,
+      "react/jsx-fragments": 0,
+      "react/no-unused-prop-types": 0,
+      "import/export": 0,
+      "linebreak-style": ["off"]
     }
-}
+  }
+  
