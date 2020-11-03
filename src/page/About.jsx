@@ -2,28 +2,35 @@ import React from "react";
 
 // Component
 import Page from "../component/Page";
-import PortfolioCard from "../component/PortfolioCard";
+import PersonCard from "../component/PersonCard";
 import { Row, Col } from "react-bootstrap";
 import * as Content from '../constants/memberList';
 
 const memberToComponent = (tm) => (
-  <Col key={tm.name} lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 12 }}>
-    <PortfolioCard portfolio={tm} />
+  <Col key={tm.name} lg={{ span: 4 }} nd={{ span: 12 }}>
+    <PersonCard portfolio={tm} />
   </Col>
 );
 
-const About = () => (
-  <Page>
+const About = () => {
+  const teamMemberList = Content.members.teamMemberList;
+  const contributorList = Content.members.contributorList;
+  return (
+    <Page>
       <Row>
-        {Content.members.teamMemberList.map(memberToComponent)}
+        {teamMemberList.map(memberToComponent)}
       </Row>
 
-      <hr />
-
-      <Row>{
-        Content.members.contributorList.map(memberToComponent)}
-      </Row>
-  </Page>
-);
+      {(contributorList.length !== 0) && (
+        <>
+          <hr />
+          <Row>
+            {contributorList.map(memberToComponent)}
+          </Row>
+        </>
+      )}
+    </Page>
+  )
+};
 
 export default About;

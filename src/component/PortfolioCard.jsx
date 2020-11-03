@@ -3,7 +3,6 @@ import React from "react";
 // Bootstrap
 import { Card } from "react-bootstrap";
 import VipIcon from "./VipIcon";
-import Cv from "./Cv";
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0];
@@ -18,47 +17,24 @@ const linkToIcon = (linkMap) => {
 
 const PortfolioCard = (props) => {
   const portfolio = props.portfolio;
+  const portfolioImageSource = portfolio.imageSource;
   const portfolioLinks = portfolio.links;
-  const cvSource = portfolio.cvSource;
-
-  var portfolioFooterElement;
-  var portfolioImgElement;
-
-  const cvExists = (cvSource !== undefined && cvSource !== null) ? true : false
-  console.log("cvExists ==> ", portfolio.name, cvExists, "cvSouce ==>", cvSource)
-
-  if (portfolio.imageSource) {
-    portfolioImgElement = (
-      <Card.Img variant="top" src={`${portfolio.imageSource}`} />
-    );
-  }
-
-  if (portfolioLinks !== undefined && portfolioLinks !== null) {
-    portfolioFooterElement = (
-      <Card.Footer className="text-center">
-        {Object.entries(portfolioLinks).map(linkToIcon)}
-      </Card.Footer>
-    );
-  }
-
 
   return (
     <Card className="mb-4 portfolio-card shadow">
-      {portfolioImgElement}
+      {portfolioImageSource && <Card.Img variant="top" src={`${portfolioImageSource}`} />}
       <Card.Body>
         <Card.Title>{portfolio.name}</Card.Title>
         <Card.Subtitle className="mb-4 text-muted">
-          {props.portfolio.title}
+          {portfolio.title}
         </Card.Subtitle>
         <Card.Text>{portfolio.description}</Card.Text>
-        {cvExists && (
-          <>
-            <hr />
-            <Cv cvSource={cvSource} modalSize="lg" />
-          </>
-        )}
       </Card.Body>
-      {portfolioFooterElement}
+      {(portfolioLinks !== undefined && portfolioLinks !== null) && (
+        <Card.Footer className="text-center">
+          {Object.entries(portfolioLinks).map(linkToIcon)}
+        </Card.Footer>
+      )}
     </Card>
   );
 };
