@@ -1,5 +1,5 @@
-import { SearchItem } from "../model/SearchItem"
-import HOWTO_ITEM_TYPE from '../model/HowToItemType';
+import { SearchItem } from '../model/SearchItem'
+import HOWTO_ITEM_TYPE from '../model/HowToItemType'
 
 /**
  *
@@ -33,96 +33,100 @@ import HOWTO_ITEM_TYPE from '../model/HowToItemType';
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
 const parsePathAndSetContent = (rootCategory, path) => {
-    let rootCategorySelectedFlag = (path === "/howto")
-    let categoryNames = path.slice(1).split("/")
-    let howtoSelectedFlag = (path.endsWith(".howto") || path.endsWith(".md"))
-    let selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
-    let selectedCategoryName = categoryNames[categoryNames.length - 1]
-    let folderPath = "/" + categoryNames.join("/")
+  const rootCategorySelectedFlag = path === '/howto'
+  const categoryNames = path.slice(1).split('/')
+  const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
+  const selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
+  const selectedCategoryName = categoryNames[categoryNames.length - 1]
+  const folderPath = '/' + categoryNames.join('/')
 
-    return {
-        folderPath: folderPath,
-        categoryNames: categoryNames,
-        selectedCategoryName: selectedCategoryName,
-        selectedHowtoName: selectedHowtoName,
-        howtoSelectedFlag: howtoSelectedFlag,
-        rootCategorySelectedFlag: rootCategorySelectedFlag,
-        ...setContent(rootCategory, categoryNames, selectedHowtoName)
-    }
+  return {
+    folderPath: folderPath,
+    categoryNames: categoryNames,
+    selectedCategoryName: selectedCategoryName,
+    selectedHowtoName: selectedHowtoName,
+    howtoSelectedFlag: howtoSelectedFlag,
+    rootCategorySelectedFlag: rootCategorySelectedFlag,
+    ...setContent(rootCategory, categoryNames, selectedHowtoName)
+  }
 }
 
 const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
-    // set selectedCategory
-    let tmpCategory = rootCategory
+  // set selectedCategory
+  let tmpCategory = rootCategory
 
-    categoryNames.shift() // shift first category (howto), because rootCategory is not wrapped with "howto" key
-    for (let cat of categoryNames) {
-        if (!tmpCategory.subCategoryList[cat]) {
-            tmpCategory = null
-            break /// category not exists
-        }
-
-        tmpCategory = tmpCategory.subCategoryList[cat]
+  categoryNames.shift() // shift first category (howto), because rootCategory is not wrapped with "howto" key
+  for (const cat of categoryNames) {
+    if (!tmpCategory.subCategoryList[cat]) {
+      tmpCategory = null
+      break /// category not exists
     }
 
-    let selectedCategory = tmpCategory
+    tmpCategory = tmpCategory.subCategoryList[cat]
+  }
 
-    // set selectedHowto
-    let selectedHowto = null
+  const selectedCategory = tmpCategory
 
-    if (selectedHowtoName &&
-        selectedCategory &&
-        selectedCategory.howtoList.hasOwnProperty(selectedHowtoName)) {
-        selectedHowto = selectedCategory.howtoList[selectedHowtoName]
-    }
+  // set selectedHowto
+  let selectedHowto = null
 
-    return {
-        selectedCategory: selectedCategory,
-        selectedHowto: selectedHowto,
-        categoryHits: null,
-        howtoHits: null
-    }
+  if (
+    selectedHowtoName &&
+    selectedCategory &&
+    //! eslint gives error
+    // eslint-disable-next-line no-prototype-builtins
+    selectedCategory.howtoList.hasOwnProperty(selectedHowtoName)
+  ) {
+    selectedHowto = selectedCategory.howtoList[selectedHowtoName]
+  }
+
+  return {
+    selectedCategory: selectedCategory,
+    selectedHowto: selectedHowto,
+    categoryHits: null,
+    howtoHits: null
+  }
 }
 
 const createSearchIndex = (rootCategory) => {
-    return indexContent(rootCategory, [], "/howto");
+  return indexContent(rootCategory, [], '/howto')
 }
 
 const indexContent = (data, arr, path) => {
-    const howtoList = data.howtoList;
-    const subCategoryList = data.subCategoryList;
+  const howtoList = data.howtoList
+  const subCategoryList = data.subCategoryList
 
-    Object.keys(howtoList).forEach(key => {
-        const howto = howtoList[key];
-        const name = howto.label;
-        const newPath = path + "/" + name;
+  Object.keys(howtoList).forEach((key) => {
+    const howto = howtoList[key]
+    const name = howto.label
+    const newPath = path + '/' + name
 
-        const searchItem = new SearchItem(
-            newPath,
-            HOWTO_ITEM_TYPE.HOWTO_HIT,
-            name.toLowerCase()
-        );
+    const searchItem = new SearchItem(
+      newPath,
+      HOWTO_ITEM_TYPE.HOWTO_HIT,
+      name.toLowerCase()
+    )
 
-        arr.push(searchItem);
-    });
+    arr.push(searchItem)
+  })
 
-    Object.keys(subCategoryList).forEach(key => {
-        const subCategory = subCategoryList[key];
-        const name = subCategory.name;
-        const newPath = path + "/" + name;
+  Object.keys(subCategoryList).forEach((key) => {
+    const subCategory = subCategoryList[key]
+    const name = subCategory.name
+    const newPath = path + '/' + name
 
-        const searchItem = new SearchItem(
-            newPath,
-            HOWTO_ITEM_TYPE.CATEGORY_HIT,
-            name.toLowerCase()
-        );
+    const searchItem = new SearchItem(
+      newPath,
+      HOWTO_ITEM_TYPE.CATEGORY_HIT,
+      name.toLowerCase()
+    )
 
-        arr.push(searchItem);
+    arr.push(searchItem)
 
-        indexContent(subCategory, arr, newPath);
-    });
+    indexContent(subCategory, arr, newPath)
+  })
 
-    return arr;
-};
+  return arr
+}
 
-export { parsePathAndSetContent, createSearchIndex };
+export { parsePathAndSetContent, createSearchIndex }
