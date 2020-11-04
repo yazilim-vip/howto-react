@@ -3,13 +3,14 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
 import VipIcon from './VipIcon'
-import Cv from './Cv'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFile } from '@fortawesome/free-solid-svg-icons'
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0]
@@ -27,19 +28,29 @@ const linkToIcon = (linkMap) => {
   )
 }
 
+const renderCv = (cvSource) => {
+  return (
+    <div className='text-center'>
+      <hr />
+
+      <Button
+        className='d-block'
+        variant='outline-primary'
+        href={cvSource}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <FontAwesomeIcon icon={faFile} className='mr-3' />
+        Curriculum Vitae
+      </Button>
+    </div>
+  )
+}
+
 const PortfolioCard = (props) => {
   const portfolio = props.portfolio
   const portfolioLinks = portfolio.links
   const cvSource = portfolio.cvSource
-
-  const cvExists = !!(cvSource !== undefined && cvSource !== null)
-  console.log(
-    'cvExists ==> ',
-    portfolio.name,
-    cvExists,
-    'cvSouce ==>',
-    cvSource
-  )
 
   return (
     <Card className='portfolio-card shadow'>
@@ -68,12 +79,7 @@ const PortfolioCard = (props) => {
           </Card.Text>
         </div>
 
-        {cvExists && (
-          <>
-            <hr />
-            <Cv cvSource={cvSource} modalSize='lg' />
-          </>
-        )}
+        {cvSource ? renderCv(cvSource) : null}
       </Card.Body>
 
       {portfolioLinks !== undefined && portfolioLinks !== null && (
