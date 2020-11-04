@@ -57,14 +57,26 @@ export const members = {
     {
       name: 'Mustafa Arif Sisman',
       title: 'Major Contributor',
-      description:
-        'I am interested in web technologies and artificial intelligence. I am familiar with agile software development principles and I am an active learner. I try to get an analytical result with my analytical thinking skills and technology in the problems I encounter.',
+      description: (
+        <>
+          <ul>
+            <li>
+              I aim to achieve the most automated and optimized result possible,
+              following the principles of agile software development and
+              analytical thinking.
+            </li>
+            <li>
+              I work in the field of artificial intelligence and web
+              technologies, I am an active learner.
+            </li>
+          </ul>
+        </>
+      ),
       imageSource: '/img/arif.jpeg',
-      cvSource: '/cv/arif.pdf',
+      cvSource: 'https://arifsisman.github.io',
       links: {
         gitlab: 'https://gitlab.com/arifsisman',
         github: 'https://github.com/arifsisman',
-        bitbucket: 'https://bitbucket.org/arifsisman',
         medium: 'https://medium.com/@arifsisman',
         linkedin: 'https://www.linkedin.com/in/mustafaarifsisman'
       }
