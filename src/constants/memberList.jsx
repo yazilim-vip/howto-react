@@ -6,15 +6,6 @@ export const members = {
       name: 'Mehmet Arif Emre Sen',
       description: (
         <>
-          <a
-            className='d-block text-center'
-            href='https://maemresen.github.io/resume/cv_mehmet_arif_emre_sen.pdf'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <b>Resume Link</b>
-          </a>
-          <hr />
           <ul>
             <li>
               I am an entrepreneur who wants to learn new technologies and use
@@ -26,6 +17,15 @@ export const members = {
             </li>
             <li>I have deep interest to Object Oriented Paradigm</li>
           </ul>
+          <hr />
+          <a
+            className='d-block text-center'
+            href='https://maemresen.github.io/curriculum-vitae/cv_mehmet_arif_emre_sen.pdf'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <b>Resume Link</b>
+          </a>
         </>
       ),
       imageSource: '/img/emre_portrait_cropped.jpeg',
