@@ -24,7 +24,7 @@ export const members = {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <b>Resume Link</b>
+            <b>CV Link</b>
           </a>
         </>
       ),
