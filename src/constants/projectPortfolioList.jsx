@@ -1,4 +1,4 @@
-export const portfolioList = [
+export const PORTFOLIO_LIST = [
   {
     name: 'Play2Gether',
     description:

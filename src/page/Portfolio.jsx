@@ -11,13 +11,13 @@ import { CardColumns } from 'react-bootstrap'
 import { Page, PortfolioCard } from '../component'
 
 // constants
-import * as Content from '../constants/projectPortfolioList'
+import { PORTFOLIO_LIST } from '../constants'
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
 
 const Portfolio = () => (
   <Page>
-    <CardColumns>{Content.portfolioList.map(portfolioToComponent)}</CardColumns>
+    <CardColumns>{PORTFOLIO_LIST.map(portfolioToComponent)}</CardColumns>
   </Page>
 )
 

@@ -11,7 +11,7 @@ import { Row, Col } from 'react-bootstrap'
 import { Page, PersonCard } from '../component'
 
 // Constants
-import * as Content from '../constants/memberList'
+import { MEMBER_LIST } from '../constants'
 
 const memberToComponent = (tm) => (
   <Col key={tm.name} lg={{ span: 4 }} nd={{ span: 12 }}>
@@ -20,8 +20,8 @@ const memberToComponent = (tm) => (
 )
 
 const About = () => {
-  const teamMemberList = Content.members.teamMemberList
-  const contributorList = Content.members.contributorList
+  const teamMemberList = MEMBER_LIST.teamMemberList
+  const contributorList = MEMBER_LIST.contributorList
   return (
     <Page>
       <Row>{teamMemberList.map(memberToComponent)}</Row>

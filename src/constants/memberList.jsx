@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const members = {
+export const MEMBER_LIST = {
   teamMemberList: [
     {
       name: 'Mehmet Arif Emre Sen',
