@@ -9,10 +9,10 @@ import { Navbar, Nav } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
+import './CustomNavbar.scss'
 
 // Project Components
-
-import { VipIcon } from './'
+import { VipIcon } from '../'
 
 const CustomNavbar = () => {
   return (
