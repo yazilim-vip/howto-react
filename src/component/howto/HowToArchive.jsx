@@ -44,6 +44,10 @@ const _HowToArchive = ({
     query,
     isToggleOn,
 
+    // ..
+    categoryNames,
+    rootCategorySelectedFlag,
+
     // methods from props
     onSearchResult,
     onToggle,
@@ -120,7 +124,10 @@ const _HowToArchive = ({
             <div>
                 <Row>
                     <Col md='7'>
-                        <HowToBreadcrumb />
+                        <HowToBreadcrumb
+                            categoryNames={categoryNames}
+                            rootCategorySelectedFlag={rootCategorySelectedFlag}
+                        />
                     </Col>
 
                     <Col md='2' sm='3' className='mb-2 mb-sm-0'>
@@ -187,7 +194,11 @@ const mapStateToProps = (state) => {
         categoryHits: howtoReducer.categoryHits,
         howtoHits: howtoReducer.howtoHits,
         searchIndex: howtoReducer.searchIndex,
-        isToggleOn: howtoReducer.isToggleOn
+        isToggleOn: howtoReducer.isToggleOn,
+
+        // ...
+        categoryNames: howtoReducer.categoryNames,
+        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
     }
 }
 
