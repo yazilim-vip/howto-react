@@ -13,6 +13,4 @@ var config = {
     projectId: 'yvip-howto'
 }
 
-const Firebase = firebase.initializeApp(config)
-
-export default Firebase
+export const Firebase = firebase.initializeApp(config)

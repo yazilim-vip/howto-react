@@ -1,3 +1,2 @@
-import Firebase from './Firebase'
+export { Firebase } from './Firebase'
 
-export { Firebase }
