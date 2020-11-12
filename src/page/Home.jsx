@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
+import { Page } from '../component'
 
 const Home = (props) => (
   <Page>

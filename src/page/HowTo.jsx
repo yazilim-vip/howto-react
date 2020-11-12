@@ -9,7 +9,9 @@ import { Alert, Spinner } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
+import { Page } from '../component'
+
+
 import HowToBrowser from '../component/howto/HowToBrowser'
 import Firebase from '../util/Firebase'
 import { actionCreators } from '../redux/actions'

@@ -8,8 +8,7 @@ import { CardColumns } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
-import PortfolioCard from '../component/PortfolioCard'
+import { Page, PortfolioCard } from '../component'
 
 // constants
 import * as Content from '../constants/projectPortfolioList'

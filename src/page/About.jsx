@@ -8,8 +8,7 @@ import { Row, Col } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
-import PersonCard from '../component/PersonCard'
+import { Page, PersonCard } from '../component'
 
 // Constants
 import * as Content from '../constants/memberList'

@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './style/App.scss'
 
 // Components
-import CustomNavbar from './component/CustomNavbar'
+import { CustomNavbar} from './component'
 
 // Pages
 import Home from './page/Home'

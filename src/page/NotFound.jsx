@@ -3,7 +3,8 @@ import React from 'react'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
+
+import { Page } from '../component'
 
 const NotFound = () => (
   <Page>
