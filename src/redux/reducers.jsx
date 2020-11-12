@@ -7,7 +7,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 //  Internal Dependencies
 // ---------------------------
 import { actionTypes } from './actions'
-import { parsePathAndSetContent, createSearchIndex } from '../util/HowToUtil'
+import { HowToUtil } from '../util'
 
 const howtoReducer = (state = [], action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ const howtoReducer = (state = [], action) => {
       if (path.startsWith('/howto') && state.rootCategory) {
         return {
           ...state,
-          ...parsePathAndSetContent(state.rootCategory, path),
+          ...HowToUtil.parsePathAndSetContent(state.rootCategory, path),
           query: ''
         }
       } else {
@@ -32,8 +32,8 @@ const howtoReducer = (state = [], action) => {
         ...state,
         rootCategory: action.rootCategory,
         isLoaded: true,
-        ...parsePathAndSetContent(action.rootCategory, action.path),
-        searchIndex: createSearchIndex(action.rootCategory),
+        ...HowToUtil.parsePathAndSetContent(action.rootCategory, action.path),
+        searchIndex: HowToUtil.createSearchIndex(action.rootCategory),
         query: ''
       }
 

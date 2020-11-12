@@ -9,7 +9,6 @@ import { Breadcrumb } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 
-
 const HowToBreadcrumb = ({
   // values from mapStateToProps
   categoryNames,

@@ -11,9 +11,8 @@ import { Alert, Spinner } from 'react-bootstrap'
 // ---------------------------
 import { Page } from '../component'
 
-
 import HowToBrowser from '../component/howto/HowToBrowser'
-import Firebase from '../util/Firebase'
+import { Firebase } from '../util'
 import { actionCreators } from '../redux/actions'
 
 class HowTo extends React.Component {

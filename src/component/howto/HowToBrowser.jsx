@@ -33,7 +33,6 @@ import HowToBreadcrumb from './HowToBreadcrumb'
 // Constants
 import HOWTO_ITEM_TYPE from '../../model/HowToItemType'
 
-
 const HowToBrowser = ({
   // values from mapStateToProps
   folderPath,
