@@ -19,7 +19,7 @@ const memberToComponent = (tm) => (
     </Col>
 )
 
-const About = () => {
+export const About = () => {
     const teamMemberList = MEMBER_LIST.teamMemberList
     const contributorList = MEMBER_LIST.contributorList
     return (
@@ -35,5 +35,3 @@ const About = () => {
         </Page>
     )
 }
-
-export default About

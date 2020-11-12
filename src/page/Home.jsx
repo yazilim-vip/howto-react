@@ -10,7 +10,7 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 import { Page } from '../component'
 
-const Home = (props) => (
+export const Home = (props) => (
     <Page>
         <Card className='mb-4 portfolio-card shadow yvip-card'>
             <div className='yvip-card-img img-responsive img-fluid' />
@@ -31,5 +31,3 @@ const Home = (props) => (
         </Card>
     </Page>
 )
-
-export default Home

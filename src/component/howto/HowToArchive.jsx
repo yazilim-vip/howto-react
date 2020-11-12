@@ -32,7 +32,7 @@ import HowToFileManager from './child/HowToFileManager'
 
 // Project Components
 
-const HowToBrowser = ({
+const _HowToArchive = ({
     // values from mapStateToProps
     folderPath,
     selectedCategory,
@@ -192,4 +192,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = { ...HOWTO_ACTION_CREATORS, push }
-export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)
+export const HowToArchive = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(_HowToArchive)

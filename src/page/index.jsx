@@ -1,7 +1,5 @@
-import Home from './Home'
-import Portfolio from './Portfolio'
-import HowTo from './HowTo'
-import About from './About'
-import NotFound from './NotFound'
-
-export { Home, Portfolio, HowTo, About, NotFound }
+export { Home } from './Home'
+export { Portfolio } from './Portfolio'
+export { HowTo } from './HowTo'
+export { About } from './About'
+export { NotFound } from './NotFound'

@@ -12,7 +12,7 @@ import { Alert, Spinner } from 'react-bootstrap'
 import { Page, HowTo as HowToComponent } from '../component'
 import { Firebase } from '../util'
 
-class HowTo extends React.Component {
+class _HowTo extends React.Component {
     componentDidMount() {
         const { rootCategory } = this.props
 
@@ -72,7 +72,7 @@ class HowTo extends React.Component {
 
         return (
             <Page span={{ span: 12 }}>
-                <HowToComponent.HowToBrowser />
+                <HowToComponent.HowToArchive />
             </Page>
         )
     }
@@ -90,4 +90,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = HowToComponent.HOWTO_ACTION_CREATORS
 
-export default connect(mapStateToProps, mapDispatchToProps)(HowTo)
+export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)

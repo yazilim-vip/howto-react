@@ -15,10 +15,8 @@ import { PORTFOLIO_LIST } from '../constants'
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
 
-const Portfolio = () => (
+export const Portfolio = () => (
     <Page>
         <CardColumns>{PORTFOLIO_LIST.map(portfolioToComponent)}</CardColumns>
     </Page>
 )
-
-export default Portfolio
