@@ -24,11 +24,11 @@ import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { actionCreators } from './redux/HowToActions'
+import HowToBreadcrumb from './HowToBreadcrumb'
+import HowToFileManager from './HowToFileManager'
+import * as HowToActions from './redux/HowToActions'
 
 // Project Components
-import HowToFileManager from './HowToFileManager'
-import HowToBreadcrumb from './HowToBreadcrumb'
 
 // Constants
 import HOWTO_ITEM_TYPE from '../../model/HowToItemType'
@@ -177,7 +177,6 @@ const HowToBrowser = ({
 
 const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
-
     return {
         folderPath: howtoReducer.folderPath,
         selectedCategory: howtoReducer.selectedCategory,
@@ -193,6 +192,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { ...actionCreators, push }
-
+const mapDispatchToProps = { ...HowToActions.actionCreators, push }
 export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)

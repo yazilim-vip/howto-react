@@ -11,7 +11,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import howtoReducer from '../component/howto/redux/HowToReducer'
+import { HowTo } from '../component'
 
 const persistConfig = {
     key: 'root',
@@ -24,7 +24,7 @@ export const history = createBrowserHistory()
 const createRootReducer = (history) =>
     combineReducers({
         router: connectRouter(history),
-        howtoReducer: persistReducer(persistConfig, howtoReducer)
+        howtoReducer: persistReducer(persistConfig, HowTo.howToReducer)
     })
 
 export default function configureStore(preloadedState) {
