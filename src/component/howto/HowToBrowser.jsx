@@ -24,15 +24,12 @@ import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HOWTO_ACTION_CREATORS } from '../../constants'
+import { HOWTO_ACTION_CREATORS, HOWTO_ITEM_TYPE } from '../../constants'
 
 import HowToBreadcrumb from './HowToBreadcrumb'
 import HowToFileManager from './HowToFileManager'
 
 // Project Components
-
-// Constants
-import HOWTO_ITEM_TYPE from '../../model/HowToItemType'
 
 const HowToBrowser = ({
     // values from mapStateToProps

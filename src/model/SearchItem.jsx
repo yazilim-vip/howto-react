@@ -1,4 +1,4 @@
-class SearchItem {
+class _SearchItem {
     constructor(path, type, name) {
         this.path = path
         this.type = type
@@ -6,4 +6,4 @@ class SearchItem {
     }
 }
 
-export { SearchItem }
+export { _SearchItem as SearchItem }
