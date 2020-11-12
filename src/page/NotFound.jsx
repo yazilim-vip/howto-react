@@ -7,15 +7,15 @@ import React from 'react'
 import { Page } from '../component'
 
 const NotFound = () => (
-  <Page>
-    <div className='row h-100 text-center'>
-      <div className='col-sm-12 my-auto'>
-        <div className='glitch' data-text='NOT FOUND'>
-          NOT FOUND
+    <Page>
+        <div className='row h-100 text-center'>
+            <div className='col-sm-12 my-auto'>
+                <div className='glitch' data-text='NOT FOUND'>
+                    NOT FOUND
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </Page>
+    </Page>
 )
 
 export default NotFound

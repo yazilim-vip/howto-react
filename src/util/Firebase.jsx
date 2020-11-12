@@ -9,8 +9,8 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 
 var config = {
-  databaseURL: 'https://yvip-howto.firebaseio.com',
-  projectId: 'yvip-howto'
+    databaseURL: 'https://yvip-howto.firebaseio.com',
+    projectId: 'yvip-howto'
 }
 
 const Firebase = firebase.initializeApp(config)
