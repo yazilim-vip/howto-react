@@ -1,5 +1,5 @@
-import PersonCard from './PersonCard'
-import PortfolioCard from './PortfolioCard'
+import PersonCard from './card/PersonCard'
+import PortfolioCard from './card/PortfolioCard'
 import Page from './Page'
 import Cv from './Cv'
 import CustomNavbar from './customNavbar/CustomNavbar'
