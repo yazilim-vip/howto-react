@@ -24,14 +24,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './style/App.scss'
 
 // Components
-import { CustomNavbar} from './component'
+import { CustomNavbar } from './component'
 
 // Pages
-import Home from './page/Home'
-import Portfolio from './page/Portfolio'
-import HowTo from './page/HowTo'
-import About from './page/About'
-import NotFound from './page/NotFound'
+import { Home, Portfolio, HowTo, About, NotFound } from './page'
 
 import { history } from './redux/configureStore'
 
