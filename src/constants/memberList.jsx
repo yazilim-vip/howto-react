@@ -6,20 +6,14 @@ export const MEMBER_LIST = {
             name: 'Mehmet Arif Emre Sen',
             description: (
                 <>
-                    <ul>
-                        <li>
-                            I am an entrepreneur who wants to learn new
-                            technologies and use them to make things easier.
-                        </li>
-                        <li>
-                            My life goal is having my own job and creating a
-                            software community that everyone can get benefit
-                            from.
-                        </li>
-                        <li>
-                            I have deep interest to Object Oriented Paradigm
-                        </li>
-                    </ul>
+                    <a
+                        className='d-block text-center'
+                        href='https://maemresen.github.io'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    >
+                        <b>Personal Website</b>
+                    </a>
                     <hr />
                     <a
                         className='d-block text-center'
