@@ -24,9 +24,10 @@ import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
+import { HOWTO_ACTION_CREATORS } from '../../constants'
+
 import HowToBreadcrumb from './HowToBreadcrumb'
 import HowToFileManager from './HowToFileManager'
-import * as HowToActions from './redux/HowToActions'
 
 // Project Components
 
@@ -192,5 +193,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = { ...HowToActions.actionCreators, push }
+const mapDispatchToProps = { ...HOWTO_ACTION_CREATORS, push }
 export default connect(mapStateToProps, mapDispatchToProps)(HowToBrowser)

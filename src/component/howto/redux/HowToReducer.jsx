@@ -7,7 +7,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 //  Internal Dependencies
 // ---------------------------
 import * as HowToUtil from '../HowToUtil'
-import { actionTypes } from './HowToActions'
+import { HOWTO_ACTION_TYPES } from '../../../constants'
 
 const howtoReducer = (state = [], action) => {
     switch (action.type) {
@@ -30,7 +30,7 @@ const howtoReducer = (state = [], action) => {
                 }
             }
 
-        case actionTypes.ON_API_SUCCESS:
+        case HOWTO_ACTION_TYPES.ON_API_SUCCESS:
             return {
                 ...state,
                 rootCategory: action.rootCategory,
@@ -43,14 +43,14 @@ const howtoReducer = (state = [], action) => {
                 query: ''
             }
 
-        case actionTypes.ON_API_ERROR:
+        case HOWTO_ACTION_TYPES.ON_API_ERROR:
             return {
                 ...state,
                 error: action.error,
                 isLoaded: true
             }
 
-        case actionTypes.ON_SEARCH:
+        case HOWTO_ACTION_TYPES.ON_SEARCH:
             return {
                 ...state,
                 query: action.query,
@@ -58,7 +58,7 @@ const howtoReducer = (state = [], action) => {
                 howtoHits: action.howtoHits
             }
 
-        case actionTypes.ON_TOGGLE:
+        case HOWTO_ACTION_TYPES.ON_TOGGLE:
             return {
                 ...state,
                 isToggleOn: !state.isToggleOn
