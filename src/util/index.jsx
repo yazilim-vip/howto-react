@@ -1,2 +1,1 @@
 export { Firebase } from './Firebase'
-
