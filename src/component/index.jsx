@@ -5,4 +5,14 @@ import Cv from './cv/Cv'
 import CustomNavbar from './customNavbar/CustomNavbar'
 import VipIcon from './vipIcon/VipIcon'
 
-export { CustomNavbar, PersonCard, PortfolioCard, Page, Cv, VipIcon }
+import HowToBrowser from './howto/HowToBrowser'
+
+export {
+  CustomNavbar,
+  PersonCard,
+  PortfolioCard,
+  Page,
+  Cv,
+  VipIcon,
+  HowToBrowser
+}
