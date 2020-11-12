@@ -5,6 +5,8 @@ import React from 'react'
 // ---------------------------
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import './VipIcon.scss'
+
 const VipIcon = (props) => (
   <div
     href={props.link}

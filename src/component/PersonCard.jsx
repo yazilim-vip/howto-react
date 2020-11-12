@@ -8,7 +8,7 @@ import { Button, Card } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import VipIcon from './VipIcon'
+import { VipIcon } from './'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 

@@ -11,7 +11,8 @@ import { Navbar, Nav } from 'react-bootstrap'
 // ---------------------------
 
 // Project Components
-import VipIcon from './VipIcon'
+
+import { VipIcon } from './'
 
 const CustomNavbar = () => {
   return (

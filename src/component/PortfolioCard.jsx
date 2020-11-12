@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import VipIcon from './VipIcon'
+import { VipIcon } from './'
 
 const linkToIcon = (linkMap) => {
   const iconCode = linkMap[0]
