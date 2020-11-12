@@ -11,7 +11,6 @@ import { Alert, Spinner } from 'react-bootstrap'
 // ---------------------------
 import { Page, HowTo as HowToComponent } from '../component'
 import { Firebase } from '../util'
-import { HOWTO_ACTION_CREATORS } from '../constants'
 
 class HowTo extends React.Component {
     componentDidMount() {
@@ -89,6 +88,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = HOWTO_ACTION_CREATORS
+const mapDispatchToProps = HowToComponent.HOWTO_ACTION_CREATORS
 
 export default connect(mapStateToProps, mapDispatchToProps)(HowTo)

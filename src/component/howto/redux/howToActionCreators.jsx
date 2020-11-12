@@ -1,4 +1,4 @@
-import { HOWTO_ACTION_TYPES } from './'
+import { HOWTO_ACTION_TYPES } from './howToActionTypes'
 
 const onApiSuccess = (category, path) => {
     return {

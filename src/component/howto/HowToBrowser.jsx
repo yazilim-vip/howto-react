@@ -24,10 +24,11 @@ import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HOWTO_ACTION_CREATORS, HOWTO_ITEM_TYPE } from '../../constants'
+import { HOWTO_ITEM_TYPE } from '../../constants'
+import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
 
-import HowToBreadcrumb from './HowToBreadcrumb'
-import HowToFileManager from './HowToFileManager'
+import HowToBreadcrumb from './child/HowToBreadcrumb'
+import HowToFileManager from './child/HowToFileManager'
 
 // Project Components
 

@@ -7,9 +7,9 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 //  Internal Dependencies
 // ---------------------------
 import * as HowToUtil from '../HowToUtil'
-import { HOWTO_ACTION_TYPES } from '../../../constants'
+import { HOWTO_ACTION_TYPES } from './howToActionTypes'
 
-const howtoReducer = (state = [], action) => {
+export const howToReducer = (state = [], action) => {
     switch (action.type) {
         case LOCATION_CHANGE:
             //! eslint gives error
@@ -68,5 +68,3 @@ const howtoReducer = (state = [], action) => {
             return state
     }
 }
-
-export default howtoReducer
