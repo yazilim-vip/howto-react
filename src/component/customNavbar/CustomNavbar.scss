@@ -1,0 +1,47 @@
+.page-nav {
+    .nav-link {
+      border-bottom: 3px solid gray;
+      transition: border-color 300ms ease-in-out;
+    }
+  
+    .nav-link.active {
+      border-color: #29a4d9;
+    }
+  }
+  
+  
+  .nav-link .yvip-icon:nth-last-child(1) {
+    --animate-duration: 400ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(2) {
+    --animate-duration: 800ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(3) {
+    --animate-duration: 1200ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(4) {
+    --animate-duration: 1600ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(5) {
+    --animate-duration: 2000ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(6) {
+    --animate-duration: 2400ms;
+  }
+  
+  .nav-link .yvip-icon:nth-last-child(7) {
+    --animate-duration: 2800ms;
+  }
+  
+  // @for $i from 1 through 6 {
+  //   .nav-link .yvip-icon:nth-child($i){
+  //     --animate-duration: 3400ms * $i;
+  //   }
+  
+  // }
+  

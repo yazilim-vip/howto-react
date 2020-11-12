@@ -1,0 +1,5 @@
+export { Home } from './home/Home'
+export { Portfolio } from './Portfolio'
+export { HowTo } from './HowTo'
+export { About } from './About'
+export { NotFound } from './notFound/NotFound'

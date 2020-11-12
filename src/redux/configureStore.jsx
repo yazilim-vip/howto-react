@@ -11,41 +11,41 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import howtoReducer from './reducers'
+import { HowTo } from '../component'
 
 const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['isToggleOn']
+    key: 'root',
+    storage,
+    whitelist: ['isToggleOn']
 }
 
 export const history = createBrowserHistory()
 
 const createRootReducer = (history) =>
-  combineReducers({
-    router: connectRouter(history),
-    howtoReducer: persistReducer(persistConfig, howtoReducer)
-  })
+    combineReducers({
+        router: connectRouter(history),
+        howtoReducer: persistReducer(persistConfig, HowTo.howToReducer)
+    })
 
 export default function configureStore(preloadedState) {
-  // Middlewares
-  const middlewares = [routerMiddleware(history)]
-  const middlewareEnhancer = applyMiddleware(...middlewares)
+    // Middlewares
+    const middlewares = [routerMiddleware(history)]
+    const middlewareEnhancer = applyMiddleware(...middlewares)
 
-  // Enhancers
-  const enhancers = [middlewareEnhancer]
-  const composedEnhancers = composeWithDevTools(...enhancers)
+    // Enhancers
+    const enhancers = [middlewareEnhancer]
+    const composedEnhancers = composeWithDevTools(...enhancers)
 
-  // Reducers
-  const persistedRootReducer = createRootReducer(history)
+    // Reducers
+    const persistedRootReducer = createRootReducer(history)
 
-  // Store & Persistor
-  const store = createStore(
-    persistedRootReducer,
-    preloadedState,
-    composedEnhancers
-  )
-  const persistor = persistStore(store)
+    // Store & Persistor
+    const store = createStore(
+        persistedRootReducer,
+        preloadedState,
+        composedEnhancers
+    )
+    const persistor = persistStore(store)
 
-  return { store, persistor }
+    return { store, persistor }
 }

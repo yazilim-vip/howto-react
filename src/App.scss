@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// ? WHY NEEDED
+main {
+  flex: 1 0 auto;
+  background-color: #e9ebf0;
+}
+
+footer {
+  flex-shrink: 0;
+  text-align: center;
+  background-color: #343a40;
+}

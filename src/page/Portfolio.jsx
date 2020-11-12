@@ -8,18 +8,15 @@ import { CardColumns } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import Page from '../component/Page'
-import PortfolioCard from '../component/PortfolioCard'
+import { Page, PortfolioCard } from '../component'
 
 // constants
-import * as Content from '../constants/projectPortfolioList'
+import { PORTFOLIO_LIST } from '../constants'
 
 const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
 
-const Portfolio = () => (
-  <Page>
-    <CardColumns>{Content.portfolioList.map(portfolioToComponent)}</CardColumns>
-  </Page>
+export const Portfolio = () => (
+    <Page>
+        <CardColumns>{PORTFOLIO_LIST.map(portfolioToComponent)}</CardColumns>
+    </Page>
 )
-
-export default Portfolio
