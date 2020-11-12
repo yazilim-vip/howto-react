@@ -14,7 +14,7 @@ import './CustomNavbar.scss'
 // Project Components
 import { VipIcon } from '../'
 
-const CustomNavbar = () => {
+export const CustomNavbar = () => {
     return (
         <Navbar
             collapseOnSelect
@@ -113,5 +113,3 @@ const CustomNavbar = () => {
         </Navbar>
     )
 }
-
-export default CustomNavbar

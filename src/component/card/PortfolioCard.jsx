@@ -26,7 +26,7 @@ const linkToIcon = (linkMap) => {
     )
 }
 
-const PortfolioCard = (props) => {
+export const PortfolioCard = (props) => {
     const portfolio = props.portfolio
     const portfolioImageSource = portfolio.imageSource
     const portfolioLinks = portfolio.links

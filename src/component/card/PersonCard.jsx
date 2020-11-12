@@ -47,7 +47,7 @@ const renderCv = (cvSource) => {
     )
 }
 
-const PortfolioCard = (props) => {
+export const PersonCard = (props) => {
     const portfolio = props.portfolio
     const portfolioLinks = portfolio.links
     const cvSource = portfolio.cvSource
@@ -90,5 +90,3 @@ const PortfolioCard = (props) => {
         </Card>
     )
 }
-
-export default PortfolioCard

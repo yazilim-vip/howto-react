@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Modal } from 'react-bootstrap'
 import { Document, Page, pdfjs } from 'react-pdf'
 
-class Cv extends React.Component {
+export class Cv extends React.Component {
     constructor(props) {
         super()
 
@@ -103,5 +103,3 @@ class Cv extends React.Component {
         )
     }
 }
-
-export default Cv

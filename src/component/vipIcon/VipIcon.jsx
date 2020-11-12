@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './VipIcon.scss'
 
-const VipIcon = (props) => (
+export const VipIcon = (props) => (
     <div
         href={props.link}
         className={`d-inline-block yvip-icon ${props.iconCode} ${props.className}`}
@@ -17,5 +17,3 @@ const VipIcon = (props) => (
         </a>
     </div>
 )
-
-export default VipIcon
