@@ -1,0 +1,14 @@
+.yvip-card {
+    .yvip-card-img {
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0.1) 10%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+        url("/img/antalya_wallpaper.jpg") no-repeat;
+      background-size: cover;
+      height: 65vh;
+      width: 100%;
+    }
+  }

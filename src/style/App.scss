@@ -14,6 +14,7 @@ body {
   height: 100%;
 }
 
+// ? WHY NEEDED
 main {
   flex: 1 0 auto;
   background-color: #e9ebf0;
@@ -23,108 +24,4 @@ footer {
   flex-shrink: 0;
   text-align: center;
   background-color: #343a40;
-}
-
-
-.yvip-card {
-  .yvip-card-img {
-    background: linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.1) 10%,
-        rgba(255, 255, 255, 0) 100%
-      ),
-      url("/img/antalya_wallpaper.jpg") no-repeat;
-    background-size: cover;
-    height: 65vh;
-    width: 100%;
-  }
-}
-
-.left-col,
-.right-col {
-  height: 80vh;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-canvas {
-  width: 100% !important;
-  height: auto !important;
-}
-
-.modal-header-footer {
-  background-color: #e9ebf0;
-}
-
-.glitch {
-  color: black;
-  font-size: 50px;
-  position: relative;
-  width: 280px;
-  margin: 0 auto;
-}
-@keyframes noise-anim {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-    }
-  }
-}
-
-.glitch:after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  text-shadow: -1px 0 red;
-  top: 0;
-  color: white;
-  background: #e9ebf0;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim 2s infinite linear alternate-reverse;
-}
-
-@keyframes noise-anim-2 {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-    }
-  }
-}
-
-.glitch:before {
-  content: attr(data-text);
-  position: absolute;
-  left: -2px;
-  text-shadow: 1px 0 blue;
-  top: 0;
-  color: white;
-  background: #e9ebf0;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 3s infinite linear alternate-reverse;
-}
-
-.link {
-  color: #353a3f;
-}
-
-.link:hover {
-  color: #646b73;
-}
-
-ol.breadcrumb {
-  margin: 0 !important;
-}
-
-// ########### Sliding Pane
-.howto-sliding-pane {
-  height: 100vh !important;
-  margin-top: 0vh !important;
-}
-.howto-sliding-pane-overlay {
-  z-index: 999 !important;
 }

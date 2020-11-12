@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Modal } from 'react-bootstrap'
 import { Document, Page, pdfjs } from 'react-pdf'
 
+import './Cv.scss'
+
 export class Cv extends React.Component {
     constructor(props) {
         super()

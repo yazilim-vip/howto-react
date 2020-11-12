@@ -30,7 +30,7 @@ import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
 import HowToBreadcrumb from './child/HowToBreadcrumb'
 import HowToFileManager from './child/HowToFileManager'
 
-// Project Components
+import './HowToArchive.scss'
 
 const _HowToArchive = ({
     // values from mapStateToProps

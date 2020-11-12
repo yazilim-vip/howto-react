@@ -4,7 +4,8 @@ import React from 'react'
 //  Internal Dependencies
 // ---------------------------
 
-import { Page } from '../component'
+import { Page } from '../../component'
+import './NotFound.scss'
 
 export const NotFound = () => (
     <Page>
