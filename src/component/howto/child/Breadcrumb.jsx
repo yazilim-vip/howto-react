@@ -10,17 +10,18 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 
 export const HowToBreadcrumb = (props) => {
     // values from mapStateToProps
-    const { categoryNames, rootCategorySelectedFlag } = props
+    const { howTo, categoryNames, rootCategorySelectedFlag } = props
+
+    const catNames = howTo ? howTo.categoryList : categoryNames
 
     const getLink = (index) => {
-        return '/howto/' + categoryNames.slice(0, index).join('/')
+        return '/howto/' + catNames.slice(0, index).join('/')
     }
 
-    const renderItems = categoryNames.map((item, index) => {
+    const renderItems = catNames.map((item, index) => {
         return (
             <Breadcrumb.Item
                 key={item}
-                active={index + 1 === categoryNames.length}
                 linkAs={Link}
                 linkProps={{ to: getLink(index + 1), className: 'link' }}
             >
@@ -43,6 +44,12 @@ export const HowToBreadcrumb = (props) => {
             </Breadcrumb.Item>
 
             {renderItems}
+
+            {howTo && (
+                <Breadcrumb.Item active key={howTo.label}>
+                    {howTo.label}
+                </Breadcrumb.Item>
+            )}
         </Breadcrumb>
     )
 }

@@ -18,14 +18,13 @@ export const HowToPanel = (props) => {
         howtoSelectedFlag,
         selectedHowto,
         onRequestClose,
-        categoryNames,
         rootCategorySelectedFlag
     } = props
 
     const title = (
         <>
             <HowToBreadcrumb
-                categoryNames={categoryNames}
+                howTo={selectedHowto}
                 rootCategorySelectedFlag={rootCategorySelectedFlag}
             />
         </>
