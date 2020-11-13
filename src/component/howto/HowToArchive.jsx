@@ -27,8 +27,8 @@ import _ from 'underscore'
 import { HOWTO_ITEM_TYPE } from '../../constants'
 import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
 
-import HowToBreadcrumb from './child/HowToBreadcrumb'
-import HowToFileManager from './child/HowToFileManager'
+import HowToBreadcrumb from './child/Breadcrumb'
+import HowToFileManager from './child/FileManager'
 
 import './HowToArchive.scss'
 
