@@ -97,7 +97,8 @@ const _HowToArchive = ({
     if (!categoryFound) {
         return showError(
             <>
-                Category <b>{selectedCategoryName}</b> not found in path.
+                Category <b>{folderPath.replace('/howto/', '')}</b> not found in
+                path.
             </>
         )
     }
