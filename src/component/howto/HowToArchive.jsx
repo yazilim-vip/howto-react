@@ -78,29 +78,6 @@ const _HowToArchive = ({
         }
     }
 
-    const renderHowtoContentElement = () => {
-        if (selectedHowto) {
-            return (
-                <HowToPanel
-                    howtoSelectedFlag={howtoSelectedFlag}
-                    selectedHowto={selectedHowto}
-                    onRequestClose={() => {
-                        push(folderPath)
-                    }}
-                />
-            )
-        }
-
-        if (howtoSelectedFlag) {
-            return (
-                <Alert key={1} variant='danger'>
-                    <b>{selectedHowtoName}</b> not found in{' '}
-                    <b>{selectedCategory.name}</b> folder.
-                </Alert>
-            )
-        }
-    }
-
     if (!selectedCategory) {
         return (
             <Alert key={1} variant='danger'>
@@ -126,7 +103,6 @@ const _HowToArchive = ({
                 </Col>
 
                 <Col md='3' sm='9'>
-
                     <FormControl
                         type='search'
                         placeholder='Search...'
