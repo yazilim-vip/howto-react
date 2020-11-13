@@ -25,6 +25,7 @@ import HowToFileManager from './child/FileManager'
 import './HowToArchive.scss'
 import { HOWTO_ITEM_TYPE } from './howToConstants'
 import { ViewModeChanger } from './child/ViewModeChanger'
+import { HowToPanel } from './child/HowToPanel'
 
 const _HowToArchive = ({
     // values from mapStateToProps
@@ -84,17 +85,9 @@ const _HowToArchive = ({
     const renderHowtoContentElement = () => {
         if (selectedHowto) {
             return (
-                <SlidingPane
-                    className='howto-sliding-pane'
-                    overlayClassName='howto-sliding-pane-overlay'
-                    isOpen={howtoSelectedFlag}
-                    children={
-                        <ReactMarkdown source={selectedHowto.markdownContent} />
-                    }
-                    title={selectedHowto.label}
-                    width='100'
-                    from='bottom'
-                    closeIcon={<FontAwesomeIcon icon={faAngleDown} size='2x' />}
+                <HowToPanel
+                    howtoSelectedFlag={howtoSelectedFlag}
+                    selectedHowto={selectedHowto}
                     onRequestClose={() => {
                         push(folderPath)
                     }}
