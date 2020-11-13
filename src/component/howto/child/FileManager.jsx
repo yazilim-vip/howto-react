@@ -4,6 +4,7 @@ import React from 'react'
 //  External Dependencies
 // ---------------------------
 import { Container, ListGroup, Row } from 'react-bootstrap'
+import { HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../howToConstants'
 
 // ---------------------------
 //  Internal Dependencies
@@ -12,7 +13,13 @@ import { FileManagerFileItem, FileManagerFolderItem } from './FileManagerItem'
 
 const HowToFileManager = (props) => {
     // values from mapStateToProps
-    const { folderPath, isHit, categoryList, howtoList, isToggleOn } = props
+    const {
+        folderPath,
+        isHit,
+        categoryList,
+        howtoList,
+        fileManagerViewMode
+    } = props
 
     const prefix = folderPath + '/'
 
@@ -23,7 +30,7 @@ const HowToFileManager = (props) => {
             return (
                 <FileManagerFolderItem
                     key={link}
-                    viewModeFlag={isToggleOn}
+                    fileManagerViewMode={fileManagerViewMode}
                     name={name}
                     link={link}
                 />
@@ -37,7 +44,7 @@ const HowToFileManager = (props) => {
             return (
                 <FileManagerFileItem
                     key={link}
-                    viewModeFlag={isToggleOn}
+                    fileManagerViewMode={fileManagerViewMode}
                     name={name}
                     link={link}
                 />
@@ -46,14 +53,14 @@ const HowToFileManager = (props) => {
     }
 
     const renderByToggle = () => {
-        if (isToggleOn) {
+        if (fileManagerViewMode === HOWTO_VIEW_MODE_LIST_VIEW) {
             return (
                 <ListGroup>
                     {renderCategories(categoryList)}
                     {renderHowtos(howtoList)}
                 </ListGroup>
             )
-        } else {
+        } else if (fileManagerViewMode === HOWTO_VIEW_MODE_GRID_VIEW) {
             return (
                 <Row>
                     {renderCategories(categoryList)}

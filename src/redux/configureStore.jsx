@@ -16,7 +16,7 @@ import { HowTo } from '../component'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['isToggleOn']
+    whitelist: ['fileManagerViewMode']
 }
 
 export const history = createBrowserHistory()

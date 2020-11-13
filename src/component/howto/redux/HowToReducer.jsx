@@ -61,7 +61,7 @@ export const howToReducer = (state = [], action) => {
         case HOWTO_ACTION_TYPES.ON_TOGGLE:
             return {
                 ...state,
-                isToggleOn: !state.isToggleOn
+                fileManagerViewMode: !state.fileManagerViewMode
             }
 
         default:

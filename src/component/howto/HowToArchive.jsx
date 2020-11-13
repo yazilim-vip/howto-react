@@ -31,6 +31,10 @@ import HowToBreadcrumb from './child/Breadcrumb'
 import HowToFileManager from './child/FileManager'
 
 import './HowToArchive.scss'
+import {
+    HOWTO_VIEW_MODE_GRID_VIEW,
+    HOWTO_VIEW_MODE_LIST_VIEW
+} from './howToConstants'
 
 const _HowToArchive = ({
     // values from mapStateToProps
@@ -42,7 +46,7 @@ const _HowToArchive = ({
     howtoSelectedFlag,
     searchIndex,
     query,
-    isToggleOn,
+    fileManagerViewMode,
 
     // from HowToBreacrumb
     categoryNames,
@@ -53,7 +57,7 @@ const _HowToArchive = ({
     isHit,
     categoryList,
     howtoList,
-    // isToggleOn
+    // fileManagerViewMode
 
     // methods from props
     onSearchResult,
@@ -126,7 +130,7 @@ const _HowToArchive = ({
                 </Alert>
             )
         }
-
+        console.log("fileManagerViewMode", fileManagerViewMode)
         return (
             <div>
                 <Row>
@@ -143,7 +147,10 @@ const _HowToArchive = ({
                                 type='radio'
                                 variant='secondary'
                                 name='radio'
-                                checked={!isToggleOn}
+                                checked={
+                                    fileManagerViewMode ===
+                                    HOWTO_VIEW_MODE_GRID_VIEW
+                                }
                                 onChange={() => onToggle()}
                             >
                                 <FontAwesomeIcon icon={faTh} />
@@ -153,7 +160,10 @@ const _HowToArchive = ({
                                 type='radio'
                                 variant='secondary'
                                 name='radio'
-                                checked={isToggleOn}
+                                checked={
+                                    fileManagerViewMode ===
+                                    HOWTO_VIEW_MODE_LIST_VIEW
+                                }
                                 onChange={() => onToggle()}
                             >
                                 <FontAwesomeIcon icon={faThList} />
@@ -183,7 +193,7 @@ const _HowToArchive = ({
                     isHit={isHit}
                     categoryList={categoryList}
                     howtoList={howtoList}
-                    isToggleOn={isToggleOn}
+                    fileManagerViewMode={fileManagerViewMode}
                 />
 
                 {renderHowtoContentElement()}
@@ -219,7 +229,7 @@ const mapStateToProps = (state) => {
         categoryHits: howtoReducer.categoryHits,
         howtoHits: howtoReducer.howtoHits,
         searchIndex: howtoReducer.searchIndex,
-        isToggleOn: howtoReducer.isToggleOn,
+        fileManagerViewMode: howtoReducer.fileManagerViewMode,
 
         // from HowToBreadcrumb
         categoryNames: howtoReducer.categoryNames,
@@ -230,7 +240,7 @@ const mapStateToProps = (state) => {
         isHit: howtoReducer.categoryHits || howtoReducer.howtoHits,
         categoryList: categoryList,
         howtoList: howtoList
-        // isToggleOn: howtoReducer.isToggleOn
+        // fileManagerViewMode: howtoReducer.fileManagerViewMode
     }
 }
 

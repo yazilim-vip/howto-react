@@ -10,7 +10,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-regular-svg-icons'
 
 class FileManagerItem extends React.Component {
-    viewModeFlag
+    fileManagerViewMode
     name
     link
     icon
@@ -18,7 +18,7 @@ class FileManagerItem extends React.Component {
 
     constructor(props) {
         super(props)
-        this.viewModeFlag = props.viewModeFlag
+        this.fileManagerViewMode = props.fileManagerViewMode
         this.name = props.name
         this.link = props.link
         this.icon = props.icon
@@ -65,7 +65,7 @@ class FileManagerItem extends React.Component {
     }
 
     render = () => {
-        return this.viewModeFlag
+        return this.fileManagerViewMode
             ? this.renderListViewModeItem()
             : this.renderGridiewModeItem()
     }
