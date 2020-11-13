@@ -1,6 +1,0 @@
-export const HOWTO_ITEM_TYPE = {
-    HOWTO: 'howto',
-    CATEGORY: 'category',
-    HOWTO_HIT: 'howto_hit',
-    CATEGORY_HIT: 'category_hit'
-}

@@ -6,7 +6,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import * as HowToUtil from '../HowToUtil'
+import { parsePathAndSetContent, createSearchIndex } from '../util'
 import { HOWTO_ACTION_TYPES } from './howToActionTypes'
 
 export const howToReducer = (state = [], action) => {
@@ -18,10 +18,7 @@ export const howToReducer = (state = [], action) => {
             if (path.startsWith('/howto') && state.rootCategory) {
                 return {
                     ...state,
-                    ...HowToUtil.parsePathAndSetContent(
-                        state.rootCategory,
-                        path
-                    ),
+                    ...parsePathAndSetContent(state.rootCategory, path),
                     query: ''
                 }
             } else {
@@ -35,11 +32,8 @@ export const howToReducer = (state = [], action) => {
                 ...state,
                 rootCategory: action.rootCategory,
                 isLoaded: true,
-                ...HowToUtil.parsePathAndSetContent(
-                    action.rootCategory,
-                    action.path
-                ),
-                searchIndex: HowToUtil.createSearchIndex(action.rootCategory),
+                ...parsePathAndSetContent(action.rootCategory, action.path),
+                searchIndex: createSearchIndex(action.rootCategory),
                 query: ''
             }
 
@@ -61,7 +55,7 @@ export const howToReducer = (state = [], action) => {
         case HOWTO_ACTION_TYPES.ON_TOGGLE:
             return {
                 ...state,
-                isToggleOn: !state.isToggleOn
+                fileManagerViewMode: !state.fileManagerViewMode
             }
 
         default:
