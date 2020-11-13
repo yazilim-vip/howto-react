@@ -4,7 +4,10 @@ import React from 'react'
 //  External Dependencies
 // ---------------------------
 import { Container, ListGroup, Row } from 'react-bootstrap'
-import { HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../howToConstants'
+import {
+    HOWTO_VIEW_MODE_GRID_VIEW,
+    HOWTO_VIEW_MODE_LIST_VIEW
+} from '../howToConstants'
 
 // ---------------------------
 //  Internal Dependencies

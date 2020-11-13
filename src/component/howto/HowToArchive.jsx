@@ -130,7 +130,6 @@ const _HowToArchive = ({
                 </Alert>
             )
         }
-        console.log("fileManagerViewMode", fileManagerViewMode)
         return (
             <div>
                 <Row>
