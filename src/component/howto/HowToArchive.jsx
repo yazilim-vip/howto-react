@@ -90,6 +90,7 @@ const _HowToArchive = ({
         </Row>
     )
 
+    console.log('fileManagerViewMode ==> ', fileManagerViewMode)
     const categoryFound = selectedCategory && true
     const howToFound = howtoSelectedFlag && selectedHowto
     const howToNotFound = howtoSelectedFlag && !selectedHowto
