@@ -14,13 +14,14 @@ import 'react-sliding-pane/dist/react-sliding-pane.css'
 // ---------------------------
 import './HowToArchive.scss'
 
-import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
-import { mapStateToProps } from './redux/mapStateToProps'
+import { HOWTO_ACTION_CREATORS, mapStateToProps } from './redux'
 
-import HowToBreadcrumb from './child/Breadcrumb'
-import HowToFileManager from './child/FileManager'
-import { ViewModeChanger } from './child/ViewModeChanger'
-import { HowToPanel } from './child/HowToPanel'
+import {
+    HowToBreadcrumb,
+    HowToFileManager,
+    ViewModeChanger,
+    HowToPanel
+} from './child'
 
 import { searchArchive } from './util'
 

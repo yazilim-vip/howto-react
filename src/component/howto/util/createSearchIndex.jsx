@@ -1,7 +1,7 @@
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { SearchItem } from '../model/SearchItem'
+import { SearchItem } from '../model'
 import { HOWTO_ITEM_TYPE } from '../howToConstants'
 
 export const createSearchIndex = (rootCategory) => {

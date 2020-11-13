@@ -14,7 +14,7 @@ import {
 // ---------------------------
 import { FileManagerFileItem, FileManagerFolderItem } from './FileManagerItem'
 
-const HowToFileManager = (props) => {
+export const HowToFileManager = (props) => {
     // values from mapStateToProps
     const {
         folderPath,
@@ -76,5 +76,3 @@ const HowToFileManager = (props) => {
 
     return <Container fluid>{renderByToggle()}</Container>
 }
-
-export default HowToFileManager
