@@ -12,16 +12,20 @@ export const HowToBreadcrumb = (props) => {
     // values from mapStateToProps
     const { howTo, categoryNames, rootCategorySelectedFlag } = props
 
-    const catNames = howTo ? howTo.categoryList : categoryNames
-
-    const getLink = (index) => {
-        return '/howto/' + catNames.slice(0, index).join('/')
+    const names = howTo ? howTo.categoryList : categoryNames
+    if (howTo) {
+        names.push(howTo.label)
     }
 
-    const renderItems = catNames.map((item, index) => {
+    const getLink = (index) => {
+        return '/howto/' + names.slice(0, index).join('/')
+    }
+
+    const renderItems = names.map((item, index) => {
         return (
             <Breadcrumb.Item
                 key={item}
+                active={index + 1 === names.length}
                 linkAs={Link}
                 linkProps={{ to: getLink(index + 1), className: 'link' }}
             >
@@ -42,14 +46,7 @@ export const HowToBreadcrumb = (props) => {
                     <FontAwesomeIcon icon={faHome} />
                 </span>
             </Breadcrumb.Item>
-
             {renderItems}
-
-            {howTo && (
-                <Breadcrumb.Item active key={howTo.label}>
-                    {howTo.label}
-                </Breadcrumb.Item>
-            )}
         </Breadcrumb>
     )
 }
