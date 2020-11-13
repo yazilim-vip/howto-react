@@ -6,7 +6,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import * as HowToUtil from '../howToUtil'
+import * as HowToUtil from '../util/howToUtil'
 import { HOWTO_ACTION_TYPES } from './howToActionTypes'
 
 export const howToReducer = (state = [], action) => {

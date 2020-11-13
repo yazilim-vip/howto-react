@@ -24,7 +24,6 @@ import _ from 'underscore'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HOWTO_ITEM_TYPE } from '../../constants'
 import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
 
 import HowToBreadcrumb from './child/Breadcrumb'
@@ -33,7 +32,8 @@ import HowToFileManager from './child/FileManager'
 import './HowToArchive.scss'
 import {
     HOWTO_VIEW_MODE_GRID_VIEW,
-    HOWTO_VIEW_MODE_LIST_VIEW
+    HOWTO_VIEW_MODE_LIST_VIEW,
+    HOWTO_ITEM_TYPE
 } from './howToConstants'
 
 const _HowToArchive = ({
