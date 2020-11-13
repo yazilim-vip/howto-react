@@ -26,8 +26,8 @@ const HowToFileManager = (props) => {
 
     const prefix = folderPath + '/'
 
-    const renderCategories = (items) =>
-        Object.keys(items).map((key) => {
+    const renderCategories = (items) => {
+        return Object.keys(items).map((key) => {
             const name = isHit ? items[key].name : items[key].name
             const link = isHit ? items[key].path : prefix + items[key].name
             return (
@@ -39,9 +39,10 @@ const HowToFileManager = (props) => {
                 />
             )
         })
+    }
 
     const renderHowtos = (items) => {
-        Object.keys(items).map((key) => {
+        return Object.keys(items).map((key) => {
             const name = isHit ? items[key].name : items[key].label
             const link = isHit ? items[key].path : prefix + items[key].label
             return (

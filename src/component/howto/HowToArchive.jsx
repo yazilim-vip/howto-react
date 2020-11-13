@@ -6,19 +6,12 @@ import React from 'react'
 // ---------------------------
 import { push } from 'connected-react-router'
 import { connect } from 'react-redux'
-import {
-    Col,
-    Row,
-    Alert,
-    FormControl,
-    ButtonGroup,
-    ToggleButton
-} from 'react-bootstrap'
+import { Col, Row, Alert, FormControl } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import SlidingPane from 'react-sliding-pane'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import _ from 'underscore'
 
 // ---------------------------
@@ -30,11 +23,8 @@ import HowToBreadcrumb from './child/Breadcrumb'
 import HowToFileManager from './child/FileManager'
 
 import './HowToArchive.scss'
-import {
-    HOWTO_VIEW_MODE_GRID_VIEW,
-    HOWTO_VIEW_MODE_LIST_VIEW,
-    HOWTO_ITEM_TYPE
-} from './howToConstants'
+import { HOWTO_ITEM_TYPE } from './howToConstants'
+import { ViewModeChanger } from './child/ViewModeChanger'
 
 const _HowToArchive = ({
     // values from mapStateToProps
@@ -141,33 +131,10 @@ const _HowToArchive = ({
                     </Col>
 
                     <Col md='2' sm='3' className='mb-2 mb-sm-0'>
-                        <ButtonGroup toggle className='float-right'>
-                            <ToggleButton
-                                type='radio'
-                                variant='secondary'
-                                name='radio'
-                                checked={
-                                    fileManagerViewMode ===
-                                    HOWTO_VIEW_MODE_GRID_VIEW
-                                }
-                                onChange={() => onToggle()}
-                            >
-                                <FontAwesomeIcon icon={faTh} />
-                            </ToggleButton>
-
-                            <ToggleButton
-                                type='radio'
-                                variant='secondary'
-                                name='radio'
-                                checked={
-                                    fileManagerViewMode ===
-                                    HOWTO_VIEW_MODE_LIST_VIEW
-                                }
-                                onChange={() => onToggle()}
-                            >
-                                <FontAwesomeIcon icon={faThList} />
-                            </ToggleButton>
-                        </ButtonGroup>
+                        <ViewModeChanger
+                            fileManagerViewMode={fileManagerViewMode}
+                            onToggle={onToggle}
+                        />
                     </Col>
 
                     <Col md='3' sm='9'>
