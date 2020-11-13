@@ -21,7 +21,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 import _ from 'underscore'
 
-
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
@@ -208,7 +207,6 @@ const mapStateToProps = (state) => {
     const howtoList = howtoHits
         ? _.extend({}, howtoHits)
         : selectedCategory.howtoList
-
 
     return {
         folderPath: howtoReducer.folderPath,
