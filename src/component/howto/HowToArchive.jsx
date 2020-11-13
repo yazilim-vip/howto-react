@@ -12,16 +12,17 @@ import 'react-sliding-pane/dist/react-sliding-pane.css'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
+import './HowToArchive.scss'
+
 import { HOWTO_ACTION_CREATORS } from './redux/howToActionCreators'
 import { mapStateToProps } from './redux/mapStateToProps'
 
 import HowToBreadcrumb from './child/Breadcrumb'
 import HowToFileManager from './child/FileManager'
-
-import './HowToArchive.scss'
-import { HOWTO_ITEM_TYPE } from './howToConstants'
 import { ViewModeChanger } from './child/ViewModeChanger'
 import { HowToPanel } from './child/HowToPanel'
+
+import { searchArchive } from './util/searchArchive'
 
 const _HowToArchive = ({
     // values from mapStateToProps
@@ -51,79 +52,61 @@ const _HowToArchive = ({
     onToggle,
     push
 }) => {
-    const search = (query) => {
-        if (!query) {
-            return onSearchResult('', null, null)
-        }
+    const showError = (errMsg) => (
+        <Alert key={1} variant='danger'>
+            {errMsg}
+        </Alert>
+    )
 
-        const hits = searchIndex.filter((o) =>
-            o.name.includes(query.toLowerCase())
-        )
-
-        if (hits) {
-            const categoryHits = []
-            const howtoHits = []
-
-            hits.forEach((hit) => {
-                if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
-                    categoryHits.push(hit)
-                } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
-                    howtoHits.push(hit)
-                }
-            })
-
-            onSearchResult(query, categoryHits, howtoHits)
-        } else {
-            onSearchResult(query, null, null)
-        }
-    }
-
-    if (!selectedCategory) {
-        return (
-            <Alert key={1} variant='danger'>
-                Category <b>{selectedCategoryName}</b> not found in path.
-            </Alert>
-        )
-    }
-    return (
-        <div>
-            <Row>
-                <Col md='7'>
-                    <HowToBreadcrumb
-                        categoryNames={categoryNames}
-                        rootCategorySelectedFlag={rootCategorySelectedFlag}
-                    />
-                </Col>
-                <Col md='2' sm='3' className='mb-2 mb-sm-0'>
-                    <ViewModeChanger
-                        fileManagerViewMode={fileManagerViewMode}
-                        onToggle={onToggle}
-                    />
-                </Col>
-                <Col md='3' sm='9'>
-                    <FormControl
-                        type='search'
-                        placeholder='Search...'
-                        aria-label='Search'
-                        value={query}
-                        onChange={(event) => search(event.target.value)}
-                    />
-                </Col>
-            </Row>
-
-            <hr />
-
-            {howtoSelectedFlag && selectedHowto && (
-                <HowToPanel
-                    howtoSelectedFlag={howtoSelectedFlag}
-                    selectedHowto={selectedHowto}
-                    onRequestClose={() => {
-                        push(folderPath)
+    const renderHeader = () => (
+        <Row>
+            <Col md='7'>
+                <HowToBreadcrumb
+                    categoryNames={categoryNames}
+                    rootCategorySelectedFlag={rootCategorySelectedFlag}
+                />
+            </Col>
+            <Col md='2' sm='3' className='mb-2 mb-sm-0'>
+                <ViewModeChanger
+                    fileManagerViewMode={fileManagerViewMode}
+                    onToggle={onToggle}
+                />
+            </Col>
+            <Col md='3' sm='9'>
+                <FormControl
+                    type='search'
+                    placeholder='Search...'
+                    aria-label='Search'
+                    value={query}
+                    onChange={(event) => {
+                        return searchArchive(
+                            searchIndex,
+                            event.target.value, // query
+                            onSearchResult
+                        )
                     }}
                 />
-            )}
+            </Col>
+        </Row>
+    )
 
-            {howtoSelectedFlag && !selectedHowto && (
+    const categoryFound = selectedCategory && true
+    const howToFound = howtoSelectedFlag && selectedHowto
+    const howToNotFound = howtoSelectedFlag && !selectedHowto
+    if (!categoryFound) {
+        return showError(
+            <>
+                Category <b>{selectedCategoryName}</b> not found in path.
+            </>
+        )
+    }
+
+    return (
+        <div>
+            {renderHeader()}
+            <hr />
+
+            {howToNotFound && (
                 <Alert key={1} variant='danger'>
                     <b>{selectedHowtoName}</b> not found in{' '}
                     <b>{selectedCategory.name}</b> folder.
@@ -137,6 +120,16 @@ const _HowToArchive = ({
                 howtoList={howtoList}
                 fileManagerViewMode={fileManagerViewMode}
             />
+
+            {howToFound && (
+                <HowToPanel
+                    howtoSelectedFlag={howtoSelectedFlag}
+                    selectedHowto={selectedHowto}
+                    onRequestClose={() => {
+                        push(folderPath)
+                    }}
+                />
+            )}
         </div>
     )
 }
