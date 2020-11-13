@@ -3,22 +3,16 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Col, Container, ListGroup, Row } from 'react-bootstrap'
-import _ from 'underscore'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-regular-svg-icons'
 
-const HowToFileManager = ({
+const HowToFileManager = (props) => {
     // values from mapStateToProps
-    folderPath,
-    isHit,
-    categoryList,
-    howtoList,
-    isToggleOn
-}) => {
+    const { folderPath, isHit, categoryList, howtoList, isToggleOn } = props
+
     const prefix = folderPath + '/'
     const renderItem = (name, link, icon, color) => {
         if (isToggleOn) {
@@ -96,26 +90,4 @@ const HowToFileManager = ({
     return <Container fluid>{renderByToggle()}</Container>
 }
 
-const mapStateToProps = (state) => {
-    const howtoReducer = state.howtoReducer
-    const categoryHits = howtoReducer.categoryHits
-    const howtoHits = howtoReducer.howtoHits
-    const selectedCategory = howtoReducer.selectedCategory
-
-    const categoryList = categoryHits
-        ? _.extend({}, categoryHits)
-        : selectedCategory.subCategoryList
-    const howtoList = howtoHits
-        ? _.extend({}, howtoHits)
-        : selectedCategory.howtoList
-
-    return {
-        folderPath: howtoReducer.folderPath,
-        isHit: howtoReducer.categoryHits || howtoReducer.howtoHits,
-        categoryList: categoryList,
-        howtoList: howtoList,
-        isToggleOn: howtoReducer.isToggleOn
-    }
-}
-
-export default connect(mapStateToProps, null)(HowToFileManager)
+export default HowToFileManager

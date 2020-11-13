@@ -3,7 +3,6 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Breadcrumb } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

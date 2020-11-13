@@ -17,9 +17,10 @@ import {
 import ReactMarkdown from 'react-markdown'
 import SlidingPane from 'react-sliding-pane'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faTh, faThList } from '@fortawesome/free-solid-svg-icons'
+import _ from 'underscore'
+
 
 // ---------------------------
 //  Internal Dependencies
@@ -44,9 +45,16 @@ const _HowToArchive = ({
     query,
     isToggleOn,
 
-    // ..
+    // from HowToBreacrumb
     categoryNames,
     rootCategorySelectedFlag,
+
+    // from HowToFileManager
+    // folderPath,
+    isHit,
+    categoryList,
+    howtoList,
+    // isToggleOn
 
     // methods from props
     onSearchResult,
@@ -171,7 +179,13 @@ const _HowToArchive = ({
 
                 <hr />
 
-                <HowToFileManager />
+                <HowToFileManager
+                    folderPath={folderPath}
+                    isHit={isHit}
+                    categoryList={categoryList}
+                    howtoList={howtoList}
+                    isToggleOn={isToggleOn}
+                />
 
                 {renderHowtoContentElement()}
             </div>
@@ -183,6 +197,19 @@ const _HowToArchive = ({
 
 const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
+
+    const categoryHits = howtoReducer.categoryHits
+    const howtoHits = howtoReducer.howtoHits
+    const selectedCategory = howtoReducer.selectedCategory
+
+    const categoryList = categoryHits
+        ? _.extend({}, categoryHits)
+        : selectedCategory.subCategoryList
+    const howtoList = howtoHits
+        ? _.extend({}, howtoHits)
+        : selectedCategory.howtoList
+
+
     return {
         folderPath: howtoReducer.folderPath,
         selectedCategory: howtoReducer.selectedCategory,
@@ -196,9 +223,16 @@ const mapStateToProps = (state) => {
         searchIndex: howtoReducer.searchIndex,
         isToggleOn: howtoReducer.isToggleOn,
 
-        // ...
+        // from HowToBreadcrumb
         categoryNames: howtoReducer.categoryNames,
-        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
+        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag,
+
+        // from HowToFileManager
+        // folderPath: howtoReducer.folderPath,
+        isHit: howtoReducer.categoryHits || howtoReducer.howtoHits,
+        categoryList: categoryList,
+        howtoList: howtoList
+        // isToggleOn: howtoReducer.isToggleOn
     }
 }
 
