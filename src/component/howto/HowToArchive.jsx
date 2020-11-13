@@ -7,11 +7,7 @@ import React from 'react'
 import { push } from 'connected-react-router'
 import { connect } from 'react-redux'
 import { Col, Row, Alert, FormControl } from 'react-bootstrap'
-import ReactMarkdown from 'react-markdown'
-import SlidingPane from 'react-sliding-pane'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import _ from 'underscore'
 
 // ---------------------------
@@ -166,18 +162,7 @@ const _HowToArchive = ({
 const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
 
-    const categoryHits = howtoReducer.categoryHits
-    const howtoHits = howtoReducer.howtoHits
-    const selectedCategory = howtoReducer.selectedCategory
-
-    const categoryList = categoryHits
-        ? _.extend({}, categoryHits)
-        : selectedCategory.subCategoryList
-    const howtoList = howtoHits
-        ? _.extend({}, howtoHits)
-        : selectedCategory.howtoList
-
-    return {
+    const result = {
         folderPath: howtoReducer.folderPath,
         selectedCategory: howtoReducer.selectedCategory,
         selectedCategoryName: howtoReducer.selectedCategoryName,
@@ -192,15 +177,29 @@ const mapStateToProps = (state) => {
 
         // from HowToBreadcrumb
         categoryNames: howtoReducer.categoryNames,
-        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag,
+        rootCategorySelectedFlag: howtoReducer.rootCategorySelectedFlag
+    }
+
+    const categoryHits = howtoReducer.categoryHits
+    const howtoHits = howtoReducer.howtoHits
+    const selectedCategory = howtoReducer.selectedCategory
+
+    if (selectedCategory) {
+        const categoryList = categoryHits
+            ? _.extend({}, categoryHits)
+            : selectedCategory.subCategoryList
+        const howtoList = howtoHits
+            ? _.extend({}, howtoHits)
+            : selectedCategory.howtoList
 
         // from HowToFileManager
         // folderPath: howtoReducer.folderPath,
-        isHit: howtoReducer.categoryHits || howtoReducer.howtoHits,
-        categoryList: categoryList,
-        howtoList: howtoList
+        result.isHit = howtoReducer.categoryHits || howtoReducer.howtoHits
+        result.categoryList = categoryList
+        result.howtoList = howtoList
         // fileManagerViewMode: howtoReducer.fileManagerViewMode
     }
+    return result
 }
 
 const mapDispatchToProps = { ...HOWTO_ACTION_CREATORS, push }
