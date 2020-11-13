@@ -22,7 +22,7 @@ import HowToFileManager from './child/FileManager'
 import { ViewModeChanger } from './child/ViewModeChanger'
 import { HowToPanel } from './child/HowToPanel'
 
-import { searchArchive } from './util/searchArchive'
+import { searchArchive } from './util'
 
 const _HowToArchive = ({
     // values from mapStateToProps

@@ -1,9 +1,3 @@
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
-import { SearchItem } from '../model/SearchItem'
-import { HOWTO_ITEM_TYPE } from '../howToConstants'
-
 /**
  *
  * Example1
@@ -35,7 +29,7 @@ import { HOWTO_ITEM_TYPE } from '../howToConstants'
  * selectedCategoryName = "Eclipse"
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
-const parsePathAndSetContent = (rootCategory, path) => {
+export const parsePathAndSetContent = (rootCategory, path) => {
     const rootCategorySelectedFlag = path === '/howto'
     const categoryNames = path.slice(1).split('/')
     const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
@@ -90,46 +84,3 @@ const setContent = (rootCategory, categoryNames, selectedHowtoName) => {
         howtoHits: null
     }
 }
-
-const createSearchIndex = (rootCategory) => {
-    return indexContent(rootCategory, [], '/howto')
-}
-
-const indexContent = (data, arr, path) => {
-    const howtoList = data.howtoList
-    const subCategoryList = data.subCategoryList
-
-    Object.keys(howtoList).forEach((key) => {
-        const howto = howtoList[key]
-        const name = howto.label
-        const newPath = path + '/' + name
-
-        const searchItem = new SearchItem(
-            newPath,
-            HOWTO_ITEM_TYPE.HOWTO_HIT,
-            name.toLowerCase()
-        )
-
-        arr.push(searchItem)
-    })
-
-    Object.keys(subCategoryList).forEach((key) => {
-        const subCategory = subCategoryList[key]
-        const name = subCategory.name
-        const newPath = path + '/' + name
-
-        const searchItem = new SearchItem(
-            newPath,
-            HOWTO_ITEM_TYPE.CATEGORY_HIT,
-            name.toLowerCase()
-        )
-
-        arr.push(searchItem)
-
-        indexContent(subCategory, arr, newPath)
-    })
-
-    return arr
-}
-
-export { parsePathAndSetContent, createSearchIndex }
