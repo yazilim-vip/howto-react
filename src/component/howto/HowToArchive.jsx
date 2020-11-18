@@ -48,11 +48,33 @@ const _HowToArchive = ({
     howtoList,
 
     // methods from props
-    onSearchResult,
-    push
-}) => {
+    push,
 
+    customRootHowToCategory
+}) => {
+    const [catList, setCatList] = useState(null)
+    const [hwList, setHwList] = useState(null)
     const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
+    const [searchResult, setSearchResult] = useState(null)
+
+    const onSearchResult = (query, categoryHits, howtoHits) => {
+        // console.log(
+        //     'query => ',
+        //     query,
+        //     'categoryHits => ',
+        //     categoryHits,
+        //     'howtoHits => ',
+        //     howtoHits
+        // )
+        setCatList(categoryHits)
+        setHwList(howtoHits)
+
+        setSearchResult({
+            query: query,
+            categoryHits: categoryHits,
+            howtoHits: howtoHits
+        })
+    }
 
     const showError = (errMsg) => (
         <Alert key={1} variant='danger'>
@@ -79,7 +101,7 @@ const _HowToArchive = ({
                     type='search'
                     placeholder='Search...'
                     aria-label='Search'
-                    value={query}
+                    value={searchResult ? searchResult.query : ''}
                     onChange={(event) => {
                         return searchArchive(
                             searchIndex,
@@ -119,8 +141,8 @@ const _HowToArchive = ({
             <HowToFileManager
                 folderPath={folderPath}
                 isHit={isHit}
-                categoryList={categoryList}
-                howtoList={howtoList}
+                categoryList={catList === null ? categoryList : catList}
+                howtoList={hwList === null ? howtoList : hwList}
                 fileManagerViewMode={viewMode}
             />
 

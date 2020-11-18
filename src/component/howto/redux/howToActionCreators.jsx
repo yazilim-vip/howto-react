@@ -12,17 +12,7 @@ const onApiError = (error) => {
     return { type: HOWTO_ACTION_TYPES.ON_API_ERROR, error }
 }
 
-const onSearchResult = (query, categoryHits, howtoHits) => {
-    return {
-        type: HOWTO_ACTION_TYPES.ON_SEARCH,
-        query,
-        categoryHits,
-        howtoHits
-    }
-}
-
 export const HOWTO_ACTION_CREATORS = {
     onApiError,
-    onApiSuccess,
-    onSearchResult
+    onApiSuccess
 }

@@ -72,7 +72,9 @@ class _HowTo extends React.Component {
 
         return (
             <Page span={{ span: 12 }}>
-                <HowToComponent.HowToArchive />
+                <HowToComponent.HowToArchive
+                    customRootHowToCategory={this.props.rootCategory}
+                />
             </Page>
         )
     }

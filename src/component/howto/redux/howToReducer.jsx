@@ -43,14 +43,6 @@ export const howToReducer = (state = [], action) => {
                 error: action.error,
                 isLoaded: true
             }
-
-        case HOWTO_ACTION_TYPES.ON_SEARCH:
-            return {
-                ...state,
-                query: action.query,
-                categoryHits: action.categoryHits,
-                howtoHits: action.howtoHits
-            }
         default:
             return state
     }

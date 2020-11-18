@@ -1,7 +1,5 @@
 import _ from 'underscore'
 
-import { HOWTO_DEFAULT_VIEW_MODE } from '../howToConstants'
-
 export const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
 
