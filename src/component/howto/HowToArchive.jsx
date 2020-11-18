@@ -30,12 +30,10 @@ const _HowToArchive = ({
     // values from mapStateToProps
     folderPath,
     selectedCategory,
-    selectedCategoryName,
     selectedHowto,
     selectedHowtoName,
     howtoSelectedFlag,
     searchIndex,
-    query,
 
     // from HowToBreacrumb
     categoryNames,
@@ -48,12 +46,10 @@ const _HowToArchive = ({
     howtoList,
 
     // methods from props
-    push,
-
-    customRootHowToCategory
+    push
 }) => {
-    const [catList, setCatList] = useState(null)
-    const [hwList, setHwList] = useState(null)
+    const [searchedCategoryList, setSearchedCategoryList] = useState(null)
+    const [searchoedHowtoList, setSearchedHowtoList] = useState(null)
     const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
     const [searchResult, setSearchResult] = useState(null)
 
@@ -66,8 +62,8 @@ const _HowToArchive = ({
         //     'howtoHits => ',
         //     howtoHits
         // )
-        setCatList(categoryHits)
-        setHwList(howtoHits)
+        setSearchedCategoryList(categoryHits)
+        setSearchedHowtoList(howtoHits)
 
         setSearchResult({
             query: query,
@@ -141,8 +137,14 @@ const _HowToArchive = ({
             <HowToFileManager
                 folderPath={folderPath}
                 isHit={isHit}
-                categoryList={catList === null ? categoryList : catList}
-                howtoList={hwList === null ? howtoList : hwList}
+                categoryList={
+                    searchedCategoryList === null
+                        ? categoryList
+                        : searchedCategoryList
+                }
+                howtoList={
+                    searchoedHowtoList === null ? howtoList : searchoedHowtoList
+                }
                 fileManagerViewMode={viewMode}
             />
 
