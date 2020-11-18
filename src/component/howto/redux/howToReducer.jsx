@@ -51,13 +51,6 @@ export const howToReducer = (state = [], action) => {
                 categoryHits: action.categoryHits,
                 howtoHits: action.howtoHits
             }
-
-        case HOWTO_ACTION_TYPES.ON_TOGGLE:
-            return {
-                ...state,
-                fileManagerViewMode: !state.fileManagerViewMode
-            }
-
         default:
             return state
     }

@@ -16,9 +16,6 @@ export const mapStateToProps = (state) => {
         categoryHits: howtoReducer.categoryHits,
         howtoHits: howtoReducer.howtoHits,
         searchIndex: howtoReducer.searchIndex,
-        fileManagerViewMode: howtoReducer.fileManagerViewMode
-            ? howtoReducer.fileManagerViewMode
-            : HOWTO_DEFAULT_VIEW_MODE,
 
         // from HowToBreadcrumb
         categoryNames: howtoReducer.categoryNames,
@@ -42,7 +39,6 @@ export const mapStateToProps = (state) => {
         result.isHit = howtoReducer.categoryHits || howtoReducer.howtoHits
         result.categoryList = categoryList
         result.howtoList = howtoList
-        // fileManagerViewMode: howtoReducer.fileManagerViewMode
     }
     return result
 }

@@ -21,13 +21,8 @@ const onSearchResult = (query, categoryHits, howtoHits) => {
     }
 }
 
-const onToggle = () => {
-    return { type: HOWTO_ACTION_TYPES.ON_TOGGLE }
-}
-
 export const HOWTO_ACTION_CREATORS = {
     onApiError,
     onApiSuccess,
-    onSearchResult,
-    onToggle
+    onSearchResult
 }

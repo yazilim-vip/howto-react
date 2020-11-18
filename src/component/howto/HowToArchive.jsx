@@ -1,5 +1,5 @@
 // ReactJS Core
-import React from 'react'
+import React, { useState } from 'react'
 
 // ---------------------------
 //  External Dependencies
@@ -24,6 +24,7 @@ import {
 } from './child'
 
 import { searchArchive } from './util'
+import { HOWTO_DEFAULT_VIEW_MODE } from './howToConstants'
 
 const _HowToArchive = ({
     // values from mapStateToProps
@@ -35,7 +36,6 @@ const _HowToArchive = ({
     howtoSelectedFlag,
     searchIndex,
     query,
-    fileManagerViewMode,
 
     // from HowToBreacrumb
     categoryNames,
@@ -46,13 +46,14 @@ const _HowToArchive = ({
     isHit,
     categoryList,
     howtoList,
-    // fileManagerViewMode
 
     // methods from props
     onSearchResult,
-    onToggle,
     push
 }) => {
+
+    const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
+
     const showError = (errMsg) => (
         <Alert key={1} variant='danger'>
             {errMsg}
@@ -69,8 +70,8 @@ const _HowToArchive = ({
             </Col>
             <Col md='2' sm='3' className='mb-2 mb-sm-0'>
                 <ViewModeChanger
-                    fileManagerViewMode={fileManagerViewMode}
-                    onToggle={onToggle}
+                    fileManagerViewMode={viewMode}
+                    onToggle={() => toggleViewMode(!viewMode)}
                 />
             </Col>
             <Col md='3' sm='9'>
@@ -120,7 +121,7 @@ const _HowToArchive = ({
                 isHit={isHit}
                 categoryList={categoryList}
                 howtoList={howtoList}
-                fileManagerViewMode={fileManagerViewMode}
+                fileManagerViewMode={viewMode}
             />
 
             {howToFound && (
