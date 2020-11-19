@@ -7,12 +7,13 @@ import { Link } from 'react-router-dom'
 import { Breadcrumb } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
+import _ from 'underscore'
 
 export const HowToBreadcrumb = (props) => {
     // values from mapStateToProps
     const { howTo, categoryNames, rootCategorySelectedFlag } = props
 
-    const names = howTo ? howTo.categoryList : categoryNames
+    const names = _.extend([], howTo ? howTo.categoryList : categoryNames)
     if (howTo) {
         names.push(howTo.label)
     }

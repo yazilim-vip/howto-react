@@ -25,9 +25,7 @@ class _HowTo extends React.Component {
     }
 
     componentDidMount() {
-        const { rootCategory } = this.props
-
-        if (!rootCategory) {
+        if (!this.state.loadedFlag) {
             this.fetchHowtoData()
         }
     }
