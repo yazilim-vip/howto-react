@@ -22,7 +22,7 @@ import {
     parsePathAndSetContent,
     searchArchive
 } from './util'
-import { HOWTO_DEFAULT_VIEW_MODE } from './howToConstants'
+import { HOWTO_DEFAULT_VIEW_MODE } from './HowToConstants'
 
 const _HowToArchive = (props) => {
     const { howtoData, requestedPath } = props

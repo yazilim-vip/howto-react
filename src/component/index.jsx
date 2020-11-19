@@ -1,4 +1,4 @@
-export { HowToArchive } from './howto'
+export { HowToArchive } from './howto/HowToArchive'
 export { CustomNavbar } from './customNavbar/CustomNavbar'
 export { PersonCard } from './personCard/PersonCard'
 export { PortfolioCard } from './portfolioCard/PortfolioCard'

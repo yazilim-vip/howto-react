@@ -1,4 +1,4 @@
-import { HOWTO_ITEM_TYPE } from '../howToConstants'
+import { HOWTO_ITEM_TYPE } from '../HowToConstants'
 
 export const searchArchive = (searchIndex, query, onSearchResult) => {
     if (!query) {
