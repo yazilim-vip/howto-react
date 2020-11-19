@@ -3,7 +3,6 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { connect } from 'react-redux'
 import { Alert, Spinner } from 'react-bootstrap'
 
 // ---------------------------
@@ -82,9 +81,7 @@ class _HowTo extends React.Component {
 
     render() {
         const { howtoData, errorFlag, errorMessage, loadedFlag } = this.state
-        const requestedPath = this.props.requestedPath
-            ? this.props.requestedPath
-            : '/howto'
+        const requestedPath = this.props.location.pathname
 
         if (!loadedFlag) {
             return this.renderInfoPage(<Spinner animation='border' />)
@@ -109,13 +106,4 @@ class _HowTo extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const howtoReducer = state.howtoReducer
-    return {
-        requestedPath: howtoReducer.requestedPath
-    }
-}
-
-const mapDispatchToProps = HowToComponent.HOWTO_ACTION_CREATORS
-
-export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)
+export const HowTo = _HowTo

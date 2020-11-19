@@ -22,9 +22,7 @@ import {
     parsePathAndSetContent,
     searchArchive
 } from './util'
-
 import { HOWTO_DEFAULT_VIEW_MODE } from './howToConstants'
-import { push } from 'connected-react-router'
 
 const _HowToArchive = (props) => {
     const { howtoData, requestedPath } = props

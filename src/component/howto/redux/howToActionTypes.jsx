@@ -1,7 +1,0 @@
-const ON_API_SUCCESS = 'ON_API_SUCCESS'
-const ON_API_ERROR = 'ON_API_ERROR'
-
-export const HOWTO_ACTION_TYPES = {
-    ON_API_ERROR,
-    ON_API_SUCCESS
-}
