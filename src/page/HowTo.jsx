@@ -13,6 +13,14 @@ import { Page, HowTo as HowToComponent } from '../component'
 import { Firebase } from '../util'
 
 class _HowTo extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            newRootCategory: null,
+            newPath: null
+        }
+    }
+
     componentDidMount() {
         const { rootCategory } = this.props
 
@@ -33,6 +41,12 @@ class _HowTo extends React.Component {
                         const path = this.props.history.location.pathname
 
                         this.props.onApiSuccess(data, path)
+                        // console.log('data', data)
+                        // console.log('path', path)
+                        this.setState({
+                            newRootCategory: data,
+                            newPath: path
+                        })
                     } else {
                         this.props.onApiError(
                             'Snapshot can not found on firebase.'
@@ -73,7 +87,8 @@ class _HowTo extends React.Component {
         return (
             <Page span={{ span: 12 }}>
                 <HowToComponent.HowToArchive
-                    customRootHowToCategory={this.props.rootCategory}
+                    newRootCategory={this.state.newRootCategory}
+                    newPath={this.props.path}
                 />
             </Page>
         )
@@ -86,7 +101,8 @@ const mapStateToProps = (state) => {
     return {
         error: howtoReducer.error,
         isLoaded: howtoReducer.isLoaded,
-        rootCategory: howtoReducer.rootCategory
+        rootCategory: howtoReducer.rootCategory,
+        path: howtoReducer.path
     }
 }
 

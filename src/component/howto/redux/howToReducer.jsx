@@ -18,12 +18,14 @@ export const howToReducer = (state = [], action) => {
             if (path.startsWith('/howto') && state.rootCategory) {
                 return {
                     ...state,
+                    path: path,
                     ...parsePathAndSetContent(state.rootCategory, path),
                     query: ''
                 }
             } else {
                 return {
-                    ...state
+                    ...state,
+                    path: path
                 }
             }
 

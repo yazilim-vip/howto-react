@@ -8,6 +8,7 @@ import { push } from 'connected-react-router'
 import { connect } from 'react-redux'
 import { Col, Row, Alert, FormControl } from 'react-bootstrap'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
+import _ from 'underscore'
 
 // ---------------------------
 //  Internal Dependencies
@@ -23,48 +24,58 @@ import {
     HowToPanel
 } from './child'
 
-import { searchArchive } from './util'
+import {
+    createSearchIndex,
+    parsePathAndSetContent,
+    searchArchive
+} from './util'
+
 import { HOWTO_DEFAULT_VIEW_MODE } from './howToConstants'
 
 const _HowToArchive = ({
-    // values from mapStateToProps
-    folderPath,
-    selectedCategory,
-    selectedHowto,
-    selectedHowtoName,
-    howtoSelectedFlag,
-    searchIndex,
-
-    // from HowToBreacrumb
-    categoryNames,
-    rootCategorySelectedFlag,
-
-    // from HowToFileManager
-    // folderPath,
-    isHit,
-    categoryList,
-    howtoList,
-
     // methods from props
-    push
+    push,
+
+    // new props
+    newRootCategory,
+    newPath
 }) => {
     const [searchedCategoryList, setSearchedCategoryList] = useState(null)
     const [searchoedHowtoList, setSearchedHowtoList] = useState(null)
     const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
     const [searchResult, setSearchResult] = useState(null)
 
+    if (!(newRootCategory && newPath)) {
+        return <div />
+    }
+
+    const {
+        categoryNames,
+        folderPath,
+        howtoSelectedFlag,
+        rootCategorySelectedFlag,
+        selectedCategory,
+        selectedHowto,
+        selectedHowtoName,
+        categoryHits,
+        howtoHits
+    } = parsePathAndSetContent(newRootCategory, newPath)
+    const searchIndex = createSearchIndex(newRootCategory)
+    const isHit = categoryHits || howtoHits
+
+    if (!selectedCategory) {
+        return <div />
+    }
+    const categoryList = categoryHits
+        ? _.extend({}, categoryHits)
+        : selectedCategory.subCategoryList
+    const howtoList = howtoHits
+        ? _.extend({}, howtoHits)
+        : selectedCategory.howtoList
+
     const onSearchResult = (query, categoryHits, howtoHits) => {
-        // console.log(
-        //     'query => ',
-        //     query,
-        //     'categoryHits => ',
-        //     categoryHits,
-        //     'howtoHits => ',
-        //     howtoHits
-        // )
         setSearchedCategoryList(categoryHits)
         setSearchedHowtoList(howtoHits)
-
         setSearchResult({
             query: query,
             categoryHits: categoryHits,
