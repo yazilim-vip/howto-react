@@ -138,9 +138,7 @@ const _HowToArchive = (props) => {
                     rootCategorySelectedFlag={rootCategorySelectedFlag}
                     howtoSelectedFlag={howtoSelectedFlag}
                     selectedHowto={selectedHowto}
-                    onRequestClose={() => {
-                        push(folderPath)
-                    }}
+                    folderPath={folderPath}
                 />
             )}
         </div>
