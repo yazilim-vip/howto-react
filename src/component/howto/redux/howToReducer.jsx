@@ -12,23 +12,10 @@ import { HOWTO_ACTION_TYPES } from './howToActionTypes'
 export const howToReducer = (state = [], action) => {
     switch (action.type) {
         case LOCATION_CHANGE:
-            //! eslint gives error
-            // eslint-disable-next-line no-case-declarations
-            const path = action.payload.location.pathname
-            if (path.startsWith('/howto') && state.rootCategory) {
-                return {
-                    ...state,
-                    path: path,
-                    ...parsePathAndSetContent(state.rootCategory, path),
-                    query: ''
-                }
-            } else {
-                return {
-                    ...state,
-                    path: path
-                }
+            return {
+                ...state,
+                requestedPath: action.payload.location.pathname
             }
-
         case HOWTO_ACTION_TYPES.ON_API_SUCCESS:
             return {
                 ...state,

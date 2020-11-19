@@ -16,8 +16,11 @@ class _HowTo extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newRootCategory: null,
-            newPath: null
+            howtoData: null,
+            requestedPath: null,
+            errorFlag: false,
+            errorMessage: null,
+            loadedFlag: false
         }
     }
 
@@ -40,21 +43,31 @@ class _HowTo extends React.Component {
                         const data = JSON.parse(val)
                         const path = this.props.history.location.pathname
 
-                        this.props.onApiSuccess(data, path)
-                        // console.log('data', data)
-                        // console.log('path', path)
                         this.setState({
-                            newRootCategory: data,
-                            newPath: path
+                            howtoData: data,
+                            requestedPath: path,
+                            errorFlag: false,
+                            errorMessage: null,
+                            loadedFlag: true
                         })
                     } else {
-                        this.props.onApiError(
-                            'Snapshot can not found on firebase.'
-                        )
+                        this.setState({
+                            howtoData: null,
+                            requestedPath: null,
+                            errorFlag: true,
+                            errorMessage: 'Snapshot can not found on firebase.',
+                            loadedFlag: true
+                        })
                     }
                 },
                 (error) => {
-                    this.props.onApiError(error)
+                    this.setState({
+                        howtoData: null,
+                        requestedPath: null,
+                        errorFlag: true,
+                        errorMessage: error,
+                        loadedFlag: true
+                    })
                 }
             )
     }
@@ -70,16 +83,19 @@ class _HowTo extends React.Component {
     }
 
     render() {
-        const { error, isLoaded } = this.props
+        const { howtoData, errorFlag, errorMessage, loadedFlag } = this.state
+        const requestedPath = this.props.requestedPath
+            ? this.props.requestedPath
+            : '/howto'
 
-        if (!isLoaded) {
+        if (!loadedFlag) {
             return this.renderInfoPage(<Spinner animation='border' />)
         }
 
-        if (error) {
+        if (errorFlag) {
             return this.renderInfoPage(
                 <Alert key={1} variant='danger'>
-                    {error}
+                    {errorMessage}
                 </Alert>
             )
         }
@@ -87,8 +103,8 @@ class _HowTo extends React.Component {
         return (
             <Page span={{ span: 12 }}>
                 <HowToComponent.HowToArchive
-                    newRootCategory={this.state.newRootCategory}
-                    newPath={this.props.path}
+                    howtoData={howtoData}
+                    requestedPath={requestedPath}
                 />
             </Page>
         )
@@ -97,12 +113,8 @@ class _HowTo extends React.Component {
 
 const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
-
     return {
-        error: howtoReducer.error,
-        isLoaded: howtoReducer.isLoaded,
-        rootCategory: howtoReducer.rootCategory,
-        path: howtoReducer.path
+        requestedPath: howtoReducer.requestedPath
     }
 }
 

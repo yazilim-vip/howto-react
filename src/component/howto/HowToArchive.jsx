@@ -4,26 +4,19 @@ import React, { useState } from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { push } from 'connected-react-router'
-import { connect } from 'react-redux'
 import { Col, Row, Alert, FormControl } from 'react-bootstrap'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
-import _ from 'underscore'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
 import './HowToArchive.scss'
-
-import { HOWTO_ACTION_CREATORS, mapStateToProps } from './redux'
-
 import {
     HowToBreadcrumb,
     HowToFileManager,
     ViewModeChanger,
     HowToPanel
 } from './child'
-
 import {
     createSearchIndex,
     parsePathAndSetContent,
@@ -31,21 +24,17 @@ import {
 } from './util'
 
 import { HOWTO_DEFAULT_VIEW_MODE } from './howToConstants'
+import { push } from 'connected-react-router'
 
-const _HowToArchive = ({
-    // methods from props
-    push,
+const _HowToArchive = (props) => {
+    const { howtoData, requestedPath } = props
 
-    // new props
-    newRootCategory,
-    newPath
-}) => {
-    const [searchedCategoryList, setSearchedCategoryList] = useState(null)
-    const [searchoedHowtoList, setSearchedHowtoList] = useState(null)
+    // state hooks
     const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
-    const [searchResult, setSearchResult] = useState(null)
+    const [searchFlag, setSearchFlag] = useState(false)
+    const [searchQuery, setSearchQuery] = useState(null)
 
-    if (!(newRootCategory && newPath)) {
+    if (!(howtoData && requestedPath)) {
         return <div />
     }
 
@@ -56,31 +45,25 @@ const _HowToArchive = ({
         rootCategorySelectedFlag,
         selectedCategory,
         selectedHowto,
-        selectedHowtoName,
-        categoryHits,
-        howtoHits
-    } = parsePathAndSetContent(newRootCategory, newPath)
-    const searchIndex = createSearchIndex(newRootCategory)
-    const isHit = categoryHits || howtoHits
+        selectedHowtoName
+    } = parsePathAndSetContent(howtoData, requestedPath)
+    const searchIndex = createSearchIndex(howtoData)
+    const isHit = false
 
     if (!selectedCategory) {
         return <div />
     }
-    const categoryList = categoryHits
-        ? _.extend({}, categoryHits)
-        : selectedCategory.subCategoryList
-    const howtoList = howtoHits
-        ? _.extend({}, howtoHits)
-        : selectedCategory.howtoList
+    const categoryList = selectedCategory.subCategoryList
+    const howtoList = selectedCategory.howtoList
 
-    const onSearchResult = (query, categoryHits, howtoHits) => {
-        setSearchedCategoryList(categoryHits)
-        setSearchedHowtoList(howtoHits)
-        setSearchResult({
-            query: query,
-            categoryHits: categoryHits,
-            howtoHits: howtoHits
-        })
+    const onSearchEvent = (event) => {
+        const { query, categoryHits, howtoHits } = searchArchive(
+            searchIndex,
+            event.target.value
+        )
+        setSearchFlag(true)
+        setSearchQuery(query)
+        console.log(categoryHits, howtoHits)
     }
 
     const showError = (errMsg) => (
@@ -108,14 +91,8 @@ const _HowToArchive = ({
                     type='search'
                     placeholder='Search...'
                     aria-label='Search'
-                    value={searchResult ? searchResult.query : ''}
-                    onChange={(event) => {
-                        return searchArchive(
-                            searchIndex,
-                            event.target.value, // query
-                            onSearchResult
-                        )
-                    }}
+                    value={searchFlag ? searchQuery : ''}
+                    onChange={onSearchEvent}
                 />
             </Col>
         </Row>
@@ -145,19 +122,15 @@ const _HowToArchive = ({
                 </Alert>
             )}
 
-            <HowToFileManager
-                folderPath={folderPath}
-                isHit={isHit}
-                categoryList={
-                    searchedCategoryList === null
-                        ? categoryList
-                        : searchedCategoryList
-                }
-                howtoList={
-                    searchoedHowtoList === null ? howtoList : searchoedHowtoList
-                }
-                fileManagerViewMode={viewMode}
-            />
+            {(categoryList || howtoList) && (
+                <HowToFileManager
+                    folderPath={folderPath}
+                    isHit={isHit}
+                    categoryList={categoryList}
+                    howtoList={howtoList}
+                    fileManagerViewMode={viewMode}
+                />
+            )}
 
             {howToFound && (
                 <HowToPanel
@@ -174,8 +147,4 @@ const _HowToArchive = ({
     )
 }
 
-const mapDispatchToProps = { ...HOWTO_ACTION_CREATORS, push }
-export const HowToArchive = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(_HowToArchive)
+export const HowToArchive = _HowToArchive
