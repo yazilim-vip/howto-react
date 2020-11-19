@@ -8,7 +8,7 @@ import { Alert, Spinner } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page, HowTo as HowToComponent } from '../component'
+import { Page, HowToArchive } from '../component'
 import { Firebase } from '../util'
 
 class _HowTo extends React.Component {
@@ -97,7 +97,7 @@ class _HowTo extends React.Component {
 
         return (
             <Page span={{ span: 12 }}>
-                <HowToComponent.HowToArchive
+                <HowToArchive
                     howtoData={howtoData}
                     requestedPath={requestedPath}
                 />

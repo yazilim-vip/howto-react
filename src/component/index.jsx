@@ -1,6 +1,4 @@
-import * as HowTo from './howto'
-
-export { HowTo }
+export { HowToArchive } from './howto'
 export { CustomNavbar } from './customNavbar/CustomNavbar'
 export { PersonCard } from './personCard/PersonCard'
 export { PortfolioCard } from './portfolioCard/PortfolioCard'
