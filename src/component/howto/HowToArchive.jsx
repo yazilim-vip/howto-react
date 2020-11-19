@@ -45,14 +45,23 @@ const _HowToArchive = (props) => {
         selectedHowto,
         selectedHowtoName
     } = parsePathAndSetContent(howtoData, requestedPath)
+    if (!selectedCategory) {
+        return (
+            <>
+                Category <b>{folderPath.replace('/howto/', '')}</b> not found in
+                path.
+            </>
+        )
+    }
+
     const searchIndex = createSearchIndex(howtoData)
     const isHit = false
-
-    if (!selectedCategory) {
-        return <div />
-    }
     const categoryList = selectedCategory.subCategoryList
     const howtoList = selectedCategory.howtoList
+
+    const categoryFound = selectedCategory && true
+    const howToFound = howtoSelectedFlag && selectedHowto
+    const howToNotFound = howtoSelectedFlag && !selectedHowto
 
     const onSearchEvent = (event) => {
         const { query, categoryHits, howtoHits } = searchArchive(
@@ -96,9 +105,6 @@ const _HowToArchive = (props) => {
         </Row>
     )
 
-    const categoryFound = selectedCategory && true
-    const howToFound = howtoSelectedFlag && selectedHowto
-    const howToNotFound = howtoSelectedFlag && !selectedHowto
     if (!categoryFound) {
         return showError(
             <>
