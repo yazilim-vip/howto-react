@@ -31,6 +31,7 @@ const _HowToArchive = (props) => {
     const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
     const [searchFlag, setSearchFlag] = useState(false)
     const [searchQuery, setSearchQuery] = useState(null)
+    const [searchResult, setSearchResult] = useState(null)
 
     if (!(howtoData && requestedPath)) {
         return <div />
@@ -55,7 +56,7 @@ const _HowToArchive = (props) => {
     }
 
     const searchIndex = createSearchIndex(howtoData)
-    const isHit = false
+    const isHit = searchFlag
     const categoryList = selectedCategory.subCategoryList
     const howtoList = selectedCategory.howtoList
 
@@ -64,13 +65,17 @@ const _HowToArchive = (props) => {
     const howToNotFound = howtoSelectedFlag && !selectedHowto
 
     const onSearchEvent = (event) => {
-        const { query, categoryHits, howtoHits } = searchArchive(
-            searchIndex,
-            event.target.value
-        )
-        setSearchFlag(true)
-        setSearchQuery(query)
-        console.log(categoryHits, howtoHits)
+        const value = event.target.value
+        if (value) {
+            const result = searchArchive(searchIndex, value)
+            setSearchFlag(true)
+            setSearchQuery(result.query)
+            setSearchResult(result)
+        } else {
+            setSearchFlag(false)
+            setSearchQuery(null)
+            setSearchResult(null)
+        }
     }
 
     const showError = (errMsg) => (
@@ -118,6 +123,12 @@ const _HowToArchive = (props) => {
         <div>
             {renderHeader()}
             <hr />
+            {searchFlag && searchQuery && (
+                <>
+                    Search Result for : {searchQuery}
+                    <hr />
+                </>
+            )}
 
             {howToNotFound && (
                 <Alert key={1} variant='danger'>
@@ -130,8 +141,12 @@ const _HowToArchive = (props) => {
                 <HowToFileManager
                     folderPath={folderPath}
                     isHit={isHit}
-                    categoryList={categoryList}
-                    howtoList={howtoList}
+                    categoryList={
+                        searchResult ? searchResult.categoryHits : categoryList
+                    }
+                    howtoList={
+                        searchResult ? searchResult.howtoHits : howtoList
+                    }
                     fileManagerViewMode={viewMode}
                 />
             )}
