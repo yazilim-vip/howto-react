@@ -3,6 +3,7 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
+import { Link } from 'react-router-dom'
 import SlidingPane from 'react-sliding-pane'
 import ReactMarkdown from 'react-markdown'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,7 +18,7 @@ export const HowToPanel = (props) => {
     const {
         howtoSelectedFlag,
         selectedHowto,
-        onRequestClose,
+        folderPath,
         rootCategorySelectedFlag
     } = props
 
@@ -38,8 +39,11 @@ export const HowToPanel = (props) => {
             title={title}
             width='100'
             from='bottom'
-            closeIcon={<FontAwesomeIcon icon={faAngleDown} size='2x' />}
-            onRequestClose={onRequestClose}
+            closeIcon={
+                <Link to={folderPath} className='link'>
+                    <FontAwesomeIcon icon={faAngleDown} size='2x' />
+                </Link>
+            }
         />
     )
 }

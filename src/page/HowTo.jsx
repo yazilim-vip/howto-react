@@ -3,20 +3,28 @@ import React from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { connect } from 'react-redux'
 import { Alert, Spinner } from 'react-bootstrap'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page, HowTo as HowToComponent } from '../component'
+import { Page, HowToArchive } from '../component'
 import { Firebase } from '../util'
 
 class _HowTo extends React.Component {
-    componentDidMount() {
-        const { rootCategory } = this.props
+    constructor(props) {
+        super(props)
+        this.state = {
+            howtoData: null,
+            requestedPath: null,
+            errorFlag: false,
+            errorMessage: null,
+            loadedFlag: false
+        }
+    }
 
-        if (!rootCategory) {
+    componentDidMount() {
+        if (!this.state.loadedFlag) {
             this.fetchHowtoData()
         }
     }
@@ -32,15 +40,31 @@ class _HowTo extends React.Component {
                         const data = JSON.parse(val)
                         const path = this.props.history.location.pathname
 
-                        this.props.onApiSuccess(data, path)
+                        this.setState({
+                            howtoData: data,
+                            requestedPath: path,
+                            errorFlag: false,
+                            errorMessage: null,
+                            loadedFlag: true
+                        })
                     } else {
-                        this.props.onApiError(
-                            'Snapshot can not found on firebase.'
-                        )
+                        this.setState({
+                            howtoData: null,
+                            requestedPath: null,
+                            errorFlag: true,
+                            errorMessage: 'Snapshot can not found on firebase.',
+                            loadedFlag: true
+                        })
                     }
                 },
                 (error) => {
-                    this.props.onApiError(error)
+                    this.setState({
+                        howtoData: null,
+                        requestedPath: null,
+                        errorFlag: true,
+                        errorMessage: error,
+                        loadedFlag: true
+                    })
                 }
             )
     }
@@ -56,38 +80,31 @@ class _HowTo extends React.Component {
     }
 
     render() {
-        const { error, isLoaded } = this.props
+        const { howtoData, errorFlag, errorMessage, loadedFlag } = this.state
+        const requestedPath = this.props.location.pathname
 
-        if (!isLoaded) {
+        if (!loadedFlag) {
             return this.renderInfoPage(<Spinner animation='border' />)
         }
 
-        if (error) {
+        if (errorFlag) {
             return this.renderInfoPage(
                 <Alert key={1} variant='danger'>
-                    {error}
+                    {errorMessage}
                 </Alert>
             )
         }
 
         return (
             <Page span={{ span: 12 }}>
-                <HowToComponent.HowToArchive />
+                <HowToArchive
+                    key={`${requestedPath}-${Date.now()}`}
+                    howtoData={howtoData}
+                    requestedPath={requestedPath}
+                />
             </Page>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    const howtoReducer = state.howtoReducer
-
-    return {
-        error: howtoReducer.error,
-        isLoaded: howtoReducer.isLoaded,
-        rootCategory: howtoReducer.rootCategory
-    }
-}
-
-const mapDispatchToProps = HowToComponent.HOWTO_ACTION_CREATORS
-
-export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)
+export const HowTo = _HowTo

@@ -13,7 +13,7 @@ import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 import {
     HOWTO_VIEW_MODE_GRID_VIEW,
     HOWTO_VIEW_MODE_LIST_VIEW
-} from '../howToConstants'
+} from '../HowToConstants'
 
 export const ViewModeChanger = (props) => {
     const { fileManagerViewMode, onToggle } = props
