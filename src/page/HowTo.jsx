@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 // ---------------------------
 import { Page, HowToArchive } from '../component'
 import { Firebase } from '../util'
+import { REDUX_ACTION_CREATORS } from '../redux'
 
 class _HowTo extends React.Component {
     constructor(props) {
@@ -105,6 +106,7 @@ class _HowTo extends React.Component {
                     requestedPath={requestedPath}
                     fileManagerViewMode={fileManagerViewMode}
                     onViewModeChange={(newViewMode) => {
+                        this.props.onFmViewModeChange(newViewMode)
                         console.log(newViewMode)
                     }}
                 />
@@ -116,9 +118,9 @@ class _HowTo extends React.Component {
 const mapStateToProps = (state) => {
     const howtoReducer = state.howtoReducer
     return {
-        fileManagerViewMode: howtoReducer.fileManagerViewMode,
+        fileManagerViewMode: howtoReducer.fileManagerViewMode
     }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
 export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)

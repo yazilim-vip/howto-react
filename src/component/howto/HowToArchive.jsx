@@ -112,8 +112,12 @@ const _HowToArchive = (props) => {
                         fileManagerViewMode={viewMode}
                         onViewModeChange={() => {
                             const newViewMode = !viewMode
-                            toggleViewMode(newViewMode)
-                            onViewModeChange && onViewModeChange(newViewMode)
+                            if (onViewModeChange) {
+                                onViewModeChange &&
+                                    onViewModeChange(newViewMode)
+                            } else {
+                                toggleViewMode(newViewMode)
+                            }
                         }}
                     />
                 </Col>
