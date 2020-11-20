@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { Col, Row, Alert, FormControl } from 'react-bootstrap'
+import { Col, Row, Alert, FormControl, Badge } from 'react-bootstrap'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 // ---------------------------
@@ -84,31 +84,43 @@ const _HowToArchive = (props) => {
         </Alert>
     )
 
-    const renderHeader = () => (
-        <Row>
-            <Col md='7'>
-                <HowToBreadcrumb
-                    categoryNames={categoryNames}
-                    rootCategorySelectedFlag={rootCategorySelectedFlag}
-                />
-            </Col>
-            <Col md='2' sm='3' className='mb-2 mb-sm-0'>
-                <ViewModeChanger
-                    fileManagerViewMode={viewMode}
-                    onToggle={() => toggleViewMode(!viewMode)}
-                />
-            </Col>
-            <Col md='3' sm='9'>
-                <FormControl
-                    type='search'
-                    placeholder='Search...'
-                    aria-label='Search'
-                    value={searchFlag ? searchQuery : ''}
-                    onChange={onSearchEvent}
-                />
-            </Col>
-        </Row>
-    )
+    const renderHeader = () => {
+        const searchMode = searchFlag && searchQuery && true
+
+        return (
+            <Row>
+                <Col md='7'>
+                    <HowToBreadcrumb
+                        categoryNames={categoryNames}
+                        rootCategorySelectedFlag={rootCategorySelectedFlag}
+                    />
+                    {searchMode && (
+                        <div className='d-inline search-result-div'>
+                            <span className='mr-3'>Search Result for :</span>
+                            <Badge pill variant='dark'>
+                                {searchQuery}
+                            </Badge>
+                        </div>
+                    )}
+                </Col>
+                <Col md='2' sm='3' className='mb-2 mb-sm-0'>
+                    <ViewModeChanger
+                        fileManagerViewMode={viewMode}
+                        onToggle={() => toggleViewMode(!viewMode)}
+                    />
+                </Col>
+                <Col md='3' sm='9'>
+                    <FormControl
+                        type='search'
+                        placeholder='Search...'
+                        aria-label='Search'
+                        value={searchFlag ? searchQuery : ''}
+                        onChange={onSearchEvent}
+                    />
+                </Col>
+            </Row>
+        )
+    }
 
     if (!categoryFound) {
         return showError(
@@ -123,12 +135,6 @@ const _HowToArchive = (props) => {
         <div>
             {renderHeader()}
             <hr />
-            {searchFlag && searchQuery && (
-                <>
-                    Search Result for : {searchQuery}
-                    <hr />
-                </>
-            )}
 
             {howToNotFound && (
                 <Alert key={1} variant='danger'>
