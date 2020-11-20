@@ -16,7 +16,7 @@ import { howToReducer } from './howToReducer'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: []
+    whitelist: ['fileManagerViewMode']
 }
 
 export const history = createBrowserHistory()

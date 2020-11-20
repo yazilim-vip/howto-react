@@ -25,10 +25,14 @@ import {
 import { HOWTO_DEFAULT_VIEW_MODE } from './HowToConstants'
 
 const _HowToArchive = (props) => {
-    const { howtoData, requestedPath } = props
+    const { howtoData, requestedPath, fileManagerViewMode, onViewModeChange } = props
+    const initialViewMode =
+        fileManagerViewMode === null || fileManagerViewMode === undefined
+            ? HOWTO_DEFAULT_VIEW_MODE
+            : fileManagerViewMode
 
     // state hooks
-    const [viewMode, toggleViewMode] = useState(HOWTO_DEFAULT_VIEW_MODE)
+    const [viewMode, toggleViewMode] = useState(initialViewMode)
     const [searchFlag, setSearchFlag] = useState(false)
     const [searchQuery, setSearchQuery] = useState(null)
     const [searchResult, setSearchResult] = useState(null)
@@ -106,7 +110,11 @@ const _HowToArchive = (props) => {
                 <Col md='2' sm='3' className='mb-2 mb-sm-0'>
                     <ViewModeChanger
                         fileManagerViewMode={viewMode}
-                        onViewModeChange={() => toggleViewMode(!viewMode)}
+                        onViewModeChange={() => {
+                            const newViewMode = !viewMode
+                            toggleViewMode(newViewMode)
+                            onViewModeChange && onViewModeChange(newViewMode)
+                        }}
                     />
                 </Col>
                 <Col md='3' sm='9'>

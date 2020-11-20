@@ -4,6 +4,7 @@ import React from 'react'
 //  External Dependencies
 // ---------------------------
 import { Alert, Spinner } from 'react-bootstrap'
+import { connect } from 'react-redux'
 
 // ---------------------------
 //  Internal Dependencies
@@ -80,6 +81,7 @@ class _HowTo extends React.Component {
     }
 
     render() {
+        const { fileManagerViewMode } = this.props
         const { howtoData, errorFlag, errorMessage, loadedFlag } = this.state
         const requestedPath = this.props.location.pathname
 
@@ -101,10 +103,22 @@ class _HowTo extends React.Component {
                     key={`${requestedPath}-${Date.now()}`}
                     howtoData={howtoData}
                     requestedPath={requestedPath}
+                    fileManagerViewMode={fileManagerViewMode}
+                    onViewModeChange={(newViewMode) => {
+                        console.log(newViewMode)
+                    }}
                 />
             </Page>
         )
     }
 }
 
-export const HowTo = _HowTo
+const mapStateToProps = (state) => {
+    const howtoReducer = state.howtoReducer
+    return {
+        fileManagerViewMode: howtoReducer.fileManagerViewMode,
+    }
+}
+
+const mapDispatchToProps = {}
+export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)
