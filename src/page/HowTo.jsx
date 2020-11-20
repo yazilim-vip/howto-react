@@ -98,6 +98,7 @@ class _HowTo extends React.Component {
         return (
             <Page span={{ span: 12 }}>
                 <HowToArchive
+                    key={`${requestedPath}-${Date.now()}`}
                     howtoData={howtoData}
                     requestedPath={requestedPath}
                 />
