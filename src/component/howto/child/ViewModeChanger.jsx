@@ -16,7 +16,7 @@ import {
 } from '../HowToConstants'
 
 export const ViewModeChanger = (props) => {
-    const { fileManagerViewMode, onToggle } = props
+    const { fileManagerViewMode, onViewModeChange } = props
 
     return (
         <ButtonGroup toggle className='float-right'>
@@ -25,7 +25,7 @@ export const ViewModeChanger = (props) => {
                 variant='secondary'
                 name='radio'
                 checked={fileManagerViewMode === HOWTO_VIEW_MODE_GRID_VIEW}
-                onChange={() => onToggle()}
+                onChange={() => onViewModeChange()}
             >
                 <FontAwesomeIcon icon={faTh} />
             </ToggleButton>
@@ -35,7 +35,7 @@ export const ViewModeChanger = (props) => {
                 variant='secondary'
                 name='radio'
                 checked={fileManagerViewMode === HOWTO_VIEW_MODE_LIST_VIEW}
-                onChange={() => onToggle()}
+                onChange={() => onViewModeChange()}
             >
                 <FontAwesomeIcon icon={faThList} />
             </ToggleButton>

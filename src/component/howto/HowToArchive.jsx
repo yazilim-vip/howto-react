@@ -106,7 +106,7 @@ const _HowToArchive = (props) => {
                 <Col md='2' sm='3' className='mb-2 mb-sm-0'>
                     <ViewModeChanger
                         fileManagerViewMode={viewMode}
-                        onToggle={() => toggleViewMode(!viewMode)}
+                        onViewModeChange={() => toggleViewMode(!viewMode)}
                     />
                 </Col>
                 <Col md='3' sm='9'>
