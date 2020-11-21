@@ -4,6 +4,7 @@ import App from './App'
 import { Provider } from 'react-redux'
 import WebFont from 'webfontloader'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@yazilim-vip/howto-archive-react/dist/index.css'
 
 import configureStore from './redux/configureStore'
 import { PersistGate } from 'redux-persist/integration/react'

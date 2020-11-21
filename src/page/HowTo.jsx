@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // ---------------------------
 //  External Dependencies
 // ---------------------------
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { HowToArchive } from '@yazilim-vip/howto-archive-react'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page, HowToArchive } from '../component'
+import { Page } from '../component'
 import { Firebase } from '../util'
 import { REDUX_ACTION_CREATORS } from '../redux'
 
@@ -109,6 +110,7 @@ class _HowTo extends React.Component {
                         this.props.onFmViewModeChange(newViewMode)
                         console.log(newViewMode)
                     }}
+                    useState={useState}
                 />
             </Page>
         )
