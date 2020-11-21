@@ -16,6 +16,8 @@ jobs:
           npm run build
           echo "www.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@master
         with:
           name: build
