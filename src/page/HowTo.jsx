@@ -42,7 +42,6 @@ class _HowTo extends React.Component {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
                         const path = this.props.history.location.pathname
-                        console.log(JSON.stringify(data))
                         this.setState({
                             howtoData: data,
                             requestedPath: path,
