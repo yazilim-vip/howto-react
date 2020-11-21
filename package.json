@@ -32,7 +32,7 @@
     "redux-persist": "^6.0.0",
     "underscore": "^1.11.0",
     "webfontloader": "^1.6.28",
-    "@yazilim-vip/howto-archive-react": "1.0.0"
+    "@yazilim-vip/howto-archive-react": "1.0.2"
   },
   "scripts": {
     "lint": "eslint --ext .jsx --ext .js src/",

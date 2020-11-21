@@ -34,7 +34,7 @@ class _HowTo extends React.Component {
 
     fetchHowtoData = () => {
         Firebase.database()
-            .ref('howto-dev')
+            .ref('howto')
             .on(
                 'value',
                 (snapshot) => {
@@ -42,7 +42,7 @@ class _HowTo extends React.Component {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
                         const path = this.props.history.location.pathname
-
+                        console.log(JSON.stringify(data))
                         this.setState({
                             howtoData: data,
                             requestedPath: path,
