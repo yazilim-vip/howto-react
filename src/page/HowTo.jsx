@@ -15,15 +15,12 @@ import { Firebase } from '../util'
 import { REDUX_ACTION_CREATORS } from '../redux'
 
 class _HowTo extends HowToComponent {
-    getInitialVieMode() {
-        return this.props.fileManagerViewMode
-    }
-
     componentDidMount() {
         this.setState({
             errorFlag: false,
             errorMessage: null,
-            loadedFlag: false
+            loadedFlag: false,
+            viewMode: this.props.fileManagerViewMode
         })
         if (!this.state.loadedFlag) {
             this.fetchHowtoData()
