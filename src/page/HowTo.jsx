@@ -19,12 +19,15 @@ class _HowTo extends HowToComponent {
         this.setState({
             errorFlag: false,
             errorMessage: null,
-            loadedFlag: false,
-            viewMode: this.props.fileManagerViewMode
+            loadedFlag: false
         })
         if (!this.state.loadedFlag) {
             this.fetchHowtoData()
         }
+    }
+
+    getInitialVieMode() {
+        return this.props.fileManagerViewMode
     }
 
     fetchHowtoData = () => {
