@@ -5,7 +5,7 @@ import React from 'react'
 // ---------------------------
 import { Col, Row } from 'react-bootstrap'
 
-export const Page = (props) => {
+export const Page = (props: any) => {
     return (
         <Col md={props.span} style={{ height: '100%' }}>
             <Row>

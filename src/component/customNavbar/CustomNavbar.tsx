@@ -12,7 +12,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import './CustomNavbar.scss'
 
 // Project Components
-import { VipIcon } from '../'
+import { VipIcon } from '../vipIcon/VipIcon'
 
 export const CustomNavbar = () => {
     return (
@@ -31,12 +31,11 @@ export const CustomNavbar = () => {
                 </Navbar.Brand>
             </div>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='mx-auto page-nav'>
                     <NavLink
                         exact
-                        activeclassname='active'
+                        activeClassName='active'
                         className='text-light nav-link'
                         to='/'
                     >
@@ -44,7 +43,7 @@ export const CustomNavbar = () => {
                     </NavLink>
 
                     <NavLink
-                        activeclassname='active'
+                        activeClassName='active'
                         className='text-light nav-link'
                         to='/portfolio'
                     >
@@ -52,7 +51,7 @@ export const CustomNavbar = () => {
                     </NavLink>
 
                     <NavLink
-                        activeclassname='active'
+                        activeClassName='active'
                         className='text-light nav-link'
                         to='/howto'
                     >
@@ -60,7 +59,7 @@ export const CustomNavbar = () => {
                     </NavLink>
 
                     <NavLink
-                        activeclassname='active'
+                        activeClassName='active'
                         className='text-light nav-link'
                         to='/about'
                     >
@@ -68,10 +67,7 @@ export const CustomNavbar = () => {
                     </NavLink>
                 </Nav>
                 <Nav>
-                    <span
-                        activeclassname='active'
-                        className='text-light nav-link'
-                    >
+                    <span className='text-light nav-link'>
                         <VipIcon
                             iconCode='gitlab'
                             className='animate__animated animate__zoomInLeft'

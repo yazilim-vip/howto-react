@@ -8,7 +8,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 // ---------------------------
 import { REDUX_ACTION_TYPES } from './actions'
 
-export const howToReducer = (state = [], action) => {
+export const howToReducer = (state = [], action: any) => {
     switch (action.type) {
         case LOCATION_CHANGE:
             console.log('location chagnge')

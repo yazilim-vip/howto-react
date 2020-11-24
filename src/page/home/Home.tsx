@@ -11,7 +11,7 @@ import { Card } from 'react-bootstrap'
 import { Page } from '../../component'
 import './Home.scss'
 
-export const Home = (props) => (
+export const Home = (props: any) => (
     <Page>
         <Card className='mb-4 portfolio-card shadow yvip-card'>
             <div className='yvip-card-img img-responsive img-fluid' />

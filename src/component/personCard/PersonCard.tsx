@@ -12,7 +12,7 @@ import { VipIcon } from '..'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 
-const linkToIcon = (linkMap) => {
+const linkToIcon = (linkMap: any) => {
     const iconCode = linkMap[0]
     const url = linkMap[1]
 
@@ -28,7 +28,7 @@ const linkToIcon = (linkMap) => {
     )
 }
 
-const renderCv = (cvSource) => {
+const renderCv = (cvSource: any) => {
     return (
         <div className='text-center'>
             <hr />
@@ -38,7 +38,6 @@ const renderCv = (cvSource) => {
                 variant='outline-primary'
                 href={cvSource}
                 target='_blank'
-                rel='noopener noreferrer'
             >
                 <FontAwesomeIcon icon={faFile} className='mr-3' />
                 Curriculum Vitae
@@ -47,7 +46,7 @@ const renderCv = (cvSource) => {
     )
 }
 
-export const PersonCard = (props) => {
+export const PersonCard = (props:any) => {
     const portfolio = props.portfolio
     const portfolioLinks = portfolio.links
     const cvSource = portfolio.cvSource

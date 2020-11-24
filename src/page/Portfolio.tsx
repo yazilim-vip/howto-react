@@ -13,7 +13,7 @@ import { Page, PortfolioCard } from '../component'
 // constants
 import { PORTFOLIO_LIST } from '../constants'
 
-const portfolioToComponent = (p) => <PortfolioCard portfolio={p} />
+const portfolioToComponent = (p: any) => <PortfolioCard portfolio={p} />
 
 export const Portfolio = () => (
     <Page>

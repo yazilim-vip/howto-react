@@ -7,9 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './VipIcon.scss'
 
-export const VipIcon = (props) => (
+export const VipIcon = (props:any) => (
     <div
-        href={props.link}
         className={`d-inline-block yvip-icon ${props.iconCode} ${props.className}`}
     >
         <a href={props.link} target='_blank' rel='noopener noreferrer'>

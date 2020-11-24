@@ -1,0 +1,94 @@
+import React, { useEffect, useState } from 'react'
+
+// ---------------------------
+//  External Dependencies.
+// ---------------------------
+import { Alert, Spinner } from 'react-bootstrap'
+import { connect } from 'react-redux'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
+import { Page } from '../component'
+import { Firebase } from '../util'
+import { REDUX_ACTION_CREATORS } from '../redux'
+
+const _HowTo = (props: any) => {
+    const [howToData, setHowToData] = useState(null)
+    const [errorFlag, setErrorFlag] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
+
+    useEffect(() => {
+        if (!loadedFlag) {
+            fetchHowtoData()
+        }
+    })
+
+    const fetchHowtoData = () => {
+        Firebase.database()
+            .ref('howto')
+            .on(
+                'value',
+                (snapshot) => {
+                    if (snapshot.exists()) {
+                        const val = snapshot.val()
+                        const data = JSON.parse(val)
+                        setHowToData(data)
+                        setLoadedFlag(true)
+                        setErrorFlag(false)
+                        // HowToUtil.json2CategoryMapper(data),
+                    } else {
+                        setLoadedFlag(true)
+                        setErrorFlag(true)
+                        setErrorMessage('Snapshot can not found on firebase.')
+                    }
+                },
+                (error: any) => {
+                    setLoadedFlag(true)
+                    setErrorFlag(true)
+                    setErrorMessage(`${error}`)
+                }
+            )
+    }
+
+    const renderInfoPage = (content: any) => {
+        return (
+            <Page>
+                <div className='row h-100 text-center'>
+                    <div className='col-sm-12 my-auto'>{content}</div>
+                </div>
+            </Page>
+        )
+    }
+
+    if (!loadedFlag) {
+        return renderInfoPage(<Spinner animation='border' />)
+    }
+
+    if (errorFlag) {
+        return renderInfoPage(
+            <Alert key={1} variant='danger'>
+                {errorMessage}
+            </Alert>
+        )
+    }
+
+    return (
+        <Page span={{ span: 12 }}>
+            emre
+            {/* {this.getHowToArchiveElement(this.props.requestedPath)} */}
+        </Page>
+    )
+}
+
+const mapStateToProps = (state: { howtoReducer: any }) => {
+    const howtoReducer = state.howtoReducer
+    return {
+        fileManagerViewMode: howtoReducer.fileManagerViewMode,
+        requestedPath: howtoReducer.requestedPath
+    }
+}
+
+const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
+export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)

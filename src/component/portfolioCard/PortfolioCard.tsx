@@ -8,9 +8,9 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { VipIcon } from '../'
+import { VipIcon } from '../vipIcon/VipIcon'
 
-const linkToIcon = (linkMap) => {
+const linkToIcon = (linkMap:any) => {
     const iconCode = linkMap[0]
     const url = linkMap[1]
 
@@ -26,7 +26,7 @@ const linkToIcon = (linkMap) => {
     )
 }
 
-export const PortfolioCard = (props) => {
+export const PortfolioCard = (props:any) => {
     const portfolio = props.portfolio
     const portfolioImageSource = portfolio.imageSource
     const portfolioLinks = portfolio.links

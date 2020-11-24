@@ -13,8 +13,10 @@ import { Page, PersonCard } from '../component'
 // Constants
 import { MEMBER_LIST } from '../constants'
 
-const memberToComponent = (tm) => (
-    <Col key={tm.name} lg={{ span: 4 }} nd={{ span: 12 }}>
+const memberToComponent = (tm: {
+    name: string | number | null | undefined
+}) => (
+    <Col key={tm.name} lg={{ span: 4 }} md={{ span: 12 }}>
         <PersonCard portfolio={tm} />
     </Col>
 )

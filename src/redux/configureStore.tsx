@@ -1,7 +1,7 @@
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory, History } from 'history'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -21,13 +21,13 @@ const persistConfig = {
 
 export const history = createBrowserHistory()
 
-const createRootReducer = (history) =>
+const createRootReducer = (history: History<unknown>) =>
     combineReducers({
         router: connectRouter(history),
         howtoReducer: persistReducer(persistConfig, howToReducer)
     })
 
-export default function configureStore(preloadedState) {
+export default function configureStore(preloadedState = undefined) {
     // Middlewares
     const middlewares = [routerMiddleware(history)]
     const middlewareEnhancer = applyMiddleware(...middlewares)
