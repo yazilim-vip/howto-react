@@ -11,6 +11,7 @@ import { REDUX_ACTION_TYPES } from './actions'
 export const howToReducer = (state = [], action) => {
     switch (action.type) {
         case LOCATION_CHANGE:
+            console.log('location chagnge')
             return {
                 ...state,
                 requestedPath: action.payload.location.pathname
