@@ -43,6 +43,18 @@ export const parsePathAndSetContent = (
     const selectedCategoryName = categoryNames[categoryNames.length - 1]
     const folderPath = '/' + categoryNames.join('/')
 
+    const parsedContent = setContent(
+        rootCategory,
+        categoryNames,
+        selectedHowtoName
+    )
+
+    const categoryFoundFlag = parsedContent.selectedCategory && true
+    const howToFoundFlag =
+        howtoSelectedFlag && parsedContent.selectedHowto && true
+    const howToNotFoundFlag =
+        howtoSelectedFlag && !parsedContent.selectedHowto && true
+
     return {
         folderPath: folderPath,
         categoryNames: categoryNames,
@@ -50,11 +62,10 @@ export const parsePathAndSetContent = (
         selectedHowtoName: selectedHowtoName,
         howtoSelectedFlag: howtoSelectedFlag,
         rootCategorySelectedFlag: rootCategorySelectedFlag,
-        parsedContent: setContent(
-            rootCategory,
-            categoryNames,
-            selectedHowtoName
-        )
+        parsedContent: parsedContent,
+        categoryFoundFlag: categoryFoundFlag,
+        howToFoundFlag: howToFoundFlag,
+        howToNotFoundFlag: howToNotFoundFlag
     }
 }
 

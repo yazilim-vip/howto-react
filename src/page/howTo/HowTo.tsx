@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HowToArchive, PageLayout, PathBreadcrumb } from '../../component'
+import { HowToArchive, PageLayout } from '../../component'
 import { Firebase, json2CategoryMapper } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
 import { Category } from '../../model'

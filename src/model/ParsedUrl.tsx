@@ -9,4 +9,7 @@ export interface ParsedUrl {
     howtoSelectedFlag: boolean;
     rootCategorySelectedFlag: boolean;
     parsedContent: ParsedContent;
+    categoryFoundFlag: boolean;
+    howToFoundFlag: boolean;
+    howToNotFoundFlag: boolean;
 }
