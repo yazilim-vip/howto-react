@@ -9,12 +9,13 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { PageLayout } from '../../component'
-import { Firebase } from '../../util'
+import { HowToArchive, PageLayout, PathBreadcrumb } from '../../component'
+import { Firebase, json2CategoryMapper } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
+import { Category } from '../../model'
 
-const _HowTo = (props: any) => {
-    const [howToData, setHowToData] = useState(null)
+const _HowTo = ({ requestedPath }: any) => {
+    const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -34,10 +35,9 @@ const _HowTo = (props: any) => {
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(data)
+                        setHowToData(json2CategoryMapper(data))
                         setLoadedFlag(true)
                         setErrorFlag(false)
-                        // HowToUtil.json2CategoryMapper(data),,
                         console.log(howToData)
                     } else {
                         setLoadedFlag(true)
@@ -67,7 +67,7 @@ const _HowTo = (props: any) => {
         return renderInfoPage(<Spinner animation='border' />)
     }
 
-    if (errorFlag) {
+    if (!howToData || errorFlag) {
         return renderInfoPage(
             <Alert key={1} variant='danger'>
                 {errorMessage}
@@ -77,8 +77,10 @@ const _HowTo = (props: any) => {
 
     return (
         <PageLayout span={{ span: 12 }}>
-            emre
-            {/* {this.getHowToArchiveElement(this.props.requestedPath)} */}
+            <HowToArchive
+                rootCategory={howToData}
+                requestedPath={requestedPath}
+            />
         </PageLayout>
     )
 }
