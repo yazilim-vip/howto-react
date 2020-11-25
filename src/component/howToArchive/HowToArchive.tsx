@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // ---------------------------
 //  Internal Dependencies.
@@ -8,8 +8,7 @@ import { PathBreadcrumb } from './child/PathBreadcrumb'
 import { FileManager, FileManagerItemType } from './child/FileManager'
 import {
     FileManagerViewMode,
-    HOWTO_DEFAULT_VIEW_MODE,
-    HOWTO_VIEW_MODE_GRID_VIEW
+    HOWTO_DEFAULT_VIEW_MODE
 } from '../../constants'
 
 import './HowToArchive.scss'
@@ -18,20 +17,16 @@ import { Alert, Container } from 'react-bootstrap'
 export interface HowToArchiveProps {
     rootCategory: Category
     requestedPath: string
-    initialViewMode: FileManagerViewMode
+    viewMode: FileManagerViewMode | undefined
 }
 
 export const HowToArchive = ({
     rootCategory,
     requestedPath,
-    initialViewMode
+    viewMode
 }: HowToArchiveProps) => {
-    // States
-    const [viewMode, setViewMode] = useState(
-        initialViewMode || HOWTO_DEFAULT_VIEW_MODE
-    )
-
     // Constants
+    const initialViewMode = viewMode || HOWTO_DEFAULT_VIEW_MODE
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
 
     // Helper Methdos
@@ -79,7 +74,7 @@ export const HowToArchive = ({
         <div>
             <PathBreadcrumb items={parsedUrl.categoryNames} />
             <FileManager
-                viewMode={HOWTO_VIEW_MODE_GRID_VIEW}
+                viewMode={initialViewMode}
                 categoryList={getFileMagnerCategoryItemList()}
                 howToList={getFileMagnerHowToItemList()}
             />

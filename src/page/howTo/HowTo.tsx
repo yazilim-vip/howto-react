@@ -79,7 +79,7 @@ const _HowTo = ({ requestedPath, fileManagerViewMode }: any) => {
             <HowToArchive
                 rootCategory={howToData}
                 requestedPath={requestedPath}
-                initialViewMode={fileManagerViewMode}
+                viewMode={fileManagerViewMode}
             />
         </PageLayout>
     )
