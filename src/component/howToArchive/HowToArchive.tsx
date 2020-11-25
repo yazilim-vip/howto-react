@@ -4,12 +4,13 @@ import React from 'react'
 //  Internal Dependencies.
 // ---------------------------
 import { Category } from '../../model'
-import { PathBreadcrumb } from './child/PathBreadcrumb'
-import { FileManager, FileManagerItemType } from './child/FileManager'
 import {
-    FileManagerViewMode,
-    HOWTO_DEFAULT_VIEW_MODE
-} from '../../constants'
+    PathBreadcrumb,
+    FileManager,
+    FileManagerItemType,
+    HowToPanel
+} from './child'
+import { FileManagerViewMode, HOWTO_DEFAULT_VIEW_MODE } from '../../constants'
 
 import './HowToArchive.scss'
 import { parsePathAndSetContent } from '../../util'
@@ -78,6 +79,9 @@ export const HowToArchive = ({
                 categoryList={getFileMagnerCategoryItemList()}
                 howToList={getFileMagnerHowToItemList()}
             />
+            {parsedUrl.howToFoundFlag && (
+                <HowToPanel howTo={parsedUrl.parsedContent.selectedHowto} />
+            )}
         </div>
     )
 }
