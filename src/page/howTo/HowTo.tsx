@@ -28,7 +28,6 @@ const _HowTo = ({
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
-    const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
 
     useEffect(() => {
         console.log('useeffect')
@@ -88,17 +87,13 @@ const _HowTo = ({
     return (
         <PageLayout span={{ span: 12 }}>
             <HowToArchive
+                key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
                 viewModeToggleEventHandler={() => {
                     toggleFmViewMode()
                 }}
-                searchEventHandler={(searchResult) => {
-                    console.log(searchResult)
-                    setSearchResult(searchResult)
-                }}
-                searchResult={searchResult}
             />
         </PageLayout>
     )

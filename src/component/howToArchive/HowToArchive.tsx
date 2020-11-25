@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // ---------------------------
 //  Internal Dependencies.
@@ -22,29 +22,27 @@ import {
     parsePathAndSetContent,
     searchArchive
 } from './util'
-import { Alert, Container, Row, Col, FormControl } from 'react-bootstrap'
+import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 export interface HowToArchiveProps {
     rootCategory: Category
     requestedPath: string
     viewMode: FileManagerViewMode | undefined
-    searchResult: SearchResult | null
     viewModeToggleEventHandler: () => void
-    searchEventHandler: (searchResult: SearchResult) => void
 }
 
 export const HowToArchive = ({
     rootCategory,
     requestedPath,
     viewMode,
-    searchResult,
-    viewModeToggleEventHandler,
-    searchEventHandler
+    viewModeToggleEventHandler
 }: HowToArchiveProps) => {
+    // States
+    const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
+
     // Constants
     const searchIndex = createSearchIndex(rootCategory)
     const initialViewMode = viewMode || HOWTO_DEFAULT_VIEW_MODE
     const parsedUrl = parsePathAndSetContent(rootCategory, requestedPath)
-    const searchFlag = searchResult !== null
 
     // Helper Methdos
     const showError = (errMsg: string | JSX.Element) => (
@@ -94,6 +92,14 @@ export const HowToArchive = ({
             <Row>
                 <Col md='7'>
                     <PathBreadcrumb items={parsedUrl.categoryNames} />
+                    {searchResult !== null && (
+                        <div className='d-inline search-result-div'>
+                            <span className='mr-3'>Search Result for :</span>
+                            <Badge pill variant='dark'>
+                                {searchResult.query}
+                            </Badge>
+                        </div>
+                    )}
                 </Col>
                 <Col md='2' sm='3' className='mb-2 mb-sm-0'>
                     <ViewModeChanger
@@ -114,7 +120,7 @@ export const HowToArchive = ({
                                     searchIndex,
                                     searchQuery
                                 )
-                                searchEventHandler(searchResult)
+                                setSearchResult(searchResult)
                             }
                         }}
                     />
