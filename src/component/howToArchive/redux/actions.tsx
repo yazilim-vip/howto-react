@@ -3,7 +3,7 @@ export const REDUX_ACTION_TYPES = {
     ON_FM_VIEW_MODE_CHANGE
 }
 
-const onFmViewModeChange = (fileManagerViewMode: any) => {
+const onFmViewModeChange = (fileManagerViewMode: boolean) => {
     return {
         type: REDUX_ACTION_TYPES.ON_FM_VIEW_MODE_CHANGE,
         fileManagerViewMode

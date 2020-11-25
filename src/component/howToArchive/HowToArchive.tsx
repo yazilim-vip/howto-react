@@ -4,8 +4,8 @@ import React from 'react'
 //  Internal Dependencies.
 // ---------------------------
 import { Category } from '../../model'
-import { PathBreadcrumb } from './PathBreadcrumb'
-import { FileManager } from './FileManager'
+import { PathBreadcrumb } from './child/PathBreadcrumb'
+import { FileManager } from './child/FileManager'
 import { HOWTO_VIEW_MODE_GRID_VIEW } from '../../constants'
 
 import './HowToArchive.scss'
