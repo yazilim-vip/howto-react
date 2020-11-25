@@ -1,2 +1,2 @@
-export { MEMBER_LIST } from './memberList'
-export { PORTFOLIO_LIST } from './projectPortfolioList'
+export * from './memberList'
+export * from './projectPortfolioList'

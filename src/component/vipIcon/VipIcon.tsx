@@ -6,13 +6,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './VipIcon.scss'
+import { IconName } from '@fortawesome/fontawesome-svg-core'
 
-export const VipIcon = (props:any) => (
-    <div
-        className={`d-inline-block yvip-icon ${props.iconCode} ${props.className}`}
-    >
-        <a href={props.link} target='_blank' rel='noopener noreferrer'>
-            <FontAwesomeIcon icon={['fab', props.iconCode]} className='mr-3' />
-        </a>
-    </div>
-)
+export interface VipIconProps {
+    iconCode: IconName
+    className: string | undefined
+    link: string | undefined
+}
+
+export const VipIcon = ({ iconCode, className, link }: VipIconProps) => {
+    const divClassName = `d-inline-block yvip-icon ${iconCode} ${className}`
+    return (
+        <div className={divClassName}>
+            <a href={link} target='_blank' rel='noopener noreferrer'>
+                <FontAwesomeIcon icon={['fab', iconCode]} className='mr-3' />
+            </a>
+        </div>
+    )
+}

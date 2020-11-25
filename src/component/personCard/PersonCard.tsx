@@ -12,78 +12,80 @@ import { VipIcon } from '..'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 
-const linkToIcon = (linkMap: any) => {
-    const iconCode = linkMap[0]
-    const url = linkMap[1]
-
-    return (
-        <a
-            href={url}
-            key={url}
-            target='blank'
-            className='text-muted portfolio-link'
-        >
-            <VipIcon iconCode={iconCode} />
-        </a>
-    )
+export interface PersonCardProps {
+    name: string
+    title: string
+    description: string | JSX.Element
+    imageSource: string
+    links: Object | undefined
+    cvSource: string | undefined
 }
 
-const renderCv = (cvSource: any) => {
-    return (
-        <div className='text-center'>
-            <hr />
-
-            <Button
-                className='d-block'
-                variant='outline-primary'
-                href={cvSource}
-                target='_blank'
-            >
-                <FontAwesomeIcon icon={faFile} className='mr-3' />
-                Curriculum Vitae
-            </Button>
-        </div>
-    )
-}
-
-export const PersonCard = (props:any) => {
-    const portfolio = props.portfolio
-    const portfolioLinks = portfolio.links
-    const cvSource = portfolio.cvSource
+export const PersonCard = ({
+    name,
+    title,
+    description,
+    imageSource,
+    links,
+    cvSource
+}: PersonCardProps) => {
+    const linkToIcon = (linkMap: any) => {
+        const iconCode = linkMap[0]
+        const url = linkMap[1]
+        return (
+            <span className='text-muted portfolio-link'>
+                <VipIcon iconCode={iconCode} link={url} className={'null'} />
+            </span>
+        )
+    }
 
     return (
         <Card className='portfolio-card shadow'>
-            {portfolio.imageSource && (
+            {imageSource && (
                 <Card.Img
                     className='mx-auto mt-2 border border-secondary'
                     style={{
                         width: '70%'
                     }}
                     variant='top'
-                    src={`${portfolio.imageSource}`}
+                    src={`${imageSource}`}
                 />
             )}
 
             <Card.Body>
                 <div className='text-center mb-3'>
-                    <Card.Title>{portfolio.name}</Card.Title>
+                    <Card.Title>{name}</Card.Title>
                     <Card.Subtitle className='text-muted'>
-                        {props.portfolio.title}
+                        {title}
                     </Card.Subtitle>
                 </div>
 
                 <div id='example-collapse-text'>
                     <Card.Text className='border-top pt-3'>
-                        {portfolio.description}
+                        {description}
                     </Card.Text>
                 </div>
 
-                {cvSource ? renderCv(cvSource) : null}
+                {cvSource && (
+                    <div className='text-center'>
+                        <hr />
+
+                        <Button
+                            className='d-block'
+                            variant='outline-primary'
+                            href={cvSource}
+                            target='_blank'
+                        >
+                            <FontAwesomeIcon icon={faFile} className='mr-3' />
+                            Curriculum Vitae
+                        </Button>
+                    </div>
+                )}
             </Card.Body>
 
-            {portfolioLinks !== undefined && portfolioLinks !== null && (
+            {links && (
                 <Card.Footer className='text-center'>
-                    {Object.entries(portfolioLinks).map(linkToIcon)}
+                    {Object.entries(links).map(linkToIcon)}
                 </Card.Footer>
             )}
         </Card>

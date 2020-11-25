@@ -5,6 +5,10 @@ import React from 'react'
 // ---------------------------
 import { Col, Row } from 'react-bootstrap'
 
+export interface PageProps {
+    span: { span: number; order: number }
+}
+
 export const Page = (props: any) => {
     return (
         <Col md={props.span} style={{ height: '100%' }}>

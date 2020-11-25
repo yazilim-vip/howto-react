@@ -10,42 +10,42 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 import { VipIcon } from '../vipIcon/VipIcon'
 
-const linkToIcon = (linkMap:any) => {
-    const iconCode = linkMap[0]
-    const url = linkMap[1]
-
-    return (
-        <a
-            href={url}
-            key={url}
-            target='blank'
-            className='text-muted portfolio-link'
-        >
-            <VipIcon iconCode={iconCode} />
-        </a>
-    )
+export interface PortfolioCardProps {
+    name: string
+    description: string | JSX.Element
+    imageSource: string | undefined
+    links: Object | undefined
 }
 
-export const PortfolioCard = (props:any) => {
-    const portfolio = props.portfolio
-    const portfolioImageSource = portfolio.imageSource
-    const portfolioLinks = portfolio.links
+export const PortfolioCard = ({
+    name,
+    description,
+    imageSource,
+    links
+}: PortfolioCardProps) => {
+    const linkToIcon = (linkMap: any) => {
+        const iconCode = linkMap[0]
+        const url = linkMap[1]
 
+        return (
+            <span className='text-muted portfolio-link'>
+                <VipIcon iconCode={iconCode} link={url} className={'null'} />
+            </span>
+        )
+    }
     return (
         <Card className='mb-4 portfolio-card shadow'>
-            {portfolioImageSource && (
-                <Card.Img variant='top' src={`${portfolioImageSource}`} />
-            )}
+            {imageSource && <Card.Img variant='top' src={`${imageSource}`} />}
             <Card.Body>
-                <Card.Title>{portfolio.name}</Card.Title>
+                <Card.Title>{name}</Card.Title>
                 <Card.Subtitle className='mb-4 text-muted'>
-                    {portfolio.title}
+                    {name}
                 </Card.Subtitle>
-                <Card.Text>{portfolio.description}</Card.Text>
+                <Card.Text>{description}</Card.Text>
             </Card.Body>
-            {portfolioLinks !== undefined && portfolioLinks !== null && (
+            {links && (
                 <Card.Footer className='text-center'>
-                    {Object.entries(portfolioLinks).map(linkToIcon)}
+                    {Object.entries(links).map(linkToIcon)}
                 </Card.Footer>
             )}
         </Card>

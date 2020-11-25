@@ -9,9 +9,9 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page } from '../component'
-import { Firebase } from '../util'
-import { REDUX_ACTION_CREATORS } from '../redux'
+import { Page } from '../../component'
+import { Firebase } from '../../util'
+import { REDUX_ACTION_CREATORS } from '../../redux'
 
 const _HowTo = (props: any) => {
     const [howToData, setHowToData] = useState(null)
