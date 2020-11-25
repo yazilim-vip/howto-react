@@ -14,7 +14,7 @@ import { Firebase, json2CategoryMapper } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
 import { Category } from '../../model'
 
-const _HowTo = ({ requestedPath }: any) => {
+const _HowTo = ({ requestedPath, fileManagerViewMode }: any) => {
     const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -79,6 +79,7 @@ const _HowTo = ({ requestedPath }: any) => {
             <HowToArchive
                 rootCategory={howToData}
                 requestedPath={requestedPath}
+                initialViewMode={fileManagerViewMode}
             />
         </PageLayout>
     )
