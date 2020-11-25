@@ -19,7 +19,6 @@ export interface HowToPanelProps {
     howTo: HowTo
 }
 export const HowToPanel = ({ howTo }: HowToPanelProps) => {
-    console.log(howTo)
     const folderLink =
         howTo.categoryList.length === 0
             ? '/howto'

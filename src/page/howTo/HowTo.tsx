@@ -29,7 +29,6 @@ const _HowTo = ({
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
 
     useEffect(() => {
-        console.log('useeffect')
         if (!loadedFlag) {
             fetchHowtoData()
         }

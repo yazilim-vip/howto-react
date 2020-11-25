@@ -31,8 +31,6 @@ export const howToReducer = (state: any = [], action: any) => {
             } else {
                 newViewMode = HOWTO_DEFAULT_VIEW_MODE
             }
-
-            console.log(prevViewMode, ' => ', newViewMode)
             return {
                 ...state,
                 fileManagerViewMode: newViewMode

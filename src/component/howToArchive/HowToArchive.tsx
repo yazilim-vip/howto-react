@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 
 // ---------------------------
+//  External Dependencies.
+// ---------------------------
+import { Link } from 'react-router-dom'
+
+// ---------------------------
 //  Internal Dependencies.
 // ---------------------------
 import { Category, SearchResult } from './model'
@@ -59,6 +64,8 @@ export const HowToArchive = ({
             <>
                 Category <b>{beutifiedPath + ' '}</b>
                 not found in path.
+                <br />
+                <Link to='/howto'>Go to root directory</Link>
             </>
         )
     }
@@ -121,6 +128,8 @@ export const HowToArchive = ({
                                     searchQuery
                                 )
                                 setSearchResult(searchResult)
+                            } else {
+                                setSearchResult(null)
                             }
                         }}
                     />
@@ -128,6 +137,17 @@ export const HowToArchive = ({
             </Row>
 
             <hr />
+
+            {searchResult === null && parsedUrl.howToNotFoundFlag && (
+                <Alert key={1} variant='danger'>
+                    <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
+                    <b>{selectedCategory.name}</b> folder.
+                    <br />
+                    <Link to={parsedUrl.folderPath}>
+                        Go to {selectedCategory.name} category
+                    </Link>
+                </Alert>
+            )}
 
             <FileManager
                 viewMode={initialViewMode}
