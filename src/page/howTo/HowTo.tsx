@@ -18,7 +18,11 @@ import {
 import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
 
-const _HowTo = ({ requestedPath, fileManagerViewMode }: any) => {
+const _HowTo = ({
+    requestedPath,
+    fileManagerViewMode,
+    toggleFmViewMode
+}: any) => {
     const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -84,6 +88,9 @@ const _HowTo = ({ requestedPath, fileManagerViewMode }: any) => {
                 rootCategory={howToData}
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
+                viewModeToggleEventHandler={() => {
+                    toggleFmViewMode()
+                }}
             />
         </PageLayout>
     )

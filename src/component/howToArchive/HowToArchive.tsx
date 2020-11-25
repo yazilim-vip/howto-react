@@ -8,7 +8,8 @@ import {
     PathBreadcrumb,
     FileManager,
     FileManagerItemType,
-    HowToPanel
+    HowToPanel,
+    ViewModeChanger
 } from './child'
 import {
     FileManagerViewMode,
@@ -17,17 +18,19 @@ import {
 
 import './HowToArchive.scss'
 import { parsePathAndSetContent } from './util'
-import { Alert, Container } from 'react-bootstrap'
+import { Alert, Container, Row, Col } from 'react-bootstrap'
 export interface HowToArchiveProps {
     rootCategory: Category
     requestedPath: string
     viewMode: FileManagerViewMode | undefined
+    viewModeToggleEventHandler: () => void
 }
 
 export const HowToArchive = ({
     rootCategory,
     requestedPath,
-    viewMode
+    viewMode,
+    viewModeToggleEventHandler
 }: HowToArchiveProps) => {
     // Constants
     const initialViewMode = viewMode || HOWTO_DEFAULT_VIEW_MODE
@@ -53,6 +56,8 @@ export const HowToArchive = ({
     }
 
     const selectedCategory = parsedUrl.parsedContent.selectedCategory
+
+    //TODO: move them to util class
     const getFileMagnerCategoryItemList = (): Array<FileManagerItemType> => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
@@ -76,7 +81,21 @@ export const HowToArchive = ({
 
     return (
         <div>
-            <PathBreadcrumb items={parsedUrl.categoryNames} />
+            <Row>
+                <Col md='7'>
+                    <PathBreadcrumb items={parsedUrl.categoryNames} />
+                </Col>
+                <Col md='2' sm='3' className='mb-2 mb-sm-0'>
+                    <ViewModeChanger
+                        viewMode={initialViewMode}
+                        viewModeToggleEventHandler={viewModeToggleEventHandler}
+                    />
+                </Col>
+                <Col md='3' sm='9'></Col>
+            </Row>
+
+            <hr />
+
             <FileManager
                 viewMode={initialViewMode}
                 categoryList={getFileMagnerCategoryItemList()}

@@ -1,14 +1,13 @@
-const ON_FM_VIEW_MODE_CHANGE = 'ON_FM_VIEW_MODE_CHANGE'
+const TOGGLE_FM_VIEW_MODE = 'TOGGLE_FM_VIEW_MODE'
 export const REDUX_ACTION_TYPES = {
-    ON_FM_VIEW_MODE_CHANGE
+    TOGGLE_FM_VIEW_MODE: TOGGLE_FM_VIEW_MODE
 }
 
-const onFmViewModeChange = (fileManagerViewMode: boolean) => {
+const toggleFmViewMode = () => {
     return {
-        type: REDUX_ACTION_TYPES.ON_FM_VIEW_MODE_CHANGE,
-        fileManagerViewMode
+        type: REDUX_ACTION_TYPES.TOGGLE_FM_VIEW_MODE
     }
 }
 export const REDUX_ACTION_CREATORS = {
-    onFmViewModeChange
+    toggleFmViewMode: toggleFmViewMode
 }
