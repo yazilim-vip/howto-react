@@ -41,7 +41,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "lint": "eslint --ext .jsx --ext .js src/",
+    "lint": "eslint --ext .jsx --ext .js --ext tsx --ext ts src/",
     "start": "env-cmd -f .env react-scripts start",
     "start:dev": "env-cmd -f .env.dev react-scripts start",
     "build": "env-cmd -f .env react-scripts build",

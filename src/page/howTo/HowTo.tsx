@@ -37,7 +37,8 @@ const _HowTo = (props: any) => {
                         setHowToData(data)
                         setLoadedFlag(true)
                         setErrorFlag(false)
-                        // HowToUtil.json2CategoryMapper(data),
+                        // HowToUtil.json2CategoryMapper(data),,
+                        console.log(howToData)
                     } else {
                         setLoadedFlag(true)
                         setErrorFlag(true)
