@@ -1,7 +1,7 @@
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HOWTO_ITEM_TYPE } from '../../../constants'
+import { HOWTO_ITEM_TYPE } from '../HowToArchiveConstants'
 // eslint-disable-next-line no-unused-vars
 import { SearchItem } from '../model'
 

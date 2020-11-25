@@ -10,7 +10,10 @@ import {
     FileManagerItemType,
     HowToPanel
 } from './child'
-import { FileManagerViewMode, HOWTO_DEFAULT_VIEW_MODE } from '../../constants'
+import {
+    FileManagerViewMode,
+    HOWTO_DEFAULT_VIEW_MODE
+} from './HowToArchiveConstants'
 
 import './HowToArchive.scss'
 import { parsePathAndSetContent } from './util'
