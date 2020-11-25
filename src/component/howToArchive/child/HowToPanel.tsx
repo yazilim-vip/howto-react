@@ -8,7 +8,6 @@ import SlidingPane from 'react-sliding-pane'
 import ReactMarkdown from 'react-markdown'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import { extend } from 'underscore'
 
 // ---------------------------
 //  Internal Dependencies

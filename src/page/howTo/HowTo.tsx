@@ -14,7 +14,6 @@ import {
     PageLayout,
     Category,
     json2CategoryMapper,
-    SearchResult
 } from '../../component'
 import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'

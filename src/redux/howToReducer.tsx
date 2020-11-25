@@ -3,7 +3,6 @@
 // ---------------------------
 import { LOCATION_CHANGE } from 'connected-react-router'
 import {
-    FileManagerViewMode,
     HOWTO_DEFAULT_VIEW_MODE,
     HOWTO_VIEW_MODE_GRID_VIEW,
     HOWTO_VIEW_MODE_LIST_VIEW

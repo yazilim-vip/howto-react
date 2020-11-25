@@ -17,7 +17,6 @@ import {
     HOWTO_VIEW_MODE_LIST_VIEW,
     FileManagerViewMode
 } from '../HowToArchiveConstants'
-import { Category, HowTo, SearchItem } from '../model'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export interface FileManagerItemType {
@@ -100,6 +99,8 @@ export const FileManager = ({
                 return renderListViewModeItem(link, icon, name, color)
             } else if (viewMode === HOWTO_VIEW_MODE_GRID_VIEW) {
                 return renderGridviewModeItem(link, icon, name, color)
+            } else {
+                return null
             }
         })
     }
