@@ -8,11 +8,11 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page } from '../../component'
+import { PageLayout } from '../../component'
 import './Home.scss'
 
 export const Home = (props: any) => (
-    <Page>
+    <PageLayout>
         <Card className='mb-4 portfolio-card shadow yvip-card'>
             <div className='yvip-card-img img-responsive img-fluid' />
             <Card.Body>
@@ -30,5 +30,5 @@ export const Home = (props: any) => (
                 </Card.Text>
             </Card.Body>
         </Card>
-    </Page>
+    </PageLayout>
 )

@@ -8,8 +8,8 @@ import { Row, Col } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page, PersonCard, PersonCardProps } from '../../component'
 
+import { PageLayout, PersonCard, PersonCardProps } from '../../component'
 // Constants
 import { TEAM_MEMBER_LIST } from '../../constants'
 
@@ -22,8 +22,8 @@ const memberToComponent = (tm: PersonCardProps) => (
 
 export const About = () => {
     return (
-        <Page>
+        <PageLayout>
             <Row>{TEAM_MEMBER_LIST.map(memberToComponent)}</Row>
-        </Page>
+        </PageLayout>
     )
 }

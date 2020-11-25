@@ -4,11 +4,11 @@ import React from 'react'
 //  Internal Dependencies
 // ---------------------------
 
-import { Page } from '../../component'
+import { PageLayout } from '../../component'
 import './NotFound.scss'
 
 export const NotFound = () => (
-    <Page>
+    <PageLayout>
         <div className='row h-100 text-center'>
             <div className='col-sm-12 my-auto'>
                 <div className='glitch' data-text='NOT FOUND'>
@@ -16,5 +16,5 @@ export const NotFound = () => (
                 </div>
             </div>
         </div>
-    </Page>
+    </PageLayout>
 )

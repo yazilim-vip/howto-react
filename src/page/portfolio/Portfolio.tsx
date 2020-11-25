@@ -8,7 +8,7 @@ import { CardColumns } from 'react-bootstrap'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page, PortfolioCard, PortfolioCardProps } from '../../component'
+import { PageLayout, PortfolioCard, PortfolioCardProps } from '../../component'
 
 // constants
 import { PORTFOLIO_LIST } from '../../constants'
@@ -19,10 +19,10 @@ export const Portfolio = () => {
     )
 
     return (
-        <Page>
+        <PageLayout>
             <CardColumns>
                 {PORTFOLIO_LIST.map(portfolioToComponent)}
             </CardColumns>
-        </Page>
+        </PageLayout>
     )
 }

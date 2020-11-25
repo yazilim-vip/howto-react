@@ -5,11 +5,7 @@ import React from 'react'
 // ---------------------------
 import { Col, Row } from 'react-bootstrap'
 
-export interface PageProps {
-    span: { span: number; order: number }
-}
-
-export const Page = (props: any) => {
+export const PageLayout = (props: any) => {
     return (
         <Col md={props.span} style={{ height: '100%' }}>
             <Row>
@@ -19,6 +15,6 @@ export const Page = (props: any) => {
     )
 }
 
-Page.defaultProps = {
+PageLayout.defaultProps = {
     span: { span: 8, offset: 2 }
 }

@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { Page } from '../../component'
+import { PageLayout } from '../../component'
 import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
 
@@ -54,11 +54,11 @@ const _HowTo = (props: any) => {
 
     const renderInfoPage = (content: any) => {
         return (
-            <Page>
+            <PageLayout>
                 <div className='row h-100 text-center'>
                     <div className='col-sm-12 my-auto'>{content}</div>
                 </div>
-            </Page>
+            </PageLayout>
         )
     }
 
@@ -75,10 +75,10 @@ const _HowTo = (props: any) => {
     }
 
     return (
-        <Page span={{ span: 12 }}>
+        <PageLayout span={{ span: 12 }}>
             emre
             {/* {this.getHowToArchiveElement(this.props.requestedPath)} */}
-        </Page>
+        </PageLayout>
     )
 }
 
