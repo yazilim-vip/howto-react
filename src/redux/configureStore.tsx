@@ -11,7 +11,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { howToReducer } from '../component/howToArchive/redux/howToReducer'
+import { howToReducer } from './howToReducer'
 
 const persistConfig = {
     key: 'root',
