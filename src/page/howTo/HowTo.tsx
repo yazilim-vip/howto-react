@@ -9,10 +9,14 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HowToArchive, PageLayout } from '../../component'
-import { Firebase, json2CategoryMapper } from '../../util'
+import {
+    HowToArchive,
+    PageLayout,
+    Category,
+    json2CategoryMapper
+} from '../../component'
+import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
-import { Category } from '../../model'
 
 const _HowTo = ({ requestedPath, fileManagerViewMode }: any) => {
     const [howToData, setHowToData] = useState<Category | null>(null)

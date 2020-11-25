@@ -17,7 +17,7 @@ import {
     HOWTO_VIEW_MODE_LIST_VIEW,
     FileManagerViewMode
 } from '../../../constants'
-import { Category, HowTo, SearchItem } from '../../../model'
+import { Category, HowTo, SearchItem } from '../model'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 export interface FileManagerItemType {

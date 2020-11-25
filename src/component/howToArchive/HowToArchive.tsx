@@ -3,7 +3,7 @@ import React from 'react'
 // ---------------------------
 //  Internal Dependencies.
 // ---------------------------
-import { Category } from '../../model'
+import { Category } from './model'
 import {
     PathBreadcrumb,
     FileManager,
@@ -13,7 +13,7 @@ import {
 import { FileManagerViewMode, HOWTO_DEFAULT_VIEW_MODE } from '../../constants'
 
 import './HowToArchive.scss'
-import { parsePathAndSetContent } from '../../util'
+import { parsePathAndSetContent } from './util'
 import { Alert, Container } from 'react-bootstrap'
 export interface HowToArchiveProps {
     rootCategory: Category

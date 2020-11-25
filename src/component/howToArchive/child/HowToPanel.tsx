@@ -14,7 +14,7 @@ import { extend } from 'underscore'
 //  Internal Dependencies
 // ---------------------------
 import { PathBreadcrumb } from './PathBreadcrumb'
-import { HowTo } from '../../../model'
+import { HowTo } from '../model'
 
 export interface HowToPanelProps {
     howTo: HowTo
