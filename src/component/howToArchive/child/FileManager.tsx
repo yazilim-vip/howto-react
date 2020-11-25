@@ -27,8 +27,8 @@ export interface FileManagerItemType {
 
 export interface FileManagerProps {
     viewMode: FileManagerViewMode
-    categoryList: FileManagerItemType[] | undefined
-    howToList: FileManagerItemType[] | undefined
+    categoryList: FileManagerItemType[] | null
+    howToList: FileManagerItemType[] | null
 }
 
 export const FileManager = ({
@@ -86,7 +86,7 @@ export const FileManager = ({
     }
 
     const renderItems = (
-        items: FileManagerItemType[] | undefined,
+        items: FileManagerItemType[] | null,
         icon: IconProp,
         color: string
     ) => {

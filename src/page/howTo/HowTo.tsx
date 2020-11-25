@@ -13,7 +13,8 @@ import {
     HowToArchive,
     PageLayout,
     Category,
-    json2CategoryMapper
+    json2CategoryMapper,
+    SearchResult
 } from '../../component'
 import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
@@ -27,8 +28,10 @@ const _HowTo = ({
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
+    const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
 
     useEffect(() => {
+        console.log('useeffect')
         if (!loadedFlag) {
             fetchHowtoData()
         }
@@ -91,6 +94,11 @@ const _HowTo = ({
                 viewModeToggleEventHandler={() => {
                     toggleFmViewMode()
                 }}
+                searchEventHandler={(searchResult) => {
+                    console.log(searchResult)
+                    setSearchResult(searchResult)
+                }}
+                searchResult={searchResult}
             />
         </PageLayout>
     )
