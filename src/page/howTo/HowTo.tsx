@@ -38,7 +38,6 @@ const _HowTo = ({ requestedPath }: any) => {
                         setHowToData(json2CategoryMapper(data))
                         setLoadedFlag(true)
                         setErrorFlag(false)
-                        console.log(howToData)
                     } else {
                         setLoadedFlag(true)
                         setErrorFlag(true)

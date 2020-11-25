@@ -15,7 +15,7 @@ export const json2CategoryMapper = (mockData: any): Category => {
 
     Object.keys(howtoList).forEach((ht: any) => {
         const howto = new HowTo()
-        howto.categoryNameList = howtoList[ht].categoryNameList
+        howto.categoryList = howtoList[ht].categoryList
         howto.label = howtoList[ht].label
         howto.filePath = howtoList[ht].filePath
         howto.markdownContent = howtoList[ht].markdownContent

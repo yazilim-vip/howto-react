@@ -10,3 +10,5 @@ export const HOWTO_ITEM_TYPE = {
     HOWTO_HIT: 'howto_hit',
     CATEGORY_HIT: 'category_hit'
 }
+
+export type FileManagerViewMode = boolean
