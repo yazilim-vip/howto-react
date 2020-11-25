@@ -14,7 +14,7 @@ import {
 // ---------------------------
 import { REDUX_ACTION_TYPES } from './actions'
 
-export const howToReducer = (state = [], action: any) => {
+export const howToReducer = (state: any = [], action: any) => {
     switch (action.type) {
         case LOCATION_CHANGE:
             return {
