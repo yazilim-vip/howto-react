@@ -35,55 +35,6 @@ export const FileManager = ({
     categoryList,
     howToList
 }: FileManagerProps) => {
-    const renderListViewModeItem = (
-        link: string,
-        icon: IconProp,
-        name: string,
-        color: string
-    ) => {
-        return (
-            <Link to={link} className='link' key={link}>
-                <ListGroup.Item>
-                    <FontAwesomeIcon
-                        icon={icon}
-                        className='mr-3'
-                        color={color}
-                    />
-                    {name}
-                </ListGroup.Item>
-            </Link>
-        )
-    }
-
-    const renderGridviewModeItem = (
-        link: string,
-        icon: IconProp,
-        name: string,
-        color: string
-    ) => {
-        return (
-            <Col
-                xs={4}
-                sm={3}
-                md={3}
-                lg={2}
-                className='py-4 text-center'
-                key={link}
-            >
-                <Link to={link} className='link'>
-                    <FontAwesomeIcon
-                        icon={icon}
-                        className='pb-1'
-                        size='4x'
-                        color={color}
-                    />
-                    <br />
-                    {name}
-                </Link>
-            </Col>
-        )
-    }
-
     const renderItems = (
         items: FileManagerItemType[] | null,
         icon: IconProp,
@@ -96,9 +47,40 @@ export const FileManager = ({
             const name = items[key].name
             const link = items[key].path
             if (viewMode === HOWTO_VIEW_MODE_LIST_VIEW) {
-                return renderListViewModeItem(link, icon, name, color)
+                return (
+                    <Link to={link} className='link' key={link}>
+                        <ListGroup.Item>
+                            <FontAwesomeIcon
+                                icon={icon}
+                                className='mr-3'
+                                color={color}
+                            />
+                            {name}
+                        </ListGroup.Item>
+                    </Link>
+                )
             } else if (viewMode === HOWTO_VIEW_MODE_GRID_VIEW) {
-                return renderGridviewModeItem(link, icon, name, color)
+                return (
+                    <Col
+                        xs={4}
+                        sm={3}
+                        md={3}
+                        lg={2}
+                        className='py-4 text-center'
+                        key={link}
+                    >
+                        <Link to={link} className='link'>
+                            <FontAwesomeIcon
+                                icon={icon}
+                                className='pb-1'
+                                size='4x'
+                                color={color}
+                            />
+                            <br />
+                            {name}
+                        </Link>
+                    </Col>
+                )
             } else {
                 return null
             }
