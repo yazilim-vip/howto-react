@@ -18,6 +18,7 @@ import {
     FileManagerViewMode
 } from '../HowToArchiveConstants'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { TooltipElement } from '../..'
 
 export interface FileManagerItemType {
     name: string
@@ -69,16 +70,18 @@ export const FileManager = ({
                         className='py-4 text-center'
                         key={link}
                     >
-                        <Link to={link} className='link'>
-                            <FontAwesomeIcon
-                                icon={icon}
-                                className='pb-1'
-                                size='4x'
-                                color={color}
-                            />
-                            <br />
-                            {name}
-                        </Link>
+                        <TooltipElement placement='bottom-end' tooltipElement={link}>
+                            <Link to={link} className='link'>
+                                <FontAwesomeIcon
+                                    icon={icon}
+                                    className='pb-1'
+                                    size='4x'
+                                    color={color}
+                                />
+                                <br />
+                                {name}
+                            </Link>
+                        </TooltipElement>
                     </Col>
                 )
             } else {
