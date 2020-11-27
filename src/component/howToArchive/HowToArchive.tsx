@@ -98,9 +98,10 @@ export const HowToArchive = ({
         <div>
             <Row>
                 <Col md='7'>
-                    <PathBreadcrumb items={parsedUrl.categoryNames} />
-                    {searchResult !== null && (
-                        <div className='d-inline search-result-div'>
+                    {searchResult === null ? (
+                        <PathBreadcrumb items={parsedUrl.categoryNames} />
+                    ) : (
+                        <div className='search-result-div'>
                             <span className='mr-3'>Search Result for :</span>
                             <Badge pill variant='dark'>
                                 {searchResult.query}
