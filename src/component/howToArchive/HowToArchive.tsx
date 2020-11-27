@@ -4,6 +4,20 @@ import React, { useState } from 'react'
 //  External Dependencies.
 // ---------------------------
 import { Link } from 'react-router-dom'
+import {
+    Alert,
+    Container,
+    Row,
+    Col,
+    FormControl,
+    Badge,
+    ToggleButton,
+    Button,
+    Tooltip,
+    OverlayTrigger
+} from 'react-bootstrap'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // ---------------------------
 //  Internal Dependencies.
@@ -27,7 +41,9 @@ import {
     parsePathAndSetContent,
     searchArchive
 } from './util'
-import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
+
+import { TooltipElement } from '../'
+
 export interface HowToArchiveProps {
     rootCategory: Category
     requestedPath: string
@@ -110,10 +126,35 @@ export const HowToArchive = ({
                     )}
                 </Col>
                 <Col md='2' sm='3' className='mb-2 mb-sm-0'>
-                    <ViewModeChanger
-                        viewMode={initialViewMode}
-                        viewModeToggleEventHandler={viewModeToggleEventHandler}
-                    />
+                    <div className='d-flex bd-highlight mb-3'>
+                        <div className='ml-auto mr-4'>
+                            <TooltipElement
+                                placement='bottom'
+                                tooltipElement={
+                                    <>
+                                        List favorited contents <br /> (not
+                                        supported yet)
+                                    </>
+                                }
+                            >
+                                <span className='d-inline-block'>
+                                    <Button
+                                        variant='secondary'
+                                        disabled
+                                        style={{ pointerEvents: 'none' }}
+                                    >
+                                        <FontAwesomeIcon icon={faStar} />
+                                    </Button>
+                                </span>
+                            </TooltipElement>
+                        </div>
+                        <ViewModeChanger
+                            viewMode={initialViewMode}
+                            viewModeToggleEventHandler={
+                                viewModeToggleEventHandler
+                            }
+                        />
+                    </div>
                 </Col>
                 <Col md='3' sm='9'>
                     <FormControl
