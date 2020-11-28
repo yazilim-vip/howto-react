@@ -1,8 +1,8 @@
-import { SearchItem } from "./SearchItem";
+import { HowToItem } from "./HowToItem";
 
 
 export interface SearchResult {
     query: string;
-    categoryHits: SearchItem[] | null;
-    howtoHits: SearchItem[] | null;
+    categoryHits: HowToItem[] | null;
+    howtoHits: HowToItem[] | null;
 }

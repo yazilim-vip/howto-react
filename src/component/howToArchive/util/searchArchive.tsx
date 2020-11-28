@@ -1,9 +1,9 @@
 import { HOWTO_ITEM_TYPE } from '../HowToArchiveConstants'
 // eslint-disable-next-line no-unused-vars
-import { SearchItem, SearchResult } from '../model'
+import { HowToItem, SearchResult } from '../model'
 
 export const searchArchive = (
-    searchIndex: SearchItem[],
+    searchIndex: HowToItem[],
     query: string
 ): SearchResult => {
     if (!query) {
@@ -23,12 +23,12 @@ export const searchArchive = (
         }
     }
 
-    const categoryHits: SearchItem[] = []
-    const howtoHits: SearchItem[] = []
-    hits.forEach((hit: SearchItem) => {
-        if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
+    const categoryHits: HowToItem[] = []
+    const howtoHits: HowToItem[] = []
+    hits.forEach((hit: HowToItem) => {
+        if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
             categoryHits.push(hit)
-        } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
+        } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
             howtoHits.push(hit)
         }
     })

@@ -19,17 +19,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // ---------------------------
 //  Internal Dependencies.
 // ---------------------------
-import { Category, SearchResult } from './model'
+import { Category, HowToItem, SearchResult } from './model'
 import {
     PathBreadcrumb,
     FileManager,
-    FileManagerItemType,
     HowToPanel,
     ViewModeChanger
 } from './child'
 import {
     FileManagerViewMode,
-    HOWTO_DEFAULT_VIEW_MODE
+    HOWTO_DEFAULT_VIEW_MODE,
+    HOWTO_ITEM_TYPE
 } from './HowToArchiveConstants'
 
 import './HowToArchive.scss'
@@ -86,23 +86,25 @@ export const HowToArchive = ({
     const selectedCategory = parsedUrl.parsedContent.selectedCategory
 
     //TODO: move them to util class
-    const getFileMagnerCategoryItemList = (): Array<FileManagerItemType> => {
+    const getFileMagnerCategoryItemList = (): Array<HowToItem> => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
             const category = categoryList[catName]
             return {
                 name: category.name,
-                path: `${parsedUrl.folderPath}/${category.name}`
+                path: `${parsedUrl.folderPath}/${category.name}`,
+                type: HOWTO_ITEM_TYPE.CATEGORY
             }
         })
     }
-    const getFileMagnerHowToItemList = (): Array<FileManagerItemType> => {
+    const getFileMagnerHowToItemList = (): Array<HowToItem> => {
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
             const howTo = howToList[howToName]
             return {
                 name: howTo.label,
-                path: `${parsedUrl.folderPath}/${howTo.label}`
+                path: `${parsedUrl.folderPath}/${howTo.label}`,
+                type: HOWTO_ITEM_TYPE.HOWTO
             }
         })
     }
@@ -173,9 +175,7 @@ export const HowToArchive = ({
                     />
                 </Col>
             </Row>
-
             <hr />
-
             {searchResult === null && parsedUrl.howToNotFoundFlag && (
                 <Alert key={1} variant='danger'>
                     <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
@@ -186,7 +186,6 @@ export const HowToArchive = ({
                     </Link>
                 </Alert>
             )}
-
             <FileManager
                 viewMode={initialViewMode}
                 categoryList={

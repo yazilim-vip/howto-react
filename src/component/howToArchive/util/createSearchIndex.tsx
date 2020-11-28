@@ -3,17 +3,17 @@
 // ---------------------------
 import { HOWTO_ITEM_TYPE } from '../HowToArchiveConstants'
 // eslint-disable-next-line no-unused-vars
-import { SearchItem } from '../model'
+import { HowToItem } from '../model'
 
-export const createSearchIndex = (rootCategory: any): SearchItem[] => {
+export const createSearchIndex = (rootCategory: any): HowToItem[] => {
     return indexContent(rootCategory, [], '/howto')
 }
 
 const indexContent = (
     data: any,
-    arr: SearchItem[],
+    arr: HowToItem[],
     path: string
-): SearchItem[] => {
+): HowToItem[] => {
     const howtoList = data.howtoList
     const subCategoryList = data.subCategoryList
 
@@ -22,12 +22,12 @@ const indexContent = (
         const name = howto.label
         const newPath = path + '/' + name
 
-        const searchItem: SearchItem = {
+        const howToItem: HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.HOWTO_HIT,
+            type: HOWTO_ITEM_TYPE.HOWTO,
             name: name.toLowerCase()
         }
-        arr.push(searchItem)
+        arr.push(howToItem)
     })
 
     Object.keys(subCategoryList).forEach((key) => {
@@ -35,13 +35,13 @@ const indexContent = (
         const name = subCategory.name
         const newPath = path + '/' + name
 
-        const searchItem: SearchItem = {
+        const howToItem: HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.CATEGORY_HIT,
+            type: HOWTO_ITEM_TYPE.CATEGORY,
             name: name.toLowerCase()
         }
 
-        arr.push(searchItem)
+        arr.push(howToItem)
         indexContent(subCategory, arr, newPath)
     })
 
