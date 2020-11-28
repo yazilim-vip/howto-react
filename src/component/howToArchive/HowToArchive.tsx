@@ -173,9 +173,7 @@ export const HowToArchive = ({
                     />
                 </Col>
             </Row>
-
             <hr />
-
             {searchResult === null && parsedUrl.howToNotFoundFlag && (
                 <Alert key={1} variant='danger'>
                     <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
@@ -186,7 +184,6 @@ export const HowToArchive = ({
                     </Link>
                 </Alert>
             )}
-
             <FileManager
                 viewMode={initialViewMode}
                 categoryList={
