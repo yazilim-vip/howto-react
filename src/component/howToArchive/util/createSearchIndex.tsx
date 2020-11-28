@@ -24,7 +24,7 @@ const indexContent = (
 
         const howToItem: HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.HOWTO_HIT,
+            type: HOWTO_ITEM_TYPE.HOWTO,
             name: name.toLowerCase()
         }
         arr.push(howToItem)
@@ -37,7 +37,7 @@ const indexContent = (
 
         const howToItem: HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.CATEGORY_HIT,
+            type: HOWTO_ITEM_TYPE.CATEGORY,
             name: name.toLowerCase()
         }
 

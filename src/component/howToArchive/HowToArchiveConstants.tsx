@@ -7,9 +7,9 @@ export const HOWTO_DEFAULT_VIEW_MODE: FileManagerViewMode = HOWTO_VIEW_MODE_GRID
 
 
 export const HOWTO_ITEM_TYPE = {
-    HOWTO_HIT: 'howto_hit',
-    CATEGORY_HIT: 'category_hit'
+    HOWTO: 'howto_hit',
+    CATEGORY: 'category_hit'
 }
 export type HowToItemType =
-    | typeof HOWTO_ITEM_TYPE.HOWTO_HIT
-    | typeof HOWTO_ITEM_TYPE.CATEGORY_HIT
+    | typeof HOWTO_ITEM_TYPE.HOWTO
+    | typeof HOWTO_ITEM_TYPE.CATEGORY

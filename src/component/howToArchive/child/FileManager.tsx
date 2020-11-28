@@ -19,6 +19,7 @@ import {
 } from '../HowToArchiveConstants'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { TooltipElement } from '../..'
+import { HowToItem } from '../model'
 
 export interface FileManagerItemType {
     name: string
@@ -27,8 +28,8 @@ export interface FileManagerItemType {
 
 export interface FileManagerProps {
     viewMode: FileManagerViewMode
-    categoryList: FileManagerItemType[] | null
-    howToList: FileManagerItemType[] | null
+    categoryList: Array<HowToItem> | null
+    howToList: Array<HowToItem> | null
 }
 
 export const FileManager = ({
@@ -37,7 +38,7 @@ export const FileManager = ({
     howToList
 }: FileManagerProps) => {
     const renderItems = (
-        items: FileManagerItemType[] | null,
+        items: Array<HowToItem> | null,
         icon: IconProp,
         color: string
     ) => {

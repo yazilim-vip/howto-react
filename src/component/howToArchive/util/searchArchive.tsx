@@ -26,9 +26,9 @@ export const searchArchive = (
     const categoryHits: HowToItem[] = []
     const howtoHits: HowToItem[] = []
     hits.forEach((hit: HowToItem) => {
-        if (hit.type === HOWTO_ITEM_TYPE.CATEGORY_HIT) {
+        if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
             categoryHits.push(hit)
-        } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO_HIT) {
+        } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
             howtoHits.push(hit)
         }
     })
