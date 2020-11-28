@@ -5,8 +5,7 @@ import React from 'react'
 // ---------------------------
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolder } from '@fortawesome/free-solid-svg-icons'
-import { faFile } from '@fortawesome/free-regular-svg-icons'
+import { faFileAlt, faFolder } from '@fortawesome/free-solid-svg-icons'
 import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 
 // ---------------------------
@@ -15,9 +14,8 @@ import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 import {
     HOWTO_VIEW_MODE_GRID_VIEW,
     HOWTO_VIEW_MODE_LIST_VIEW,
-    FileManagerViewMode
+    FileManagerViewMode, HOWTO_ITEM_TYPE
 } from '../HowToArchiveConstants'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { TooltipElement } from '../..'
 import { HowToItem } from '../model'
 
@@ -37,17 +35,20 @@ export const FileManager = ({
     categoryList,
     howToList
 }: FileManagerProps) => {
-    const renderItems = (
-        items: Array<HowToItem> | null,
-        icon: IconProp,
-        color: string
-    ) => {
+    const renderItems = (items: Array<HowToItem> | null) => {
         if (!items) {
             return null
         }
+
         return Object.keys(items).map((key: any) => {
-            const name = items[key].name
-            const link = items[key].path
+            const howToItem = items[key]
+            const howToItemType = howToItem.type
+
+            const icon = howToItemType === HOWTO_ITEM_TYPE.CATEGORY ?  faFolder : faFileAlt
+            const color = howToItemType === HOWTO_ITEM_TYPE.CATEGORY ?  '#50a4d4' : '#494d52'
+
+            const name = howToItem.name
+            const link = howToItem.path
             if (viewMode === HOWTO_VIEW_MODE_LIST_VIEW) {
                 return (
                     <Link to={link} className='link' key={link}>
@@ -71,7 +72,10 @@ export const FileManager = ({
                         className='py-4 text-center'
                         key={link}
                     >
-                        <TooltipElement placement='bottom-end' tooltipElement={link}>
+                        <TooltipElement
+                            placement='bottom-end'
+                            tooltipElement={link}
+                        >
                             <Link to={link} className='link'>
                                 <FontAwesomeIcon
                                     icon={icon}
@@ -91,8 +95,8 @@ export const FileManager = ({
         })
     }
 
-    const categoryItems = renderItems(categoryList, faFolder, '#50a4d4')
-    const howToItems = renderItems(howToList, faFile, '#494d52')
+    const categoryItems = renderItems(categoryList)
+    const howToItems = renderItems(howToList)
     return (
         <Container fluid>
             {viewMode === HOWTO_VIEW_MODE_LIST_VIEW && (

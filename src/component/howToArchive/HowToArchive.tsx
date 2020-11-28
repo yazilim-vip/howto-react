@@ -23,7 +23,6 @@ import { Category, HowToItem, SearchResult } from './model'
 import {
     PathBreadcrumb,
     FileManager,
-    FileManagerItemType,
     HowToPanel,
     ViewModeChanger
 } from './child'
