@@ -4,9 +4,12 @@ import React from 'react'
 //  External Dependencies
 // ---------------------------
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import './VipIcon.scss'
 import { IconName } from '@fortawesome/fontawesome-svg-core'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
+import './VipIcon.scss'
 
 export interface VipIconProps {
     iconCode: IconName

@@ -4,13 +4,13 @@ import React from 'react'
 //  External Dependencies
 // ---------------------------
 import { Button, Card } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFile } from '@fortawesome/free-solid-svg-icons'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { VipIcon } from '..'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile } from '@fortawesome/free-solid-svg-icons'
+import { VipIcon } from '../vipIcon/VipIcon'
 
 export interface PersonCardProps {
     name: string

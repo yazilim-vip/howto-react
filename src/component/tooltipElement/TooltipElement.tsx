@@ -1,5 +1,8 @@
 import React from 'react'
 
+// ---------------------------
+//  External Dependencies
+// ---------------------------
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Placement } from 'react-bootstrap/esm/Overlay'
 
