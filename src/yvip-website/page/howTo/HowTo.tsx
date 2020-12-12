@@ -10,10 +10,10 @@ import { connect } from 'react-redux'
 //  Internal Dependencies
 // ---------------------------
 import {
-    HowToArchive,
+    HowToArchiveModule,
     PageLayout,
     Category,
-    json2CategoryMapper,
+    json2CategoryMapper
 } from '../../component'
 import { Firebase } from '../../util'
 import { REDUX_ACTION_CREATORS } from '../../redux'
@@ -84,7 +84,7 @@ const _HowTo = ({
 
     return (
         <PageLayout span={{ span: 12 }}>
-            <HowToArchive
+            <HowToArchiveModule.HowToArchive
                 key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}
                 requestedPath={requestedPath}
