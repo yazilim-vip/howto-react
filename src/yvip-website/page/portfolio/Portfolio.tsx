@@ -6,12 +6,16 @@ import React from 'react'
 import { CardColumns } from 'react-bootstrap'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
-import { PageLayout, PortfolioCard, PortfolioCardProps } from '../../component'
+import {
+    PageLayout,
+    PortfolioCard,
+    PortfolioCardProps
+} from 'yvip-website/component'
 
 // constants
-import { PORTFOLIO_LIST } from '../../constants'
+import { PORTFOLIO_LIST } from 'yvip-website/constants'
 
 export const Portfolio = () => {
     const portfolioToComponent = (portfolio: PortfolioCardProps) => (

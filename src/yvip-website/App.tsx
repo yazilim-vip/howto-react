@@ -23,13 +23,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Styles
 import './App.scss'
 
+
+// ---------------------------
+//  Project Dependencies
+// ---------------------------
+
+
 // Components
-import { CustomNavbar } from './component'
+import { CustomNavbar } from 'yvip-website/component'
 
 // Pages
-import { Home, Portfolio, HowTo, About, NotFound } from './page'
+import { Home, Portfolio, HowTo, About, NotFound }  from 'yvip-website/page'
 
-import { history } from './redux/configureStore'
+import { history } from 'yvip-website/redux'
 
 library.add(fab)
 library.add(fas)

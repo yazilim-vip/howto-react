@@ -1,10 +1,13 @@
 import React from 'react'
 
 // ---------------------------
+//  Project Dependencies
+// ---------------------------
+import { PageLayout } from 'yvip-website/component'
+
+// ---------------------------
 //  Internal Dependencies
 // ---------------------------
-
-import { PageLayout } from '../../component'
 import './NotFound.scss'
 
 export const NotFound = () => (

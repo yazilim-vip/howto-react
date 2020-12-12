@@ -11,7 +11,7 @@ import {
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { REDUX_ACTION_TYPES } from './actions'
+import { REDUX_ACTION_TYPES } from 'yvip-website/redux'
 
 export const howToReducer = (state: any = [], action: any) => {
     switch (action.type) {

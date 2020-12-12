@@ -6,9 +6,13 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
 import { PageLayout } from 'yvip-website/component'
+
+// ---------------------------
+//  Internal Dependencies
+// ---------------------------
 import './Home.scss'
 
 export const Home = (props: any) => (

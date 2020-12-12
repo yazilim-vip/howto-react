@@ -6,17 +6,18 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
+
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
 import {
     HowToArchiveModule,
     PageLayout,
     Category,
     json2CategoryMapper
-} from '../../component'
-import { Firebase } from '../../util'
-import { REDUX_ACTION_CREATORS } from '../../redux'
+} from 'yvip-website/component'
+import { Firebase } from 'yvip-website/util'
+import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
 
 const _HowTo = ({
     requestedPath,

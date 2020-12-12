@@ -1,1 +1,1 @@
-export { Firebase } from './Firebase'
+export * from './Firebase'

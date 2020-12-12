@@ -11,7 +11,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { howToReducer } from './howToReducer'
+import { howToReducer } from 'yvip-website/redux'
 
 const persistConfig = {
     key: 'root',

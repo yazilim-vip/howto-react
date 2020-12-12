@@ -6,12 +6,10 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
-
-import { PageLayout, PersonCard, PersonCardProps } from '../../component'
-// Constants
-import { TEAM_MEMBER_LIST } from '../../constants'
+import { PageLayout, PersonCard, PersonCardProps } from 'yvip-website/component'
+import { TEAM_MEMBER_LIST } from 'yvip-website/constants'
 
 const memberToComponent = (tm: PersonCardProps) => (
     <Col key={tm.name} lg={{ span: 4 }} md={{ span: 12 }}>
