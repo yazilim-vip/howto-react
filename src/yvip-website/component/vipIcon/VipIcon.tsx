@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconName } from '@fortawesome/fontawesome-svg-core'
 
 // ---------------------------
-//  Internal Dependencies
+//  Module Internal Dependencies
 // ---------------------------
 import './VipIcon.scss'
 

@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
-import { VipIcon } from '../vipIcon/VipIcon'
+import { VipIcon } from 'yvip-website/component'
 
 export interface PersonCardProps {
     name: string

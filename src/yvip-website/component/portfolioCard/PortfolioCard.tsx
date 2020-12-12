@@ -6,7 +6,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
 import { VipIcon } from '../vipIcon/VipIcon'
 
