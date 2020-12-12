@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { VipIcon } from '../vipIcon/VipIcon'
+import { VipIcon } from 'yvip-website/component'
 
 export interface PortfolioCardProps {
     name: string
