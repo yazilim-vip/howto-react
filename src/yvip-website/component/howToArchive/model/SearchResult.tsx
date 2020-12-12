@@ -1,8 +1,8 @@
-import { HowToItem } from "./HowToItem";
+import { HowToArchiveModule } from 'yvip-website/component'
 
 
 export interface SearchResult {
     query: string;
-    categoryHits: HowToItem[] | null;
-    howtoHits: HowToItem[] | null;
+    categoryHits: HowToArchiveModule.HowToItem[] | null;
+    howtoHits: HowToArchiveModule.HowToItem[] | null;
 }

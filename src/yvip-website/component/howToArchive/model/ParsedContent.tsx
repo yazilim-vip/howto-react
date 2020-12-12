@@ -1,10 +1,8 @@
-import { HowTo } from "./HowTo";
-import { Category } from "./Category";
-
+import { HowToArchiveModule } from 'yvip-website/component'
 
 export interface ParsedContent {
-    selectedCategory: Category;
-    selectedHowto: HowTo;
+    selectedCategory: HowToArchiveModule.Category;
+    selectedHowto: HowToArchiveModule.HowTo;
     categoryHits: string[] | null;
     howtoHits: string[] | null;
 }

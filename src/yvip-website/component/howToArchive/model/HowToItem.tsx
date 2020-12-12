@@ -1,7 +1,7 @@
-import { HowToItemType } from '../HowToArchiveConstants'
+import { HowToArchiveModule } from 'yvip-website/component'
 
 export interface HowToItem {
     path: string
-    type: HowToItemType
+    type: HowToArchiveModule.HowToItemType
     name: string
 }
