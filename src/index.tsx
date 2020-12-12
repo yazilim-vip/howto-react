@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './vip/yazilim/website/App'
+import App from 'yvip-website/App'
 import { Provider } from 'react-redux'
 import WebFont from 'webfontloader'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 
-import configureStore from './vip/yazilim/website/redux/configureStore'
+import configureStore from 'yvip-website/redux/configureStore'
 import { PersistGate } from 'redux-persist/integration/react'
 
 const { store, persistor } = configureStore()
