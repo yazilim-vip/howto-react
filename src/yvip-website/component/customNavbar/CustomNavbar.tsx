@@ -7,12 +7,14 @@ import { NavLink } from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap'
 
 // ---------------------------
-//  Internal Dependencies
+//  Project Dependencies
 // ---------------------------
-import './CustomNavbar.scss'
+import { VipIcon } from 'yvip-website/component'
 
-// Project Components
-import { VipIcon } from '../vipIcon/VipIcon'
+// ---------------------------
+//  Module Internal Dependencies
+// ---------------------------
+import 'yvip-website/component/customNavbar/CustomNavbar.scss'
 
 export const CustomNavbar = () => {
     return (
