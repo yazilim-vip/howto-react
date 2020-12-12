@@ -1,11 +1,9 @@
-import { HOWTO_ITEM_TYPE } from '../HowToArchiveConstants'
-// eslint-disable-next-line no-unused-vars
-import { HowToItem, SearchResult } from '../model'
+import { HowToArchiveModule } from 'yvip-website/component'
 
 export const searchArchive = (
-    searchIndex: HowToItem[],
+    searchIndex: HowToArchiveModule.HowToItem[],
     query: string
-): SearchResult => {
+): HowToArchiveModule.SearchResult => {
     if (!query) {
         return {
             query: '',
@@ -23,12 +21,12 @@ export const searchArchive = (
         }
     }
 
-    const categoryHits: HowToItem[] = []
-    const howtoHits: HowToItem[] = []
-    hits.forEach((hit: HowToItem) => {
-        if (hit.type === HOWTO_ITEM_TYPE.CATEGORY) {
+    const categoryHits: HowToArchiveModule.HowToItem[] = []
+    const howtoHits: HowToArchiveModule.HowToItem[] = []
+    hits.forEach((hit: HowToArchiveModule.HowToItem) => {
+        if (hit.type === HowToArchiveModule.HOWTO_ITEM_TYPE.CATEGORY) {
             categoryHits.push(hit)
-        } else if (hit.type === HOWTO_ITEM_TYPE.HOWTO) {
+        } else if (hit.type === HowToArchiveModule.HOWTO_ITEM_TYPE.HOWTO) {
             howtoHits.push(hit)
         }
     })

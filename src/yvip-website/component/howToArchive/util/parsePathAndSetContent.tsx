@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import { ParsedContent, ParsedUrl } from '../model'
+import { HowToArchiveModule } from 'yvip-website/component'
 
 /**
  *
@@ -35,7 +34,7 @@ import { ParsedContent, ParsedUrl } from '../model'
 export const parsePathAndSetContent = (
     rootCategory: any,
     path: string
-): ParsedUrl => {
+): HowToArchiveModule.ParsedUrl => {
     const rootCategorySelectedFlag: boolean = path === '/howto'
     const categoryNames = path.slice(1).split('/')
     const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
@@ -73,7 +72,7 @@ const setContent = (
     rootCategory: any,
     categoryNames: string[],
     selectedHowtoName: string | null | undefined
-): ParsedContent => {
+): HowToArchiveModule.ParsedContent => {
     // set selectedCategory
     let tmpCategory = rootCategory
 

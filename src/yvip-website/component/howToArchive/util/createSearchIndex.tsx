@@ -1,19 +1,17 @@
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HOWTO_ITEM_TYPE } from '../HowToArchiveConstants'
-// eslint-disable-next-line no-unused-vars
-import { HowToItem } from '../model'
+import { HowToArchiveModule } from 'yvip-website/component'
 
-export const createSearchIndex = (rootCategory: any): HowToItem[] => {
+export const createSearchIndex = (rootCategory: any): HowToArchiveModule.HowToItem[] => {
     return indexContent(rootCategory, [], '/howto')
 }
 
 const indexContent = (
     data: any,
-    arr: HowToItem[],
+    arr: HowToArchiveModule.HowToItem[],
     path: string
-): HowToItem[] => {
+): HowToArchiveModule.HowToItem[] => {
     const howtoList = data.howtoList
     const subCategoryList = data.subCategoryList
 
@@ -22,9 +20,9 @@ const indexContent = (
         const name = howto.label
         const newPath = path + '/' + name
 
-        const howToItem: HowToItem = {
+        const howToItem: HowToArchiveModule.HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.HOWTO,
+            type: HowToArchiveModule.HOWTO_ITEM_TYPE.HOWTO,
             name: name.toLowerCase()
         }
         arr.push(howToItem)
@@ -35,9 +33,9 @@ const indexContent = (
         const name = subCategory.name
         const newPath = path + '/' + name
 
-        const howToItem: HowToItem = {
+        const howToItem: HowToArchiveModule.HowToItem = {
             path: newPath,
-            type: HOWTO_ITEM_TYPE.CATEGORY,
+            type: HowToArchiveModule.HOWTO_ITEM_TYPE.CATEGORY,
             name: name.toLowerCase()
         }
 

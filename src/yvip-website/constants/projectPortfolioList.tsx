@@ -1,4 +1,4 @@
-import { PortfolioCardProps } from '../component'
+import { PortfolioCardProps } from 'yvip-website/component'
 
 export const PORTFOLIO_LIST: PortfolioCardProps[] = [
     {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PersonCardProps } from '../component'
+import { PersonCardProps } from 'yvip-website/component'
 
 export const TEAM_MEMBER_LIST: PersonCardProps[] = [
     {

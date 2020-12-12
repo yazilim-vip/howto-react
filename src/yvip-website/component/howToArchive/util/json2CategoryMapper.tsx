@@ -1,9 +1,9 @@
-import { HowTo, Category } from '../model'
+import { HowToArchiveModule } from 'yvip-website/component'
 
-export const json2CategoryMapper = (mockData: any): Category => {
+export const json2CategoryMapper = (mockData: any): HowToArchiveModule.Category => {
     const categoryObj = JSON.parse(JSON.stringify(mockData))
 
-    const category = new Category()
+    const category = new HowToArchiveModule.Category()
     category.name = categoryObj.name
 
     const subCategoryList = categoryObj.subCategoryList
@@ -14,7 +14,7 @@ export const json2CategoryMapper = (mockData: any): Category => {
     })
 
     Object.keys(howtoList).forEach((ht: any) => {
-        const howto = new HowTo()
+        const howto = new HowToArchiveModule.HowTo()
         howto.categoryList = howtoList[ht].categoryList
         howto.label = howtoList[ht].label
         howto.filePath = howtoList[ht].filePath
