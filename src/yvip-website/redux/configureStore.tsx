@@ -27,7 +27,7 @@ const createRootReducer = (history: History<unknown>) =>
         howtoReducer: persistReducer(persistConfig, howToReducer)
     })
 
-export default function configureStore(preloadedState = undefined) {
+export function configureStore(preloadedState = undefined) {
     // Middlewares
     const middlewares = [routerMiddleware(history)]
     const middlewareEnhancer = applyMiddleware(...middlewares)
