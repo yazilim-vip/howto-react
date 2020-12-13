@@ -1,7 +1,7 @@
 import * as constants from './constants'
-import * as utils from './util'
+import * as utils from './utils'
 import * as types from './types'
-import * as models from './model'
+import * as models from './models'
 import * as childs from './child'
 
 // Components
