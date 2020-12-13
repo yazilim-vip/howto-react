@@ -11,13 +11,11 @@ import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
 
 export interface ViewModeChangerProps {
     viewMode: HowToArchiveModule.FileManagerViewMode
-    viewModeToggleEventHandler: () => void
+    events: Record<string, (...args: any[]) => void>
 }
 
-export const ViewModeChanger = ({
-    viewMode,
-    viewModeToggleEventHandler
-}: ViewModeChangerProps) => {
+export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
+    const viewModeToggleEventHandler = events['viewModeToggleEventHandler']
     return (
         <ButtonGroup toggle className='float-right'>
             <TooltipElement placement='bottom' tooltipElement='Grid View Mode'>

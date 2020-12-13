@@ -30,22 +30,29 @@ export interface HowToArchiveProps {
     rootCategory: HowToArchiveModule.Category
     requestedPath: string
     viewMode: HowToArchiveModule.FileManagerViewMode | undefined
-    viewModeToggleEventHandler: () => void
+    events: Record<string, (...args: any[]) => void>
 }
 
 export const HowToArchive = ({
     rootCategory,
     requestedPath,
     viewMode,
-    viewModeToggleEventHandler
+    events
 }: HowToArchiveProps) => {
     // States
-    const [searchResult, setSearchResult] = useState<HowToArchiveModule.SearchResult | null>(null)
+    const [
+        searchResult,
+        setSearchResult
+    ] = useState<HowToArchiveModule.SearchResult | null>(null)
 
     // Constants
     const searchIndex = HowToArchiveModule.createSearchIndex(rootCategory)
-    const initialViewMode = viewMode || HowToArchiveModule.HOWTO_DEFAULT_VIEW_MODE
-    const parsedUrl = HowToArchiveModule.parsePathAndSetContent(rootCategory, requestedPath)
+    const initialViewMode =
+        viewMode || HowToArchiveModule.HOWTO_DEFAULT_VIEW_MODE
+    const parsedUrl = HowToArchiveModule.parsePathAndSetContent(
+        rootCategory,
+        requestedPath
+    )
 
     // Helper Methdos
     const showError = (errMsg: string | JSX.Element) => (
@@ -71,7 +78,9 @@ export const HowToArchive = ({
     const selectedCategory = parsedUrl.parsedContent.selectedCategory
 
     //TODO: move them to util class
-    const getFileMagnerCategoryItemList = (): Array<HowToArchiveModule.HowToItem> => {
+    const getFileMagnerCategoryItemList = (): Array<
+        HowToArchiveModule.HowToItem
+    > => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
             const category = categoryList[catName]
@@ -82,7 +91,9 @@ export const HowToArchive = ({
             }
         })
     }
-    const getFileMagnerHowToItemList = (): Array<HowToArchiveModule.HowToItem> => {
+    const getFileMagnerHowToItemList = (): Array<
+        HowToArchiveModule.HowToItem
+    > => {
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
             const howTo = howToList[howToName]
@@ -98,7 +109,9 @@ export const HowToArchive = ({
         <div>
             <Row>
                 <Col md='7'>
-                    <HowToArchiveModule.PathBreadcrumb items={parsedUrl.categoryNames} />
+                    <HowToArchiveModule.PathBreadcrumb
+                        items={parsedUrl.categoryNames}
+                    />
                     {searchResult !== null && (
                         <div className='search-result-div'>
                             <span className='mr-3'>Search Result for :</span>
@@ -133,9 +146,7 @@ export const HowToArchive = ({
                         </div>
                         <HowToArchiveModule.ViewModeChanger
                             viewMode={initialViewMode}
-                            viewModeToggleEventHandler={
-                                viewModeToggleEventHandler
-                            }
+                            events={events}
                         />
                     </div>
                 </Col>
@@ -185,7 +196,9 @@ export const HowToArchive = ({
                 }
             />
             {parsedUrl.howToFoundFlag && (
-                <HowToArchiveModule.HowToPanel howTo={parsedUrl.parsedContent.selectedHowto} />
+                <HowToArchiveModule.HowToPanel
+                    howTo={parsedUrl.parsedContent.selectedHowto}
+                />
             )}
         </div>
     )

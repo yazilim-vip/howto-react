@@ -6,14 +6,10 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import {
-    HowToArchiveModule,
-    PageLayout,
-} from 'yvip-website/component'
+import { HowToArchiveModule, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
 
@@ -22,7 +18,10 @@ const _HowTo = ({
     fileManagerViewMode,
     toggleFmViewMode
 }: any) => {
-    const [howToData, setHowToData] = useState<HowToArchiveModule.Category | null>(null)
+    const [
+        howToData,
+        setHowToData
+    ] = useState<HowToArchiveModule.Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -42,7 +41,9 @@ const _HowTo = ({
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(HowToArchiveModule.json2CategoryMapper(data))
+                        setHowToData(
+                            HowToArchiveModule.json2CategoryMapper(data)
+                        )
                         setLoadedFlag(true)
                         setErrorFlag(false)
                     } else {
@@ -88,8 +89,10 @@ const _HowTo = ({
                 rootCategory={howToData}
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
-                viewModeToggleEventHandler={() => {
-                    toggleFmViewMode()
+                events={{
+                    viewModeToggleEventHandler: () => {
+                        toggleFmViewMode()
+                    }
                 }}
             />
         </PageLayout>
