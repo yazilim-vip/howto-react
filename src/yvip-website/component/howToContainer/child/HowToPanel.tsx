@@ -15,7 +15,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { HowToArchive } from 'yvip-website/component'
 
 export interface HowToPanelProps {
-    howTo: HowToArchive.HowTo
+    howTo: HowToArchive.models.HowTo
 }
 export const HowToPanel = ({ howTo }: HowToPanelProps) => {
     const folderLink =
@@ -24,14 +24,16 @@ export const HowToPanel = ({ howTo }: HowToPanelProps) => {
             : `/howto/${howTo.categoryList.join('/')}`
     const title = (
         <div>
-            <HowToArchive.PathBreadcrumb items={[...howTo.categoryList, howTo.label]} />
+            <HowToArchive.childs.PathBreadcrumb
+                items={[...howTo.categoryList, howTo.label]}
+            />
         </div>
     )
     return (
         <SlidingPane
             className='howto-sliding-pane'
             overlayClassName='howto-sliding-pane-overlay'
-            isOpen={true}
+            isOpen
             children={<ReactMarkdown source={howTo.markdownContent} />}
             title={title}
             width='100'

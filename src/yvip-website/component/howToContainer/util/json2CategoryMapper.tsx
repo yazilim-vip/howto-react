@@ -1,9 +1,11 @@
 import { HowToArchive } from 'yvip-website/component'
 
-export const json2CategoryMapper = (mockData: any): HowToArchive.Category => {
+export const json2CategoryMapper = (
+    mockData: any
+): HowToArchive.models.Category => {
     const categoryObj = JSON.parse(JSON.stringify(mockData))
 
-    const category = new HowToArchive.Category()
+    const category = new HowToArchive.models.Category()
     category.name = categoryObj.name
 
     const subCategoryList = categoryObj.subCategoryList
@@ -14,7 +16,7 @@ export const json2CategoryMapper = (mockData: any): HowToArchive.Category => {
     })
 
     Object.keys(howtoList).forEach((ht: any) => {
-        const howto = new HowToArchive.HowTo()
+        const howto = new HowToArchive.models.HowTo()
         howto.categoryList = howtoList[ht].categoryList
         howto.label = howtoList[ht].label
         howto.filePath = howtoList[ht].filePath

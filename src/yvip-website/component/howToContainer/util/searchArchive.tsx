@@ -1,9 +1,9 @@
 import { HowToArchive } from 'yvip-website/component'
 
 export const searchArchive = (
-    searchIndex: HowToArchive.HowToItem[],
+    searchIndex: HowToArchive.models.HowToItem[],
     query: string
-): HowToArchive.SearchResult => {
+): HowToArchive.models.SearchResult => {
     if (!query) {
         return {
             query: '',
@@ -21,12 +21,12 @@ export const searchArchive = (
         }
     }
 
-    const categoryHits: HowToArchive.HowToItem[] = []
-    const howtoHits: HowToArchive.HowToItem[] = []
-    hits.forEach((hit: HowToArchive.HowToItem) => {
-        if (hit.type === HowToArchive.HOWTO_ITEM_TYPE.CATEGORY) {
+    const categoryHits: HowToArchive.models.HowToItem[] = []
+    const howtoHits: HowToArchive.models.HowToItem[] = []
+    hits.forEach((hit: HowToArchive.models.HowToItem) => {
+        if (hit.type === HowToArchive.constants.HOWTO_ITEM_TYPE.CATEGORY) {
             categoryHits.push(hit)
-        } else if (hit.type === HowToArchive.HOWTO_ITEM_TYPE.HOWTO) {
+        } else if (hit.type === HowToArchive.constants.HOWTO_ITEM_TYPE.HOWTO) {
             howtoHits.push(hit)
         }
     })

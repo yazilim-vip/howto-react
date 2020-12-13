@@ -10,12 +10,12 @@ import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 import { TooltipElement, HowToArchive } from 'yvip-website/component'
 
 export interface ViewModeChangerProps
-    extends HowToArchive.HowToComponentProps {
-    viewMode: HowToArchive.FileManagerViewMode
+    extends HowToArchive.types.HowToComponentProps {
+    viewMode: HowToArchive.types.FileManagerViewMode
 }
 
 export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
-    const viewModeToggleEventHandler = events['viewModeToggleEventHandler']
+    const viewModeToggleEventHandler = events.viewModeToggleEventHandler
     return (
         <ButtonGroup toggle className='float-right'>
             <TooltipElement placement='bottom' tooltipElement='Grid View Mode'>
@@ -25,11 +25,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -43,11 +43,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >

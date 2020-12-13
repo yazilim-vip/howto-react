@@ -3,15 +3,17 @@
 // ---------------------------
 import { HowToArchive } from 'yvip-website/component'
 
-export const createSearchIndex = (rootCategory: any): HowToArchive.HowToItem[] => {
+export const createSearchIndex = (
+    rootCategory: any
+): HowToArchive.models.HowToItem[] => {
     return indexContent(rootCategory, [], '/howto')
 }
 
 const indexContent = (
     data: any,
-    arr: HowToArchive.HowToItem[],
+    arr: HowToArchive.models.HowToItem[],
     path: string
-): HowToArchive.HowToItem[] => {
+): HowToArchive.models.HowToItem[] => {
     const howtoList = data.howtoList
     const subCategoryList = data.subCategoryList
 
@@ -20,9 +22,9 @@ const indexContent = (
         const name = howto.label
         const newPath = path + '/' + name
 
-        const howToItem: HowToArchive.HowToItem = {
+        const howToItem: HowToArchive.models.HowToItem = {
             path: newPath,
-            type: HowToArchive.HOWTO_ITEM_TYPE.HOWTO,
+            type: HowToArchive.constants.HOWTO_ITEM_TYPE.HOWTO,
             name: name.toLowerCase()
         }
         arr.push(howToItem)
@@ -33,9 +35,9 @@ const indexContent = (
         const name = subCategory.name
         const newPath = path + '/' + name
 
-        const howToItem: HowToArchive.HowToItem = {
+        const howToItem: HowToArchive.models.HowToItem = {
             path: newPath,
-            type: HowToArchive.HOWTO_ITEM_TYPE.CATEGORY,
+            type: HowToArchive.constants.HOWTO_ITEM_TYPE.CATEGORY,
             name: name.toLowerCase()
         }
 

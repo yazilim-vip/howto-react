@@ -1,7 +1,6 @@
-
 export class HowTo {
-    categoryList: string[] = [];
-    label = '';
-    filePath = '';
-    markdownContent = '';
+    categoryList: string[] = []
+    label = ''
+    filePath = ''
+    markdownContent = ''
 }

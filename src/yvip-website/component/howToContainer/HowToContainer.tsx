@@ -27,10 +27,10 @@ import { TooltipElement, HowToArchive } from 'yvip-website/component'
 import './HowToContainer.scss'
 
 export interface HowToContainerProps {
-    rootCategory: HowToArchive.Category
+    rootCategory: HowToArchive.models.Category
     requestedPath: string
-    viewMode: HowToArchive.FileManagerViewMode | undefined
-    events: Record<HowToArchive.HowToEvent, (...args: any[]) => void>
+    viewMode: HowToArchive.types.FileManagerViewMode | undefined
+    events: Record<HowToArchive.types.HowToEvent, (...args: any[]) => void>
 }
 
 export const HowToContainer = ({
@@ -43,13 +43,13 @@ export const HowToContainer = ({
     const [
         searchResult,
         setSearchResult
-    ] = useState<HowToArchive.SearchResult | null>(null)
+    ] = useState<HowToArchive.models.SearchResult | null>(null)
 
     // Constants
-    const searchIndex = HowToArchive.createSearchIndex(rootCategory)
+    const searchIndex = HowToArchive.utils.createSearchIndex(rootCategory)
     const initialViewMode =
-        viewMode || HowToArchive.HOWTO_DEFAULT_VIEW_MODE
-    const parsedUrl = HowToArchive.parsePathAndSetContent(
+        viewMode || HowToArchive.constants.HOWTO_DEFAULT_VIEW_MODE
+    const parsedUrl = HowToArchive.utils.parsePathAndSetContent(
         rootCategory,
         requestedPath
     )
@@ -79,7 +79,7 @@ export const HowToContainer = ({
 
     //TODO: move them to util class
     const getFileMagnerCategoryItemList = (): Array<
-        HowToArchive.HowToItem
+        HowToArchive.models.HowToItem
     > => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
@@ -87,12 +87,12 @@ export const HowToContainer = ({
             return {
                 name: category.name,
                 path: `${parsedUrl.folderPath}/${category.name}`,
-                type: HowToArchive.HOWTO_ITEM_TYPE.CATEGORY
+                type: HowToArchive.constants.HOWTO_ITEM_TYPE.CATEGORY
             }
         })
     }
     const getFileMagnerHowToItemList = (): Array<
-        HowToArchive.HowToItem
+        HowToArchive.models.HowToItem
     > => {
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
@@ -100,7 +100,7 @@ export const HowToContainer = ({
             return {
                 name: howTo.label,
                 path: `${parsedUrl.folderPath}/${howTo.label}`,
-                type: HowToArchive.HOWTO_ITEM_TYPE.HOWTO
+                type: HowToArchive.constants.HOWTO_ITEM_TYPE.HOWTO
             }
         })
     }
@@ -109,7 +109,7 @@ export const HowToContainer = ({
         <div>
             <Row>
                 <Col md='7'>
-                    <HowToArchive.PathBreadcrumb
+                    <HowToArchive.childs.PathBreadcrumb
                         items={parsedUrl.categoryNames}
                     />
                     {searchResult !== null && (
@@ -144,7 +144,7 @@ export const HowToContainer = ({
                                 </span>
                             </TooltipElement>
                         </div>
-                        <HowToArchive.ViewModeChanger
+                        <HowToArchive.childs.ViewModeChanger
                             viewMode={initialViewMode}
                             events={events}
                         />
@@ -159,7 +159,7 @@ export const HowToContainer = ({
                         onChange={(event) => {
                             const searchQuery = event.target.value
                             if (searchQuery) {
-                                const searchResult = HowToArchive.searchArchive(
+                                const searchResult = HowToArchive.utils.searchArchive(
                                     searchIndex,
                                     searchQuery
                                 )
@@ -182,7 +182,7 @@ export const HowToContainer = ({
                     </Link>
                 </Alert>
             )}
-            <HowToArchive.FileManager
+            <HowToArchive.childs.FileManager
                 viewMode={initialViewMode}
                 categoryList={
                     searchResult !== null
@@ -196,7 +196,7 @@ export const HowToContainer = ({
                 }
             />
             {parsedUrl.howToFoundFlag && (
-                <HowToArchive.HowToPanel
+                <HowToArchive.childs.HowToPanel
                     howTo={parsedUrl.parsedContent.selectedHowto}
                 />
             )}

@@ -34,7 +34,7 @@ import { HowToArchive } from 'yvip-website/component'
 export const parsePathAndSetContent = (
     rootCategory: any,
     path: string
-): HowToArchive.ParsedUrl => {
+): HowToArchive.models.ParsedUrl => {
     const rootCategorySelectedFlag: boolean = path === '/howto'
     const categoryNames = path.slice(1).split('/')
     const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
@@ -72,7 +72,7 @@ const setContent = (
     rootCategory: any,
     categoryNames: string[],
     selectedHowtoName: string | null | undefined
-): HowToArchive.ParsedContent => {
+): HowToArchive.models.ParsedContent => {
     // set selectedCategory
     let tmpCategory = rootCategory
 

@@ -18,10 +18,9 @@ const _HowTo = ({
     fileManagerViewMode,
     toggleFmViewMode
 }: any) => {
-    const [
-        howToData,
-        setHowToData
-    ] = useState<HowToArchive.Category | null>(null)
+    const [howToData, setHowToData] = useState<HowToArchive.models.Category | null>(
+        null
+    )
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -42,7 +41,7 @@ const _HowTo = ({
                         const val = snapshot.val()
                         const data = JSON.parse(val)
                         setHowToData(
-                            HowToArchive.json2CategoryMapper(data)
+                            HowToArchive.utils.json2CategoryMapper(data)
                         )
                         setLoadedFlag(true)
                         setErrorFlag(false)
@@ -90,7 +89,7 @@ const _HowTo = ({
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
                 events={{
-                    'viewModeToggleEventHandler': () => {
+                    viewModeToggleEventHandler: () => {
                         toggleFmViewMode()
                     }
                 }}

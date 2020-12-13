@@ -19,16 +19,16 @@ export const howToReducer = (state: any = [], action: any) => {
         case REDUX_ACTION_TYPES.TOGGLE_FM_VIEW_MODE:
             const prevViewMode =
                 state.fileManagerViewMode ||
-                HowToArchive.HOWTO_DEFAULT_VIEW_MODE
+                HowToArchive.constants.HOWTO_DEFAULT_VIEW_MODE
             let newViewMode
-            if (prevViewMode === HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW) {
-                newViewMode = HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
+            if (prevViewMode === HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW) {
+                newViewMode = HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
             } else if (
-                prevViewMode === HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
+                prevViewMode === HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
             ) {
-                newViewMode = HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW
+                newViewMode = HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
             } else {
-                newViewMode = HowToArchive.HOWTO_DEFAULT_VIEW_MODE
+                newViewMode = HowToArchive.constants.HOWTO_DEFAULT_VIEW_MODE
             }
             return {
                 ...state,
