@@ -1,19 +1,19 @@
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { HowToArchive } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
 
 export const createSearchIndex = (
     rootCategory: any
-): HowToArchive.models.HowToItem[] => {
+): HowTo.models.HowToItem[] => {
     return indexContent(rootCategory, [], '/howto')
 }
 
 const indexContent = (
     data: any,
-    arr: HowToArchive.models.HowToItem[],
+    arr: HowTo.models.HowToItem[],
     path: string
-): HowToArchive.models.HowToItem[] => {
+): HowTo.models.HowToItem[] => {
     const howtoList = data.howtoList
     const subCategoryList = data.subCategoryList
 
@@ -22,9 +22,9 @@ const indexContent = (
         const name = howto.label
         const newPath = path + '/' + name
 
-        const howToItem: HowToArchive.models.HowToItem = {
+        const howToItem: HowTo.models.HowToItem = {
             path: newPath,
-            type: HowToArchive.constants.HOWTO_ITEM_TYPE.HOWTO,
+            type: HowTo.constants.HOWTO_ITEM_TYPE_HOWTO,
             name: name.toLowerCase()
         }
         arr.push(howToItem)
@@ -35,9 +35,9 @@ const indexContent = (
         const name = subCategory.name
         const newPath = path + '/' + name
 
-        const howToItem: HowToArchive.models.HowToItem = {
+        const howToItem: HowTo.models.HowToItem = {
             path: newPath,
-            type: HowToArchive.constants.HOWTO_ITEM_TYPE.CATEGORY,
+            type: HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY,
             name: name.toLowerCase()
         }
 

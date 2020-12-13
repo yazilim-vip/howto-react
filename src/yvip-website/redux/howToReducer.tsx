@@ -2,7 +2,7 @@
 //  External Dependencies
 // ---------------------------
 import { LOCATION_CHANGE } from 'connected-react-router'
-import { HowToArchive } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
 
 // ---------------------------
 //  Internal Dependencies
@@ -19,16 +19,16 @@ export const howToReducer = (state: any = [], action: any) => {
         case REDUX_ACTION_TYPES.TOGGLE_FM_VIEW_MODE:
             const prevViewMode =
                 state.fileManagerViewMode ||
-                HowToArchive.constants.HOWTO_DEFAULT_VIEW_MODE
+                HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
             let newViewMode
-            if (prevViewMode === HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW) {
-                newViewMode = HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
+            if (prevViewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW) {
+                newViewMode = HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
             } else if (
-                prevViewMode === HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
+                prevViewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
             ) {
-                newViewMode = HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
+                newViewMode = HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
             } else {
-                newViewMode = HowToArchive.constants.HOWTO_DEFAULT_VIEW_MODE
+                newViewMode = HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
             }
             return {
                 ...state,

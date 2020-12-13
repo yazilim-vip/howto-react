@@ -1,4 +1,4 @@
-import { HowToArchive } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
 
 export interface ParsedUrl {
     folderPath: string
@@ -7,7 +7,7 @@ export interface ParsedUrl {
     selectedHowtoName: string | null | undefined
     howtoSelectedFlag: boolean
     rootCategorySelectedFlag: boolean
-    parsedContent: HowToArchive.models.ParsedContent
+    parsedContent: HowTo.models.ParsedContent
     categoryFoundFlag: boolean
     howToFoundFlag: boolean
     howToNotFoundFlag: boolean

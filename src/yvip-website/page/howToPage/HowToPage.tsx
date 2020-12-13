@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { HowToArchive, PageLayout } from 'yvip-website/component'
+import { HowTo, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
 
@@ -18,7 +18,7 @@ const _HowToPage = ({
     fileManagerViewMode,
     toggleFmViewMode
 }: any) => {
-    const [howToData, setHowToData] = useState<HowToArchive.models.Category | null>(
+    const [howToData, setHowToData] = useState<HowTo.models.Category | null>(
         null
     )
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
@@ -41,7 +41,7 @@ const _HowToPage = ({
                         const val = snapshot.val()
                         const data = JSON.parse(val)
                         setHowToData(
-                            HowToArchive.utils.json2CategoryMapper(data)
+                            HowTo.utils.json2CategoryMapper(data)
                         )
                         setLoadedFlag(true)
                         setErrorFlag(false)
@@ -83,7 +83,7 @@ const _HowToPage = ({
 
     return (
         <PageLayout span={{ span: 12 }}>
-            <HowToArchive.HowToContainer
+            <HowTo.HowToContainer
                 key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}
                 requestedPath={requestedPath}

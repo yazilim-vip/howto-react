@@ -7,11 +7,11 @@ import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
-import { TooltipElement, HowToArchive } from 'yvip-website/component'
+import { TooltipElement, HowTo } from 'yvip-website/component'
 
 export interface ViewModeChangerProps
-    extends HowToArchive.types.HowToComponentProps {
-    viewMode: HowToArchive.types.FileManagerViewMode
+    extends HowTo.types.HowToComponentProps {
+    viewMode: HowTo.types.FileManagerViewMode
 }
 
 export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
@@ -25,11 +25,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchive.constants.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -43,11 +43,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchive.constants.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
