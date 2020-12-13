@@ -19,37 +19,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
+import { TooltipElement, HowToArchive } from 'yvip-website/component'
 
 // ---------------------------
 //  Module Internal Dependencies
 // ---------------------------
-import './HowToArchive.scss'
+import './HowToContainer.scss'
 
-export interface HowToArchiveProps {
-    rootCategory: HowToArchiveModule.Category
+export interface HowToContainerProps {
+    rootCategory: HowToArchive.Category
     requestedPath: string
-    viewMode: HowToArchiveModule.FileManagerViewMode | undefined
-    events: Record<HowToArchiveModule.HowToEvent, (...args: any[]) => void>
+    viewMode: HowToArchive.FileManagerViewMode | undefined
+    events: Record<HowToArchive.HowToEvent, (...args: any[]) => void>
 }
 
-export const HowToArchive = ({
+export const HowToContainer = ({
     rootCategory,
     requestedPath,
     viewMode,
     events
-}: HowToArchiveProps) => {
+}: HowToContainerProps) => {
     // States
     const [
         searchResult,
         setSearchResult
-    ] = useState<HowToArchiveModule.SearchResult | null>(null)
+    ] = useState<HowToArchive.SearchResult | null>(null)
 
     // Constants
-    const searchIndex = HowToArchiveModule.createSearchIndex(rootCategory)
+    const searchIndex = HowToArchive.createSearchIndex(rootCategory)
     const initialViewMode =
-        viewMode || HowToArchiveModule.HOWTO_DEFAULT_VIEW_MODE
-    const parsedUrl = HowToArchiveModule.parsePathAndSetContent(
+        viewMode || HowToArchive.HOWTO_DEFAULT_VIEW_MODE
+    const parsedUrl = HowToArchive.parsePathAndSetContent(
         rootCategory,
         requestedPath
     )
@@ -79,7 +79,7 @@ export const HowToArchive = ({
 
     //TODO: move them to util class
     const getFileMagnerCategoryItemList = (): Array<
-        HowToArchiveModule.HowToItem
+        HowToArchive.HowToItem
     > => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
@@ -87,12 +87,12 @@ export const HowToArchive = ({
             return {
                 name: category.name,
                 path: `${parsedUrl.folderPath}/${category.name}`,
-                type: HowToArchiveModule.HOWTO_ITEM_TYPE.CATEGORY
+                type: HowToArchive.HOWTO_ITEM_TYPE.CATEGORY
             }
         })
     }
     const getFileMagnerHowToItemList = (): Array<
-        HowToArchiveModule.HowToItem
+        HowToArchive.HowToItem
     > => {
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
@@ -100,7 +100,7 @@ export const HowToArchive = ({
             return {
                 name: howTo.label,
                 path: `${parsedUrl.folderPath}/${howTo.label}`,
-                type: HowToArchiveModule.HOWTO_ITEM_TYPE.HOWTO
+                type: HowToArchive.HOWTO_ITEM_TYPE.HOWTO
             }
         })
     }
@@ -109,7 +109,7 @@ export const HowToArchive = ({
         <div>
             <Row>
                 <Col md='7'>
-                    <HowToArchiveModule.PathBreadcrumb
+                    <HowToArchive.PathBreadcrumb
                         items={parsedUrl.categoryNames}
                     />
                     {searchResult !== null && (
@@ -144,7 +144,7 @@ export const HowToArchive = ({
                                 </span>
                             </TooltipElement>
                         </div>
-                        <HowToArchiveModule.ViewModeChanger
+                        <HowToArchive.ViewModeChanger
                             viewMode={initialViewMode}
                             events={events}
                         />
@@ -159,7 +159,7 @@ export const HowToArchive = ({
                         onChange={(event) => {
                             const searchQuery = event.target.value
                             if (searchQuery) {
-                                const searchResult = HowToArchiveModule.searchArchive(
+                                const searchResult = HowToArchive.searchArchive(
                                     searchIndex,
                                     searchQuery
                                 )
@@ -182,7 +182,7 @@ export const HowToArchive = ({
                     </Link>
                 </Alert>
             )}
-            <HowToArchiveModule.FileManager
+            <HowToArchive.FileManager
                 viewMode={initialViewMode}
                 categoryList={
                     searchResult !== null
@@ -196,7 +196,7 @@ export const HowToArchive = ({
                 }
             />
             {parsedUrl.howToFoundFlag && (
-                <HowToArchiveModule.HowToPanel
+                <HowToArchive.HowToPanel
                     howTo={parsedUrl.parsedContent.selectedHowto}
                 />
             )}

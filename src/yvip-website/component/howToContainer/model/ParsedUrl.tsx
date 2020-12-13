@@ -1,4 +1,4 @@
-import { HowToArchiveModule } from 'yvip-website/component'
+import { HowToArchive } from 'yvip-website/component'
 
 
 export interface ParsedUrl {
@@ -8,7 +8,7 @@ export interface ParsedUrl {
     selectedHowtoName: string | null | undefined;
     howtoSelectedFlag: boolean;
     rootCategorySelectedFlag: boolean;
-    parsedContent: HowToArchiveModule.ParsedContent;
+    parsedContent: HowToArchive.ParsedContent;
     categoryFoundFlag: boolean;
     howToFoundFlag: boolean;
     howToNotFoundFlag: boolean;

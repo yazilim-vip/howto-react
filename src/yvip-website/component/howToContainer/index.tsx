@@ -1,4 +1,4 @@
-export * from './HowToArchive'
+export * from './HowToContainer'
 export * from './types'
 export * from './util'
 export * from './model'

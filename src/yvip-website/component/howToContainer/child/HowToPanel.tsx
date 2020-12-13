@@ -12,10 +12,10 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { HowToArchiveModule } from 'yvip-website/component'
+import { HowToArchive } from 'yvip-website/component'
 
 export interface HowToPanelProps {
-    howTo: HowToArchiveModule.HowTo
+    howTo: HowToArchive.HowTo
 }
 export const HowToPanel = ({ howTo }: HowToPanelProps) => {
     const folderLink =
@@ -24,7 +24,7 @@ export const HowToPanel = ({ howTo }: HowToPanelProps) => {
             : `/howto/${howTo.categoryList.join('/')}`
     const title = (
         <div>
-            <HowToArchiveModule.PathBreadcrumb items={[...howTo.categoryList, howTo.label]} />
+            <HowToArchive.PathBreadcrumb items={[...howTo.categoryList, howTo.label]} />
         </div>
     )
     return (

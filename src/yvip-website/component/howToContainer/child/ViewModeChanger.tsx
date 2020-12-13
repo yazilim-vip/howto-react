@@ -7,11 +7,11 @@ import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
-import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
+import { TooltipElement, HowToArchive } from 'yvip-website/component'
 
 export interface ViewModeChangerProps
-    extends HowToArchiveModule.HowToComponentProps {
-    viewMode: HowToArchiveModule.FileManagerViewMode
+    extends HowToArchive.HowToComponentProps {
+    viewMode: HowToArchive.FileManagerViewMode
 }
 
 export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
@@ -25,11 +25,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowToArchive.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -43,11 +43,11 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowToArchive.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
