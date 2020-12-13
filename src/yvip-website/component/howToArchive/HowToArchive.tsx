@@ -30,7 +30,7 @@ export interface HowToArchiveProps {
     rootCategory: HowToArchiveModule.Category
     requestedPath: string
     viewMode: HowToArchiveModule.FileManagerViewMode | undefined
-    events: Record<string, (...args: any[]) => void>
+    events: Record<HowToArchiveModule.HowToEvent, (...args: any[]) => void>
 }
 
 export const HowToArchive = ({

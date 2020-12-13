@@ -11,7 +11,7 @@ import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
 
 export interface ViewModeChangerProps {
     viewMode: HowToArchiveModule.FileManagerViewMode
-    events: Record<string, (...args: any[]) => void>
+    events: Record<HowToArchiveModule.HowToEvent, (...args: any[]) => void>
 }
 
 export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
