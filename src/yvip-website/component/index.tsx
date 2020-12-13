@@ -4,6 +4,5 @@ export * from './personCard/PersonCard'
 export * from './portfolioCard/PortfolioCard'
 export * from './vipIcon/VipIcon'
 export * from './pageLayout/PageLayout'
-export * from './howToArchive'
 export * from './tooltipElement/TooltipElement'
 export { HowToArchiveModule }

@@ -13,8 +13,6 @@ import { connect } from 'react-redux'
 import {
     HowToArchiveModule,
     PageLayout,
-    Category,
-    json2CategoryMapper
 } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
@@ -24,7 +22,7 @@ const _HowTo = ({
     fileManagerViewMode,
     toggleFmViewMode
 }: any) => {
-    const [howToData, setHowToData] = useState<Category | null>(null)
+    const [howToData, setHowToData] = useState<HowToArchiveModule.Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -44,7 +42,7 @@ const _HowTo = ({
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(json2CategoryMapper(data))
+                        setHowToData(HowToArchiveModule.json2CategoryMapper(data))
                         setLoadedFlag(true)
                         setErrorFlag(false)
                     } else {
