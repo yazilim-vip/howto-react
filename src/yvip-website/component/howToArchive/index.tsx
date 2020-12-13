@@ -1,4 +1,5 @@
 export * from './HowToArchive'
+export * from './types'
 export * from './util'
 export * from './model'
 export * from './child'

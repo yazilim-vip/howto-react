@@ -12,7 +12,6 @@ import { connect } from 'react-redux'
 import { HowToArchiveModule, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
-import { HowToEvent } from 'yvip-website/component/howToArchive'
 
 const _HowTo = ({
     requestedPath,

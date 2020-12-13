@@ -9,9 +9,9 @@ import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
 import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
 
-export interface ViewModeChangerProps {
+export interface ViewModeChangerProps
+    extends HowToArchiveModule.HowToComponentProps {
     viewMode: HowToArchiveModule.FileManagerViewMode
-    events: Record<HowToArchiveModule.HowToEvent, (...args: any[]) => void>
 }
 
 export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
