@@ -13,7 +13,7 @@ import { HowToArchive, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
 
-const _HowTo = ({
+const _HowToPage = ({
     requestedPath,
     fileManagerViewMode,
     toggleFmViewMode
@@ -107,4 +107,4 @@ const mapStateToProps = (state: { howtoReducer: any }) => {
 }
 
 const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
-export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)
+export const HowToPage = connect(mapStateToProps, mapDispatchToProps)(_HowToPage)
