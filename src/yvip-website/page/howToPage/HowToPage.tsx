@@ -6,25 +6,21 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import {
-    HowToArchiveModule,
-    PageLayout,
-    Category,
-    json2CategoryMapper
-} from 'yvip-website/component'
+import { HowTo, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
 
-const _HowTo = ({
+const _HowToPage = ({
     requestedPath,
     fileManagerViewMode,
     toggleFmViewMode
 }: any) => {
-    const [howToData, setHowToData] = useState<Category | null>(null)
+    const [howToData, setHowToData] = useState<HowTo.models.Category | null>(
+        null
+    )
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -44,7 +40,9 @@ const _HowTo = ({
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(json2CategoryMapper(data))
+                        setHowToData(
+                            HowTo.utils.json2CategoryMapper(data)
+                        )
                         setLoadedFlag(true)
                         setErrorFlag(false)
                     } else {
@@ -85,13 +83,15 @@ const _HowTo = ({
 
     return (
         <PageLayout span={{ span: 12 }}>
-            <HowToArchiveModule.HowToArchive
+            <HowTo.HowToContainer
                 key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
-                viewModeToggleEventHandler={() => {
-                    toggleFmViewMode()
+                events={{
+                    viewModeToggleEventHandler: () => {
+                        toggleFmViewMode()
+                    }
                 }}
             />
         </PageLayout>
@@ -107,4 +107,4 @@ const mapStateToProps = (state: { howtoReducer: any }) => {
 }
 
 const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
-export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)
+export const HowToPage = connect(mapStateToProps, mapDispatchToProps)(_HowToPage)

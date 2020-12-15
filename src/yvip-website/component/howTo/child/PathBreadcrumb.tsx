@@ -24,7 +24,7 @@ export const PathBreadcrumb = ({ items }: PathBreadcrumbProps) => {
                 active={index + 1 === items.length}
                 linkAs={Link}
                 linkProps={{ to: getLink(index + 1), className: 'link' }}
-               >
+            >
                 {item}
             </Breadcrumb.Item>
         )

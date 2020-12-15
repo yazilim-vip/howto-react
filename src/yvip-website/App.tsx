@@ -23,17 +23,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Styles
 import './App.scss'
 
-
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-
 
 // Components
 import { CustomNavbar } from 'yvip-website/component'
 
 // Pages
-import { Home, Portfolio, HowTo, About, NotFound }  from 'yvip-website/page'
+import { Home, Portfolio, HowToPage, About, NotFound } from 'yvip-website/page'
 
 import { history } from 'yvip-website/redux'
 
@@ -59,7 +57,7 @@ const App = () => (
                         />
                         <Route exact path='/' component={Home} />
                         <Route path='/portfolio' component={Portfolio} />
-                        <Route path='/howto' component={HowTo} />
+                        <Route path='/howto' component={HowToPage} />
                         <Route path='/about' component={About} />
                         <Route path='/404' component={NotFound} />
                         <Redirect to='/404' />

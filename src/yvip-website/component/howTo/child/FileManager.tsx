@@ -11,7 +11,7 @@ import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
+import { TooltipElement, HowTo } from 'yvip-website/component'
 
 export interface FileManagerItemType {
     name: string
@@ -19,9 +19,9 @@ export interface FileManagerItemType {
 }
 
 export interface FileManagerProps {
-    viewMode: HowToArchiveModule.FileManagerViewMode
-    categoryList: Array<HowToArchiveModule.HowToItem> | null
-    howToList: Array<HowToArchiveModule.HowToItem> | null
+    viewMode: HowTo.types.FileManagerViewMode
+    categoryList: Array<HowTo.models.HowToItem> | null
+    howToList: Array<HowTo.models.HowToItem> | null
 }
 
 export const FileManager = ({
@@ -29,7 +29,7 @@ export const FileManager = ({
     categoryList,
     howToList
 }: FileManagerProps) => {
-    const renderItems = (items: Array<HowToArchiveModule.HowToItem> | null) => {
+    const renderItems = (items: Array<HowTo.models.HowToItem> | null) => {
         if (!items) {
             return null
         }
@@ -39,17 +39,19 @@ export const FileManager = ({
             const howToItemType = howToItem.type
 
             const icon =
-                howToItemType === HowToArchiveModule.HOWTO_ITEM_TYPE.CATEGORY
+                howToItemType ===
+                HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
                     ? faFolder
                     : faFileAlt
             const color =
-                howToItemType === HowToArchiveModule.HOWTO_ITEM_TYPE.CATEGORY
+                howToItemType ===
+                HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
                     ? '#50a4d4'
                     : '#494d52'
 
             const name = howToItem.name
             const link = howToItem.path
-            if (viewMode === HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW) {
+            if (viewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW) {
                 return (
                     <Link to={link} className='link' key={link}>
                         <ListGroup.Item>
@@ -62,7 +64,9 @@ export const FileManager = ({
                         </ListGroup.Item>
                     </Link>
                 )
-            } else if (viewMode === HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW) {
+            } else if (
+                viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
+            ) {
                 return (
                     <Col
                         xs={4}
@@ -99,13 +103,13 @@ export const FileManager = ({
     const howToItems = renderItems(howToList)
     return (
         <Container fluid>
-            {viewMode === HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW && (
+            {viewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW && (
                 <ListGroup>
                     {categoryItems}
                     {howToItems}
                 </ListGroup>
             )}
-            {viewMode === HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW && (
+            {viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW && (
                 <Row>
                     {categoryItems}
                     {howToItems}

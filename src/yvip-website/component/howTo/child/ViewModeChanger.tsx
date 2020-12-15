@@ -7,17 +7,15 @@ import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
-import { TooltipElement, HowToArchiveModule } from 'yvip-website/component'
+import { TooltipElement, HowTo } from 'yvip-website/component'
 
-export interface ViewModeChangerProps {
-    viewMode: HowToArchiveModule.FileManagerViewMode
-    viewModeToggleEventHandler: () => void
+export interface ViewModeChangerProps
+    extends HowTo.types.HowToComponentProps {
+    viewMode: HowTo.types.FileManagerViewMode
 }
 
-export const ViewModeChanger = ({
-    viewMode,
-    viewModeToggleEventHandler
-}: ViewModeChangerProps) => {
+export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
+    const viewModeToggleEventHandler = events.viewModeToggleEventHandler
     return (
         <ButtonGroup toggle className='float-right'>
             <TooltipElement placement='bottom' tooltipElement='Grid View Mode'>
@@ -27,11 +25,11 @@ export const ViewModeChanger = ({
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_GRID_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -45,11 +43,11 @@ export const ViewModeChanger = ({
                     name='radio'
                     value={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     checked={
                         viewMode ===
-                        HowToArchiveModule.HOWTO_VIEW_MODE_LIST_VIEW
+                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
