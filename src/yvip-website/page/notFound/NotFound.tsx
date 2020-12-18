@@ -8,7 +8,7 @@ import { PageLayout } from 'yvip-website/component'
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import './NotFound.scss'
+import 'yvip-website/page/notFound/NotFound.scss'
 
 export const NotFound = () => (
     <PageLayout>

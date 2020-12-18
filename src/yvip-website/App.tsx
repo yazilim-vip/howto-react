@@ -21,7 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //  Internal Dependencies
 // ---------------------------
 // Styles
-import './App.scss'
+import 'yvip-website/App.scss'
 
 // ---------------------------
 //  Project Dependencies

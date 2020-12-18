@@ -1,2 +1,2 @@
-export * from './memberList'
-export * from './projectPortfolioList'
+export * from 'yvip-website/constants/memberList'
+export * from 'yvip-website/constants/projectPortfolioList'

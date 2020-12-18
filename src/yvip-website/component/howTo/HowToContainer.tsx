@@ -24,7 +24,7 @@ import { TooltipElement, HowTo } from 'yvip-website/component'
 // ---------------------------
 //  Module Internal Dependencies
 // ---------------------------
-import './HowToContainer.scss'
+import 'yvip-website/component/howTo/HowToContainer.scss'
 
 export interface HowToContainerProps {
     rootCategory: HowTo.models.Category

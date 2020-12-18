@@ -9,7 +9,7 @@ import { IconName } from '@fortawesome/fontawesome-svg-core'
 // ---------------------------
 //  Module Internal Dependencies
 // ---------------------------
-import './VipIcon.scss'
+import 'yvip-website/component/vipIcon/VipIcon.scss'
 
 export interface VipIconProps {
     iconCode: IconName

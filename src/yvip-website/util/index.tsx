@@ -1,1 +1,1 @@
-export * from './Firebase'
+export * from 'yvip-website/util/Firebase'
