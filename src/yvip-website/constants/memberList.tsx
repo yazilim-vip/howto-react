@@ -14,27 +14,13 @@ export const TEAM_MEMBER_LIST: PersonCardProps[] = [
                 >
                     <b>Personal Website</b>
                 </a>
-                <hr />
-                <a
-                    className='d-block text-center'
-                    href='https://maemresen.github.io/curriculum-vitae/cv_mehmet_arif_emre_sen.pdf'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    <b>CV Link</b>
-                </a>
             </>
         ),
         imageSource:
             'https://avatars2.githubusercontent.com/u/17517090?s=460&u=a0e442b6913f827d2e51e00abe143b2dbc375f33&v=4',
         cvSource: undefined,
         title: 'Major Contributor',
-        links: {
-            gitlab: 'https://gitlab.com/emresen',
-            github: 'https://github.com/maemresen',
-            medium: 'https://medium.com/@maemresen',
-            linkedin: 'https://www.linkedin.com/in/maemresen'
-        }
+        links: undefined
     },
     {
         name: 'Burak Erkan',
