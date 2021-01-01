@@ -25,7 +25,7 @@ export const TEAM_MEMBER_LIST: PersonCardProps[] = [
                 </a>
             </>
         ),
-        imageSource: '/img/emre_portrait_cropped.jpeg',
+        imageSource: 'https://avatars2.githubusercontent.com/u/17517090?s=460&u=a0e442b6913f827d2e51e00abe143b2dbc375f33&v=4',
         cvSource: undefined,
         title: 'Major Contributor',
         links: {
