@@ -42,6 +42,7 @@ const App = () => (
                             from='/:url*(/+)'
                             to={history.location.pathname.slice(0, -1)}
                         />
+                        {/* <Redirect from='/' to='/howto' /> */}
                         <Route exact path='/howto*' component={HowToPage} />
                         <Route path='/404' component={NotFound} />
                         <Redirect to='/404' />

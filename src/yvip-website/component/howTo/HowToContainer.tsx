@@ -25,6 +25,8 @@ import { TooltipElement, HowTo } from 'yvip-website/component'
 //  Module Internal Dependencies
 // ---------------------------
 import 'yvip-website/component/howTo/HowToContainer.scss'
+import ReactMarkdown from 'react-markdown'
+import { PathBreadcrumb } from './child'
 
 export interface HowToContainerProps {
     rootCategory: HowTo.models.Category
@@ -47,8 +49,7 @@ export const HowToContainer = ({
 
     // Constants
     const searchIndex = HowTo.utils.createSearchIndex(rootCategory)
-    const initialViewMode =
-        viewMode || HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
+    const initialViewMode = viewMode || HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
     const parsedUrl = HowTo.utils.parsePathAndSetContent(
         rootCategory,
         requestedPath
@@ -78,9 +79,7 @@ export const HowToContainer = ({
     const selectedCategory = parsedUrl.parsedContent.selectedCategory
 
     //TODO: move them to util class
-    const getFileMagnerCategoryItemList = (): Array<
-        HowTo.models.HowToItem
-    > => {
+    const getFileMagnerCategoryItemList = (): Array<HowTo.models.HowToItem> => {
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
             const category = categoryList[catName]
@@ -91,9 +90,7 @@ export const HowToContainer = ({
             }
         })
     }
-    const getFileMagnerHowToItemList = (): Array<
-        HowTo.models.HowToItem
-    > => {
+    const getFileMagnerHowToItemList = (): Array<HowTo.models.HowToItem> => {
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
             const howTo = howToList[howToName]
@@ -105,12 +102,17 @@ export const HowToContainer = ({
         })
     }
 
+    let pathBreadcrumElements = parsedUrl.categoryNames
+    if (parsedUrl.selectedHowtoName) {
+        pathBreadcrumElements.push(parsedUrl.selectedHowtoName)
+    }
+
     return (
         <div>
             <Row>
                 <Col md='7'>
                     <HowTo.childs.PathBreadcrumb
-                        items={parsedUrl.categoryNames}
+                        items={pathBreadcrumElements}
                     />
                     {searchResult !== null && (
                         <div className='search-result-div'>
@@ -155,7 +157,7 @@ export const HowToContainer = ({
                         type='search'
                         placeholder='Search...'
                         aria-label='Search'
-                        value={searchResult === null ? '' : searchResult.query}
+                        value={searchResult ? searchResult.query : ''}
                         onChange={(event) => {
                             const searchQuery = event.target.value
                             if (searchQuery) {
@@ -182,22 +184,26 @@ export const HowToContainer = ({
                     </Link>
                 </Alert>
             )}
-            <HowTo.childs.FileManager
-                viewMode={initialViewMode}
-                categoryList={
-                    searchResult !== null
-                        ? searchResult.categoryHits
-                        : getFileMagnerCategoryItemList()
-                }
-                howToList={
-                    searchResult !== null
-                        ? searchResult.howtoHits
-                        : getFileMagnerHowToItemList()
-                }
-            />
-            {parsedUrl.howToFoundFlag && (
-                <HowTo.childs.HowToPanel
-                    howTo={parsedUrl.parsedContent.selectedHowto}
+
+            {parsedUrl.howToFoundFlag ? (
+                <ReactMarkdown
+                    source={
+                        parsedUrl.parsedContent.selectedHowto.markdownContent
+                    }
+                />
+            ) : (
+                <HowTo.childs.FileManager
+                    viewMode={initialViewMode}
+                    categoryList={
+                        searchResult !== null
+                            ? searchResult.categoryHits
+                            : getFileMagnerCategoryItemList()
+                    }
+                    howToList={
+                        searchResult !== null
+                            ? searchResult.howtoHits
+                            : getFileMagnerHowToItemList()
+                    }
                 />
             )}
         </div>
