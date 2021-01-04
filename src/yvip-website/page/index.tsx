@@ -1,5 +1,2 @@
-export { Home } from 'yvip-website/page/home/Home'
-export { Portfolio } from 'yvip-website/page/portfolio/Portfolio'
 export { HowToPage } from 'yvip-website/page/howToPage/HowToPage'
-export { About } from 'yvip-website/page/about/About'
 export { NotFound } from 'yvip-website/page/notFound/NotFound'
