@@ -40,9 +40,7 @@ const _HowToPage = ({
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(
-                            HowTo.utils.json2CategoryMapper(data)
-                        )
+                        setHowToData(HowTo.utils.json2CategoryMapper(data))
                         setLoadedFlag(true)
                         setErrorFlag(false)
                     } else {
@@ -107,4 +105,7 @@ const mapStateToProps = (state: { howtoReducer: any }) => {
 }
 
 const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
-export const HowToPage = connect(mapStateToProps, mapDispatchToProps)(_HowToPage)
+export const HowToPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(_HowToPage)
