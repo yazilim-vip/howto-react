@@ -26,7 +26,6 @@ import { TooltipElement, HowTo } from 'yvip-website/component'
 // ---------------------------
 import 'yvip-website/component/howTo/HowToContainer.scss'
 import ReactMarkdown from 'react-markdown'
-import { PathBreadcrumb } from './child'
 
 export interface HowToContainerProps {
     rootCategory: HowTo.models.Category
@@ -185,7 +184,7 @@ export const HowToContainer = ({
                 </Alert>
             )}
 
-            {parsedUrl.howToFoundFlag ? (
+            {searchResult === null && parsedUrl.howToFoundFlag ? (
                 <ReactMarkdown
                     source={
                         parsedUrl.parsedContent.selectedHowto.markdownContent
