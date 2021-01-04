@@ -4,23 +4,12 @@ import React, { useState } from 'react'
 //  External Dependencies.
 // ---------------------------
 import { Link } from 'react-router-dom'
-import {
-    Alert,
-    Container,
-    Row,
-    Col,
-    FormControl,
-    Badge,
-    Button,
-    ToggleButton
-} from 'react-bootstrap'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { TooltipElement, HowTo } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
 
 // ---------------------------
 //  Module Internal Dependencies
@@ -102,7 +91,7 @@ export const HowToContainer = ({
         })
     }
 
-    let pathBreadcrumElements = parsedUrl.categoryNames
+    const pathBreadcrumElements = parsedUrl.categoryNames
     if (parsedUrl.selectedHowtoName) {
         pathBreadcrumElements.push(parsedUrl.selectedHowtoName)
     }
@@ -169,16 +158,11 @@ export const HowToContainer = ({
             )}
 
             {searchResult === null && parsedUrl.howToFoundFlag ? (
-                <Row>
-                    <Col lg='12'>
-                        <ReactMarkdown
-                            source={
-                                parsedUrl.parsedContent.selectedHowto
-                                    .markdownContent
-                            }
-                        />
-                    </Col>
-                </Row>
+                <ReactMarkdown
+                    source={
+                        parsedUrl.parsedContent.selectedHowto.markdownContent
+                    }
+                />
             ) : (
                 <HowTo.childs.FileManager
                     viewMode={initialViewMode}

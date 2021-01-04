@@ -11,7 +11,6 @@ export interface TooltipElementProps {
     tooltipElement: React.ReactElement | string
     children: React.ReactElement
 }
-
 export const TooltipElement = ({
     placement,
     tooltipElement,
