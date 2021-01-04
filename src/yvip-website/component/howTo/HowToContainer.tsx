@@ -11,7 +11,8 @@ import {
     Col,
     FormControl,
     Badge,
-    Button
+    Button,
+    ToggleButton
 } from 'react-bootstrap'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -124,31 +125,14 @@ export const HowToContainer = ({
                 </Col>
                 <Col md='2' sm='3' className='mb-2 mb-sm-0'>
                     <div className='d-flex bd-highlight mb-3'>
-                        <div className='ml-auto mr-4'>
-                            <TooltipElement
-                                placement='bottom'
-                                tooltipElement={
-                                    <>
-                                        List favorited contents <br /> (not
-                                        supported yet)
-                                    </>
-                                }
-                            >
-                                <span className='d-inline-block'>
-                                    <Button
-                                        variant='secondary'
-                                        disabled
-                                        style={{ pointerEvents: 'none' }}
-                                    >
-                                        <FontAwesomeIcon icon={faStar} />
-                                    </Button>
-                                </span>
-                            </TooltipElement>
-                        </div>
-                        <HowTo.childs.ViewModeChanger
-                            viewMode={initialViewMode}
-                            events={events}
-                        />
+                        <div className='ml-auto mr-4'></div>
+
+                        {!parsedUrl.howtoSelectedFlag && (
+                            <HowTo.childs.ViewModeChanger
+                                viewMode={initialViewMode}
+                                events={events}
+                            />
+                        )}
                     </div>
                 </Col>
                 <Col md='3' sm='9'>
@@ -185,11 +169,16 @@ export const HowToContainer = ({
             )}
 
             {searchResult === null && parsedUrl.howToFoundFlag ? (
-                <ReactMarkdown
-                    source={
-                        parsedUrl.parsedContent.selectedHowto.markdownContent
-                    }
-                />
+                <Row>
+                    <Col lg='12'>
+                        <ReactMarkdown
+                            source={
+                                parsedUrl.parsedContent.selectedHowto
+                                    .markdownContent
+                            }
+                        />
+                    </Col>
+                </Row>
             ) : (
                 <HowTo.childs.FileManager
                     viewMode={initialViewMode}
