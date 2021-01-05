@@ -1,1 +1,1 @@
-export type HowToEvent = 'viewModeToggleEventHandler';
+export type HowToEvent = 'viewModeToggleEventHandler'

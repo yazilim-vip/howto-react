@@ -1,21 +1,9 @@
 import React, { useState } from 'react'
-
-// ---------------------------
-//  External Dependencies.
-// ---------------------------
 import { Link } from 'react-router-dom'
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
-
-// ---------------------------
-//  Project Dependencies
-// ---------------------------
 import { HowTo } from 'yvip-website/component'
-
-// ---------------------------
-//  Module Internal Dependencies
-// ---------------------------
-import 'yvip-website/component/howTo/HowToContainer.scss'
 import ReactMarkdown from 'react-markdown'
+import 'yvip-website/component/howTo/HowToContainer.scss'
 
 export interface HowToContainerProps {
     rootCategory: HowTo.models.Category
