@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
@@ -102,7 +102,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
         <div>
             <Row>
                 <Col md="7">
-                    <PathBreadcrumb items={pathBreadcrumElements} />
+                    <PathBreadcrumb items={pathBreadcrumElements} events={events} />
                     {searchResult !== null && (
                         <div className="search-result-div">
                             <span className="mr-3">Search Result for :</span>
@@ -149,6 +149,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                 <ReactMarkdown source={parsedUrl?.parsedContent?.selectedHowto?.markdownContent} />
             ) : (
                 <FileManager
+                    events={events}
                     viewMode={initialViewMode}
                     categoryList={searchResult ? searchResult.categoryHits : getFileMagnerCategoryItemList()}
                     howToList={searchResult ? searchResult.howtoHits : getFileMagnerHowToItemList()}

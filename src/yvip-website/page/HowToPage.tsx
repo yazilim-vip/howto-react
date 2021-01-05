@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { PageLayout } from 'yvip-website/component/PageLayout'
 import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from 'yvip-website/howto-library'
 import { createToggleAction } from 'yvip-website/redux/actions'
+import { history } from 'yvip-website/redux'
 import { Firebase } from 'yvip-website/util'
 
 interface HowToPageProps {
@@ -85,6 +86,10 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
                 events={{
                     viewModeToggle: () => {
                         createToggleAction()
+                    },
+                    itemSelected: (type, link) => {
+                        history.push(link)
+                        console.log(link)
                     }
                 }}
             />
