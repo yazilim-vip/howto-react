@@ -23,7 +23,8 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import 'yvip-website/App.scss'
 
 // Pages
-import { HowToPage, NotFound } from 'yvip-website/page'
+import { HowToPage } from 'yvip-website/page/HowToPage'
+import { NotFound } from 'yvip-website/page/notFound/NotFound'
 
 import { history } from 'yvip-website/redux'
 
