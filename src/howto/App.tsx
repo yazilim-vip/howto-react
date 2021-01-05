@@ -7,12 +7,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { ConnectedRouter } from 'connected-react-router'
 import firebase from 'firebase/app'
 import 'firebase/database'
-import { Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { HowToPage } from 'howto/HowToPage'
 import { history } from 'howto/redux'
-import 'howto/App.scss'
 
 // Firabase
 const config = {
@@ -26,17 +25,25 @@ library.add(fab)
 library.add(fas)
 library.add(far)
 
+export const styles = {
+    main: {
+        backgroundColor: '#e9ebf0'
+    }
+}
+
 const App: FC = () => (
     <ConnectedRouter history={history}>
         {/* BODY */}
-        <main className="py-4">
+        <main className="py-4" style={styles.main}>
             <Container fluid>
                 <Row>
-                    <Switch>
-                        <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
-                        <Route exact path="/howto*" component={HowToPage} />
-                        <Redirect to="/howto" />
-                    </Switch>
+                    <Col lg="12">
+                        <Switch>
+                            <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
+                            <Route exact path="/howto*" component={HowToPage} />
+                            <Redirect to="/howto" />
+                        </Switch>
+                    </Col>
                 </Row>
             </Container>
         </main>
