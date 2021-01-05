@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
+import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from '@yazilim-vip/howto-library'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import { HowTo } from 'yvip-website/component'
-import { FileManagerViewMode } from 'yvip-website/component/howTo/types'
 import { PageLayout } from 'yvip-website/component/PageLayout'
 import { createToggleAction } from 'yvip-website/redux/actions'
 import { Firebase } from 'yvip-website/util'
@@ -16,7 +15,7 @@ interface HowToPageProps {
 }
 
 const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowToPageProps) => {
-    const [howToData, setHowToData] = useState<HowTo.models.Category | null>(null)
+    const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -36,7 +35,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
                     if (snapshot.exists()) {
                         const val = snapshot.val()
                         const data = JSON.parse(val)
-                        setHowToData(HowTo.utils.json2CategoryMapper(data))
+                        setHowToData(json2CategoryMapper(data))
                         setLoadedFlag(true)
                         setErrorFlag(false)
                     } else {
@@ -78,7 +77,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
 
     return (
         <PageLayout>
-            <HowTo.HowToContainer
+            <HowToContainer
                 key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}
                 requestedPath={requestedPath}
