@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
+import { Reducer } from 'redux'
+
 import {
     HOWTO_VIEW_MODE_GRID_VIEW,
     HOWTO_VIEW_MODE_LIST_VIEW,
     HOWTO_DEFAULT_VIEW_MODE
-} from '@yazilim-vip/howto-library'
-import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
-import { Reducer } from 'redux'
-
+} from 'yvip-website/howto-library'
 import { HowToActions, TOGGLE_FM_VIEW_MODE } from 'yvip-website/redux'
 
 export const howToReducer = (state: any = [], action: HowToActions): Reducer => {

@@ -145,7 +145,6 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                     <Link to={parsedUrl.folderPath}>Go to {selectedCategory?.name} category</Link>
                 </Alert>
             )}
-
             {!searchResult && parsedUrl.howToFoundFlag ? (
                 <ReactMarkdown source={parsedUrl?.parsedContent?.selectedHowto?.markdownContent} />
             ) : (
