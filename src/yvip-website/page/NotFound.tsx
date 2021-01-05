@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { PageLayout } from 'yvip-website/component/PageLayout'
 
-import 'yvip-website/page/notFound/NotFound.scss'
+import 'yvip-website/page/NotFound.scss'
 
 export const NotFound: FC = () => (
     <PageLayout>

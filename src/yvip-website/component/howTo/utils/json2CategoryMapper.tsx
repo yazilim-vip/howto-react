@@ -1,27 +1,29 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HowTo } from 'yvip-website/component'
 
 export const json2CategoryMapper = (mockData: any): HowTo.models.Category => {
     const categoryObj = JSON.parse(JSON.stringify(mockData))
 
-    const category = new HowTo.models.Category()
-    category.name = categoryObj.name
-
-    const subCategoryList = categoryObj.subCategoryList
-    const howtoList = categoryObj.howtoList
-
-    Object.keys(subCategoryList).forEach((sc: any) => {
-        category.addSubCategory(json2CategoryMapper(subCategoryList[sc]))
+    const objSubCategoryList = categoryObj.subCategoryList
+    const subCategoryList: { [s: string]: HowTo.models.Category } = {}
+    Object.keys(objSubCategoryList).forEach((sc: any) => {
+        const subCategory = json2CategoryMapper(objSubCategoryList[sc])
+        subCategoryList[subCategory.name] = subCategory
     })
 
-    Object.keys(howtoList).forEach((ht: any) => {
-        const howto = new HowTo.models.HowTo()
-        howto.categoryList = howtoList[ht].categoryList
-        howto.label = howtoList[ht].label
-        howto.filePath = howtoList[ht].filePath
-        howto.markdownContent = howtoList[ht].markdownContent
-        category.addHowTo(howto)
+    const objHowToList = categoryObj.howtoList
+    const howtoList: { [s: string]: HowTo.models.HowTo } = {}
+    Object.keys(objHowToList).forEach((ht: any) => {
+        const howTo: HowTo.models.HowTo = {
+            categoryList: objHowToList[ht].categoryList,
+            label: objHowToList[ht].label,
+            filePath: objHowToList[ht].filePath,
+            markdownContent: objHowToList[ht].markdownContent
+        }
+        howtoList[howTo.label] = howTo
     })
-    return category
+    return {
+        name: categoryObj.name,
+        subCategoryList,
+        howtoList
+    }
 }

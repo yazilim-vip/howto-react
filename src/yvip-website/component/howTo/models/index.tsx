@@ -1,5 +1,5 @@
-export { Category } from 'yvip-website/component/howTo/models/Category'
-export { HowTo } from 'yvip-website/component/howTo/models/HowTo'
+export type { HowTo } from 'yvip-website/component/howTo/models/HowTo'
+export type { Category } from 'yvip-website/component/howTo/models/Category'
 export type { ParsedContent } from 'yvip-website/component/howTo/models/ParsedContent'
 export type { ParsedUrl } from 'yvip-website/component/howTo/models/ParsedUrl'
 export type { HowToItem } from 'yvip-website/component/howTo/models/HowToItem'
