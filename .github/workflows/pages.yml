@@ -12,8 +12,8 @@ jobs:
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
       - name: ReactJS Build
         run: |
-          npm install
-          npm run build
+          yarn install
+          yarn build
           echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
         env:
