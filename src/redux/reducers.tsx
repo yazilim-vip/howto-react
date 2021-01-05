@@ -29,7 +29,6 @@ export const howToReducer = (state: any = [], action: HowToActions): Reducer => 
 export const locationReducer = (state: any = [], action: LocationChangeAction): Reducer => {
     switch (action.type) {
         case LOCATION_CHANGE:
-            console.log('LOCATION', action.payload)
             return {
                 ...state,
                 requestedPath: action.payload.location.pathname
