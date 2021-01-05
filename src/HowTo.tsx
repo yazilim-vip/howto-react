@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 
 // eslint-disable-next-line import/default
 import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from '@yazilim-vip/react-howto'
+import { Firebase } from 'App'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import { Firebase } from 'howto/App'
-import { history } from 'howto/redux'
-import { createToggleAction } from 'howto/redux/actions'
+import { createToggleAction } from './redux/actions'
+import { history } from './redux/configureStore'
 
-interface HowToPageProps {
+interface HowToProps {
     requestedPath: string
     fileManagerViewMode: FileManagerViewMode
     createToggleAction: () => void
 }
 
-const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowToPageProps) => {
+const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowToProps) => {
     // states
     const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
@@ -95,4 +95,4 @@ const mapStateToProps = (state: { howtoReducer: any; locationReducer: any }) => 
 }
 
 const mapDispatchToProps = { createToggleAction }
-export const HowToPage = connect(mapStateToProps, mapDispatchToProps)(_HowToPage)
+export const HowTo = connect(mapStateToProps, mapDispatchToProps)(_HowTo)

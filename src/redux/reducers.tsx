@@ -3,7 +3,7 @@ import { HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW, HOWTO_DEFAULT_VIE
 import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
 import { Reducer } from 'redux'
 
-import { HowToActions, TOGGLE_FM_VIEW_MODE } from 'howto/redux'
+import { HowToActions, TOGGLE_FM_VIEW_MODE } from './types'
 
 export const howToReducer = (state: any = [], action: HowToActions): Reducer => {
     switch (action.type) {
