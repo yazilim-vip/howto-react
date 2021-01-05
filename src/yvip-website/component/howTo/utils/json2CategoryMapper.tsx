@@ -1,8 +1,6 @@
 import { HowTo } from 'yvip-website/component'
 
-export const json2CategoryMapper = (
-    mockData: any
-): HowTo.models.Category => {
+export const json2CategoryMapper = (mockData: any): HowTo.models.Category => {
     const categoryObj = JSON.parse(JSON.stringify(mockData))
 
     const category = new HowTo.models.Category()

@@ -41,15 +41,9 @@ export const parsePathAndSetContent = (
     const selectedCategoryName = categoryNames[categoryNames.length - 1]
     const rootCategorySelectedFlag: boolean = path === '/howto'
     const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
-    const selectedHowtoName = howtoSelectedFlag
-        ? categoryNames.pop()
-        : undefined
+    const selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : undefined
 
-    const parsedContent = setContent(
-        rootCategory,
-        categoryNames,
-        selectedHowtoName
-    )
+    const parsedContent = setContent(rootCategory, categoryNames, selectedHowtoName)
 
     const categoryFoundFlag = !_.isUndefined(parsedContent?.selectedCategory)
     const howToFoundFlag = !_.isUndefined(parsedContent?.selectedHowto)
@@ -84,10 +78,7 @@ const setContent = (
         howtoHits: undefined
     }
 
-    if (
-        selectedHowtoName &&
-        selectedCategory?.howtoList.hasOwnProperty(selectedHowtoName)
-    ) {
+    if (selectedHowtoName && selectedCategory?.howtoList.hasOwnProperty(selectedHowtoName)) {
         result.selectedHowto = selectedCategory.howtoList[selectedHowtoName]
     }
     return result

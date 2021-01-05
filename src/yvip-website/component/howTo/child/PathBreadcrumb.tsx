@@ -32,11 +32,7 @@ export const PathBreadcrumb = ({ items }: PathBreadcrumbProps) => {
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item
-                key='root'
-                linkAs={Link}
-                linkProps={{ to: '/howto', className: 'link' }}
-            >
+            <Breadcrumb.Item key="root" linkAs={Link} linkProps={{ to: '/howto', className: 'link' }}>
                 <span>
                     <FontAwesomeIcon icon={faHome} />
                 </span>

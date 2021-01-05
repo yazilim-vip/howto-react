@@ -9,7 +9,7 @@ export const PageLayout = (props: any) => {
     return (
         <Col md={props.span} style={{ height: '100%' }}>
             <Row>
-                <Col md='12'>{props.children}</Col>
+                <Col md="12">{props.children}</Col>
             </Row>
         </Col>
     )

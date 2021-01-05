@@ -41,11 +41,7 @@ export function configureStore(preloadedState = undefined) {
     const persistedRootReducer = createRootReducer(history)
 
     // Store & Persistor
-    const store = createStore(
-        persistedRootReducer,
-        preloadedState,
-        composedEnhancers
-    )
+    const store = createStore(persistedRootReducer, preloadedState, composedEnhancers)
 
     const persistor = persistStore(store)
 

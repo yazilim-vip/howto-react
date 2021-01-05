@@ -13,14 +13,8 @@ import { HowTo, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
 import { createToggleAction } from 'yvip-website/redux/actions'
 
-const _HowToPage = ({
-    requestedPath,
-    fileManagerViewMode,
-    createToggleAction
-}: any) => {
-    const [howToData, setHowToData] = useState<HowTo.models.Category | null>(
-        null
-    )
+const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: any) => {
+    const [howToData, setHowToData] = useState<HowTo.models.Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
@@ -60,20 +54,20 @@ const _HowToPage = ({
     const renderInfoPage = (content: any) => {
         return (
             <PageLayout>
-                <div className='row h-100 text-center'>
-                    <div className='col-sm-12 my-auto'>{content}</div>
+                <div className="row h-100 text-center">
+                    <div className="col-sm-12 my-auto">{content}</div>
                 </div>
             </PageLayout>
         )
     }
 
     if (!loadedFlag) {
-        return renderInfoPage(<Spinner animation='border' />)
+        return renderInfoPage(<Spinner animation="border" />)
     }
 
     if (!howToData || errorFlag) {
         return renderInfoPage(
-            <Alert key={1} variant='danger'>
+            <Alert key={1} variant="danger">
                 {errorMessage}
             </Alert>
         )
@@ -96,10 +90,7 @@ const _HowToPage = ({
     )
 }
 
-const mapStateToProps = (state: {
-    howtoReducer: any
-    locationReducer: any
-}) => {
+const mapStateToProps = (state: { howtoReducer: any; locationReducer: any }) => {
     return {
         fileManagerViewMode: state.howtoReducer.fileManagerViewMode,
         requestedPath: state.locationReducer.requestedPath
@@ -107,7 +98,4 @@ const mapStateToProps = (state: {
 }
 
 const mapDispatchToProps = { createToggleAction }
-export const HowToPage = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(_HowToPage)
+export const HowToPage = connect(mapStateToProps, mapDispatchToProps)(_HowToPage)

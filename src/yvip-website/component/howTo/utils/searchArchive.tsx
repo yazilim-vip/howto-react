@@ -1,9 +1,6 @@
 import { HowTo } from 'yvip-website/component'
 
-export const searchArchive = (
-    searchIndex: HowTo.models.HowToItem[],
-    query: string
-): HowTo.models.SearchResult => {
+export const searchArchive = (searchIndex: HowTo.models.HowToItem[], query: string): HowTo.models.SearchResult => {
     if (!query) {
         return {
             query: '',

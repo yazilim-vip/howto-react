@@ -12,30 +12,19 @@ export interface HowToContainerProps {
     events: Record<HowTo.types.HowToEvent, (...args: any[]) => void>
 }
 
-export const HowToContainer = ({
-    rootCategory,
-    requestedPath,
-    viewMode,
-    events
-}: HowToContainerProps) => {
+export const HowToContainer = ({ rootCategory, requestedPath, viewMode, events }: HowToContainerProps) => {
     // States
-    const [
-        searchResult,
-        setSearchResult
-    ] = useState<HowTo.models.SearchResult | null>(null)
+    const [searchResult, setSearchResult] = useState<HowTo.models.SearchResult | null>(null)
 
     // Constants
     const searchIndex = HowTo.utils.createSearchIndex(rootCategory)
     const initialViewMode = viewMode || HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
-    const parsedUrl = HowTo.utils.parsePathAndSetContent(
-        rootCategory,
-        requestedPath
-    )
+    const parsedUrl = HowTo.utils.parsePathAndSetContent(rootCategory, requestedPath)
 
     // Helper Methdos
     const showError = (errMsg: string | JSX.Element) => (
         <Container>
-            <Alert key={1} variant='danger'>
+            <Alert key={1} variant="danger">
                 {errMsg}
             </Alert>
         </Container>
@@ -48,7 +37,7 @@ export const HowToContainer = ({
                 Category <b>{beutifiedPath + ' '}</b>
                 not found in path.
                 <br />
-                <Link to='/howto'>Go to root directory</Link>
+                <Link to="/howto">Go to root directory</Link>
             </>
         )
     }
@@ -93,44 +82,36 @@ export const HowToContainer = ({
     return (
         <div>
             <Row>
-                <Col md='7'>
-                    <HowTo.childs.PathBreadcrumb
-                        items={pathBreadcrumElements}
-                    />
+                <Col md="7">
+                    <HowTo.childs.PathBreadcrumb items={pathBreadcrumElements} />
                     {searchResult !== null && (
-                        <div className='search-result-div'>
-                            <span className='mr-3'>Search Result for :</span>
-                            <Badge pill variant='dark'>
+                        <div className="search-result-div">
+                            <span className="mr-3">Search Result for :</span>
+                            <Badge pill variant="dark">
                                 {searchResult.query}
                             </Badge>
                         </div>
                     )}
                 </Col>
-                <Col md='2' sm='3' className='mb-2 mb-sm-0'>
-                    <div className='d-flex bd-highlight mb-3'>
-                        <div className='ml-auto mr-4'></div>
+                <Col md="2" sm="3" className="mb-2 mb-sm-0">
+                    <div className="d-flex bd-highlight mb-3">
+                        <div className="ml-auto mr-4"></div>
 
                         {!parsedUrl.howtoSelectedFlag && (
-                            <HowTo.childs.ViewModeChanger
-                                viewMode={initialViewMode}
-                                events={events}
-                            />
+                            <HowTo.childs.ViewModeChanger viewMode={initialViewMode} events={events} />
                         )}
                     </div>
                 </Col>
-                <Col md='3' sm='9'>
+                <Col md="3" sm="9">
                     <FormControl
-                        type='search'
-                        placeholder='Search...'
-                        aria-label='Search'
+                        type="search"
+                        placeholder="Search..."
+                        aria-label="Search"
                         value={searchResult ? searchResult.query : ''}
                         onChange={(event) => {
                             const searchQuery = event.target.value
                             if (searchQuery) {
-                                const searchResult = HowTo.utils.searchArchive(
-                                    searchIndex,
-                                    searchQuery
-                                )
+                                const searchResult = HowTo.utils.searchArchive(searchIndex, searchQuery)
                                 setSearchResult(searchResult)
                             } else {
                                 setSearchResult(null)
@@ -140,38 +121,21 @@ export const HowToContainer = ({
                 </Col>
             </Row>
             <hr />
-            {!searchResult &&
-                parsedUrl.howtoSelectedFlag &&
-                !parsedUrl.howToFoundFlag && (
-                    <Alert key={1} variant='danger'>
-                        <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
-                        <b>{selectedCategory?.name}</b> folder.
-                        <br />
-                        <Link to={parsedUrl.folderPath}>
-                            Go to {selectedCategory?.name} category
-                        </Link>
-                    </Alert>
-                )}
+            {!searchResult && parsedUrl.howtoSelectedFlag && !parsedUrl.howToFoundFlag && (
+                <Alert key={1} variant="danger">
+                    <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in <b>{selectedCategory?.name}</b> folder.
+                    <br />
+                    <Link to={parsedUrl.folderPath}>Go to {selectedCategory?.name} category</Link>
+                </Alert>
+            )}
 
             {!searchResult && parsedUrl.howToFoundFlag ? (
-                <ReactMarkdown
-                    source={
-                        parsedUrl?.parsedContent?.selectedHowto?.markdownContent
-                    }
-                />
+                <ReactMarkdown source={parsedUrl?.parsedContent?.selectedHowto?.markdownContent} />
             ) : (
                 <HowTo.childs.FileManager
                     viewMode={initialViewMode}
-                    categoryList={
-                        searchResult
-                            ? searchResult.categoryHits
-                            : getFileMagnerCategoryItemList()
-                    }
-                    howToList={
-                        searchResult
-                            ? searchResult.howtoHits
-                            : getFileMagnerHowToItemList()
-                    }
+                    categoryList={searchResult ? searchResult.categoryHits : getFileMagnerCategoryItemList()}
+                    howToList={searchResult ? searchResult.howtoHits : getFileMagnerHowToItemList()}
                 />
             )}
         </div>

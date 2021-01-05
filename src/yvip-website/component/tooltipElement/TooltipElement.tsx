@@ -7,16 +7,9 @@ export interface TooltipElementProps {
     tooltipElement: React.ReactElement | string
     children: React.ReactElement
 }
-export const TooltipElement = ({
-    placement,
-    tooltipElement,
-    children
-}: TooltipElementProps) => {
+export const TooltipElement = ({ placement, tooltipElement, children }: TooltipElementProps) => {
     return (
-        <OverlayTrigger
-            placement={placement}
-            overlay={<Tooltip id='tooltip-disabled'>{tooltipElement}</Tooltip>}
-        >
+        <OverlayTrigger placement={placement} overlay={<Tooltip id="tooltip-disabled">{tooltipElement}</Tooltip>}>
             {children}
         </OverlayTrigger>
     )

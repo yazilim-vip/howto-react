@@ -34,18 +34,15 @@ library.add(far)
 const App = () => (
     <ConnectedRouter history={history}>
         {/* BODY */}
-        <main className='py-4'>
-            <Col md='12'>
+        <main className="py-4">
+            <Col md="12">
                 <Row>
                     <Switch>
-                        <Redirect
-                            from='/:url*(/+)'
-                            to={history.location.pathname.slice(0, -1)}
-                        />
+                        <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
                         {/* <Redirect from='/' to='/howto' /> */}
-                        <Route exact path='/howto*' component={HowToPage} />
-                        <Route path='/404' component={NotFound} />
-                        <Redirect to='/404' />
+                        <Route exact path="/howto*" component={HowToPage} />
+                        <Route path="/404" component={NotFound} />
+                        <Redirect to="/404" />
                     </Switch>
                 </Row>
             </Col>
