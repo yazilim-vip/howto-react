@@ -24,7 +24,8 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -51,7 +52,6 @@
     "@types/react-redux": "^7.1.11",
     "@types/underscore": "^1.10.24",
     "bootstrap": "^4.5.3",
-    "connected-react-router": "^6.8.0",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "firebase": "^7.23.0",
