@@ -9,7 +9,7 @@ import { Col, Row } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { HowToPage } from 'yvip-website/page/HowToPage'
-import { NotFound } from 'yvip-website/page/notFound/NotFound'
+import { NotFound } from 'yvip-website/page/NotFound'
 import { history } from 'yvip-website/redux'
 import 'yvip-website/App.scss'
 
