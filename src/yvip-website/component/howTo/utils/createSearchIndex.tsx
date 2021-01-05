@@ -1,10 +1,14 @@
 import { HowTo } from 'yvip-website/component'
 
-export const createSearchIndex = (rootCategory: any): HowTo.models.HowToItem[] => {
+export const createSearchIndex = (rootCategory: HowTo.models.Category): HowTo.models.HowToItem[] => {
     return indexContent(rootCategory, [], '/howto')
 }
 
-const indexContent = (data: any, arr: HowTo.models.HowToItem[], path: string): HowTo.models.HowToItem[] => {
+const indexContent = (
+    data: HowTo.models.Category,
+    arr: HowTo.models.HowToItem[],
+    path: string
+): HowTo.models.HowToItem[] => {
     const howtoList = data.howtoList
     const subCategoryList = data.subCategoryList
 

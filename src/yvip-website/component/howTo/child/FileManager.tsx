@@ -7,12 +7,6 @@ import { Link } from 'react-router-dom'
 
 import { HowTo } from 'yvip-website/component'
 import { TooltipElement } from 'yvip-website/component/TooltipElement'
-
-export interface FileManagerItemType extends HowTo.types.HowToComponentProps {
-    name: string
-    path: string
-}
-
 export interface FileManagerProps extends HowTo.types.HowToComponentProps {
     viewMode: HowTo.types.FileManagerViewMode
     categoryList: Array<HowTo.models.HowToItem> | null
@@ -20,13 +14,13 @@ export interface FileManagerProps extends HowTo.types.HowToComponentProps {
 }
 
 export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howToList }: FileManagerProps) => {
-    const renderItems = (items: Array<HowTo.models.HowToItem> | null) => {
+    const renderItems = (items: Array<HowTo.models.HowToItem>) => {
         if (!items) {
             return null
         }
 
-        return Object.keys(items).map((key: any) => {
-            const howToItem = items[key]
+        return Object.keys(items).map((value: string, index: number) => {
+            const howToItem = items[index]
             const howToItemType = howToItem.type
 
             const icon = howToItemType === HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY ? faFolder : faFileAlt
@@ -61,8 +55,8 @@ export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howT
         })
     }
 
-    const categoryItems = renderItems(categoryList)
-    const howToItems = renderItems(howToList)
+    const categoryItems = (categoryList && renderItems(categoryList)) || undefined
+    const howToItems = (howToList && renderItems(howToList)) || undefined
     return (
         <Container fluid>
             {viewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW && (
