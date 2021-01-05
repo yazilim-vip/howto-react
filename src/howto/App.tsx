@@ -10,9 +10,9 @@ import 'firebase/database'
 import { Container, Row } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { HowToPage } from 'yvip-website/HowToPage'
-import { history } from 'yvip-website/redux'
-import 'yvip-website/App.scss'
+import { HowToPage } from 'howto/HowToPage'
+import { history } from 'howto/redux'
+import 'howto/App.scss'
 
 // Firabase
 const config = {

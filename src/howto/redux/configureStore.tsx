@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
-import { howToReducer, locationReducer } from 'yvip-website/redux'
+import { howToReducer, locationReducer } from 'howto/redux'
 
 const persistConfig = {
     key: 'root',

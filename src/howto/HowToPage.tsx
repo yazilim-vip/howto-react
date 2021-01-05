@@ -5,9 +5,9 @@ import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } fr
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import { Firebase } from 'yvip-website/App'
-import { history } from 'yvip-website/redux'
-import { createToggleAction } from 'yvip-website/redux/actions'
+import { Firebase } from 'howto/App'
+import { history } from 'howto/redux'
+import { createToggleAction } from 'howto/redux/actions'
 
 interface HowToPageProps {
     requestedPath: string

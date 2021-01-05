@@ -7,8 +7,8 @@ import WebFont from 'webfontloader'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 
-import App from 'yvip-website/App'
-import { configureStore } from 'yvip-website/redux'
+import App from 'howto/App'
+import { configureStore } from 'howto/redux'
 
 const { store, persistor } = configureStore()
 
