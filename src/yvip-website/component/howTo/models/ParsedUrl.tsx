@@ -4,11 +4,10 @@ export interface ParsedUrl {
     folderPath: string
     categoryNames: string[]
     selectedCategoryName: string
-    selectedHowtoName: string | null | undefined
+    selectedHowtoName: string | undefined
     howtoSelectedFlag: boolean
     rootCategorySelectedFlag: boolean
-    parsedContent: HowTo.models.ParsedContent
+    parsedContent: HowTo.models.ParsedContent | undefined
     categoryFoundFlag: boolean
     howToFoundFlag: boolean
-    howToNotFoundFlag: boolean
 }

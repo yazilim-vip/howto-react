@@ -1,4 +1,5 @@
 import { HowTo } from 'yvip-website/component'
+import _ from 'underscore'
 
 /**
  *
@@ -32,15 +33,17 @@ import { HowTo } from 'yvip-website/component'
  * selectedHowtoName = "eclipse-shortcuts_configuration.howto"
  */
 export const parsePathAndSetContent = (
-    rootCategory: any,
+    rootCategory: HowTo.models.Category | undefined,
     path: string
 ): HowTo.models.ParsedUrl => {
-    const rootCategorySelectedFlag: boolean = path === '/howto'
     const categoryNames = path.slice(1).split('/')
-    const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
-    const selectedHowtoName = howtoSelectedFlag ? categoryNames.pop() : null
-    const selectedCategoryName = categoryNames[categoryNames.length - 1]
     const folderPath = '/' + categoryNames.join('/')
+    const selectedCategoryName = categoryNames[categoryNames.length - 1]
+    const rootCategorySelectedFlag: boolean = path === '/howto'
+    const howtoSelectedFlag = path.endsWith('.howto') || path.endsWith('.md')
+    const selectedHowtoName = howtoSelectedFlag
+        ? categoryNames.pop()
+        : undefined
 
     const parsedContent = setContent(
         rootCategory,
@@ -48,63 +51,44 @@ export const parsePathAndSetContent = (
         selectedHowtoName
     )
 
-    const categoryFoundFlag = parsedContent.selectedCategory && true
-    const howToFoundFlag =
-        howtoSelectedFlag && parsedContent.selectedHowto && true
-    const howToNotFoundFlag =
-        howtoSelectedFlag && !parsedContent.selectedHowto && true
-
+    const categoryFoundFlag = _.isUndefined(parsedContent?.selectedCategory)
+    const howToFoundFlag = _.isUndefined(parsedContent?.selectedHowto)
     return {
-        folderPath: folderPath,
-        categoryNames: categoryNames,
-        selectedCategoryName: selectedCategoryName,
-        selectedHowtoName: selectedHowtoName,
-        howtoSelectedFlag: howtoSelectedFlag,
-        rootCategorySelectedFlag: rootCategorySelectedFlag,
-        parsedContent: parsedContent,
-        categoryFoundFlag: categoryFoundFlag,
-        howToFoundFlag: howToFoundFlag,
-        howToNotFoundFlag: howToNotFoundFlag
+        categoryNames,
+        folderPath,
+        selectedCategoryName,
+        rootCategorySelectedFlag,
+        howtoSelectedFlag,
+        selectedHowtoName,
+        parsedContent,
+        categoryFoundFlag,
+        howToFoundFlag
     }
 }
 
 const setContent = (
-    rootCategory: any,
+    rootCategory: HowTo.models.Category | undefined,
     categoryNames: string[],
-    selectedHowtoName: string | null | undefined
-): HowTo.models.ParsedContent => {
-    // set selectedCategory
-    let tmpCategory = rootCategory
-
+    selectedHowtoName?: string | undefined
+): HowTo.models.ParsedContent | undefined => {
+    let selectedCategory = rootCategory
     categoryNames.shift() // shift first category (howto), because rootCategory is not wrapped with "howto" key
     for (const cat of categoryNames) {
-        if (!tmpCategory.subCategoryList[cat]) {
-            tmpCategory = null
-            break /// category not exists
-        }
-
-        tmpCategory = tmpCategory.subCategoryList[cat]
+        selectedCategory = selectedCategory?.subCategoryList[cat]
     }
 
-    const selectedCategory = tmpCategory
-
-    // set selectedHowto
-    let selectedHowto = null
+    const result: HowTo.models.ParsedContent = {
+        selectedCategory,
+        selectedHowto: undefined,
+        categoryHits: undefined,
+        howtoHits: undefined
+    }
 
     if (
         selectedHowtoName &&
-        selectedCategory &&
-        //! eslint gives error
-        // eslint-disable-next-line no-prototype-builtins
-        selectedCategory.howtoList.hasOwnProperty(selectedHowtoName)
+        selectedCategory?.howtoList.hasOwnProperty(selectedHowtoName)
     ) {
-        selectedHowto = selectedCategory.howtoList[selectedHowtoName]
+        result.selectedHowto = selectedCategory.howtoList[selectedHowtoName]
     }
-
-    return {
-        selectedCategory: selectedCategory,
-        selectedHowto: selectedHowto,
-        categoryHits: null,
-        howtoHits: null
-    }
+    return result
 }
