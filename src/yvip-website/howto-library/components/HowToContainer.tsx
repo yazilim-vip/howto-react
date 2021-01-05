@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 import { HOWTO_DEFAULT_VIEW_MODE, HOWTO_ITEM_TYPE_CATEGORY, HOWTO_ITEM_TYPE_HOWTO } from '../constants'
 import { Category } from '../models/Category'
-import { HowTo } from '../models/HowTo'
 import { HowToItem } from '../models/HowToItem'
 import { SearchResult } from '../models/SearchResult'
 import { HowToComponentProps, FileManagerViewMode } from '../types'
@@ -15,7 +14,6 @@ import { parsePathAndSetContent } from '../utils/parsePathAndSetContent'
 import { searchArchive } from '../utils/searchArchive'
 import { FileManager } from './FileManager'
 import { PathBreadcrumb } from './PathBreadcrumb'
-import { TooltipElement } from './TooltipElement'
 import { ViewModeChanger } from './ViewModeChanger'
 
 import './HowToContainer.css'

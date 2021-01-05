@@ -4,12 +4,7 @@ import { faFileAlt, faFolder } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 
-import {
-    HOWTO_ITEM_TYPE_CATEGORY,
-    HOWTO_ITEM_TYPE_HOWTO,
-    HOWTO_VIEW_MODE_GRID_VIEW,
-    HOWTO_VIEW_MODE_LIST_VIEW
-} from '../constants'
+import { HOWTO_ITEM_TYPE_CATEGORY, HOWTO_VIEW_MODE_GRID_VIEW, HOWTO_VIEW_MODE_LIST_VIEW } from '../constants'
 import { HowToItem } from '../models/HowToItem'
 import { FileManagerViewMode, HowToComponentProps, HowToItemType } from '../types'
 import { TooltipElement } from './TooltipElement'
