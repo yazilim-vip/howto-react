@@ -5,7 +5,7 @@ import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } fr
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import { Firebase } from 'yvip-website/Firebase'
+import { Firebase } from 'yvip-website/App'
 import { history } from 'yvip-website/redux'
 import { createToggleAction } from 'yvip-website/redux/actions'
 
@@ -16,17 +16,20 @@ interface HowToPageProps {
 }
 
 const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowToPageProps) => {
+    // states
     const [howToData, setHowToData] = useState<Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [loadedFlag, setLoadedFlag] = useState<boolean>(false)
 
+    // hooks
     useEffect(() => {
         if (!loadedFlag) {
             fetchHowtoData()
         }
     })
 
+    // methods
     const fetchHowtoData = () => {
         Firebase.database()
             .ref('howto')
@@ -54,26 +57,17 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
             )
     }
 
-    const renderInfoPage = (content: JSX.Element) => {
-        return (
-            <div className="row h-100 text-center">
-                <div className="col-sm-12 my-auto">{content}</div>
-            </div>
-        )
-    }
-
     if (!loadedFlag) {
-        return renderInfoPage(<Spinner animation="border" />)
+        return <Spinner animation="border" />
     }
 
     if (!howToData || errorFlag) {
-        return renderInfoPage(
+        return (
             <Alert key={1} variant="danger">
                 {errorMessage}
             </Alert>
         )
     }
-
     return (
         <HowToContainer
             key={`${requestedPath}-${new Date()}`}
