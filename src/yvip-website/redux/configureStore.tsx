@@ -11,7 +11,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { howToReducer } from 'yvip-website/redux'
+import { howToReducer, locationReducer } from 'yvip-website/redux'
 
 const persistConfig = {
     key: 'root',
@@ -24,7 +24,8 @@ export const history = createBrowserHistory()
 const createRootReducer = (history: History<unknown>) =>
     combineReducers({
         router: connectRouter(history),
-        howtoReducer: persistReducer(persistConfig, howToReducer)
+        howtoReducer: persistReducer(persistConfig, howToReducer),
+        locationReducer
     })
 
 export function configureStore(preloadedState = undefined) {
@@ -45,6 +46,7 @@ export function configureStore(preloadedState = undefined) {
         preloadedState,
         composedEnhancers
     )
+
     const persistor = persistStore(store)
 
     return { store, persistor }

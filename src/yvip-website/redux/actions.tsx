@@ -1,14 +1,19 @@
-const TOGGLE_FM_VIEW_MODE = 'TOGGLE_FM_VIEW_MODE'
-export const REDUX_ACTION_TYPES = {
-    TOGGLE_FM_VIEW_MODE: TOGGLE_FM_VIEW_MODE
+import { HowToActions, TOGGLE_FM_VIEW_MODE } from './types'
+
+// Generic
+export interface Action<T, P> {
+    readonly type: T
+    readonly payload: P
 }
 
-const toggleFmViewMode = (): { type: string } => {
-    return {
-        type: REDUX_ACTION_TYPES.TOGGLE_FM_VIEW_MODE
-    }
+export function createAction<T extends string, P>(
+    type: T,
+    payload: P
+): Action<T, P> {
+    return { type, payload }
 }
 
-export const REDUX_ACTION_CREATORS = {
-    toggleFmViewMode: toggleFmViewMode
+// Actions
+export const createToggleAction = (): HowToActions => {
+    return createAction(TOGGLE_FM_VIEW_MODE, undefined)
 }

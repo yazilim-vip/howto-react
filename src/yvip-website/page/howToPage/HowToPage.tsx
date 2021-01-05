@@ -11,12 +11,12 @@ import { connect } from 'react-redux'
 // ---------------------------
 import { HowTo, PageLayout } from 'yvip-website/component'
 import { Firebase } from 'yvip-website/util'
-import { REDUX_ACTION_CREATORS } from 'yvip-website/redux'
+import { createToggleAction } from 'yvip-website/redux/actions'
 
 const _HowToPage = ({
     requestedPath,
     fileManagerViewMode,
-    toggleFmViewMode
+    createToggleAction
 }: any) => {
     const [howToData, setHowToData] = useState<HowTo.models.Category | null>(
         null
@@ -88,7 +88,7 @@ const _HowToPage = ({
                 viewMode={fileManagerViewMode}
                 events={{
                     viewModeToggleEventHandler: () => {
-                        toggleFmViewMode()
+                        createToggleAction()
                     }
                 }}
             />
@@ -96,15 +96,17 @@ const _HowToPage = ({
     )
 }
 
-const mapStateToProps = (state: { howtoReducer: any }) => {
-    const howtoReducer = state.howtoReducer
+const mapStateToProps = (state: {
+    howtoReducer: any
+    locationReducer: any
+}) => {
     return {
-        fileManagerViewMode: howtoReducer.fileManagerViewMode,
-        requestedPath: howtoReducer.requestedPath
+        fileManagerViewMode: state.howtoReducer.fileManagerViewMode,
+        requestedPath: state.locationReducer.requestedPath
     }
 }
 
-const mapDispatchToProps = { ...REDUX_ACTION_CREATORS }
+const mapDispatchToProps = { createToggleAction }
 export const HowToPage = connect(
     mapStateToProps,
     mapDispatchToProps

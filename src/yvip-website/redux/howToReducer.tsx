@@ -3,22 +3,21 @@
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { LOCATION_CHANGE } from 'connected-react-router'
+import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
+import { Reducer } from 'redux'
 import { HowTo } from 'yvip-website/component'
 
 // ---------------------------
 //  Internal Dependencies
 // ---------------------------
-import { REDUX_ACTION_TYPES } from 'yvip-website/redux'
+import { HowToActions, TOGGLE_FM_VIEW_MODE } from 'yvip-website/redux'
 
-export const howToReducer = (state: any = [], action: any) => {
+export const howToReducer = (
+    state: any = [],
+    action: HowToActions
+): Reducer => {
     switch (action.type) {
-        case LOCATION_CHANGE:
-            return {
-                ...state,
-                requestedPath: action.payload.location.pathname
-            }
-        case REDUX_ACTION_TYPES.TOGGLE_FM_VIEW_MODE:
+        case TOGGLE_FM_VIEW_MODE:
             const prevViewMode =
                 state.fileManagerViewMode ||
                 HowTo.constants.HOWTO_DEFAULT_VIEW_MODE
@@ -35,6 +34,22 @@ export const howToReducer = (state: any = [], action: any) => {
             return {
                 ...state,
                 fileManagerViewMode: newViewMode
+            }
+        default:
+            return state
+    }
+}
+
+export const locationReducer = (
+    state: any = [],
+    action: LocationChangeAction
+): Reducer => {
+    switch (action.type) {
+        case LOCATION_CHANGE:
+            console.log('LOCATION', action.payload)
+            return {
+                ...state,
+                requestedPath: action.payload.location.pathname
             }
         default:
             return state
