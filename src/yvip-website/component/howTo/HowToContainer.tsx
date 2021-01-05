@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
 import { HowTo } from 'yvip-website/component'
@@ -12,7 +12,12 @@ export interface HowToContainerProps {
     events: Record<HowTo.types.HowToEvent, (...args: any[]) => void>
 }
 
-export const HowToContainer = ({ rootCategory, requestedPath, viewMode, events }: HowToContainerProps) => {
+export const HowToContainer: FC<HowToContainerProps> = ({
+    rootCategory,
+    requestedPath,
+    viewMode,
+    events
+}: HowToContainerProps) => {
     // States
     const [searchResult, setSearchResult] = useState<HowTo.models.SearchResult | null>(null)
 

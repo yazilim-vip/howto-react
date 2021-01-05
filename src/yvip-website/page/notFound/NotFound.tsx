@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 // ---------------------------
 //  Project Dependencies
@@ -10,7 +10,7 @@ import { PageLayout } from 'yvip-website/component'
 // ---------------------------
 import 'yvip-website/page/notFound/NotFound.scss'
 
-export const NotFound = () => (
+export const NotFound: FC = () => (
     <PageLayout>
         <div className="row h-100 text-center">
             <div className="col-sm-12 my-auto">
