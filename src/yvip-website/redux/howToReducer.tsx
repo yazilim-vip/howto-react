@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
 import { Reducer } from 'redux'
 

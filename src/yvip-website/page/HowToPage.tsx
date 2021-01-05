@@ -45,6 +45,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
                         setErrorMessage('Snapshot can not found on firebase.')
                     }
                 },
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (error: any) => {
                     setLoadedFlag(true)
                     setErrorFlag(true)
@@ -53,7 +54,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
             )
     }
 
-    const renderInfoPage = (content: any) => {
+    const renderInfoPage = (content: JSX.Element) => {
         return (
             <PageLayout>
                 <div className="row h-100 text-center">
@@ -92,6 +93,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
     )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapStateToProps = (state: { howtoReducer: any; locationReducer: any }) => {
     return {
         fileManagerViewMode: state.howtoReducer.fileManagerViewMode,

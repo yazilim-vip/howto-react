@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { HowTo } from 'yvip-website/component'
 
 export const json2CategoryMapper = (mockData: any): HowTo.models.Category => {
