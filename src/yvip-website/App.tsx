@@ -8,8 +8,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Container, Row } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { HowToPage } from 'yvip-website/page/HowToPage'
-import { NotFound } from 'yvip-website/page/NotFound'
+import { HowToPage } from 'yvip-website/HowToPage'
 import { history } from 'yvip-website/redux'
 import 'yvip-website/App.scss'
 
@@ -25,10 +24,8 @@ const App: FC = () => (
                 <Row>
                     <Switch>
                         <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
-                        {/* <Redirect from='/' to='/howto' /> */}
                         <Route exact path="/howto*" component={HowToPage} />
-                        <Route path="/404" component={NotFound} />
-                        <Redirect to="/404" />
+                        <Redirect to="/howto" />
                     </Switch>
                 </Row>
             </Container>
