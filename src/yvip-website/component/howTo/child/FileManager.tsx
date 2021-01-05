@@ -39,13 +39,11 @@ export const FileManager = ({
             const howToItemType = howToItem.type
 
             const icon =
-                howToItemType ===
-                HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
+                howToItemType === HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
                     ? faFolder
                     : faFileAlt
             const color =
-                howToItemType ===
-                HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
+                howToItemType === HowTo.constants.HOWTO_ITEM_TYPE_CATEGORY
                     ? '#50a4d4'
                     : '#494d52'
 
@@ -64,9 +62,7 @@ export const FileManager = ({
                         </ListGroup.Item>
                     </Link>
                 )
-            } else if (
-                viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
-            ) {
+            } else if (viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW) {
                 return (
                     <Col
                         xs={4}

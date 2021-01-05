@@ -8,7 +8,7 @@ import firebase from 'firebase/app'
 // Add the Firebase services that you want to use
 import 'firebase/database'
 
-var config = {
+const config = {
     databaseURL: 'https://yvip-howto.firebaseio.com',
     projectId: 'yvip-howto'
 }

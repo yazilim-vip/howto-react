@@ -9,8 +9,7 @@ import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
 import { TooltipElement, HowTo } from 'yvip-website/component'
 
-export interface ViewModeChangerProps
-    extends HowTo.types.HowToComponentProps {
+export interface ViewModeChangerProps extends HowTo.types.HowToComponentProps {
     viewMode: HowTo.types.FileManagerViewMode
 }
 
@@ -24,12 +23,10 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     variant='secondary'
                     name='radio'
                     value={
-                        viewMode ===
-                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
+                        viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     checked={
-                        viewMode ===
-                        HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
+                        viewMode === HowTo.constants.HOWTO_VIEW_MODE_GRID_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >
@@ -42,12 +39,10 @@ export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
                     variant='secondary'
                     name='radio'
                     value={
-                        viewMode ===
-                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
+                        viewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     checked={
-                        viewMode ===
-                        HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
+                        viewMode === HowTo.constants.HOWTO_VIEW_MODE_LIST_VIEW
                     }
                     onChange={() => viewModeToggleEventHandler()}
                 >

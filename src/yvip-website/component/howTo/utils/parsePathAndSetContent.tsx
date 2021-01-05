@@ -51,8 +51,8 @@ export const parsePathAndSetContent = (
         selectedHowtoName
     )
 
-    const categoryFoundFlag = _.isUndefined(parsedContent?.selectedCategory)
-    const howToFoundFlag = _.isUndefined(parsedContent?.selectedHowto)
+    const categoryFoundFlag = !_.isUndefined(parsedContent?.selectedCategory)
+    const howToFoundFlag = !_.isUndefined(parsedContent?.selectedHowto)
     return {
         categoryNames,
         folderPath,

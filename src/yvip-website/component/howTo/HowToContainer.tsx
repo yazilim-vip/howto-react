@@ -53,10 +53,13 @@ export const HowToContainer = ({
         )
     }
 
-    const selectedCategory = parsedUrl.parsedContent.selectedCategory
+    const selectedCategory = parsedUrl?.parsedContent?.selectedCategory
 
     //TODO: move them to util class
     const getFileMagnerCategoryItemList = (): Array<HowTo.models.HowToItem> => {
+        if (!selectedCategory) {
+            return []
+        }
         const categoryList = selectedCategory.subCategoryList
         return Object.keys(categoryList).map((catName) => {
             const category = categoryList[catName]
@@ -68,6 +71,9 @@ export const HowToContainer = ({
         })
     }
     const getFileMagnerHowToItemList = (): Array<HowTo.models.HowToItem> => {
+        if (!selectedCategory) {
+            return []
+        }
         const howToList = selectedCategory.howtoList
         return Object.keys(howToList).map((howToName) => {
             const howTo = howToList[howToName]
@@ -134,33 +140,35 @@ export const HowToContainer = ({
                 </Col>
             </Row>
             <hr />
-            {searchResult === null && parsedUrl.howToNotFoundFlag && (
-                <Alert key={1} variant='danger'>
-                    <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
-                    <b>{selectedCategory.name}</b> folder.
-                    <br />
-                    <Link to={parsedUrl.folderPath}>
-                        Go to {selectedCategory.name} category
-                    </Link>
-                </Alert>
-            )}
+            {!searchResult &&
+                parsedUrl.howtoSelectedFlag &&
+                !parsedUrl.howToFoundFlag && (
+                    <Alert key={1} variant='danger'>
+                        <b>Whopps {parsedUrl.selectedHowtoName}</b> not found in{' '}
+                        <b>{selectedCategory?.name}</b> folder.
+                        <br />
+                        <Link to={parsedUrl.folderPath}>
+                            Go to {selectedCategory?.name} category
+                        </Link>
+                    </Alert>
+                )}
 
-            {searchResult === null && parsedUrl.howToFoundFlag ? (
+            {!searchResult && parsedUrl.howToFoundFlag ? (
                 <ReactMarkdown
                     source={
-                        parsedUrl.parsedContent.selectedHowto.markdownContent
+                        parsedUrl?.parsedContent?.selectedHowto?.markdownContent
                     }
                 />
             ) : (
                 <HowTo.childs.FileManager
                     viewMode={initialViewMode}
                     categoryList={
-                        searchResult !== null
+                        searchResult
                             ? searchResult.categoryHits
                             : getFileMagnerCategoryItemList()
                     }
                     howToList={
-                        searchResult !== null
+                        searchResult
                             ? searchResult.howtoHits
                             : getFileMagnerHowToItemList()
                     }
