@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
+// eslint-disable-next-line import/default
+import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from '@yazilim-vip/react-howto'
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import { PageLayout } from 'yvip-website/component/PageLayout'
-import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from 'yvip-website/howto-library'
-import { createToggleAction } from 'yvip-website/redux/actions'
 import { history } from 'yvip-website/redux'
+import { createToggleAction } from 'yvip-website/redux/actions'
 import { Firebase } from 'yvip-website/util'
 
 interface HowToPageProps {
@@ -89,7 +90,6 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
                     },
                     itemSelected: (type, link) => {
                         history.push(link)
-                        console.log(link)
                     }
                 }}
             />
