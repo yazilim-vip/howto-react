@@ -1,5 +1,5 @@
 // ReactJS
-import React from 'react'
+import React, { FC } from 'react'
 
 // ---------------------------
 //  External Dependencies
@@ -31,7 +31,7 @@ library.add(fab)
 library.add(fas)
 library.add(far)
 
-const App = () => (
+const App: FC = () => (
     <ConnectedRouter history={history}>
         {/* BODY */}
         <main className="py-4">

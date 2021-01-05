@@ -9,7 +9,8 @@ import { connect } from 'react-redux'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { HowTo, PageLayout } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
+import { PageLayout } from 'yvip-website/component/PageLayout'
 import { Firebase } from 'yvip-website/util'
 import { createToggleAction } from 'yvip-website/redux/actions'
 

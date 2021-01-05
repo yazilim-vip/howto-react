@@ -7,7 +7,8 @@ import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
 
-import { TooltipElement, HowTo } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
+import { TooltipElement } from 'yvip-website/component/TooltipElement'
 
 export interface ViewModeChangerProps extends HowTo.types.HowToComponentProps {
     viewMode: HowTo.types.FileManagerViewMode

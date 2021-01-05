@@ -11,7 +11,8 @@ import { ListGroup, Container, Col, Row } from 'react-bootstrap'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import { TooltipElement, HowTo } from 'yvip-website/component'
+import { HowTo } from 'yvip-website/component'
+import { TooltipElement } from 'yvip-website/component/TooltipElement'
 
 export interface FileManagerItemType {
     name: string
