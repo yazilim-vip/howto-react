@@ -5,7 +5,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { ConnectedRouter } from 'connected-react-router'
-import { Col, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { HowToPage } from 'yvip-website/page/HowToPage'
@@ -21,7 +21,7 @@ const App: FC = () => (
     <ConnectedRouter history={history}>
         {/* BODY */}
         <main className="py-4">
-            <Col md="12">
+            <Container fluid>
                 <Row>
                     <Switch>
                         <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
@@ -31,7 +31,7 @@ const App: FC = () => (
                         <Redirect to="/404" />
                     </Switch>
                 </Row>
-            </Col>
+            </Container>
         </main>
     </ConnectedRouter>
 )

@@ -5,7 +5,6 @@ import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } fr
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-import { PageLayout } from 'yvip-website/component/PageLayout'
 import { history } from 'yvip-website/redux'
 import { createToggleAction } from 'yvip-website/redux/actions'
 import { Firebase } from 'yvip-website/util'
@@ -57,11 +56,9 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
 
     const renderInfoPage = (content: JSX.Element) => {
         return (
-            <PageLayout>
-                <div className="row h-100 text-center">
-                    <div className="col-sm-12 my-auto">{content}</div>
-                </div>
-            </PageLayout>
+            <div className="row h-100 text-center">
+                <div className="col-sm-12 my-auto">{content}</div>
+            </div>
         )
     }
 
@@ -78,22 +75,20 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
     }
 
     return (
-        <PageLayout>
-            <HowToContainer
-                key={`${requestedPath}-${new Date()}`}
-                rootCategory={howToData}
-                requestedPath={requestedPath}
-                viewMode={fileManagerViewMode}
-                events={{
-                    viewModeToggle: () => {
-                        createToggleAction()
-                    },
-                    itemSelected: (type, link) => {
-                        history.push(link)
-                    }
-                }}
-            />
-        </PageLayout>
+        <HowToContainer
+            key={`${requestedPath}-${new Date()}`}
+            rootCategory={howToData}
+            requestedPath={requestedPath}
+            viewMode={fileManagerViewMode}
+            events={{
+                viewModeToggle: () => {
+                    createToggleAction()
+                },
+                itemSelected: (type, link) => {
+                    history.push(link)
+                }
+            }}
+        />
     )
 }
 
