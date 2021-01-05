@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 
-// ---------------------------
-//  External Dependencies.
-// ---------------------------
 import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
-// ---------------------------
-//  Project Dependencies
-// ---------------------------
 import { HowTo } from 'yvip-website/component'
+import { FileManagerViewMode } from 'yvip-website/component/howTo/types'
 import { PageLayout } from 'yvip-website/component/PageLayout'
-import { Firebase } from 'yvip-website/util'
 import { createToggleAction } from 'yvip-website/redux/actions'
+import { Firebase } from 'yvip-website/util'
 
-const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: any) => {
+interface HowToPageProps {
+    requestedPath: string
+    fileManagerViewMode: FileManagerViewMode
+    createToggleAction: () => void
+}
+
+const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowToPageProps) => {
     const [howToData, setHowToData] = useState<HowTo.models.Category | null>(null)
     const [errorFlag, setErrorFlag] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -75,7 +76,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
     }
 
     return (
-        <PageLayout span={{ span: 12 }}>
+        <PageLayout>
             <HowTo.HowToContainer
                 key={`${requestedPath}-${new Date()}`}
                 rootCategory={howToData}

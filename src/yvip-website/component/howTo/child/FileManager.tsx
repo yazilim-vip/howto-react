@@ -1,16 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-// ---------------------------
-//  External Dependencies
-// ---------------------------
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAlt, faFolder } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ListGroup, Container, Col, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-// ---------------------------
-//  Project Dependencies
-// ---------------------------
 import { HowTo } from 'yvip-website/component'
 import { TooltipElement } from 'yvip-website/component/TooltipElement'
 
@@ -25,7 +19,7 @@ export interface FileManagerProps {
     howToList: Array<HowTo.models.HowToItem> | null
 }
 
-export const FileManager = ({ viewMode, categoryList, howToList }: FileManagerProps) => {
+export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howToList }: FileManagerProps) => {
     const renderItems = (items: Array<HowTo.models.HowToItem> | null) => {
         if (!items) {
             return null

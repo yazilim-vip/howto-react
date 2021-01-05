@@ -1,13 +1,7 @@
 import React, { FC } from 'react'
 
-// ---------------------------
-//  Project Dependencies
-// ---------------------------
 import { PageLayout } from 'yvip-website/component/PageLayout'
 
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
 import 'yvip-website/page/notFound/NotFound.scss'
 
 export const NotFound: FC = () => (

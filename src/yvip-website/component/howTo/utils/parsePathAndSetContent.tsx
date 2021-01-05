@@ -1,5 +1,6 @@
-import { HowTo } from 'yvip-website/component'
 import _ from 'underscore'
+
+import { HowTo } from 'yvip-website/component'
 
 /**
  *

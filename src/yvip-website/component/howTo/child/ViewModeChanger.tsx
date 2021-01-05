@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-// ---------------------------
-//  External Dependencies
-// ---------------------------
-import { ButtonGroup, ToggleButton } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThList } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
 import { HowTo } from 'yvip-website/component'
 import { TooltipElement } from 'yvip-website/component/TooltipElement'
@@ -14,7 +11,7 @@ export interface ViewModeChangerProps extends HowTo.types.HowToComponentProps {
     viewMode: HowTo.types.FileManagerViewMode
 }
 
-export const ViewModeChanger = ({ viewMode, events }: ViewModeChangerProps) => {
+export const ViewModeChanger: FC<ViewModeChangerProps> = ({ viewMode, events }: ViewModeChangerProps) => {
     const viewModeToggleEventHandler = events.viewModeToggleEventHandler
     return (
         <ButtonGroup toggle className="float-right">

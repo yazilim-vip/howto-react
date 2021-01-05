@@ -1,16 +1,10 @@
-// ---------------------------
-//  External Dependencies
-// ---------------------------
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory, History } from 'history'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
 import { howToReducer, locationReducer } from 'yvip-website/redux'
 
 const persistConfig = {

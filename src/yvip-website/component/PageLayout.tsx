@@ -1,20 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-// ---------------------------
-//  External Dependencies
-// ---------------------------
 import { Col, Row } from 'react-bootstrap'
 
-export const PageLayout = (props: any) => {
+export interface PageLayoutProps {
+    children: JSX.Element
+}
+export const PageLayout: FC<PageLayoutProps> = ({ children }: PageLayoutProps) => {
     return (
-        <Col md={props.span} style={{ height: '100%' }}>
+        <Col md={{ span: 12 }} style={{ height: '100%' }}>
             <Row>
-                <Col md="12">{props.children}</Col>
+                <Col md="12">{children}</Col>
             </Row>
         </Col>
     )
-}
-
-PageLayout.defaultProps = {
-    span: { span: 8, offset: 2 }
 }

@@ -1,18 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-// ---------------------------
-//  External Dependencies
-// ---------------------------
-import { Link } from 'react-router-dom'
-import { Breadcrumb } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Breadcrumb } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export interface PathBreadcrumbProps {
     items: string[]
 }
 
-export const PathBreadcrumb = ({ items }: PathBreadcrumbProps) => {
+export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items }: PathBreadcrumbProps) => {
     const getLink = (index: number) => {
         return '/howto/' + items.slice(0, index).join('/')
     }

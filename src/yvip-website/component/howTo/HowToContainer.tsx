@@ -1,8 +1,11 @@
 import React, { FC, useState } from 'react'
-import { Link } from 'react-router-dom'
+
 import { Alert, Container, Row, Col, FormControl, Badge } from 'react-bootstrap'
-import { HowTo } from 'yvip-website/component'
 import ReactMarkdown from 'react-markdown'
+import { Link } from 'react-router-dom'
+
+import { HowTo } from 'yvip-website/component'
+
 import 'yvip-website/component/howTo/HowToContainer.scss'
 
 export interface HowToContainerProps {

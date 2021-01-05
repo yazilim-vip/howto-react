@@ -1,6 +1,3 @@
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
 import { HowTo } from 'yvip-website/component'
 
 export const createSearchIndex = (rootCategory: any): HowTo.models.HowToItem[] => {

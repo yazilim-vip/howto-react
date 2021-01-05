@@ -1,15 +1,7 @@
-/* eslint-disable no-case-declarations */
-
-// ---------------------------
-//  External Dependencies
-// ---------------------------
 import { LocationChangeAction, LOCATION_CHANGE } from 'connected-react-router'
 import { Reducer } from 'redux'
-import { HowTo } from 'yvip-website/component'
 
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
+import { HowTo } from 'yvip-website/component'
 import { HowToActions, TOGGLE_FM_VIEW_MODE } from 'yvip-website/redux'
 
 export const howToReducer = (state: any = [], action: HowToActions): Reducer => {

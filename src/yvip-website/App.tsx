@@ -1,32 +1,17 @@
-// ReactJS
 import React, { FC } from 'react'
 
-// ---------------------------
-//  External Dependencies
-// ---------------------------
-import { ConnectedRouter } from 'connected-react-router'
-import { Switch, Route, Redirect } from 'react-router-dom'
-
-// Bootstrap
-import { Col, Row } from 'react-bootstrap'
-
-// Fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { ConnectedRouter } from 'connected-react-router'
+import { Col, Row } from 'react-bootstrap'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-// ---------------------------
-//  Internal Dependencies
-// ---------------------------
-// Styles
-import 'yvip-website/App.scss'
-
-// Pages
 import { HowToPage } from 'yvip-website/page/HowToPage'
 import { NotFound } from 'yvip-website/page/notFound/NotFound'
-
 import { history } from 'yvip-website/redux'
+import 'yvip-website/App.scss'
 
 library.add(fab)
 library.add(fas)
