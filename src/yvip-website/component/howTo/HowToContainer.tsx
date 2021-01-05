@@ -8,11 +8,10 @@ import { HowTo } from 'yvip-website/component'
 
 import 'yvip-website/component/howTo/HowToContainer.scss'
 
-export interface HowToContainerProps {
+export interface HowToContainerProps extends HowTo.types.HowToComponentProps {
     rootCategory: HowTo.models.Category
     requestedPath: string
     viewMode: HowTo.types.FileManagerViewMode | undefined
-    events: Record<HowTo.types.HowToEvent, (...args: any[]) => void>
 }
 
 export const HowToContainer: FC<HowToContainerProps> = ({

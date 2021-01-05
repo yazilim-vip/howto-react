@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Breadcrumb } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-export interface PathBreadcrumbProps {
+import { HowTo } from 'yvip-website/component'
+
+export interface PathBreadcrumbProps extends HowTo.types.HowToComponentProps {
     items: string[]
 }
 
@@ -37,4 +39,8 @@ export const PathBreadcrumb: FC<PathBreadcrumbProps> = ({ items }: PathBreadcrum
             {breadcrumbItems}
         </Breadcrumb>
     )
+}
+
+PathBreadcrumb.defaultProps = {
+    events: undefined
 }

@@ -83,7 +83,7 @@ const _HowToPage = ({ requestedPath, fileManagerViewMode, createToggleAction }: 
                 requestedPath={requestedPath}
                 viewMode={fileManagerViewMode}
                 events={{
-                    viewModeToggleEventHandler: () => {
+                    viewModeToggle: () => {
                         createToggleAction()
                     }
                 }}

@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom'
 import { HowTo } from 'yvip-website/component'
 import { TooltipElement } from 'yvip-website/component/TooltipElement'
 
-export interface FileManagerItemType {
+export interface FileManagerItemType extends HowTo.types.HowToComponentProps {
     name: string
     path: string
 }
 
-export interface FileManagerProps {
+export interface FileManagerProps extends HowTo.types.HowToComponentProps {
     viewMode: HowTo.types.FileManagerViewMode
     categoryList: Array<HowTo.models.HowToItem> | null
     howToList: Array<HowTo.models.HowToItem> | null
@@ -79,4 +79,8 @@ export const FileManager: FC<FileManagerProps> = ({ viewMode, categoryList, howT
             )}
         </Container>
     )
+}
+
+FileManager.defaultProps = {
+    events: undefined
 }
