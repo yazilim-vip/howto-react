@@ -30,8 +30,7 @@ const App: FC = () => (
         <Container fluid className="py-4 h-100">
             <Switch>
                 <Redirect from="/:url*(/+)" to={history.location.pathname.slice(0, -1)} />
-                <Route exact path="/howto*" component={HowTo} />
-                <Redirect to="/howto" />
+                <Route exact path="/*" component={HowTo} />
             </Switch>
         </Container>
     </ConnectedRouter>

@@ -68,18 +68,20 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
             </Alert>
         )
     }
+    console.log(requestedPath)
+    const path = requestedPath === '/' ? '/howto' : '/howto' + requestedPath
     return (
         <HowToContainer
             key={`${requestedPath}-${new Date()}`}
             rootCategory={howToData}
-            requestedPath={requestedPath}
+            requestedPath={path}
             viewMode={fileManagerViewMode}
             events={{
-                viewModeToggle: () => {
+                viewModeToggleEventHandler: () => {
                     createToggleAction()
                 },
-                itemSelected: (type, link) => {
-                    history.push(link)
+                itemSelectEventHandler: (type, link) => {
+                    history.push(link.replace('/howto', ''))
                 }
             }}
         />
