@@ -12,8 +12,9 @@ jobs:
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
       - name: ReactJS Build
         run: |
-          echo ".npmrc" >> "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
-          echo ".npmrc" >> "@yazilim-vip:registry=https://npm.pkg.github.com"
+          touch .npmrc
+          echo .npmrc >> "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+          echo .npmrc >> "@yazilim-vip:registry=https://npm.pkg.github.com"
           yarn install
           yarn build
           echo "howto.yazilim.vip" > ./build/CNAME
