@@ -13,8 +13,8 @@ jobs:
       - name: ReactJS Build
         run: |
           touch .npmrc
-          echo .npmrc >> "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
-          echo .npmrc >> "@yazilim-vip:registry=https://npm.pkg.github.com"
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "@yazilim-vip:registry=https://npm.pkg.github.com" >> .npmrc
           yarn install
           yarn build
           echo "howto.yazilim.vip" > ./build/CNAME
