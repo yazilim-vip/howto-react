@@ -5,8 +5,7 @@ import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } fr
 import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
-
-import { Alert, Col, Spinner } from 'react-bootstrap'
+import { Alert, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import { createToggleAction } from './redux/actions'
