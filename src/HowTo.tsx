@@ -2,12 +2,23 @@ import React, { useEffect, useState } from 'react'
 
 // eslint-disable-next-line import/default
 import { HowToContainer, Category, json2CategoryMapper, FileManagerViewMode } from '@yazilim-vip/react-howto'
-import { Firebase } from 'App'
-import { Alert, Spinner } from 'react-bootstrap'
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/auth'
+
+import { Alert, Col, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import { createToggleAction } from './redux/actions'
 import { history } from './redux/configureStore'
+
+// Firabase
+const config = {
+    apiKey: 'AIzaSyDlYpctL19t8-r4A_pyGMrZggnbbdsJ1zI',
+    databaseURL: 'https://yvip-howto.firebaseio.com',
+    projectId: 'yvip-howto'
+}
+export const firebaseApp = firebase.initializeApp(config)
 
 interface HowToProps {
     requestedPath: string
@@ -31,34 +42,48 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
 
     // methods
     const fetchHowtoData = () => {
-        Firebase.database()
-            .ref('howto')
-            .on(
-                'value',
-                (snapshot) => {
-                    if (snapshot.exists()) {
-                        const val = snapshot.val()
-                        const data = JSON.parse(val)
-                        setHowToData(json2CategoryMapper(data))
-                        setLoadedFlag(true)
-                        setErrorFlag(false)
-                    } else {
-                        setLoadedFlag(true)
-                        setErrorFlag(true)
-                        setErrorMessage('Snapshot can not found on firebase.')
-                    }
-                },
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (error: any) => {
-                    setLoadedFlag(true)
-                    setErrorFlag(true)
-                    setErrorMessage(`${error}`)
-                }
-            )
+        firebaseApp
+            .auth()
+            .signInAnonymously()
+            .then(() => {
+                firebaseApp
+                    .database()
+                    .ref('howto')
+                    .on(
+                        'value',
+                        (snapshot) => {
+                            if (snapshot.exists()) {
+                                const val = snapshot.val()
+                                const data = JSON.parse(val)
+                                setHowToData(json2CategoryMapper(data))
+                                setLoadedFlag(true)
+                                setErrorFlag(false)
+                            } else {
+                                setLoadedFlag(true)
+                                setErrorFlag(true)
+                                setErrorMessage('Snapshot can not found on firebase.')
+                            }
+                        },
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        (error: any) => {
+                            setLoadedFlag(true)
+                            setErrorFlag(true)
+                            setErrorMessage(`${error}`)
+                        }
+                    )
+            })
+            .catch((error) => {
+                console.log('login failed', error)
+                // ...
+            })
     }
 
     if (!loadedFlag) {
-        return <Spinner animation="border" />
+        return (
+            <div className="d-flex h-100">
+                <Spinner animation="border" className="mx-auto align-self-center" />
+            </div>
+        )
     }
 
     if (!howToData || errorFlag) {
@@ -68,7 +93,8 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
             </Alert>
         )
     }
-    console.log(requestedPath)
+
+    // console.log(requestedPath)
     const path = requestedPath === '/' ? '/howto' : '/howto' + requestedPath
     return (
         <HowToContainer
@@ -85,6 +111,7 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
                 }
             }}
         />
+        // align-items-stretch"
     )
 }
 
