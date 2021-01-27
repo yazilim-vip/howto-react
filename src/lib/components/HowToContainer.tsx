@@ -74,7 +74,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
     }
 
     return (
-        <div>
+        <Col lg="12">
             <Row>
                 <Col md="7">
                     <PathBreadcrumb
@@ -136,7 +136,7 @@ export const HowToContainer: FC<HowToContainerProps> = ({
                     }
                 />
             )}
-        </div>
+        </Col>
     )
 }
 
