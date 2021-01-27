@@ -1,33 +1,39 @@
-name: Build And Publish Node Module
-on:
-  push:
-    branches:
-      - "main"
-  release:
-    types:
-      - "published"
+name: Websites Publisher
+on: [push]
 jobs:
-  npm_publish:
+  website_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
           registry-url: "https://npm.pkg.github.com/yazilim-vip"
-      - name: Build
+      - name: ReactJS Build
         run: |
+          touch .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
           echo "@yazilim-vip:registry=https://npm.pkg.github.com" >> .npmrc
           yarn install
-          yarn lib:build
-          yarn showcase:build
-          echo "react-howto.yazilim.vip" > ./build/CNAME
+          yarn build
+          echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
-      - name: Publish Package
-        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build
+  website_publish:
+    needs: [website_build]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build
       - name: GH Pages Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
