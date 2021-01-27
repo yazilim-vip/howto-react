@@ -1,4 +1,5 @@
-import { Category, HowTo } from '@yazilim-vip/howto-script'
+import { Category } from '../models/Category'
+import { HowTo } from '../models/HowTo'
 
 export interface ParsedContent {
     selectedCategory: Category | undefined

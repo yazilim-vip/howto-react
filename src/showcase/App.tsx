@@ -8,15 +8,13 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Container } from 'react-bootstrap'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-// import { HowTo } from './HowTo'
+import { HowTo } from './HowTo'
 import { history } from './redux/configureStore'
 
 // Fontaweome
 library.add(fab)
 library.add(fas)
 library.add(far)
-
-const HowTo: FC = () => <div>hello</div>
 
 const App: FC = () => (
     <ConnectedRouter history={history}>

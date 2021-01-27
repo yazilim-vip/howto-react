@@ -1,4 +1,3 @@
-import { Category } from '@yazilim-vip/howto-script'
 import { Placement } from 'react-bootstrap/esm/Overlay'
 
 import {
@@ -7,6 +6,7 @@ import {
     HOWTO_VIEW_MODE_GRID_VIEW,
     HOWTO_VIEW_MODE_LIST_VIEW
 } from './constants'
+import { Category } from './models/Category'
 import { HowToItem } from './models/HowToItem'
 
 export type HowToItemType = typeof HOWTO_ITEM_TYPE_HOWTO | typeof HOWTO_ITEM_TYPE_CATEGORY
