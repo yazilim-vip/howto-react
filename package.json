@@ -24,6 +24,7 @@
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.8",
         "redux-persist": "^6.0.0",
+        "connected-react-router": "^6.8.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.32",
         "@fortawesome/free-brands-svg-icons": "^5.15.1",
         "@fortawesome/free-regular-svg-icons": "^5.15.1",
