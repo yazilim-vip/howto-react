@@ -22,7 +22,7 @@ jobs:
           yarn install
           yarn lib:build
           yarn showcase:build
-          echo "react-howto.yazilim.vip" > ./build/CNAME
+          echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
       - name: Publish Package
         run: yarn publish
