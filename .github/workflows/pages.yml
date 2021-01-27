@@ -22,7 +22,7 @@ jobs:
           yarn showcase:build
           echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
-          yarn publish
+          yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: GH Pages Deploy
