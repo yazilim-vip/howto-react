@@ -1,8 +1,7 @@
-FROM node:14
+# Stage 2
+FROM nginx:1.19.6
 
-RUN ["npm", "i", "-g", "@yazilim-vip/howto-script@0.10.0", "http-server"]
-RUN ["mkdir", "-p", "/howto"]
-
-COPY init.sh ./
-RUN ["chmod", "+x", "./init.sh"]
-CMD [ "./init.sh"]
+COPY ./build /var/www
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+ENTRYPOINT ["nginx","-g","daemon off;"]
