@@ -1,7 +1,5 @@
-# Stage 2
-FROM nginx:1.19.6
-
-COPY ./build /var/www
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-ENTRYPOINT ["nginx","-g","daemon off;"]
+# production environment
+FROM node:14.15.4
+RUN ["npm", "i", "-g", "serve"]
+COPY ./build /build
+ENTRYPOINT ["serve", "-l", "8080", "-s", "/build"]

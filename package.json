@@ -17,9 +17,9 @@
         "showcase:clean": "rm -rf build",
         "showcase:build": "react-scripts build",
         "showcase:bundle": "run-s showcase:clean showcase:build",
-        "docker:clean": "docker rm -vf howto-test",
+        "docker:clean": "docker-compose stop && docker-compose rm -vf",
         "docker:build": "docker build --no-cache -t yazilimvip/howto-react:latest .",
-        "docker:run": "docker run -d --name howto-test -p 8080:80 yazilimvip/howto-react:latest",
+        "docker:run": "docker-compose up -d",
         "docker:test": "run-s docker:clean docker:build docker:run"
     },
     "peerDependencies": {
