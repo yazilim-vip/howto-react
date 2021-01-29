@@ -40,40 +40,57 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
 
     // methods
     const fetchHowtoData = () => {
-        firebaseApp
-            .auth()
-            .signInAnonymously()
-            .then(() => {
-                firebaseApp
-                    .database()
-                    .ref('howto')
-                    .on(
-                        'value',
-                        (snapshot) => {
-                            if (snapshot.exists()) {
-                                const val = snapshot.val()
-                                const data = JSON.parse(val)
-                                setHowToData(json2CategoryMapper(data))
-                                setLoadedFlag(true)
-                                setErrorFlag(false)
-                            } else {
+        console.log('process.env.REACT_APP_HOWTO_SOURCE', process.env.REACT_APP_HOWTO_SOURCE)
+        if (process.env.REACT_APP_HOWTO_SOURCE === 'firebase') {
+            firebaseApp
+                .auth()
+                .signInAnonymously()
+                .then(() => {
+                    firebaseApp
+                        .database()
+                        .ref('howto')
+                        .on(
+                            'value',
+                            (snapshot) => {
+                                if (snapshot.exists()) {
+                                    const val = snapshot.val()
+                                    const data = JSON.parse(val)
+                                    setHowToData(json2CategoryMapper(data))
+                                    setLoadedFlag(true)
+                                    setErrorFlag(false)
+                                } else {
+                                    setLoadedFlag(true)
+                                    setErrorFlag(true)
+                                    setErrorMessage('Snapshot can not found on firebase.')
+                                }
+                            },
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            (error: any) => {
                                 setLoadedFlag(true)
                                 setErrorFlag(true)
-                                setErrorMessage('Snapshot can not found on firebase.')
+                                setErrorMessage(`${error}`)
                             }
-                        },
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        (error: any) => {
-                            setLoadedFlag(true)
-                            setErrorFlag(true)
-                            setErrorMessage(`${error}`)
-                        }
-                    )
-            })
-            .catch((error) => {
-                console.log('login failed', error)
-                // ...
-            })
+                        )
+                })
+                .catch((error) => {
+                    console.log('login failed', error)
+                    // ...
+                })
+        } else if (process.env.REACT_APP_HOWTO_SOURCE === 'service') {
+            // Simple GET request using fetch
+            fetch('https://localhost:5000/howto')
+                .then((response) => response.json())
+                .then((data) => {
+                    setHowToData(json2CategoryMapper(data))
+                    setLoadedFlag(true)
+                    setErrorFlag(false)
+                })
+                .catch((error) => {
+                    setLoadedFlag(true)
+                    setErrorFlag(true)
+                    setErrorMessage(`${error}`)
+                })
+        }
     }
 
     if (!loadedFlag) {

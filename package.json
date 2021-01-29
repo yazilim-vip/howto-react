@@ -16,7 +16,10 @@
         "showcase:start": "react-scripts start",
         "showcase:clean": "rm -rf build",
         "showcase:build": "react-scripts build",
-        "showcase:bundle": "run-s showcase:clean showcase:build",
+        "showcase:firebase:start": "env-cmd -f .env-firebase run-s showcase:start",
+        "showcase:firebase:bundle": "env-cmd -f .env-firebase run-s showcase:clean showcase:build",
+        "showcase:webapp:start": "env-cmd -f .env-webapp run-s showcase:start",
+        "showcase:webapp:bundle": "env-cmd -f .env-webapp run-s showcase:clean showcase:build",
         "docker:clean": "docker-compose stop && docker-compose rm -vf",
         "docker:build": "docker build --no-cache -t yazilimvip/howto-react:latest .",
         "docker:run": "docker-compose up -d",
@@ -93,5 +96,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "dependencies": {
+        "env-cmd": "^10.1.0"
     }
 }
