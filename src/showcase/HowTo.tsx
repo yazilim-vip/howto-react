@@ -10,6 +10,12 @@ import { HowToContainer, FileManagerViewMode, Category, json2CategoryMapper } fr
 import { createToggleAction } from './redux/actions'
 import { history } from './redux/configureStore'
 
+declare global {
+    interface Window {
+        _env_: any
+    }
+}
+
 // Firabase
 const config = {
     apiKey: 'AIzaSyDlYpctL19t8-r4A_pyGMrZggnbbdsJ1zI',
@@ -78,7 +84,7 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
                 })
         } else if (process.env.REACT_APP_HOWTO_SOURCE === 'service') {
             // Simple GET request using fetch
-            fetch('https://localhost:5000/howto')
+            fetch(window._env_.API_URL)
                 .then((response) => response.json())
                 .then((data) => {
                     setHowToData(json2CategoryMapper(data))

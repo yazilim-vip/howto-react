@@ -13,7 +13,7 @@
         "lib:clean": "rm -rf ./lib",
         "lib:build": "tsc --project src/lib && cp src/lib/components/HowToContainer.css lib/components/HowToContainer.css",
         "lib:bundle": "run-s lib:clean lib:build",
-        "showcase:start": "react-scripts start",
+        "showcase:start": "./env.sh && cp env-config-webapp.js ./public/ && react-scripts start",
         "showcase:clean": "rm -rf build",
         "showcase:build": "react-scripts build",
         "showcase:firebase:start": "env-cmd -f .env-firebase run-s showcase:start",
