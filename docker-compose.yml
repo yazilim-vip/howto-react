@@ -4,12 +4,14 @@ services:
   webapp:
     image: yazilimvip/howto-react:latest
     ports:
-      - "5100:8080"
+      - "5100:80"
+    environment:
+      - "API_URL=http://localhost:5000"
     depends_on:
       - service
   service:
-    image: yazilimvip/howto-script:0.10.1
+    image: yazilimvip/howto-script:0.10.2
     volumes:
       - /home/maemresen/workspace/yvip/howto/yvip-howto-archive:/usr/src/app/howto
     ports:
-      - "5200:5000"
+      - "5000:5000"

@@ -46,7 +46,6 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
 
     // methods
     const fetchHowtoData = () => {
-        console.log('process.env.REACT_APP_HOWTO_SOURCE', process.env.REACT_APP_HOWTO_SOURCE)
         if (process.env.REACT_APP_HOWTO_SOURCE === 'firebase') {
             firebaseApp
                 .auth()
@@ -80,14 +79,16 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
                 })
                 .catch((error) => {
                     console.log('login failed', error)
-                    // ...
+                    setLoadedFlag(true)
+                    setErrorFlag(true)
+                    setErrorMessage(`${error}`)
                 })
         } else if (process.env.REACT_APP_HOWTO_SOURCE === 'service') {
             // Simple GET request using fetch
-            fetch(window._env_.API_URL)
+            fetch(`${window._env_.API_URL}/howto`)
                 .then((response) => response.json())
-                .then((data) => {
-                    setHowToData(json2CategoryMapper(data))
+                .then((response) => {
+                    setHowToData(response)
                     setLoadedFlag(true)
                     setErrorFlag(false)
                 })
