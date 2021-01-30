@@ -1,4 +1,4 @@
-name: Build And Publish Node Module
+name: Node Module - Build & Publish
 on:
   push:
     branches:

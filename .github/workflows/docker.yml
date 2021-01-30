@@ -1,4 +1,4 @@
-name: Build And Publish Node Module
+name: Docker Image - Build & Publish
 on:
   push:
     branches:
