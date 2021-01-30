@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   webapp:
-    image: yazilimvip/howto-react:latest
+    image: yazilimvip/howto-react:0.3.3
     ports:
       - "5100:80"
     environment:
@@ -12,6 +12,6 @@ services:
   service:
     image: yazilimvip/howto-script:0.10.2
     volumes:
-      - /home/maemresen/workspace/yvip/howto/yvip-howto-archive:/usr/src/app/howto
+      - /path/to/howto:/usr/src/app/howto
     ports:
       - "5000:5000"
