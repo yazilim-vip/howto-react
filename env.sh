@@ -3,9 +3,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # ENV=$1
-ENV=webapp
-ENV_FILE=$DIR/.env-$ENV
-ENV_CONFIG_JS=$DIR/env-config-$ENV.js
+ENV=$1
+ENV_FILE=$DIR/.env.$ENV
+ENV_CONFIG_JS=$DIR/env-config.js
 
 # Recreate config file
 rm -rf $ENV_CONFIG_JS

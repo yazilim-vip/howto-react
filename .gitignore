@@ -25,4 +25,4 @@ yarn.lock
 .npmrc
 .yarnrc.yml
 
-env-config-webapp.js
+env-config.js
