@@ -20,6 +20,8 @@ jobs:
           echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
           yarn publish --access public
+          ./env.sh firebase
+          mv env-confg.js build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: GH Pages Deploy
