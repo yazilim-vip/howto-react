@@ -46,7 +46,8 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
 
     // methods
     const fetchHowtoData = () => {
-        if (process.env.REACT_APP_HOWTO_SOURCE === 'firebase') {
+        console.log(window._env_)
+        if (window._env_.REACT_APP_HOWTO_SOURCE === 'firebase') {
             firebaseApp
                 .auth()
                 .signInAnonymously()
@@ -83,7 +84,7 @@ const _HowTo = ({ requestedPath, fileManagerViewMode, createToggleAction }: HowT
                     setErrorFlag(true)
                     setErrorMessage(`${error}`)
                 })
-        } else if (process.env.REACT_APP_HOWTO_SOURCE === 'service') {
+        } else if (window._env_.REACT_APP_HOWTO_SOURCE === 'service') {
             // Simple GET request using fetch
             fetch(`${window._env_.API_URL}/howto`)
                 .then((response) => response.json())
