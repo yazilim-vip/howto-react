@@ -8,26 +8,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-          registry-url: "https://registry.npmjs.org"
-      - name: Build and Publish
-        run: |
-          yarn install
-          yarn lib:build
-          yarn showcase:bundle:firebase
-          echo "howto.yazilim.vip" > ./build/CNAME
-          cp build/index.html build/404.html
-          yarn publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "12.x"
+      #     registry-url: "https://registry.npmjs.org"
+      # - name: Build and Publish
+      #   run: |
+      #     yarn install
+      #     yarn lib:build
+      #     yarn showcase:bundle:firebase
+      #     echo "howto.yazilim.vip" > ./build/CNAME
+      #     cp build/index.html build/404.html
+      #     yarn publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build ENV
         run: ./env.sh firebase
         shell: bash
+      - run: ls
       - run: mv env-confg.js build
-      - name: GH Pages Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+      # - name: GH Pages Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./build
