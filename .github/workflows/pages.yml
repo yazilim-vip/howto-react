@@ -20,10 +20,12 @@ jobs:
           echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
           yarn publish --access public
-          ./env.sh firebase
-          mv env-confg.js build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build ENV
+        run: ./env.sh firebase
+        shell: bash
+      - run: mv env-confg.js build
       - name: GH Pages Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
