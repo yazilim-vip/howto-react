@@ -16,7 +16,7 @@ jobs:
       - name: Build and Publish
         run: |
           yarn install
-          yarn showcase:webapp:bundle
+          yarn showcase:bundle:webapp
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Login to DockerHub

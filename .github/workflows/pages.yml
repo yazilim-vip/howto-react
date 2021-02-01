@@ -16,7 +16,7 @@ jobs:
         run: |
           yarn install
           yarn lib:build
-          yarn showcase:firebase:bundle
+          yarn showcase:bundle:firebase
           echo "howto.yazilim.vip" > ./build/CNAME
           cp build/index.html build/404.html
           yarn publish --access public
