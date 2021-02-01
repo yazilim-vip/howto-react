@@ -23,10 +23,11 @@ jobs:
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build ENV
-        run: ./env.sh firebase
         shell: bash
-      - run: ls
-      - run: mv env-confg.js build
+        run: |
+          ./env.sh firebase
+          ls
+          mv env-confg.js build
       # - name: GH Pages Deploy
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
